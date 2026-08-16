@@ -3,116 +3,102 @@
 <head>
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width,
-    initial-scale=1.0,
-    maximum-scale=1.0,
-    user-scalable=no"
->
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
-<title>PARDESI ZONE // CYBER TERMINAL</title>
+<title>PARDESI ZONE // CYBER ID</title>
 
 <style>
 
-/* =====================================================
-   PARDESI ZONE // EXTREME CYBER SYSTEM
-===================================================== */
+/* =========================================================
+   PARDESI ZONE
+   EXTREME CYBER / HACKER STYLE
+========================================================= */
 
 :root{
-
-    --black:#010303;
-    --black2:#020807;
+    --bg:#020303;
+    --panel:#07100c;
 
     --green:#00ff66;
-    --green2:#00cc52;
+    --green2:#00c853;
 
     --red:#ff1744;
+    --red2:#ff3d00;
+
+    --orange:#ff9800;
+    --gold:#ffc107;
+
     --cyan:#00eaff;
 
-    --white:#eafff0;
-    --dim:#638170;
+    --white:#f4fff8;
+    --dim:#769486;
 
-    --panel:rgba(0,20,10,.78);
-
-    --font:
-        "Courier New",
-        Courier,
-        monospace;
+    --font:"Courier New",monospace;
 }
 
 
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 *{
     box-sizing:border-box;
-
     -webkit-tap-highlight-color:transparent;
 }
 
 html,
 body{
-
     width:100%;
     height:100%;
-
     margin:0;
     padding:0;
-
     overflow:hidden;
 }
 
-
 body{
-
     display:flex;
-
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+
+    font-family:var(--font);
+    color:var(--white);
 
     background:
-
         radial-gradient(
-            circle at 50% 40%,
+            circle at 50% 35%,
             rgba(0,255,102,.08),
             transparent 35%
         ),
-
         radial-gradient(
-            circle at 10% 90%,
-            rgba(255,23,68,.08),
-            transparent 30%
+            circle at 50% 100%,
+            rgba(255,23,68,.15),
+            transparent 38%
         ),
+        #020303;
 
-        #010303;
-
-    color:var(--white);
-
-    font-family:var(--font);
-
+    transition:
+        background 1s ease;
 }
 
 
-/* =====================================================
-   SCANLINES
-===================================================== */
+/* =========================================================
+   CRT SCANLINES
+========================================================= */
 
 body::after{
-
     content:"";
 
     position:fixed;
-
     inset:0;
 
     pointer-events:none;
 
-    z-index:999;
+    z-index:9999;
 
     background:
-
         repeating-linear-gradient(
             0deg,
             rgba(255,255,255,.018) 0px,
@@ -120,87 +106,34 @@ body::after{
             transparent 1px,
             transparent 4px
         );
-
-    mix-blend-mode:screen;
-
 }
 
 
-/* =====================================================
-   MOVING GREEN LIGHT
-===================================================== */
+/* =========================================================
+   MAIN CARD
+========================================================= */
 
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    width:450px;
-    height:450px;
-
-    border-radius:50%;
-
-    background:var(--green);
-
-    opacity:.045;
-
-    filter:blur(100px);
-
-    animation:
-
-        ambientMove
-        8s
-        ease-in-out
-        infinite
-        alternate;
-
-    pointer-events:none;
-}
-
-
-@keyframes ambientMove{
-
-    from{
-        transform:
-            translate(-130px,-100px);
-    }
-
-    to{
-        transform:
-            translate(130px,100px);
-    }
-
-}
-
-
-/* =====================================================
-   MAIN TERMINAL
-===================================================== */
-
-.cyber-terminal{
+.cyber-card{
 
     width:93%;
-    max-width:410px;
+    max-width:420px;
 
-    height:min(91vh,680px);
+    height:min(92vh,700px);
 
     position:relative;
 
     overflow:hidden;
 
     background:
-
         linear-gradient(
             145deg,
-            rgba(0,255,102,.055),
-            rgba(0,0,0,.92)
+            rgba(0,255,102,.045),
+            rgba(0,0,0,.96)
         );
 
     border:
-
         1px solid
-        rgba(0,255,102,.4);
+        rgba(0,255,102,.45);
 
     box-shadow:
 
@@ -210,58 +143,48 @@ body::before{
         0 35px 100px
         rgba(0,0,0,.95),
 
-        inset 0 0 45px
+        inset 0 0 50px
         rgba(0,255,102,.025);
 
     clip-path:
-
         polygon(
-            14px 0,
-            calc(100% - 14px) 0,
-            100% 14px,
-            100% calc(100% - 14px),
-            calc(100% - 14px) 100%,
-            14px 100%,
-            0 calc(100% - 14px),
-            0 14px
+            15px 0,
+            calc(100% - 15px) 0,
+            100% 15px,
+            100% calc(100% - 15px),
+            calc(100% - 15px) 100%,
+            15px 100%,
+            0 calc(100% - 15px),
+            0 15px
         );
 
     opacity:0;
 
     transform:
         scale(.88)
-        translateY(35px);
+        translateY(30px);
 
     animation:
-
-        bootTerminal
-        .9s
+        boot .9s
         cubic-bezier(.2,.8,.2,1)
         forwards;
-
 }
 
-
-@keyframes bootTerminal{
-
+@keyframes boot{
     to{
-
         opacity:1;
-
         transform:
             scale(1)
             translateY(0);
-
     }
-
 }
 
 
-/* =====================================================
-   TOP SYSTEM BAR
-===================================================== */
+/* =========================================================
+   TOP BAR
+========================================================= */
 
-.system-bar{
+.top-bar{
 
     position:absolute;
 
@@ -269,36 +192,33 @@ body::before{
     left:0;
 
     width:100%;
-    height:30px;
+    height:29px;
 
     display:flex;
-
     align-items:center;
 
     overflow:hidden;
 
-    background:
+    z-index:50;
 
+    background:
         linear-gradient(
             90deg,
-            #001b0a,
-            #003b18,
-            #001b0a
+            #001d0c,
+            #003e1b,
+            #001d0c
         );
 
     border-bottom:
-
         1px solid
-        rgba(0,255,102,.4);
-
-    z-index:50;
-
+        rgba(0,255,102,.45);
 }
 
-
-.system-bar-text{
+.ticker{
 
     white-space:nowrap;
+
+    color:var(--green);
 
     font-size:7px;
 
@@ -306,25 +226,17 @@ body::before{
 
     letter-spacing:2px;
 
-    color:var(--green);
-
     text-shadow:
-
         0 0 8px
         var(--green);
 
     animation:
-
-        terminalMarquee
-        15s
+        ticker 18s
         linear
         infinite;
-
 }
 
-
-@keyframes terminalMarquee{
-
+@keyframes ticker{
     from{
         transform:translateX(100%);
     }
@@ -332,13 +244,12 @@ body::before{
     to{
         transform:translateX(-100%);
     }
-
 }
 
 
-/* =====================================================
-   MATRIX CANVAS
-===================================================== */
+/* =========================================================
+   MATRIX
+========================================================= */
 
 #matrix{
 
@@ -349,18 +260,17 @@ body::before{
     width:100%;
     height:100%;
 
-    opacity:.13;
+    opacity:.12;
 
     z-index:1;
 
     pointer-events:none;
-
 }
 
 
-/* =====================================================
+/* =========================================================
    GRID
-===================================================== */
+========================================================= */
 
 .grid{
 
@@ -385,149 +295,46 @@ body::before{
             transparent 1px
         );
 
-    background-size:
-        25px 25px;
-
+    background-size:24px 24px;
 }
 
 
-/* =====================================================
-   RADAR
-===================================================== */
+/* =========================================================
+   HEADER
+========================================================= */
 
-.radar{
+.header{
 
     position:absolute;
 
-    right:-55px;
-
-    top:105px;
-
-    width:150px;
-    height:150px;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        rgba(0,255,102,.15);
-
-    opacity:.5;
-
-    z-index:3;
-
-}
-
-
-.radar::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:15px;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        rgba(0,255,102,.18);
-
-}
-
-
-.radar::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:50%;
-    height:1px;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            var(--green),
-            transparent
-        );
-
-    transform-origin:left;
-
-    animation:
-
-        radarSpin
-        3s
-        linear
-        infinite;
-
-}
-
-
-@keyframes radarSpin{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* =====================================================
-   BRAND HEADER
-===================================================== */
-
-.brand{
-
-    position:absolute;
-
+    top:45px;
     left:23px;
 
-    top:47px;
-
     z-index:20;
-
-    opacity:0;
-
-    animation:
-
-        fadeUp
-        .6s
-        .2s
-        forwards;
-
 }
 
-
-.brand-mini{
+.mini-title{
 
     color:var(--green);
 
     font-size:7px;
 
-    letter-spacing:4px;
+    letter-spacing:3px;
 
     font-weight:bold;
 
     text-shadow:
-
         0 0 8px
         var(--green);
-
 }
 
-
-.brand-name{
+.brand{
 
     margin-top:3px;
 
     font-family:Arial,sans-serif;
 
-    font-size:28px;
+    font-size:27px;
 
     font-weight:1000;
 
@@ -536,65 +343,52 @@ body::before{
     color:#fff;
 
     text-shadow:
-
         2px 0 var(--red),
         -2px 0 var(--cyan),
         0 0 15px
         rgba(0,255,102,.35);
 
-    animation:
-
-        glitchText
-        4s
-        infinite;
-
+    animation:glitch 4s infinite;
 }
 
-
-.brand-name span{
-
+.brand span{
     color:var(--green);
 
     text-shadow:
-
         0 0 12px
         var(--green);
-
 }
 
+@keyframes glitch{
 
-@keyframes glitchText{
-
-    0%,94%,100%{
+    0%,93%,100%{
         transform:translate(0);
     }
 
-    95%{
+    94%{
         transform:translate(-2px,1px);
     }
 
-    96%{
+    95%{
         transform:translate(2px,-1px);
     }
 
-    97%{
+    96%{
         transform:translate(-1px,0);
     }
-
 }
 
 
-/* =====================================================
-   STATUS
-===================================================== */
+/* =========================================================
+   LIVE STATUS
+========================================================= */
 
 .status{
 
     position:absolute;
 
-    top:52px;
-
-    right:20px;
+    top:50px;
+    right:18px;
 
     z-index:20;
 
@@ -604,16 +398,14 @@ body::before{
 
     gap:6px;
 
-    font-size:7px;
-
     color:var(--green);
 
-    letter-spacing:2px;
+    font-size:6px;
 
+    letter-spacing:1px;
 }
 
-
-.status-light{
+.status-dot{
 
     width:7px;
     height:7px;
@@ -623,107 +415,78 @@ body::before{
     background:var(--green);
 
     box-shadow:
-
         0 0 12px
         var(--green);
 
-    animation:
-
-        blink
-        1s
-        infinite;
-
+    animation:blink 1s infinite;
 }
 
-
 @keyframes blink{
-
     50%{
         opacity:.15;
     }
-
 }
 
 
-/* =====================================================
-   IMAGE / ORIGINAL MEDIA
-===================================================== */
+/* =========================================================
+   PORTRAIT
+========================================================= */
 
 .portrait{
 
     position:absolute;
 
-    top:94px;
+    top:91px;
 
     left:25px;
     right:25px;
 
-    bottom:198px;
-
-    overflow:hidden;
+    bottom:218px;
 
     z-index:8;
 
-    border:
-
-        1px solid
-        var(--green);
+    overflow:hidden;
 
     background:
-
         url(
         'https://raw.githubusercontent.com/DPModsYT/webbydpmods/refs/heads/main/IMG_20260514_135013.jpg'
         )
+        center/cover no-repeat;
 
-        center/cover
-        no-repeat;
+    border:
+        1px solid
+        var(--green);
 
     box-shadow:
 
         0 0 18px
-        rgba(0,255,102,.18),
+        rgba(0,255,102,.2),
 
-        inset 0 0 25px
-        rgba(0,255,102,.08);
-
-    opacity:0;
+        inset 0 0 30px
+        rgba(0,255,102,.1);
 
     animation:
-
-        portraitBoot
-        .7s
-        .4s
-        forwards;
-
+        portraitIn .8s .3s
+        both;
 }
 
-
-@keyframes portraitBoot{
+@keyframes portraitIn{
 
     from{
-
         opacity:0;
-
-        transform:
-            scale(1.05);
-
+        transform:scale(1.05);
     }
 
     to{
-
         opacity:1;
-
-        transform:
-            scale(1);
-
+        transform:scale(1);
     }
-
 }
 
 
-/* =====================================================
+/* =========================================================
    IMAGE DARK OVERLAY
-===================================================== */
+========================================================= */
 
 .portrait::before{
 
@@ -734,22 +497,20 @@ body::before{
     inset:0;
 
     background:
-
         linear-gradient(
             180deg,
             rgba(0,255,102,.04),
             transparent 45%,
-            rgba(0,0,0,.55)
+            rgba(0,0,0,.62)
         );
 
     z-index:2;
-
 }
 
 
-/* =====================================================
-   SCANNING LASER
-===================================================== */
+/* =========================================================
+   LASER SCAN
+========================================================= */
 
 .portrait::after{
 
@@ -767,22 +528,16 @@ body::before{
     background:#fff;
 
     box-shadow:
-
-        0 0 20px 4px
+        0 0 20px 5px
         var(--green);
-
-    animation:
-
-        laserScan
-        3.8s
-        infinite;
 
     z-index:5;
 
+    animation:
+        scan 4s infinite;
 }
 
-
-@keyframes laserScan{
+@keyframes scan{
 
     0%{
         top:-5%;
@@ -801,15 +556,14 @@ body::before{
         top:105%;
         opacity:0;
     }
-
 }
 
 
-/* =====================================================
-   IMAGE CORNERS
-===================================================== */
+/* =========================================================
+   CORNERS
+========================================================= */
 
-.image-corner{
+.corner{
 
     position:absolute;
 
@@ -817,161 +571,248 @@ body::before{
     height:22px;
 
     z-index:15;
-
 }
 
-
-.image-corner.a{
-
-    top:8px;
-    left:8px;
+.c1{
+    top:7px;
+    left:7px;
 
     border-top:2px solid var(--green);
     border-left:2px solid var(--green);
-
 }
 
-
-.image-corner.b{
-
-    top:8px;
-    right:8px;
+.c2{
+    top:7px;
+    right:7px;
 
     border-top:2px solid var(--green);
     border-right:2px solid var(--green);
-
 }
 
-
-.image-corner.c{
-
-    bottom:8px;
-    left:8px;
+.c3{
+    bottom:7px;
+    left:7px;
 
     border-bottom:2px solid var(--green);
     border-left:2px solid var(--green);
-
 }
 
-
-.image-corner.d{
-
-    bottom:8px;
-    right:8px;
+.c4{
+    bottom:7px;
+    right:7px;
 
     border-bottom:2px solid var(--green);
     border-right:2px solid var(--green);
-
 }
 
 
-/* =====================================================
-   VERTICAL BRAND
-===================================================== */
+/* =========================================================
+   LANGUAGE DISPLAY
+========================================================= */
 
-.vertical-brand{
+.language-box{
 
     position:absolute;
 
-    left:-10px;
+    left:31px;
+    right:31px;
 
-    top:53%;
+    bottom:194px;
 
-    transform:
+    z-index:25;
 
-        translateY(-50%)
-        rotate(180deg);
+    height:42px;
 
-    writing-mode:vertical-rl;
+    display:flex;
 
-    color:transparent;
+    justify-content:center;
+    align-items:center;
 
-    -webkit-text-stroke:
+    overflow:hidden;
 
-        1px var(--green);
+    border:
+        1px solid
+        rgba(0,255,102,.25);
 
-    font-size:15px;
+    background:
+        rgba(0,8,4,.85);
+}
 
-    font-weight:900;
+.language{
 
-    letter-spacing:5px;
+    position:absolute;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    color:var(--green);
 
     text-shadow:
+        0 0 9px
+        var(--green);
 
-        0 0 10px
-        rgba(0,255,102,.3);
+    opacity:0;
 
-    z-index:20;
+    transform:
+        translateY(10px);
 
+    animation:
+        languageShow
+        9s
+        infinite;
+}
+
+.language:nth-child(1){
+    animation-delay:0s;
+}
+
+.language:nth-child(2){
+    animation-delay:3s;
+}
+
+.language:nth-child(3){
+    animation-delay:6s;
+}
+
+@keyframes languageShow{
+
+    0%{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    8%{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+    27%{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+    34%{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+
+    100%{
+        opacity:0;
+    }
 }
 
 
-/* =====================================================
-   TERMINAL LOG WINDOW
-===================================================== */
+/* =========================================================
+   TERMINAL LOG
+========================================================= */
 
 .logs{
 
     position:absolute;
 
-    left:32px;
+    left:31px;
+    right:31px;
 
-    right:32px;
+    bottom:137px;
 
-    bottom:176px;
+    height:53px;
 
-    height:65px;
-
-    z-index:18;
+    padding:7px;
 
     overflow:hidden;
 
-    padding:8px;
+    z-index:25;
 
     background:
-
-        rgba(0,5,3,.82);
+        rgba(0,4,2,.9);
 
     border:
-
         1px solid
-        rgba(0,255,102,.2);
-
-    box-shadow:
-
-        inset 0 0 15px
-        rgba(0,255,102,.04);
-
+        rgba(0,255,102,.18);
 }
 
-
-.log-line{
+.log{
 
     font-size:6px;
 
-    line-height:12px;
+    line-height:10px;
 
     color:var(--green);
 
     white-space:nowrap;
 
+    transition:.3s;
 }
 
-
-.log-line::before{
-
+.log::before{
     content:"> ";
-
     color:var(--red);
-
 }
 
 
-/* =====================================================
-   INFO PANEL
-===================================================== */
+/* =========================================================
+   TIME PANEL
+========================================================= */
 
-.info-panel{
+.time-panel{
+
+    position:absolute;
+
+    right:18px;
+
+    bottom:139px;
+
+    z-index:30;
+
+    text-align:right;
+}
+
+.time-title{
+
+    color:var(--dim);
+
+    font-size:5px;
+
+    letter-spacing:1px;
+}
+
+.time{
+
+    margin-top:3px;
+
+    color:var(--orange);
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 10px
+        rgba(255,152,0,.8);
+}
+
+.date{
+
+    margin-top:2px;
+
+    color:#a98b56;
+
+    font-size:5px;
+}
+
+
+/* =========================================================
+   INFO PANEL
+========================================================= */
+
+.info{
 
     position:absolute;
 
@@ -979,64 +820,51 @@ body::before{
 
     bottom:69px;
 
-    width:74%;
+    width:72%;
+
+    z-index:30;
 
     padding:
-
-        10px
+        9px
         20px
-        10px
-        16px;
+        9px
+        15px;
 
     background:
 
         linear-gradient(
             90deg,
-            rgba(0,8,4,.97),
-            rgba(0,15,8,.72)
+            rgba(15,2,3,.98),
+            rgba(30,7,5,.8)
         );
 
     border-top:
-
         1px solid
-        var(--green);
+        var(--red);
 
     border-right:
-
         1px solid
-        var(--green);
+        var(--red);
 
     border-bottom:
-
         1px solid
-        var(--green);
+        rgba(255,152,0,.7);
 
     border-left:none;
 
-    z-index:25;
-
-    opacity:0;
-
-    animation:
-
-        slideIn
-        .6s
-        .8s
-        forwards;
-
+    box-shadow:
+        0 0 18px
+        rgba(255,23,68,.1);
 }
-
 
 .info-label{
 
-    font-size:6px;
+    color:#8e6268;
 
-    color:var(--dim);
+    font-size:5px;
 
-    letter-spacing:3px;
-
+    letter-spacing:2px;
 }
-
 
 .info-name{
 
@@ -1044,133 +872,57 @@ body::before{
 
     font-family:Arial,sans-serif;
 
-    font-size:20px;
+    font-size:18px;
 
     font-weight:1000;
-
-    letter-spacing:1px;
-
 }
-
 
 .info-name span{
 
-    color:var(--green);
+    color:var(--red);
 
     text-shadow:
-
-        0 0 8px
-        var(--green);
-
+        0 0 9px
+        var(--red);
 }
-
 
 .info-sub{
 
-    margin-top:5px;
+    margin-top:4px;
 
-    color:var(--green);
-
-    font-size:7px;
-
-    letter-spacing:1px;
-
-}
-
-
-@keyframes slideIn{
-
-    from{
-
-        transform:
-            translateX(-25px);
-
-    }
-
-    to{
-
-        transform:
-            translateX(0);
-
-        opacity:1;
-
-    }
-
-}
-
-
-/* =====================================================
-   TIME
-===================================================== */
-
-.time{
-
-    position:absolute;
-
-    right:20px;
-
-    bottom:137px;
-
-    z-index:25;
-
-    text-align:right;
-
-}
-
-
-.time-label{
-
-    color:var(--dim);
+    color:var(--orange);
 
     font-size:6px;
 
-    letter-spacing:2px;
-
+    letter-spacing:1px;
 }
 
 
-.time-value{
-
-    margin-top:3px;
-
-    color:var(--green);
-
-    font-size:12px;
-
-    font-weight:bold;
-
-    text-shadow:
-
-        0 0 10px
-        var(--green);
-
-}
-
-
-/* =====================================================
+/* =========================================================
    WHATSAPP
-===================================================== */
+========================================================= */
 
 .whatsapp{
 
     position:absolute;
 
-    right:20px;
+    right:19px;
 
-    bottom:69px;
+    bottom:70px;
 
-    width:54px;
-    height:54px;
+    z-index:40;
 
-    border-radius:50%;
+    width:52px;
+    height:52px;
 
     display:flex;
 
     justify-content:center;
     align-items:center;
 
-    background:
+    border-radius:50%;
 
+    background:
         linear-gradient(
             145deg,
             #25D366,
@@ -1183,73 +935,54 @@ body::before{
         rgba(37,211,102,.55),
 
         0 0 35px
-        rgba(37,211,102,.18);
-
-    z-index:30;
+        rgba(37,211,102,.15);
 
     cursor:pointer;
 
     animation:
-
-        whatsappPulse
-        2s
-        infinite;
-
+        waPulse 2s infinite;
 }
-
 
 .whatsapp:active{
-
-    transform:
-        scale(.86);
-
+    transform:scale(.85);
 }
-
 
 .whatsapp svg{
-
     width:27px;
     height:27px;
-
     fill:#fff;
-
 }
 
-
-.whatsapp-label{
+.wa-text{
 
     position:absolute;
 
-    bottom:-15px;
+    bottom:-14px;
+
+    white-space:nowrap;
 
     color:#25D366;
 
-    font-size:6px;
+    font-size:5px;
 
     letter-spacing:1px;
 
     font-weight:bold;
-
 }
 
-
-@keyframes whatsappPulse{
+@keyframes waPulse{
 
     50%{
-
         box-shadow:
-
-            0 0 30px
-            rgba(37,211,102,.85);
-
+            0 0 28px
+            rgba(37,211,102,.9);
     }
-
 }
 
 
-/* =====================================================
-   BACK TO APP
-===================================================== */
+/* =========================================================
+   BOTTOM RED SYSTEM
+========================================================= */
 
 .bottom{
 
@@ -1258,7 +991,11 @@ body::before{
     left:0;
     right:0;
 
-    bottom:14px;
+    bottom:0;
+
+    height:55px;
+
+    z-index:35;
 
     display:flex;
 
@@ -1266,34 +1003,51 @@ body::before{
 
     align-items:center;
 
-    gap:5px;
+    justify-content:center;
 
-    z-index:40;
-
-}
-
-
-.back-button{
-
-    padding:
-
-        9px
-        27px;
-
-    border:
-
-        1px solid
-        var(--green);
+    gap:4px;
 
     background:
 
-        rgba(0,255,102,.04);
+        linear-gradient(
+            90deg,
+            #130205,
+            #32070a,
+            #170203
+        );
 
-    color:var(--green);
+    border-top:
+        1px solid
+        rgba(255,23,68,.65);
+
+    box-shadow:
+        0 -8px 25px
+        rgba(255,23,68,.08);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-btn{
+
+    padding:
+        7px
+        25px;
+
+    color:#fff;
+
+    background:
+        rgba(255,23,68,.08);
+
+    border:
+        1px solid
+        var(--red);
 
     font-family:var(--font);
 
-    font-size:10px;
+    font-size:9px;
 
     font-weight:bold;
 
@@ -1302,7 +1056,6 @@ body::before{
     cursor:pointer;
 
     clip-path:
-
         polygon(
             8px 0,
             100% 0,
@@ -1313,97 +1066,109 @@ body::before{
         );
 
     box-shadow:
-
         0 0 12px
-        rgba(0,255,102,.15);
+        rgba(255,23,68,.15);
 
     transition:.2s;
-
 }
 
+.back-btn:active{
 
-.back-button:active{
+    background:var(--red);
 
-    background:var(--green);
+    color:#fff;
 
-    color:#000;
+    transform:scale(.93);
 
-    transform:
-        scale(.94);
-
+    box-shadow:
+        0 0 25px
+        rgba(255,23,68,.8);
 }
 
+.copy{
 
-.copyright{
+    color:#74474d;
 
-    color:#3d5a48;
-
-    font-size:5px;
+    font-size:4px;
 
     letter-spacing:2px;
-
 }
 
 
-/* =====================================================
-   FADE
-===================================================== */
+/* =========================================================
+   NIGHT MODE
+========================================================= */
 
-@keyframes fadeUp{
+body.night{
 
-    from{
+    background:
 
-        opacity:0;
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(0,255,102,.06),
+            transparent 35%
+        ),
 
-        transform:
-            translateY(10px);
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(255,23,68,.2),
+            transparent 45%
+        ),
 
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-            translateY(0);
-
-    }
-
+        #010202;
 }
 
 
-/* =====================================================
+/* =========================================================
+   DAY MODE
+========================================================= */
+
+body.day{
+
+    background:
+
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(0,200,83,.16),
+            transparent 40%
+        ),
+
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(255,152,0,.15),
+            transparent 45%
+        ),
+
+        #06100b;
+}
+
+
+/* =========================================================
    SMALL SCREEN
-===================================================== */
+========================================================= */
 
 @media(max-height:650px){
 
     .portrait{
+        top:86px;
+        bottom:205px;
+    }
 
-        top:88px;
-
-        bottom:180px;
-
+    .language-box{
+        bottom:181px;
     }
 
     .logs{
-
-        bottom:160px;
-
-        height:55px;
-
+        bottom:128px;
     }
 
-    .info-panel{
-
-        bottom:62px;
-
+    .time-panel{
+        bottom:130px;
     }
 
+    .info,
     .whatsapp{
-
-        bottom:62px;
-
+        bottom:63px;
     }
 
 }
@@ -1415,23 +1180,22 @@ body::before{
 <body>
 
 
-<!-- =====================================================
-     MAIN TERMINAL
-===================================================== -->
-
-<div class="cyber-terminal">
+<div class="cyber-card">
 
 
-    <!-- TOP BAR -->
+    <!-- =====================================================
+         TOP SYSTEM BAR
+    ====================================================== -->
 
-    <div class="system-bar">
+    <div class="top-bar">
 
-        <div class="system-bar-text">
+        <div class="ticker">
 
             PARDESI ZONE //
-            CYBER TERMINAL //
             SYSTEM ONLINE //
-            SECURE CONNECTION //
+            سسٹم فعال ہے //
+            سسٽم فعال آهي //
+            SECURE CYBER INTERFACE //
             ACCESS GRANTED //
 
         </div>
@@ -1449,27 +1213,19 @@ body::before{
     <div class="grid"></div>
 
 
-    <!-- RADAR -->
+    <!-- HEADER -->
 
-    <div class="radar"></div>
+    <div class="header">
 
+        <div class="mini-title">
 
-    <!-- =========================
-         BRAND
-    ========================== -->
-
-    <div class="brand">
-
-        <div class="brand-mini">
-
-            // OFFICIAL CYBER SYSTEM
+            // OFFICIAL DIGITAL SYSTEM
 
         </div>
 
-        <div class="brand-name">
+        <div class="brand">
 
-            PARDESI
-            <span>ZONE</span>
+            PARDESI <span>ZONE</span>
 
         </div>
 
@@ -1480,72 +1236,90 @@ body::before{
 
     <div class="status">
 
-        <div class="status-light"></div>
+        <div class="status-dot"></div>
 
-        SYSTEM ONLINE
+        ONLINE
 
     </div>
 
 
-    <!-- =========================
-         ORIGINAL IMAGE
-    ========================== -->
+    <!-- =====================================================
+         ORIGINAL PHOTO
+    ====================================================== -->
 
     <div class="portrait">
 
-        <div class="image-corner a"></div>
-        <div class="image-corner b"></div>
-        <div class="image-corner c"></div>
-        <div class="image-corner d"></div>
+        <div class="corner c1"></div>
+        <div class="corner c2"></div>
+        <div class="corner c3"></div>
+        <div class="corner c4"></div>
 
     </div>
 
 
-    <!-- VERTICAL BRAND -->
+    <!-- =====================================================
+         3 LANGUAGES
+    ====================================================== -->
 
-    <div class="vertical-brand">
+    <div class="language-box">
 
-        PARDESI ZONE
+        <div class="language">
+
+            SYSTEM ONLINE • WELCOME TO PARDESI ZONE
+
+        </div>
+
+        <div class="language">
+
+            سسٹم فعال ہے • پردیسی زون میں خوش آمدید
+
+        </div>
+
+        <div class="language">
+
+            سسٽم فعال آهي • پرديسي زون ۾ ڀليڪار
+
+        </div>
 
     </div>
 
 
-    <!-- =========================
-         FAKE TERMINAL LOGS
-    ========================== -->
+    <!-- =====================================================
+         TERMINAL LOG
+    ====================================================== -->
 
     <div class="logs">
 
         <div
-            class="log-line"
+            class="log"
             id="log1"
         >
-            INITIALIZING PARDESI ZONE...
+            PARDESI ZONE INITIALIZING...
         </div>
 
         <div
-            class="log-line"
+            class="log"
             id="log2"
-        >
-            ENCRYPTED CHANNEL: ACTIVE
-        </div>
-
-        <div
-            class="log-line"
-            id="log3"
         >
             SECURITY STATUS: VERIFIED
         </div>
 
         <div
-            class="log-line"
-            id="log4"
+            class="log"
+            id="log3"
         >
             DIGITAL CORE: ONLINE
         </div>
 
         <div
-            class="log-line"
+            class="log"
+            id="log4"
+        >
+            CONNECTION: SECURE
+        </div>
+
+        <div
+            class="log"
             id="log5"
         >
             WAITING FOR USER...
@@ -1554,22 +1328,50 @@ body::before{
     </div>
 
 
-    <!-- =========================
-         INFO
-    ========================== -->
+    <!-- =====================================================
+         LIVE TIME
+    ====================================================== -->
 
-    <div class="info-panel">
+    <div class="time-panel">
+
+        <div class="time-title">
+
+            PAKISTAN LOCAL TIME
+
+        </div>
+
+        <div
+            class="time"
+            id="clock"
+        >
+            00:00:00
+        </div>
+
+        <div
+            class="date"
+            id="date"
+        >
+            00/00/0000
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         INFO
+    ====================================================== -->
+
+    <div class="info">
 
         <div class="info-label">
 
-            SYSTEM IDENTITY
+            DIGITAL IDENTITY
 
         </div>
 
         <div class="info-name">
 
-            PARDESI
-            <span>ZONE</span>
+            PARDESI <span>ZONE</span>
 
         </div>
 
@@ -1582,38 +1384,6 @@ body::before{
     </div>
 
 
-    <!-- =========================
-         TIME
-    ========================== -->
-
-    <div class="time">
-
-        <div class="time-label">
-
-            LOCAL SYSTEM TIME
-
-        </div>
-
-        <div
-            class="time-value"
-            id="clock"
-        >
-            00:00:00
-        </div>
-
-    </div>
-
-
-    <!-- =========================
+    <!-- =====================================================
          WHATSAPP
-    ========================== -->
-
-    <div
-        class="whatsapp"
-        onclick="openWhatsApp()"
-        title="WhatsApp"
-    >
-
-        <svg viewBox="0 0 24 24">
-
-            <path d="M17.472 14.382c-.297-.149-
+    ========================

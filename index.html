@@ -1,360 +1,1510 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DPMods Cyber ID</title>
-    <style>
-        :root {
-            --bg-metal: #08080a;
-            --neon-purple: #d500ff;
-            --neon-cyan: #00e5ff;
-            --text-main: #ffffff;
-            --text-dim: #8b8b99;
-            --font-sys: 'Courier New', Courier, monospace;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+<title>Pardesi Zone</title>
 
-        /* --- BLURRED DIALOG BACKDROP --- */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            color: var(--text-main);
-            font-family: var(--font-sys);
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+<style>
 
-        /* --- THE FLOATING CYBER CARD --- */
-        .cyber-card {
-            width: 92%;
-            max-width: 400px;
-            aspect-ratio: 5 / 8;
-            max-height: 88vh;
-            background-color: var(--bg-metal);
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 20px 20px;
-            position: relative;
-            clip-path: polygon(10% 0, 100% 0, 100% 92%, 92% 100%, 0 100%, 0 8%);
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15), 0 30px 60px rgba(0,0,0,0.95);
-            opacity: 0;
-            transform: scale(0.9) translateY(30px);
-            animation: bootUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            transition: all 0.4s ease;
-        }
+:root{
+    --bg-main:#05080d;
+    --bg-card:#080d15;
+    --primary:#00c8ff;
+    --secondary:#ff1744;
+    --green:#25D366;
+    --white:#ffffff;
+    --dim:#8795a5;
+    --font:'Courier New',Courier,monospace;
+}
 
-        /* --- PARTICLE SYSTEM --- */
-        #particles {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 2; overflow: hidden;
-            clip-path: polygon(10% 0, 100% 0, 100% 92%, 92% 100%, 0 100%, 0 8%);
-        }
-        .particle {
-            position: absolute; width: 3px; height: 3px;
-            background: var(--neon-purple); border-radius: 50%; opacity: 0;
-            box-shadow: 0 0 10px 2px var(--neon-purple);
-            animation: floatUp infinite linear;
-        }
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
 
-        /* --- FAST-LOAD MARQUEE TICKER --- */
-        .ticker-wrap {
-            position: absolute; top: 0; left: 10%; right: 0; height: 16px;
-            background: var(--neon-cyan); color: #000; overflow: hidden;
-            display: flex; align-items: center; z-index: 15;
-            clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%);
-        }
-        .ticker {
-            display: flex;
-            width: max-content;
-            animation: marquee 12s linear infinite;
-        }
-        .ticker span {
-            white-space: nowrap; font-size: 9px; font-weight: 900; letter-spacing: 2px;
-            padding-right: 15px;
-        }
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
 
-        /* --- ANIMATIONS --- */
-        @keyframes bootUp { 100% { opacity: 1; transform: scale(1) translateY(0); } }
-        @keyframes seqFade { 0% { opacity: 0; transform: translateX(15px); } 100% { opacity: 1; transform: translateX(0); } }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes spinRev { 100% { transform: rotate(-360deg); } }
-        @keyframes blink { 0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--neon-cyan); } 50% { opacity: 0.1; box-shadow: 0 0 0 transparent; } }
-        @keyframes scanline { 0% { top: -5%; opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { top: 105%; opacity: 0; } }
-        @keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 0; } 10% { opacity: 0.9; } 80% { opacity: 0.5; } 100% { transform: translateY(-200px) scale(0.2); opacity: 0; } }
-        @keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        @keyframes neonPulse { 0%, 100% { box-shadow: 0 0 15px rgba(213, 0, 255, 0.4), inset 0 0 10px rgba(213, 0, 255, 0.2); } 50% { box-shadow: 0 0 30px rgba(213, 0, 255, 0.8), inset 0 0 20px rgba(213, 0, 255, 0.5); } }
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-        /* --- THE CENTRAL PORTRAIT --- */
-        .portrait-wrapper {
-            position: absolute;
-            top: 45px; left: 40px; right: 40px; 
-            bottom: 155px; 
-            background: url('https://raw.githubusercontent.com/DPModsYT/webbydpmods/refs/heads/main/IMG_20260514_135013.jpg') center/cover no-repeat;
-            border: 2px solid var(--neon-purple); border-radius: 6px;
-            animation: bootUp 0.5s 0.3s forwards, neonPulse 3s 0.8s infinite ease-in-out;
-            z-index: 1; overflow: hidden; opacity: 0;
-        }
-        .portrait-wrapper::after {
-            content: ''; position: absolute; left: 0; right: 0; top: 0; height: 5px;
-            background: rgba(255, 255, 255, 0.9); box-shadow: 0 0 25px 5px var(--neon-purple);
-            animation: scanline 4s infinite cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none;
-        }
+    color:var(--white);
+    font-family:var(--font);
 
-        /* --- TOP LEFT HARDWARE --- */
-        .hardware-screws {
-            position: absolute; top: 25px; left: 15px;
-            display: flex; flex-direction: column; gap: 12px; z-index: 5;
-        }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--neon-cyan); animation: blink 1.2s infinite ease-in-out; }
-        .screw { width: 8px; height: 8px; border-radius: 50%; background: #333; box-shadow: inset 1px 1px 3px #000; }
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(0,200,255,.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(255,23,68,.15),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            var(--bg-main),
+            #071727
+        );
 
-        .data-blocks {
-            position: absolute; top: 70px; left: 10px; display: flex; flex-direction: column; gap: 5px; opacity: 0.6;
-        }
-        .d-box { width: 20px; height: 8px; background: var(--text-dim); }
-        .d-box.cyan { background: var(--neon-cyan); width: 12px; }
-        .d-box.purp { background: var(--neon-purple); width: 16px; }
+    transition:background 1.5s ease;
+}
 
-        /* --- VERTICAL BRANDING --- */
-        .vertical-brand {
-            position: absolute; left: -12px; top: 50%; transform: translateY(-50%) rotate(180deg);
-            writing-mode: vertical-rl; color: transparent; -webkit-text-stroke: 1px var(--neon-purple);
-            font-size: 22px; font-weight: 900; letter-spacing: 6px; text-shadow: 0 0 12px rgba(213, 0, 255, 0.5);
-            z-index: 5; opacity: 0; animation: bootUp 0.5s 0.5s forwards;
-        }
+/* ================================
+   BACKGROUND LIGHT
+================================ */
 
-        /* --- RIGHT EDGE DATA SPECS --- */
-        .right-specs {
-            position: absolute; right: 8px; top: 40px;
-            display: flex; gap: 15px; writing-mode: vertical-rl; z-index: 5;
-            opacity: 0; animation: seqFade 0.5s 0.6s forwards;
-        }
-        .spec-block { display: flex; flex-direction: column; gap: 3px; }
-        .spec-label { color: var(--text-dim); font-size: 7px; letter-spacing: 2px; font-weight: bold; }
-        .spec-value { color: var(--text-main); font-size: 10px; letter-spacing: 1px; font-weight: bold; }
+body::before{
+    content:"";
 
-        /* --- BOTTOM LEFT ANGLED PANEL --- */
-        .name-panel {
-            position: absolute; bottom: 65px; left: 0; width: 60%; 
-            background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(5px);
-            padding: 12px 20px 12px 15px;
-            border: 1px solid var(--neon-purple); border-left: none;
-            clip-path: polygon(0 0, 85% 0, 100% 25%, 100% 100%, 0 100%);
-            z-index: 10; opacity: 0; animation: bootUp 0.5s 0.8s forwards;
-        }
-        .name-label { color: var(--neon-purple); font-size: 9px; font-weight: bold; letter-spacing: 2px; }
-        .name-value { color: var(--text-main); font-size: 22px; font-weight: 900; letter-spacing: 1px; margin-bottom: 6px; text-shadow: 0 0 8px rgba(255,255,255,0.4);}
-        .mission-label { color: var(--neon-purple); font-size: 8px; font-weight: bold; letter-spacing: 2px; }
-        .mission-value { color: var(--text-main); font-size: 11px; font-weight: bold; letter-spacing: 1px; }
-        .barcode {
-            position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-            width: 12px; height: 40px; background: repeating-linear-gradient(0deg, #fff, #fff 1px, transparent 1px, transparent 3px); opacity: 0.7;
-        }
+    position:fixed;
 
-        /* --- BOTTOM RIGHT HUD LOGO / TELEGRAM BUTTON (COMBINED) --- */
-        .cyber-logo {
-            position: absolute; bottom: 65px; right: 25px;
-            display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 10;
-            opacity: 0; animation: seqFade 0.5s 0.9s forwards;
-            cursor: pointer;
-        }
-        
-        .cyber-logo:active .crosshair { 
-            transform: scale(0.9); 
-            box-shadow: 0 0 20px var(--neon-cyan); 
-            border-color: var(--neon-cyan); 
-            background: rgba(0, 229, 255, 0.15);
-        }
-        .cyber-logo:active .tg-icon { fill: var(--text-main); }
-        .cyber-logo:active .logo-text { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+    width:500px;
+    height:500px;
 
-        .tg-label {
-            font-size: 7px; color: var(--neon-cyan); font-weight: bold; letter-spacing: 2px;
-            text-shadow: 0 0 5px var(--neon-cyan); margin-bottom: 2px;
-        }
+    border-radius:50%;
 
-        .crosshair {
-            width: 44px; height: 44px; 
-            border: 2px solid var(--neon-purple); border-radius: 50%;
-            position: relative; box-shadow: 0 0 12px var(--neon-purple);
-            display: flex; justify-content: center; align-items: center;
-            background: rgba(0, 229, 255, 0.05);
-            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        .ring-1 { position: absolute; top: -6px; left: -6px; right: -6px; bottom: -6px; border: 1px dashed var(--neon-cyan); border-radius: 50%; animation: spin 6s linear infinite; }
-        .ring-2 { position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; border: 1px dotted var(--neon-purple); border-radius: 50%; animation: spinRev 8s linear infinite; }
-        
-        /* Telegram Icon directly centered in the HUD */
-        .tg-icon { 
-            width: 22px; height: 22px; 
-            fill: var(--neon-cyan); 
-            margin-right: 2px; /* Optical center for the paper airplane */
-            transition: all 0.2s;
-            animation: floatIcon 3s infinite ease-in-out;
-        }
+    background:var(--primary);
 
-        .logo-text { 
-            font-size: 11px; font-weight: 900; letter-spacing: 3px; 
-            text-shadow: 0 0 6px var(--neon-purple); transition: all 0.2s; 
-        }
+    opacity:.07;
 
-        /* --- FIXED ACTION CONSOLE --- */
-        .action-console {
-            position: absolute;
-            bottom: 15px;
-            left: 0; width: 100%;
-            display: flex; flex-direction: column; align-items: center; gap: 6px;
-            z-index: 20; opacity: 0; animation: bootUp 0.5s 1s forwards;
-        }
+    filter:blur(100px);
 
-        .meta-text { font-size: 7px; color: var(--text-dim); letter-spacing: 2px; }
+    animation:
+        backgroundMove 9s ease-in-out infinite alternate;
 
-        .init-btn {
-            position: relative;
-            background: rgba(0, 229, 255, 0.05);
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 10px 30px;
-            font-family: var(--font-sys);
-            font-size: 13px; font-weight: bold; letter-spacing: 3px;
-            cursor: pointer; transition: all 0.2s;
-            box-shadow: 0 0 15px rgba(0,229,255,0.2), inset 0 0 8px rgba(0,229,255,0.1);
-            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-        }
+    pointer-events:none;
+}
 
-        .init-btn:active {
-            background: var(--neon-cyan); color: #000;
-            box-shadow: 0 0 25px rgba(0,229,255,0.9); transform: scale(0.95);
-        }
+@keyframes backgroundMove{
 
-    </style>
+    0%{
+        transform:translate(-120px,-120px);
+    }
+
+    100%{
+        transform:translate(120px,120px);
+    }
+}
+
+
+/* ================================
+   MAIN CARD
+================================ */
+
+.zone-card{
+
+    width:92%;
+    max-width:400px;
+
+    height:min(88vh,650px);
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid rgba(255,255,255,.16);
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.9),
+        inset 0 0 40px rgba(255,255,255,.025);
+
+    opacity:0;
+
+    transform:
+        scale(.9)
+        translateY(30px);
+
+    animation:
+        cardBoot .8s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+@keyframes cardBoot{
+
+    to{
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+/* ================================
+   TOP TICKER
+================================ */
+
+.ticker-wrap{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:28px;
+
+    overflow:hidden;
+
+    display:flex;
+    align-items:center;
+
+    z-index:30;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--secondary),
+            var(--primary),
+            var(--secondary)
+        );
+
+    box-shadow:
+        0 0 20px rgba(0,200,255,.2);
+}
+
+.ticker{
+
+    width:max-content;
+
+    display:flex;
+
+    animation:
+        marquee 16s
+        linear infinite;
+}
+
+.ticker span{
+
+    white-space:nowrap;
+
+    padding-right:50px;
+
+    color:#fff;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+@keyframes marquee{
+
+    0%{
+        transform:translateX(0);
+    }
+
+    100%{
+        transform:translateX(-50%);
+    }
+}
+
+
+/* ================================
+   PARTICLES
+================================ */
+
+#particles{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:3;
+}
+
+.particle{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    box-shadow:
+        0 0 10px var(--primary);
+
+    opacity:0;
+
+    animation:
+        floatParticle
+        linear infinite;
+}
+
+@keyframes floatParticle{
+
+    0%{
+        transform:
+            translateY(100px)
+            scale(1);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:.9;
+    }
+
+    80%{
+        opacity:.5;
+    }
+
+    100%{
+        transform:
+            translateY(-450px)
+            scale:.1;
+
+        opacity:0;
+    }
+}
+
+
+/* ================================
+   BRAND
+================================ */
+
+.brand{
+
+    position:absolute;
+
+    top:48px;
+    left:24px;
+
+    z-index:12;
+
+    opacity:0;
+
+    animation:
+        fadeIn .6s .25s forwards;
+}
+
+.brand-small{
+
+    color:var(--primary);
+
+    font-size:7px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+}
+
+.brand-name{
+
+    margin-top:4px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:27px;
+
+    font-weight:1000;
+
+    letter-spacing:1px;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 10px rgba(0,200,255,.7),
+        0 0 25px rgba(0,200,255,.25);
+}
+
+.brand-name span{
+
+    color:var(--secondary);
+
+    text-shadow:
+        0 0 10px rgba(255,23,68,.7);
+}
+
+
+/* ================================
+   STATUS
+================================ */
+
+.status{
+
+    position:absolute;
+
+    top:58px;
+    right:20px;
+
+    z-index:12;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    font-size:7px;
+
+    color:var(--dim);
+
+    letter-spacing:1px;
+}
+
+.status-dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#00ff88;
+
+    box-shadow:
+        0 0 12px #00ff88;
+
+    animation:
+        statusBlink 1.3s infinite;
+}
+
+@keyframes statusBlink{
+
+    50%{
+        opacity:.2;
+    }
+}
+
+
+/* ================================
+   PORTRAIT / ORIGINAL IMAGE
+================================ */
+
+.portrait-wrapper{
+
+    position:absolute;
+
+    top:98px;
+
+    left:27px;
+    right:27px;
+
+    bottom:190px;
+
+    overflow:hidden;
+
+    border-radius:16px;
+
+    border:2px solid var(--primary);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,200,255,.12),
+            rgba(255,23,68,.12)
+        );
+
+    box-shadow:
+        0 0 25px rgba(0,200,255,.18),
+        inset 0 0 25px rgba(0,200,255,.08);
+
+    z-index:6;
+
+    opacity:0;
+
+    animation:
+        portraitBoot .7s .35s forwards,
+        neonPulse 3s 1.2s infinite;
+}
+
+/*
+   اصل DPMods تصویر یہاں جوں کی توں رکھی گئی ہے۔
+*/
+
+.portrait-wrapper{
+
+    background:
+        url('https://raw.githubusercontent.com/DPModsYT/webbydpmods/refs/heads/main/IMG_20260514_135013.jpg')
+        center/cover
+        no-repeat;
+}
+
+@keyframes portraitBoot{
+
+    to{
+        opacity:1;
+    }
+}
+
+
+/* ================================
+   SCAN LINE
+================================ */
+
+.portrait-wrapper::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    top:0;
+
+    height:4px;
+
+    background:#fff;
+
+    box-shadow:
+        0 0 25px 5px var(--primary);
+
+    animation:
+        scanLine 4s
+        infinite
+        cubic-bezier(.4,0,.2,1);
+
+    pointer-events:none;
+}
+
+@keyframes scanLine{
+
+    0%{
+        top:-5%;
+        opacity:0;
+    }
+
+    10%{
+        opacity:.9;
+    }
+
+    90%{
+        opacity:.9;
+    }
+
+    100%{
+        top:105%;
+        opacity:0;
+    }
+}
+
+
+@keyframes neonPulse{
+
+    0%,100%{
+
+        box-shadow:
+            0 0 20px rgba(0,200,255,.18),
+            inset 0 0 15px rgba(0,200,255,.05);
+    }
+
+    50%{
+
+        box-shadow:
+            0 0 35px rgba(0,200,255,.35),
+            0 0 60px rgba(255,23,68,.12),
+            inset 0 0 20px rgba(0,200,255,.08);
+    }
+}
+
+
+/* ================================
+   SIDE BRAND
+================================ */
+
+.vertical-brand{
+
+    position:absolute;
+
+    left:-12px;
+
+    top:52%;
+
+    transform:
+        translateY(-50%)
+        rotate(180deg);
+
+    writing-mode:vertical-rl;
+
+    color:transparent;
+
+    -webkit-text-stroke:
+        1px var(--primary);
+
+    font-size:16px;
+
+    font-weight:900;
+
+    letter-spacing:5px;
+
+    text-shadow:
+        0 0 12px rgba(0,200,255,.4);
+
+    z-index:10;
+}
+
+
+/* ================================
+   INFORMATION PANEL
+================================ */
+
+.name-panel{
+
+    position:absolute;
+
+    left:0;
+
+    bottom:67px;
+
+    width:72%;
+
+    padding:
+        12px
+        20px
+        12px
+        16px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,12,22,.97),
+            rgba(5,12,22,.72)
+        );
+
+    border-top:
+        1px solid var(--primary);
+
+    border-right:
+        1px solid var(--primary);
+
+    border-bottom:
+        1px solid var(--primary);
+
+    border-left:none;
+
+    border-radius:
+        0 16px 16px 0;
+
+    backdrop-filter:blur(10px);
+
+    z-index:15;
+
+    opacity:0;
+
+    animation:
+        slideIn .6s .75s forwards;
+}
+
+.name-label{
+
+    color:var(--primary);
+
+    font-size:7px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+}
+
+.name-value{
+
+    margin-top:3px;
+
+    margin-bottom:6px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:21px;
+
+    font-weight:1000;
+
+    color:#fff;
+
+    letter-spacing:1px;
+}
+
+.name-value span{
+
+    color:var(--secondary);
+}
+
+.mission-label{
+
+    color:var(--primary);
+
+    font-size:7px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+.mission-value{
+
+    margin-top:2px;
+
+    color:#fff;
+
+    font-size:8px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+}
+
+@keyframes slideIn{
+
+    from{
+        transform:translateX(-20px);
+    }
+
+    to{
+        transform:translateX(0);
+
+        opacity:1;
+    }
+}
+
+
+/* ================================
+   TIME
+================================ */
+
+.time-box{
+
+    position:absolute;
+
+    right:20px;
+
+    bottom:135px;
+
+    z-index:15;
+
+    text-align:right;
+
+    opacity:0;
+
+    animation:
+        fadeIn .7s 1s forwards;
+}
+
+.time-label{
+
+    color:var(--dim);
+
+    font-size:6px;
+
+    letter-spacing:2px;
+}
+
+.time-value{
+
+    margin-top:3px;
+
+    color:var(--primary);
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 10px var(--primary);
+}
+
+
+/* ================================
+   WHATSAPP BUTTON
+================================ */
+
+.whatsapp-button{
+
+    position:absolute;
+
+    right:20px;
+
+    bottom:66px;
+
+    width:57px;
+    height:57px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #25D366,
+            #0ca94f
+        );
+
+    box-shadow:
+        0 0 18px rgba(37,211,102,.55),
+        0 0 40px rgba(37,211,102,.18);
+
+    z-index:25;
+
+    cursor:pointer;
+
+    animation:
+        whatsappPulse 2s infinite;
+
+    transition:.2s;
+}
+
+.whatsapp-button:active{
+
+    transform:scale(.87);
+}
+
+.whatsapp-button svg{
+
+    width:29px;
+    height:29px;
+
+    fill:#fff;
+}
+
+.whatsapp-label{
+
+    position:absolute;
+
+    bottom:-15px;
+
+    font-size:6px;
+
+    color:#25D366;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+}
+
+@keyframes whatsappPulse{
+
+    0%,100%{
+
+        box-shadow:
+            0 0 15px
+            rgba(37,211,102,.45);
+    }
+
+    50%{
+
+        box-shadow:
+            0 0 30px
+            rgba(37,211,102,.85);
+    }
+}
+
+
+/* ================================
+   BOTTOM BUTTON
+================================ */
+
+.action-console{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    bottom:15px;
+
+    z-index:25;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:6px;
+
+    opacity:0;
+
+    animation:
+        fadeIn .6s 1s forwards;
+}
+
+.contact-button{
+
+    border:none;
+
+    padding:
+        10px
+        28px;
+
+    border-radius:8px;
+
+    font-family:var(--font);
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--secondary),
+            #ff345c,
+            var(--primary)
+        );
+
+    box-shadow:
+        0 0 20px rgba(0,200,255,.2);
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.contact-button:active{
+
+    transform:scale(.94);
+}
+
+.meta-text{
+
+    color:var(--dim);
+
+    font-size:6px;
+
+    letter-spacing:2px;
+}
+
+
+/* ================================
+   CORNERS
+================================ */
+
+.corner{
+
+    position:absolute;
+
+    width:30px;
+    height:30px;
+
+    border-color:var(--primary);
+
+    z-index:20;
+}
+
+.corner.tl{
+
+    top:38px;
+    left:10px;
+
+    border-top:1px solid;
+    border-left:1px solid;
+}
+
+.corner.tr{
+
+    top:38px;
+    right:10px;
+
+    border-top:1px solid;
+    border-right:1px solid;
+}
+
+.corner.bl{
+
+    bottom:10px;
+    left:10px;
+
+    border-bottom:1px solid;
+    border-left:1px solid;
+}
+
+.corner.br{
+
+    bottom:10px;
+    right:10px;
+
+    border-bottom:1px solid;
+    border-right:1px solid;
+}
+
+
+/* ================================
+   FADE
+================================ */
+
+@keyframes fadeIn{
+
+    to{
+        opacity:1;
+    }
+}
+
+
+/* ================================
+   SMALL SCREEN
+================================ */
+
+@media(max-height:650px){
+
+    .portrait-wrapper{
+
+        top:88px;
+
+        bottom:175px;
+    }
+
+    .name-panel{
+
+        bottom:61px;
+    }
+
+    .whatsapp-button{
+
+        bottom:62px;
+    }
+
+    .time-box{
+
+        bottom:118px;
+    }
+}
+
+</style>
 </head>
+
+
 <body>
 
-<div class="cyber-card" id="mainCard">
-    
+<div
+    class="zone-card"
+    id="mainCard"
+>
+
+
+    <!-- =========================
+         TOP TICKER
+    ========================== -->
+
     <div class="ticker-wrap">
+
         <div class="ticker">
-            <span>SYSTEM SECURE // DPMODS VIP ENGINE V2 // ENCRYPTION LEVEL: MAXIMUM // AUTHENTICATION REQUIRED // AWAITING INPUT // </span>
-            <span>SYSTEM SECURE // DPMODS VIP ENGINE V2 // ENCRYPTION LEVEL: MAXIMUM // AUTHENTICATION REQUIRED // AWAITING INPUT // </span>
+
+            <span>
+                PARDESI ZONE
+                // DIGITAL SERVICES
+                // PREMIUM ACCESS
+                // OFFICIAL SYSTEM
+                //
+            </span>
+
+            <span>
+                PARDESI ZONE
+                // DIGITAL SERVICES
+                // PREMIUM ACCESS
+                // OFFICIAL SYSTEM
+                //
+            </span>
+
         </div>
+
     </div>
+
+
+    <!-- PARTICLES -->
 
     <div id="particles"></div>
 
+
+    <!-- CORNERS -->
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+
+    <!-- =========================
+         BRAND
+    ========================== -->
+
+    <div class="brand">
+
+        <div class="brand-small">
+            OFFICIAL DIGITAL ZONE
+        </div>
+
+        <div class="brand-name">
+            PARDESI
+            <span>ZONE</span>
+        </div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div class="status">
+
+        <div class="status-dot"></div>
+
+        <span>
+            ONLINE
+        </span>
+
+    </div>
+
+
+    <!-- =========================
+         ORIGINAL PHOTO
+    ========================== -->
+
     <div class="portrait-wrapper"></div>
 
-    <div class="hardware-screws">
-        <div class="status-dot"></div>
-        <div class="screw"></div>
-    </div>
-    <div class="data-blocks">
-        <div class="d-box"></div>
-        <div class="d-box cyan"></div>
-        <div class="d-box purp"></div>
-        <div class="d-box"></div>
+
+    <!-- =========================
+         SIDE BRAND
+    ========================== -->
+
+    <div class="vertical-brand">
+        PARDESI ZONE
     </div>
 
-    <div class="vertical-brand">DPMODS VIP</div>
 
-    <div class="right-specs">
-        <div class="spec-block"><span class="spec-label">ID NUMBER</span><span class="spec-value">DP-101101</span></div>
-        <div class="spec-block"><span class="spec-label">ADDRESS</span><span class="spec-value">127.0.0.1_ROOT</span></div>
-        <div class="spec-block"><span class="spec-label">ISSUE DATE</span><span class="spec-value">2026.MAY.14</span></div>
-        <div class="spec-block"><span class="spec-label">EXPIRED DATE</span><span class="spec-value">LIFETIME_VIP</span></div>
-    </div>
+    <!-- =========================
+         NAME PANEL
+    ========================== -->
 
     <div class="name-panel">
-        <div class="name-label">NAME</div>
-        <div class="name-value">DPMODS:</div>
-        <div class="mission-label">MISSION CODE</div>
-        <div class="mission-value">#AWAKEN_ENGINE</div>
-        <div class="barcode"></div>
+
+        <div class="name-label">
+            BRAND NAME
+        </div>
+
+        <div class="name-value">
+            PARDESI
+            <span>ZONE</span>
+        </div>
+
+        <div class="mission-label">
+            DIGITAL SERVICES
+        </div>
+
+        <div class="mission-value">
+            PREMIUM • FAST • SECURE
+        </div>
+
     </div>
 
-    <div class="cyber-logo" onclick="openLink('https://t.me/dp_mods')">
-        <div class="tg-label">TG LINK</div>
-        <div class="crosshair">
-            <div class="ring-1"></div>
-            <div class="ring-2"></div>
-            <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.21-1.12-.33-1.08-.7.02-.19.27-.39.75-.6 2.93-1.28 4.88-2.12 5.86-2.53 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z"/></svg>
+
+    <!-- =========================
+         TIME
+    ========================== -->
+
+    <div class="time-box">
+
+        <div class="time-label">
+            LOCAL TIME
         </div>
-        <div class="logo-text">MODS</div>
+
+        <div
+            class="time-value"
+            id="currentTime"
+        >
+            00:00:00
+        </div>
+
     </div>
+
+
+    <!-- =========================
+         WHATSAPP
+    ========================== -->
+
+    <div
+        class="whatsapp-button"
+        onclick="openWhatsApp()"
+    >
+
+        <svg
+            viewBox="0 0 24 24"
+        >
+
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.198-.497.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+
+        </svg>
+
+        <div class="whatsapp-label">
+            WHATSAPP
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         BOTTOM
+    ========================== -->
 
     <div class="action-console">
-        <button class="init-btn" onclick="triggerClose()">SYSTEM OVERRIDE</button>
-        <div class="meta-text">© DPMODS INC. 2026</div>
+
+        <button
+            class="contact-button"
+            onclick="openWhatsApp()"
+        >
+            CONTACT US
+        </button>
+
+        <div class="meta-text">
+            © 2026 PARDESI ZONE • OFFICIAL
+        </div>
+
     </div>
+
 
 </div>
 
+
 <script>
-    // --- ADVANCED PARTICLE ENGINE ---
-    function spawnParticles() {
-        const container = document.getElementById('particles');
-        const particleCount = 45; 
-        
-        for (let i = 0; i < particleCount; i++) {
-            let p = document.createElement('div');
-            p.className = 'particle';
-            
-            p.style.left = Math.random() * 100 + '%';
-            p.style.top = (80 + Math.random() * 20) + '%'; 
-            p.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            p.style.animationDelay = (Math.random() * 3) + 's';
-            
-            if(Math.random() > 0.65) {
-                p.style.background = 'var(--neon-cyan)';
-                p.style.boxShadow = '0 0 10px 2px var(--neon-cyan)';
-            }
-            
-            container.appendChild(p);
+
+
+/* =========================================
+   WHATSAPP NUMBER
+========================================= */
+
+const whatsappNumber =
+    "923118485874";
+
+
+/* =========================================
+   WHATSAPP FUNCTION
+========================================= */
+
+function openWhatsApp(){
+
+    const message =
+        "Assalam-o-Alaikum, Pardesi Zone se rabta karna hai.";
+
+    const url =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================
+   LIVE CLOCK + TIME THEME
+========================================= */
+
+function updateTime(){
+
+    const now =
+        new Date();
+
+    const hours =
+        now.getHours();
+
+    const minutes =
+        String(
+            now.getMinutes()
+        ).padStart(2,"0");
+
+    const seconds =
+        String(
+            now.getSeconds()
+        ).padStart(2,"0");
+
+
+    document.getElementById(
+        "currentTime"
+    ).innerText =
+
+        String(hours)
+        .padStart(2,"0")
+        + ":" +
+        minutes
+        + ":" +
+        seconds;
+
+
+    const root =
+        document.documentElement;
+
+
+    /*
+       MORNING
+       05:00 - 11:59
+    */
+
+    if(
+        hours >= 5 &&
+        hours < 12
+    ){
+
+        root.style.setProperty(
+            "--bg-main",
+            "#06151d"
+        );
+
+        root.style.setProperty(
+            "--primary",
+            "#00e1ff"
+        );
+
+        root.style.setProperty(
+            "--secondary",
+            "#ff477e"
+        );
+
+    }
+
+
+    /*
+       DAY
+       12:00 - 16:59
+    */
+
+    else if(
+        hours >= 12 &&
+        hours < 17
+    ){
+
+        root.style.setProperty(
+            "--bg-main",
+            "#06101b"
+        );
+
+        root.style.setProperty(
+            "--primary",
+            "#00b7ff"
+        );
+
+        root.style.setProperty(
+            "--secondary",
+            "#ff1744"
+        );
+
+    }
+
+
+    /*
+       EVENING
+       17:00 - 19:59
+    */
+
+    else if(
+        hours >= 17 &&
+        hours < 20
+    ){
+
+        root.style.setProperty(
+            "--bg-main",
+            "#180914"
+        );
+
+        root.style.setProperty(
+            "--primary",
+            "#ff6685"
+        );
+
+        root.style.setProperty(
+            "--secondary",
+            "#ff9f1c"
+        );
+
+    }
+
+
+    /*
+       NIGHT
+       20:00 - 04:59
+    */
+
+    else{
+
+        root.style.setProperty(
+            "--bg-main",
+            "#03050d"
+        );
+
+        root.style.setProperty(
+            "--primary",
+            "#8c7dff"
+        );
+
+        root.style.setProperty(
+            "--secondary",
+            "#ff1744"
+        );
+
+    }
+
+}
+
+
+/* Start Clock */
+
+updateTime();
+
+setInterval(
+    updateTime,
+    1000
+);
+
+
+/* =========================================
+   PARTICLE SYSTEM
+========================================= */
+
+function spawnParticles(){
+
+    const container =
+        document.getElementById(
+            "particles"
+        );
+
+
+    const particleCount =
+        45;
+
+
+    for(
+        let i = 0;
+        i < particleCount;
+        i++
+    ){
+
+        const particle =
+            document.createElement(
+                "div"
+            );
+
+
+        particle.className =
+            "particle";
+
+
+        particle.style.left =
+            Math.random() * 100 + "%";
+
+
+        particle.style.top =
+            (
+                70 +
+                Math.random() * 30
+            ) + "%";
+
+
+        particle.style.animationDuration =
+            (
+                3 +
+                Math.random() * 5
+            ) + "s";
+
+
+        particle.style.animationDelay =
+            (
+                Math.random() * 5
+            ) + "s";
+
+
+        if(
+            Math.random() > .55
+        ){
+
+            particle.style.background =
+                "var(--secondary)";
+
+            particle.style.boxShadow =
+                "0 0 10px var(--secondary)";
         }
+
+
+        container.appendChild(
+            particle
+        );
+
     }
 
-    window.onload = spawnParticles;
+}
 
-    // --- OPEN LINKS EXTERNALLY ---
-    function openLink(url) {
-        window.open(url, '_blank');
-    }
 
-    // --- FLAWLESS ACTION://CLOSE INTEGRATION ---
-    function triggerClose() {
-        const card = document.getElementById('mainCard');
-        const btn = document.querySelector('.init-btn');
-        
-        btn.style.background = 'var(--neon-cyan)';
-        btn.style.color = '#000';
-        btn.innerText = 'ACCESS GRANTED...';
+spawnParticles();
 
-        document.getElementById('particles').style.opacity = '0';
 
-        card.style.animation = 'none';
-        card.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        card.style.transform = 'scale(0.85) translateY(60px)';
-        card.style.opacity = '0';
-        
-        setTimeout(() => {
-            window.location.href = "action://close";
-        }, 400);
-    }
+/* =========================================
+   OPTIONAL APP CLOSE
+========================================= */
+
+function triggerClose(){
+
+    const card =
+        document.getElementById(
+            "mainCard"
+        );
+
+
+    card.style.transition =
+        "all .4s ease";
+
+
+    card.style.transform =
+        "scale(.85) translateY(60px)";
+
+
+    card.style.opacity =
+        "0";
+
+
+    setTimeout(
+        function(){
+
+            window.location.href =
+                "action://close";
+
+        },
+        400
+    );
+
+}
+
 </script>
 
 </body>

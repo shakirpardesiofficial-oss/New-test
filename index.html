@@ -2,450 +2,326 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0,
-      maximum-scale=1.0,
-      user-scalable=no">
-
-<title>PARDESI ZONE // CYBER ID</title>
+<title>Secure Activation</title>
 
 <style>
-
-/* =========================================================
-   PARDESI ZONE
-   EXTREME CYBER / HACKER STYLE
-========================================================= */
-
 :root{
-    --bg:#020303;
-    --panel:#07100c;
-
-    --green:#00ff66;
-    --green2:#00c853;
-
-    --red:#ff1744;
-    --red2:#ff3d00;
-
-    --orange:#ff9800;
-    --gold:#ffc107;
-
+    --bg:#030506;
+    --panel:#080b0d;
+    --green:#00ff88;
     --cyan:#00eaff;
-
-    --white:#f4fff8;
-    --dim:#769486;
-
-    --font:"Courier New",monospace;
+    --red:#ff1744;
+    --orange:#ffb300;
+    --white:#f4f7f8;
+    --dim:#68777b;
 }
-
-
-/* =========================================================
-   RESET
-========================================================= */
 
 *{
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
     width:100%;
     height:100%;
     margin:0;
-    padding:0;
     overflow:hidden;
 }
 
 body{
+    background:
+        radial-gradient(circle at 50% 38%,
+            rgba(0,255,136,.09),
+            transparent 28%),
+        radial-gradient(circle at 50% 100%,
+            rgba(255,23,68,.12),
+            transparent 38%),
+        #030506;
+
+    color:var(--white);
+    font-family:"Courier New",monospace;
+
     display:flex;
     align-items:center;
     justify-content:center;
-
-    font-family:var(--font);
-    color:var(--white);
-
-    background:
-        radial-gradient(
-            circle at 50% 35%,
-            rgba(0,255,102,.08),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(255,23,68,.15),
-            transparent 38%
-        ),
-        #020303;
-
-    transition:
-        background 1s ease;
 }
 
-
-/* =========================================================
-   CRT SCANLINES
-========================================================= */
-
-body::after{
+/* CRT EFFECT */
+body:after{
     content:"";
-
     position:fixed;
     inset:0;
-
     pointer-events:none;
-
     z-index:9999;
 
     background:
         repeating-linear-gradient(
             0deg,
-            rgba(255,255,255,.018) 0px,
+            rgba(255,255,255,.018) 0,
             rgba(255,255,255,.018) 1px,
             transparent 1px,
             transparent 4px
         );
 }
 
+/* MAIN */
 
-/* =========================================================
-   MAIN CARD
-========================================================= */
-
-.cyber-card{
-
-    width:93%;
-    max-width:420px;
-
-    height:min(92vh,700px);
-
+.card{
     position:relative;
+
+    width:94%;
+    max-width:420px;
+    height:min(92vh,720px);
 
     overflow:hidden;
 
     background:
         linear-gradient(
             145deg,
-            rgba(0,255,102,.045),
-            rgba(0,0,0,.96)
+            rgba(0,255,136,.035),
+            rgba(0,0,0,.97)
         );
 
-    border:
-        1px solid
-        rgba(0,255,102,.45);
+    border:1px solid rgba(0,255,136,.25);
 
     box-shadow:
-
-        0 0 25px
-        rgba(0,255,102,.12),
-
-        0 35px 100px
-        rgba(0,0,0,.95),
-
-        inset 0 0 50px
-        rgba(0,255,102,.025);
+        0 0 45px rgba(0,255,136,.08),
+        0 35px 100px rgba(0,0,0,.95),
+        inset 0 0 80px rgba(0,0,0,.8);
 
     clip-path:
         polygon(
-            15px 0,
-            calc(100% - 15px) 0,
-            100% 15px,
-            100% calc(100% - 15px),
-            calc(100% - 15px) 100%,
-            15px 100%,
-            0 calc(100% - 15px),
-            0 15px
+            14px 0,
+            calc(100% - 14px) 0,
+            100% 14px,
+            100% calc(100% - 14px),
+            calc(100% - 14px) 100%,
+            14px 100%,
+            0 calc(100% - 14px),
+            0 14px
         );
 
-    opacity:0;
-
-    transform:
-        scale(.88)
-        translateY(30px);
-
-    animation:
-        boot .9s
-        cubic-bezier(.2,.8,.2,1)
-        forwards;
+    animation:cardIn .9s ease forwards;
 }
 
-@keyframes boot{
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:scale(.92) translateY(25px);
+    }
     to{
         opacity:1;
-        transform:
-            scale(1)
-            translateY(0);
+        transform:scale(1) translateY(0);
     }
 }
 
-
-/* =========================================================
-   TOP BAR
-========================================================= */
-
-.top-bar{
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:29px;
-
-    display:flex;
-    align-items:center;
-
-    overflow:hidden;
-
-    z-index:50;
-
-    background:
-        linear-gradient(
-            90deg,
-            #001d0c,
-            #003e1b,
-            #001d0c
-        );
-
-    border-bottom:
-        1px solid
-        rgba(0,255,102,.45);
-}
-
-.ticker{
-
-    white-space:nowrap;
-
-    color:var(--green);
-
-    font-size:7px;
-
-    font-weight:900;
-
-    letter-spacing:2px;
-
-    text-shadow:
-        0 0 8px
-        var(--green);
-
-    animation:
-        ticker 18s
-        linear
-        infinite;
-}
-
-@keyframes ticker{
-    from{
-        transform:translateX(100%);
-    }
-
-    to{
-        transform:translateX(-100%);
-    }
-}
-
-
-/* =========================================================
-   MATRIX
-========================================================= */
+/* MATRIX */
 
 #matrix{
-
     position:absolute;
-
     inset:0;
 
     width:100%;
     height:100%;
 
-    opacity:.12;
-
+    opacity:.10;
     z-index:1;
-
-    pointer-events:none;
 }
 
-
-/* =========================================================
-   GRID
-========================================================= */
+/* GRID */
 
 .grid{
-
     position:absolute;
-
     inset:0;
-
     z-index:2;
-
     pointer-events:none;
 
     background:
-
         linear-gradient(
-            rgba(0,255,102,.035) 1px,
+            rgba(0,255,136,.025) 1px,
             transparent 1px
         ),
-
         linear-gradient(
             90deg,
-            rgba(0,255,102,.035) 1px,
+            rgba(0,255,136,.025) 1px,
             transparent 1px
         );
 
-    background-size:24px 24px;
+    background-size:25px 25px;
 }
 
+/* TOP SYSTEM BAR */
 
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header{
-
+.system-bar{
     position:absolute;
+    top:0;
+    left:0;
+    right:0;
 
-    top:45px;
-    left:23px;
+    height:30px;
 
-    z-index:20;
+    z-index:40;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 16px;
+
+    border-bottom:1px solid
+        rgba(0,255,136,.18);
+
+    background:
+        rgba(0,0,0,.55);
+
+    font-size:6px;
+    letter-spacing:1.5px;
 }
 
-.mini-title{
-
+.system-left{
     color:var(--green);
 
-    font-size:7px;
-
-    letter-spacing:3px;
-
-    font-weight:bold;
-
     text-shadow:
-        0 0 8px
-        var(--green);
+        0 0 8px var(--green);
 }
 
-.brand{
+.system-right{
+    color:var(--dim);
+}
 
-    margin-top:3px;
+/* MAIN HEADER */
+
+.header{
+    position:absolute;
+
+    top:50px;
+    left:0;
+    right:0;
+
+    z-index:20;
+
+    text-align:center;
+}
+
+.header-small{
+    font-size:6px;
+    letter-spacing:3px;
+
+    color:var(--dim);
+}
+
+.header-title{
+    margin-top:9px;
 
     font-family:Arial,sans-serif;
 
-    font-size:27px;
+    font-size:22px;
+    font-weight:900;
 
-    font-weight:1000;
-
-    letter-spacing:1px;
+    letter-spacing:4px;
 
     color:#fff;
 
     text-shadow:
-        2px 0 var(--red),
-        -2px 0 var(--cyan),
-        0 0 15px
-        rgba(0,255,102,.35);
-
-    animation:glitch 4s infinite;
+        0 0 15px rgba(255,255,255,.25);
 }
 
-.brand span{
-    color:var(--green);
+.header-line{
+    width:90px;
+    height:1px;
 
-    text-shadow:
-        0 0 12px
-        var(--green);
+    margin:10px auto 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--green),
+            transparent
+        );
+
+    box-shadow:
+        0 0 10px var(--green);
 }
 
-@keyframes glitch{
-
-    0%,93%,100%{
-        transform:translate(0);
-    }
-
-    94%{
-        transform:translate(-2px,1px);
-    }
-
-    95%{
-        transform:translate(2px,-1px);
-    }
-
-    96%{
-        transform:translate(-1px,0);
-    }
-}
-
-
-/* =========================================================
-   LIVE STATUS
-========================================================= */
+/* STATUS */
 
 .status{
-
     position:absolute;
 
-    top:50px;
-    right:18px;
+    top:112px;
+    left:0;
+    right:0;
 
     z-index:20;
 
-    display:flex;
-
-    align-items:center;
-
-    gap:6px;
+    text-align:center;
 
     color:var(--green);
 
     font-size:6px;
+    letter-spacing:2px;
 
-    letter-spacing:1px;
+    text-shadow:
+        0 0 10px var(--green);
 }
 
 .status-dot{
+    display:inline-block;
 
-    width:7px;
-    height:7px;
+    width:6px;
+    height:6px;
+
+    margin-right:5px;
 
     border-radius:50%;
 
     background:var(--green);
 
     box-shadow:
-        0 0 12px
-        var(--green);
+        0 0 12px var(--green);
 
-    animation:blink 1s infinite;
+    animation:pulse .8s infinite;
 }
 
-@keyframes blink{
+@keyframes pulse{
     50%{
-        opacity:.15;
+        opacity:.2;
     }
 }
 
+/* PHOTO FRAME */
 
-/* =========================================================
-   PORTRAIT
-========================================================= */
-
-.portrait{
-
+.photo-area{
     position:absolute;
 
-    top:91px;
+    top:137px;
+    left:32px;
+    right:32px;
 
-    left:25px;
-    right:25px;
+    height:255px;
 
-    bottom:218px;
-
-    z-index:8;
+    z-index:10;
 
     overflow:hidden;
+
+    background:#020303;
+
+    border:1px solid
+        rgba(0,255,136,.4);
+
+    box-shadow:
+        0 0 25px rgba(0,255,136,.08),
+        inset 0 0 30px rgba(0,0,0,.8);
+}
+
+/* PHOTO */
+
+.photo{
+    position:absolute;
+    inset:7px;
 
     background:
         url(
@@ -453,94 +329,98 @@ body::after{
         )
         center/cover no-repeat;
 
-    border:
-        1px solid
-        var(--green);
+    filter:
+        contrast(1.08)
+        saturate(.9);
 
-    box-shadow:
-
-        0 0 18px
-        rgba(0,255,102,.2),
-
-        inset 0 0 30px
-        rgba(0,255,102,.1);
-
-    animation:
-        portraitIn .8s .3s
-        both;
+    opacity:.93;
 }
 
-@keyframes portraitIn{
+/* DARK CINEMATIC OVERLAY */
 
-    from{
-        opacity:0;
-        transform:scale(1.05);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-
-/* =========================================================
-   IMAGE DARK OVERLAY
-========================================================= */
-
-.portrait::before{
-
+.photo:after{
     content:"";
-
     position:absolute;
-
     inset:0;
 
     background:
         linear-gradient(
             180deg,
-            rgba(0,255,102,.04),
-            transparent 45%,
-            rgba(0,0,0,.62)
+            rgba(0,0,0,.12),
+            transparent 40%,
+            rgba(0,0,0,.65)
         );
-
-    z-index:2;
 }
 
+/* CORNERS */
 
-/* =========================================================
-   LASER SCAN
-========================================================= */
+.corner{
+    position:absolute;
 
-.portrait::after{
+    width:24px;
+    height:24px;
 
-    content:"";
+    z-index:15;
+}
 
+.c1{
+    top:0;
+    left:0;
+
+    border-top:2px solid var(--green);
+    border-left:2px solid var(--green);
+}
+
+.c2{
+    top:0;
+    right:0;
+
+    border-top:2px solid var(--green);
+    border-right:2px solid var(--green);
+}
+
+.c3{
+    bottom:0;
+    left:0;
+
+    border-bottom:2px solid var(--red);
+    border-left:2px solid var(--red);
+}
+
+.c4{
+    bottom:0;
+    right:0;
+
+    border-bottom:2px solid var(--red);
+    border-right:2px solid var(--red);
+}
+
+/* SCAN */
+
+.scan{
     position:absolute;
 
     left:0;
     right:0;
 
-    top:-5%;
+    top:-5px;
 
-    height:3px;
+    height:2px;
+
+    z-index:20;
 
     background:#fff;
 
     box-shadow:
-        0 0 20px 5px
-        var(--green);
-
-    z-index:5;
+        0 0 18px 4px var(--green);
 
     animation:
-        scan 4s infinite;
+        scan 3.5s infinite;
 }
 
 @keyframes scan{
-
     0%{
-        top:-5%;
+        top:0;
         opacity:0;
     }
 
@@ -553,139 +433,182 @@ body::after{
     }
 
     100%{
-        top:105%;
+        top:100%;
         opacity:0;
     }
 }
 
+/* HUD CIRCLE */
 
-/* =========================================================
-   CORNERS
-========================================================= */
-
-.corner{
-
+.hud{
     position:absolute;
 
-    width:22px;
-    height:22px;
+    left:50%;
+    top:50%;
 
-    z-index:15;
-}
+    width:120px;
+    height:120px;
 
-.c1{
-    top:7px;
-    left:7px;
+    transform:translate(-50%,-50%);
 
-    border-top:2px solid var(--green);
-    border-left:2px solid var(--green);
-}
+    border:1px solid
+        rgba(0,255,234,.25);
 
-.c2{
-    top:7px;
-    right:7px;
-
-    border-top:2px solid var(--green);
-    border-right:2px solid var(--green);
-}
-
-.c3{
-    bottom:7px;
-    left:7px;
-
-    border-bottom:2px solid var(--green);
-    border-left:2px solid var(--green);
-}
-
-.c4{
-    bottom:7px;
-    right:7px;
-
-    border-bottom:2px solid var(--green);
-    border-right:2px solid var(--green);
-}
-
-
-/* =========================================================
-   LANGUAGE DISPLAY
-========================================================= */
-
-.language-box{
-
-    position:absolute;
-
-    left:31px;
-    right:31px;
-
-    bottom:194px;
+    border-radius:50%;
 
     z-index:25;
 
-    height:42px;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    overflow:hidden;
-
-    border:
-        1px solid
-        rgba(0,255,102,.25);
-
-    background:
-        rgba(0,8,4,.85);
+    animation:rotate 14s linear infinite;
 }
 
-.language{
+.hud:before{
+    content:"";
 
     position:absolute;
 
-    width:100%;
+    inset:12px;
+
+    border:
+        1px dashed
+        rgba(0,255,234,.45);
+
+    border-radius:50%;
+}
+
+.hud:after{
+    content:"";
+
+    position:absolute;
+
+    inset:29px;
+
+    border:
+        1px solid
+        rgba(0,255,136,.4);
+
+    border-radius:50%;
+}
+
+@keyframes rotate{
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+    }
+}
+
+/* ACTIVATION MESSAGE */
+
+.activation{
+    position:absolute;
+
+    left:20px;
+    right:20px;
+
+    top:405px;
+
+    z-index:30;
 
     text-align:center;
+}
 
-    font-size:11px;
+.activation-title{
+    font-family:Arial,sans-serif;
 
-    font-weight:bold;
+    font-size:20px;
+    font-weight:900;
 
-    letter-spacing:1px;
+    letter-spacing:2px;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 18px rgba(255,255,255,.25);
+
+    animation:activationGlow 2s infinite;
+}
+
+@keyframes activationGlow{
+    50%{
+        text-shadow:
+            0 0 25px
+            rgba(0,255,136,.5);
+    }
+}
+
+.activation-credit{
+    margin-top:8px;
+
+    font-size:7px;
+
+    letter-spacing:3px;
 
     color:var(--green);
 
     text-shadow:
-        0 0 9px
-        var(--green);
+        0 0 10px var(--green);
+}
+
+.activation-line{
+    width:160px;
+    height:1px;
+
+    margin:11px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--green),
+            transparent
+        );
+}
+
+/* LANGUAGE */
+
+.language{
+    height:24px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    margin-top:4px;
+}
+
+.lang{
+    position:absolute;
+
+    width:100%;
+
+    left:0;
 
     opacity:0;
 
-    transform:
-        translateY(10px);
+    font-size:8px;
 
-    animation:
-        languageShow
-        9s
-        infinite;
+    color:#b9c8c4;
+
+    animation:lang 9s infinite;
 }
 
-.language:nth-child(1){
+.lang:nth-child(1){
     animation-delay:0s;
 }
 
-.language:nth-child(2){
+.lang:nth-child(2){
     animation-delay:3s;
 }
 
-.language:nth-child(3){
+.lang:nth-child(3){
     animation-delay:6s;
 }
 
-@keyframes languageShow{
+@keyframes lang{
 
     0%{
         opacity:0;
-        transform:translateY(10px);
+        transform:translateY(8px);
     }
 
     8%{
@@ -700,7 +623,7 @@ body::after{
 
     34%{
         opacity:0;
-        transform:translateY(-10px);
+        transform:translateY(-8px);
     }
 
     100%{
@@ -708,496 +631,318 @@ body::after{
     }
 }
 
+/* TERMINAL */
 
-/* =========================================================
-   TERMINAL LOG
-========================================================= */
-
-.logs{
-
+.terminal{
     position:absolute;
 
-    left:31px;
-    right:31px;
+    left:32px;
+    right:32px;
 
-    bottom:137px;
+    bottom:92px;
 
-    height:53px;
+    height:52px;
 
-    padding:7px;
+    z-index:30;
+
+    padding:7px 9px;
 
     overflow:hidden;
 
-    z-index:25;
-
     background:
-        rgba(0,4,2,.9);
+        rgba(0,0,0,.72);
 
     border:
         1px solid
-        rgba(0,255,102,.18);
-}
-
-.log{
+        rgba(0,255,136,.12);
 
     font-size:6px;
 
     line-height:10px;
 
+    color:#60756d;
+}
+
+.terminal span{
     color:var(--green);
-
-    white-space:nowrap;
-
-    transition:.3s;
 }
 
-.log::before{
-    content:"> ";
-    color:var(--red);
-}
+/* TIME */
 
-
-/* =========================================================
-   TIME PANEL
-========================================================= */
-
-.time-panel{
-
+.time{
     position:absolute;
 
-    right:18px;
+    bottom:100px;
+    right:40px;
 
-    bottom:139px;
-
-    z-index:30;
+    z-index:35;
 
     text-align:right;
 }
 
-.time-title{
+.time-label{
+    font-size:5px;
 
     color:var(--dim);
-
-    font-size:5px;
 
     letter-spacing:1px;
 }
 
-.time{
-
+.clock{
     margin-top:3px;
 
-    color:var(--orange);
+    font-size:11px;
 
-    font-size:12px;
+    color:var(--orange);
 
     font-weight:bold;
 
     text-shadow:
         0 0 10px
-        rgba(255,152,0,.8);
+        rgba(255,179,0,.7);
 }
 
 .date{
-
     margin-top:2px;
-
-    color:#a98b56;
-
-    font-size:5px;
-}
-
-
-/* =========================================================
-   INFO PANEL
-========================================================= */
-
-.info{
-
-    position:absolute;
-
-    left:0;
-
-    bottom:69px;
-
-    width:72%;
-
-    z-index:30;
-
-    padding:
-        9px
-        20px
-        9px
-        15px;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            rgba(15,2,3,.98),
-            rgba(30,7,5,.8)
-        );
-
-    border-top:
-        1px solid
-        var(--red);
-
-    border-right:
-        1px solid
-        var(--red);
-
-    border-bottom:
-        1px solid
-        rgba(255,152,0,.7);
-
-    border-left:none;
-
-    box-shadow:
-        0 0 18px
-        rgba(255,23,68,.1);
-}
-
-.info-label{
-
-    color:#8e6268;
 
     font-size:5px;
 
-    letter-spacing:2px;
+    color:#8b7650;
 }
 
-.info-name{
-
-    margin-top:2px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:18px;
-
-    font-weight:1000;
-}
-
-.info-name span{
-
-    color:var(--red);
-
-    text-shadow:
-        0 0 9px
-        var(--red);
-}
-
-.info-sub{
-
-    margin-top:4px;
-
-    color:var(--orange);
-
-    font-size:6px;
-
-    letter-spacing:1px;
-}
-
-
-/* =========================================================
-   WHATSAPP
-========================================================= */
+/* WHATSAPP */
 
 .whatsapp{
-
     position:absolute;
 
-    right:19px;
+    right:28px;
+    bottom:158px;
 
-    bottom:70px;
+    width:43px;
+    height:43px;
 
     z-index:40;
 
-    width:52px;
-    height:52px;
-
     display:flex;
-
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 
     border-radius:50%;
 
     background:
-        linear-gradient(
-            145deg,
-            #25D366,
-            #079b43
-        );
+        #20c968;
 
     box-shadow:
-
-        0 0 15px
-        rgba(37,211,102,.55),
-
-        0 0 35px
-        rgba(37,211,102,.15);
+        0 0 18px
+        rgba(32,201,104,.5);
 
     cursor:pointer;
-
-    animation:
-        waPulse 2s infinite;
-}
-
-.whatsapp:active{
-    transform:scale(.85);
-}
-
-.whatsapp svg{
-    width:27px;
-    height:27px;
-    fill:#fff;
-}
-
-.wa-text{
-
-    position:absolute;
-
-    bottom:-14px;
-
-    white-space:nowrap;
-
-    color:#25D366;
-
-    font-size:5px;
-
-    letter-spacing:1px;
-
-    font-weight:bold;
-}
-
-@keyframes waPulse{
-
-    50%{
-        box-shadow:
-            0 0 28px
-            rgba(37,211,102,.9);
-    }
-}
-
-
-/* =========================================================
-   BOTTOM RED SYSTEM
-========================================================= */
-
-.bottom{
-
-    position:absolute;
-
-    left:0;
-    right:0;
-
-    bottom:0;
-
-    height:55px;
-
-    z-index:35;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:4px;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #130205,
-            #32070a,
-            #170203
-        );
-
-    border-top:
-        1px solid
-        rgba(255,23,68,.65);
-
-    box-shadow:
-        0 -8px 25px
-        rgba(255,23,68,.08);
-}
-
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
-.back-btn{
-
-    padding:
-        7px
-        25px;
-
-    color:#fff;
-
-    background:
-        rgba(255,23,68,.08);
-
-    border:
-        1px solid
-        var(--red);
-
-    font-family:var(--font);
-
-    font-size:9px;
-
-    font-weight:bold;
-
-    letter-spacing:2px;
-
-    cursor:pointer;
-
-    clip-path:
-        polygon(
-            8px 0,
-            100% 0,
-            100% calc(100% - 8px),
-            calc(100% - 8px) 100%,
-            0 100%,
-            0 8px
-        );
-
-    box-shadow:
-        0 0 12px
-        rgba(255,23,68,.15);
 
     transition:.2s;
 }
 
-.back-btn:active{
-
-    background:var(--red);
-
-    color:#fff;
-
-    transform:scale(.93);
-
-    box-shadow:
-        0 0 25px
-        rgba(255,23,68,.8);
+.whatsapp:active{
+    transform:scale(.86);
 }
 
-.copy{
+.whatsapp svg{
+    width:22px;
+    height:22px;
 
-    color:#74474d;
+    fill:#fff;
+}
+
+.whatsapp-label{
+    position:absolute;
+
+    top:48px;
+
+    white-space:nowrap;
+
+    font-size:5px;
+
+    color:#20c968;
+
+    letter-spacing:1px;
+}
+
+/* SOUND */
+
+.sound{
+    position:absolute;
+
+    left:28px;
+    bottom:158px;
+
+    width:43px;
+    height:43px;
+
+    z-index:40;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        rgba(0,255,136,.04);
+
+    border:
+        1px solid
+        var(--green);
+
+    color:var(--green);
+
+    font-size:14px;
+
+    box-shadow:
+        0 0 15px
+        rgba(0,255,136,.12);
+
+    cursor:pointer;
+}
+
+.sound.on{
+    background:
+        rgba(0,255,136,.12);
+
+    box-shadow:
+        0 0 22px
+        rgba(0,255,136,.45);
+}
+
+/* ENTER */
+
+.enter{
+    position:absolute;
+
+    left:32px;
+    right:32px;
+
+    bottom:28px;
+
+    height:40px;
+
+    z-index:50;
+
+    border:
+        1px solid
+        var(--green);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,255,136,.04),
+            rgba(0,255,136,.12),
+            rgba(0,255,136,.04)
+        );
+
+    color:var(--green);
+
+    font-family:var(--font);
+
+    font-size:9px;
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 18px
+        rgba(0,255,136,.08);
+
+    transition:.2s;
+}
+
+.enter:active{
+    transform:scale(.97);
+
+    color:#000;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 30px
+        rgba(0,255,136,.7);
+}
+
+/* BOTTOM CREDIT */
+
+.credit{
+    position:absolute;
+
+    bottom:8px;
+
+    left:0;
+    right:0;
+
+    z-index:50;
+
+    text-align:center;
 
     font-size:4px;
+
+    color:#53615e;
 
     letter-spacing:2px;
 }
 
+/* FLASH */
 
-/* =========================================================
-   NIGHT MODE
-========================================================= */
+.flash{
+    position:fixed;
+    inset:0;
 
-body.night{
+    z-index:10000;
 
-    background:
+    pointer-events:none;
 
-        radial-gradient(
-            circle at 50% 30%,
-            rgba(0,255,102,.06),
-            transparent 35%
-        ),
+    background:#fff;
 
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(255,23,68,.2),
-            transparent 45%
-        ),
-
-        #010202;
+    opacity:0;
 }
 
-
-/* =========================================================
-   DAY MODE
-========================================================= */
-
-body.day{
-
-    background:
-
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(0,200,83,.16),
-            transparent 40%
-        ),
-
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(255,152,0,.15),
-            transparent 45%
-        ),
-
-        #06100b;
+.flash.go{
+    animation:flash .25s;
 }
 
+@keyframes flash{
+    0%{opacity:0}
+    30%{opacity:.18}
+    100%{opacity:0}
+}
 
-/* =========================================================
-   SMALL SCREEN
-========================================================= */
+/* ACTIVATED */
 
-@media(max-height:650px){
+.activated .activation-title{
+    color:var(--green);
 
-    .portrait{
-        top:86px;
-        bottom:205px;
-    }
-
-    .language-box{
-        bottom:181px;
-    }
-
-    .logs{
-        bottom:128px;
-    }
-
-    .time-panel{
-        bottom:130px;
-    }
-
-    .info,
-    .whatsapp{
-        bottom:63px;
-    }
-
+    text-shadow:
+        0 0 20px
+        var(--green);
 }
 
 </style>
 </head>
 
-
 <body>
 
+<div class="flash" id="flash"></div>
 
-<div class="cyber-card">
+<div class="card" id="card">
 
+    <!-- SYSTEM BAR -->
 
-    <!-- =====================================================
-         TOP SYSTEM BAR
-    ====================================================== -->
+    <div class="system-bar">
 
-    <div class="top-bar">
+        <div class="system-left">
+            ● SECURE CONNECTION
+        </div>
 
-        <div class="ticker">
-
-            PARDESI ZONE //
-            SYSTEM ONLINE //
-            سسٹم فعال ہے //
-            سسٽم فعال آهي //
-            SECURE CYBER INTERFACE //
-            ACCESS GRANTED //
-
+        <div class="system-right">
+            ONLINE
         </div>
 
     </div>
@@ -1207,9 +952,6 @@ body.day{
 
     <canvas id="matrix"></canvas>
 
-
-    <!-- GRID -->
-
     <div class="grid"></div>
 
 
@@ -1217,17 +959,15 @@ body.day{
 
     <div class="header">
 
-        <div class="mini-title">
-
-            // OFFICIAL DIGITAL SYSTEM
-
+        <div class="header-small">
+            DIGITAL AUTHENTICATION PROTOCOL
         </div>
 
-        <div class="brand">
-
-            PARDESI <span>ZONE</span>
-
+        <div class="header-title">
+            SECURE ACCESS
         </div>
+
+        <div class="header-line"></div>
 
     </div>
 
@@ -1236,18 +976,22 @@ body.day{
 
     <div class="status">
 
-        <div class="status-dot"></div>
+        <span class="status-dot"></span>
 
-        ONLINE
+        SYSTEM READY • IDENTITY VERIFIED
 
     </div>
 
 
-    <!-- =====================================================
-         ORIGINAL PHOTO
-    ====================================================== -->
+    <!-- PHOTO -->
 
-    <div class="portrait">
+    <div class="photo-area">
+
+        <div class="photo"></div>
+
+        <div class="scan"></div>
+
+        <div class="hud"></div>
 
         <div class="corner c1"></div>
         <div class="corner c2"></div>
@@ -1257,91 +1001,82 @@ body.day{
     </div>
 
 
-    <!-- =====================================================
-         3 LANGUAGES
-    ====================================================== -->
+    <!-- ACTIVATION -->
 
-    <div class="language-box">
+    <div class="activation">
 
-        <div class="language">
-
-            SYSTEM ONLINE • WELCOME TO PARDESI ZONE
-
+        <div
+            class="activation-title"
+            id="activationTitle"
+        >
+            APPLICATION ACTIVATED
         </div>
 
-        <div class="language">
-
-            سسٹم فعال ہے • پردیسی زون میں خوش آمدید
-
+        <div class="activation-credit">
+            CREDIT: PARDESI
         </div>
 
+        <div class="activation-line"></div>
+
+
+        <!-- LANGUAGES -->
+
         <div class="language">
 
-            سسٽم فعال آهي • پرديسي زون ۾ ڀليڪار
+            <div class="lang">
+                SECURE APPLICATION READY
+            </div>
+
+            <div class="lang">
+                ایپلیکیشن کامیابی سے فعال ہے
+            </div>
+
+            <div class="lang">
+                ايپليڪيشن ڪاميابي سان فعال آهي
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- =====================================================
-         TERMINAL LOG
-    ====================================================== -->
+    <!-- TERMINAL -->
 
-    <div class="logs">
+    <div class="terminal">
 
-        <div
-            class="log"
-            id="log1"
-        >
-            PARDESI ZONE INITIALIZING...
+        <div>
+            <span>[OK]</span>
+            BOOT SEQUENCE COMPLETE
         </div>
 
-        <div
-            class="log"
-            id="log2"
-        >
-            SECURITY STATUS: VERIFIED
+        <div>
+            <span>[OK]</span>
+            SECURITY VERIFICATION COMPLETE
         </div>
 
-        <div
-            class="log"
-            id="log3"
-        >
-            DIGITAL CORE: ONLINE
+        <div>
+            <span>[OK]</span>
+            DIGITAL CORE CONNECTED
         </div>
 
-        <div
-            class="log"
-            id="log4"
-        >
-            CONNECTION: SECURE
-        </div>
-
-        <div
-            class="log"
-            id="log5"
-        >
-            WAITING FOR USER...
+        <div>
+            <span>[OK]</span>
+            PARDESI PROTOCOL READY
         </div>
 
     </div>
 
 
-    <!-- =====================================================
-         LIVE TIME
-    ====================================================== -->
+    <!-- TIME -->
 
-    <div class="time-panel">
+    <div class="time">
 
-        <div class="time-title">
-
+        <div class="time-label">
             PAKISTAN LOCAL TIME
-
         </div>
 
         <div
-            class="time"
+            class="clock"
             id="clock"
         >
             00:00:00
@@ -1357,33 +1092,678 @@ body.day{
     </div>
 
 
-    <!-- =====================================================
-         INFO
-    ====================================================== -->
+    <!-- WHATSAPP -->
 
-    <div class="info">
+    <div
+        class="whatsapp"
+        onclick="openWhatsApp()"
+    >
 
-        <div class="info-label">
+        <svg viewBox="0 0 24 24">
 
-            DIGITAL IDENTITY
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.198-.497.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
 
-        </div>
+        </svg>
 
-        <div class="info-name">
-
-            PARDESI <span>ZONE</span>
-
-        </div>
-
-        <div class="info-sub">
-
-            PREMIUM • FAST • SECURE
-
+        <div class="whatsapp-label">
+            WHATSAPP
         </div>
 
     </div>
 
 
-    <!-- =====================================================
-         WHATSAPP
-    ========================
+    <!-- SOUND -->
+
+    <button
+        class="sound"
+        id="soundButton"
+        onclick="toggleSound()"
+        aria-label="Sound"
+    >
+        🔇
+    </button>
+
+
+    <!-- ENTER APP -->
+
+    <button
+        class="enter"
+        id="enterButton"
+        onclick="enterApplication()"
+    >
+        ENTER APPLICATION
+    </button>
+
+
+    <div class="credit">
+        DIGITAL INTERFACE • CREDIT BY PARDESI • 2026
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   PARDESI ZONE
+   PREMIUM ACTIVATION ENGINE
+===================================================== */
+
+
+/* -----------------------------------------------------
+   WHATSAPP
+----------------------------------------------------- */
+
+function openWhatsApp(){
+
+    const number =
+        "923118485874";
+
+    const message =
+        "السلام علیکم، پردیسی سے رابطہ کرنا ہے۔";
+
+    const url =
+        "https://wa.me/" +
+        number +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(
+        url,
+        "_blank"
+    );
+}
+
+
+/* -----------------------------------------------------
+   LIVE PAKISTAN TIME
+----------------------------------------------------- */
+
+function updateTime(){
+
+    const now =
+        new Date();
+
+    const time =
+        new Intl.DateTimeFormat(
+            "en-GB",
+            {
+                timeZone:"Asia/Karachi",
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit",
+                hour12:false
+            }
+        ).format(now);
+
+    const date =
+        new Intl.DateTimeFormat(
+            "en-GB",
+            {
+                timeZone:"Asia/Karachi",
+                day:"2-digit",
+                month:"2-digit",
+                year:"numeric"
+            }
+        ).format(now);
+
+    document.getElementById(
+        "clock"
+    ).textContent = time;
+
+    document.getElementById(
+        "date"
+    ).textContent = date;
+}
+
+updateTime();
+
+setInterval(
+    updateTime,
+    1000
+);
+
+
+/* -----------------------------------------------------
+   AUDIO ENGINE
+----------------------------------------------------- */
+
+let audioCtx = null;
+
+let masterGain = null;
+
+let soundOn = false;
+
+
+/* Create audio */
+
+function initAudio(){
+
+    if(!audioCtx){
+
+        audioCtx =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+        masterGain =
+            audioCtx.createGain();
+
+        masterGain.gain.value =
+            0.055;
+
+        masterGain.connect(
+            audioCtx.destination
+        );
+    }
+
+    if(
+        audioCtx.state ===
+        "suspended"
+    ){
+
+        audioCtx.resume();
+
+    }
+}
+
+
+/* -----------------------------------------------------
+   SYNTH TONE
+----------------------------------------------------- */
+
+function tone(
+    frequency,
+    duration,
+    type="sine",
+    volume=.3,
+    delay=0
+){
+
+    if(
+        !soundOn ||
+        !audioCtx
+    ){
+        return;
+    }
+
+    const osc =
+        audioCtx.createOscillator();
+
+    const gain =
+        audioCtx.createGain();
+
+    osc.type =
+        type;
+
+    osc.frequency.setValueAtTime(
+        frequency,
+        audioCtx.currentTime +
+        delay
+    );
+
+    gain.gain.setValueAtTime(
+        0,
+        audioCtx.currentTime +
+        delay
+    );
+
+    gain.gain.linearRampToValueAtTime(
+        volume,
+        audioCtx.currentTime +
+        delay +
+        .015
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .001,
+        audioCtx.currentTime +
+        delay +
+        duration
+    );
+
+    osc.connect(gain);
+
+    gain.connect(masterGain);
+
+    osc.start(
+        audioCtx.currentTime +
+        delay
+    );
+
+    osc.stop(
+        audioCtx.currentTime +
+        delay +
+        duration +
+        .03
+    );
+}
+
+
+/* -----------------------------------------------------
+   ACTIVATION SOUND
+----------------------------------------------------- */
+
+function activationSound(){
+
+    if(!soundOn){
+        return;
+    }
+
+    /*
+       1. Deep system boot
+    */
+
+    tone(
+        110,
+        .45,
+        "sine",
+        .9,
+        0
+    );
+
+    tone(
+        165,
+        .35,
+        "sine",
+        .55,
+        .18
+    );
+
+
+    /*
+       2. Scanner
+    */
+
+    tone(
+        420,
+        .08,
+        "square",
+        .25,
+        .48
+    );
+
+    tone(
+        620,
+        .08,
+        "square",
+        .25,
+        .60
+    );
+
+    tone(
+        820,
+        .08,
+        "square",
+        .25,
+        .72
+    );
+
+
+    /*
+       3. Security verification
+    */
+
+    tone(
+        540,
+        .11,
+        "triangle",
+        .35,
+        1.05
+    );
+
+    tone(
+        720,
+        .12,
+        "triangle",
+        .38,
+        1.22
+    );
+
+    tone(
+        960,
+        .18,
+        "triangle",
+        .42,
+        1.39
+    );
+
+
+    /*
+       4. Final activation
+    */
+
+    tone(
+        392,
+        .16,
+        "sine",
+        .42,
+        1.85
+    );
+
+    tone(
+        523,
+        .18,
+        "sine",
+        .45,
+        2.02
+    );
+
+    tone(
+        784,
+        .35,
+        "sine",
+        .55,
+        2.20
+    );
+
+}
+
+
+/* -----------------------------------------------------
+   SMALL UI SOUND
+----------------------------------------------------- */
+
+function clickSound(){
+
+    if(!soundOn){
+        return;
+    }
+
+    tone(
+        680,
+        .07,
+        "square",
+        .18
+    );
+}
+
+
+/* -----------------------------------------------------
+   SOUND BUTTON
+----------------------------------------------------- */
+
+function toggleSound(){
+
+    initAudio();
+
+    soundOn =
+        !soundOn;
+
+    const button =
+        document.getElementById(
+            "soundButton"
+        );
+
+    if(soundOn){
+
+        button.textContent =
+            "🔊";
+
+        button.classList.add(
+            "on"
+        );
+
+        activationSound();
+
+    }else{
+
+        button.textContent =
+            "🔇";
+
+        button.classList.remove(
+            "on"
+        );
+
+    }
+}
+
+
+/* -----------------------------------------------------
+   FIRST TOUCH
+----------------------------------------------------- */
+
+document.addEventListener(
+    "pointerdown",
+    function(){
+
+        initAudio();
+
+    },
+    {
+        once:true
+    }
+);
+
+
+/* -----------------------------------------------------
+   ENTER APPLICATION
+----------------------------------------------------- */
+
+function enterApplication(){
+
+    initAudio();
+
+    soundOn = true;
+
+    activationSound();
+
+    clickSound();
+
+    const button =
+        document.getElementById(
+            "enterButton"
+        );
+
+    const title =
+        document.getElementById(
+            "activationTitle"
+        );
+
+    const flash =
+        document.getElementById(
+            "flash"
+        );
+
+    button.textContent =
+        "APPLICATION ACTIVATING...";
+
+    title.textContent =
+        "ACCESS GRANTED";
+
+    document
+        .getElementById("card")
+        .classList.add(
+            "activated"
+        );
+
+    flash.classList.add(
+        "go"
+    );
+
+
+    /*
+       IMPORTANT:
+
+       action://close is retained
+       for Android WebView/dialog apps.
+
+       If your app uses another close
+       action, replace this URL.
+    */
+
+    setTimeout(
+        function(){
+
+            window.location.href =
+                "action://close";
+
+        },
+        900
+    );
+}
+
+
+/* -----------------------------------------------------
+   MATRIX
+----------------------------------------------------- */
+
+const canvas =
+    document.getElementById(
+        "matrix"
+    );
+
+const ctx =
+    canvas.getContext("2d");
+
+const chars =
+    "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%";
+
+let fontSize = 10;
+
+let columns;
+
+let drops;
+
+
+function resizeMatrix(){
+
+    canvas.width =
+        canvas.clientWidth;
+
+    canvas.height =
+        canvas.clientHeight;
+
+    columns =
+        Math.floor(
+            canvas.width /
+            fontSize
+        );
+
+    drops =
+        new Array(columns)
+        .fill(1);
+}
+
+resizeMatrix();
+
+window.addEventListener(
+    "resize",
+    resizeMatrix
+);
+
+
+function drawMatrix(){
+
+    ctx.fillStyle =
+        "rgba(0,0,0,.075)";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.fillStyle =
+        "#00ff88";
+
+    ctx.font =
+        fontSize +
+        "px monospace";
+
+    for(
+        let i=0;
+        i<drops.length;
+        i++
+    ){
+
+        const text =
+            chars[
+                Math.floor(
+                    Math.random() *
+                    chars.length
+                )
+            ];
+
+        ctx.fillText(
+            text,
+            i * fontSize,
+            drops[i] *
+            fontSize
+        );
+
+        if(
+            drops[i] *
+            fontSize >
+            canvas.height &&
+            Math.random() >
+            .975
+        ){
+
+            drops[i] = 0;
+
+        }
+
+        drops[i]++;
+
+    }
+}
+
+setInterval(
+    drawMatrix,
+    55
+);
+
+
+/* -----------------------------------------------------
+   TERMINAL TYPE EFFECT
+----------------------------------------------------- */
+
+const terminalLines = [
+    "AUTHENTICATION VERIFIED",
+    "SECURITY PROTOCOL READY",
+    "APPLICATION CORE CONNECTED",
+    "PARDESI DIGITAL CREDIT VERIFIED"
+];
+
+let terminalIndex = 0;
+
+setInterval(
+    function(){
+
+        const terminal =
+            document.querySelector(
+                ".terminal"
+            );
+
+        const lines =
+            terminal.querySelectorAll(
+                "div"
+            );
+
+        if(lines.length){
+
+            lines[
+                terminalIndex %
+                lines.length
+            ].innerHTML =
+                "<span>[OK]</span> " +
+                terminalLines[
+                    terminalIndex %
+                    terminalLines.length
+                ];
+
+        }
+
+        terminalIndex++;
+
+    },
+    2300
+);
+
+</script>
+
+</body>
+</html>

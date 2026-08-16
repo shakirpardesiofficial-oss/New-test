@@ -2,165 +2,266 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>Pardesi Zone</title>
+<meta
+    name="viewport"
+    content="width=device-width,
+    initial-scale=1.0,
+    maximum-scale=1.0,
+    user-scalable=no"
+>
+
+<title>PARDESI ZONE // CYBER TERMINAL</title>
 
 <style>
 
+/* =====================================================
+   PARDESI ZONE // EXTREME CYBER SYSTEM
+===================================================== */
+
 :root{
-    --bg-main:#05080d;
-    --bg-card:#080d15;
-    --primary:#00c8ff;
-    --secondary:#ff1744;
-    --green:#25D366;
-    --white:#ffffff;
-    --dim:#8795a5;
-    --font:'Courier New',Courier,monospace;
+
+    --black:#010303;
+    --black2:#020807;
+
+    --green:#00ff66;
+    --green2:#00cc52;
+
+    --red:#ff1744;
+    --cyan:#00eaff;
+
+    --white:#eafff0;
+    --dim:#638170;
+
+    --panel:rgba(0,20,10,.78);
+
+    --font:
+        "Courier New",
+        Courier,
+        monospace;
 }
+
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
     box-sizing:border-box;
+
     -webkit-tap-highlight-color:transparent;
 }
 
 html,
 body{
-    margin:0;
-    padding:0;
+
     width:100%;
     height:100%;
+
+    margin:0;
+    padding:0;
+
     overflow:hidden;
 }
 
+
 body{
+
     display:flex;
+
     justify-content:center;
     align-items:center;
 
+    background:
+
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(0,255,102,.08),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(255,23,68,.08),
+            transparent 30%
+        ),
+
+        #010303;
+
     color:var(--white);
+
     font-family:var(--font);
 
-    background:
-        radial-gradient(
-            circle at 15% 15%,
-            rgba(0,200,255,.18),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 85% 85%,
-            rgba(255,23,68,.15),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            var(--bg-main),
-            #071727
-        );
-
-    transition:background 1.5s ease;
 }
 
-/* ================================
-   BACKGROUND LIGHT
-================================ */
 
-body::before{
+/* =====================================================
+   SCANLINES
+===================================================== */
+
+body::after{
+
     content:"";
 
     position:fixed;
 
-    width:500px;
-    height:500px;
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:999;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.018) 0px,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    mix-blend-mode:screen;
+
+}
+
+
+/* =====================================================
+   MOVING GREEN LIGHT
+===================================================== */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:450px;
+    height:450px;
 
     border-radius:50%;
 
-    background:var(--primary);
+    background:var(--green);
 
-    opacity:.07;
+    opacity:.045;
 
     filter:blur(100px);
 
     animation:
-        backgroundMove 9s ease-in-out infinite alternate;
+
+        ambientMove
+        8s
+        ease-in-out
+        infinite
+        alternate;
 
     pointer-events:none;
 }
 
-@keyframes backgroundMove{
 
-    0%{
-        transform:translate(-120px,-120px);
+@keyframes ambientMove{
+
+    from{
+        transform:
+            translate(-130px,-100px);
     }
 
-    100%{
-        transform:translate(120px,120px);
+    to{
+        transform:
+            translate(130px,100px);
     }
+
 }
 
 
-/* ================================
-   MAIN CARD
-================================ */
+/* =====================================================
+   MAIN TERMINAL
+===================================================== */
 
-.zone-card{
+.cyber-terminal{
 
-    width:92%;
-    max-width:400px;
+    width:93%;
+    max-width:410px;
 
-    height:min(88vh,650px);
+    height:min(91vh,680px);
 
     position:relative;
 
     overflow:hidden;
 
-    border-radius:24px;
-
     background:
+
         linear-gradient(
             145deg,
-            rgba(255,255,255,.075),
-            rgba(255,255,255,.025)
+            rgba(0,255,102,.055),
+            rgba(0,0,0,.92)
         );
 
-    border:1px solid rgba(255,255,255,.16);
+    border:
 
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
+        1px solid
+        rgba(0,255,102,.4);
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.9),
-        inset 0 0 40px rgba(255,255,255,.025);
+
+        0 0 25px
+        rgba(0,255,102,.12),
+
+        0 35px 100px
+        rgba(0,0,0,.95),
+
+        inset 0 0 45px
+        rgba(0,255,102,.025);
+
+    clip-path:
+
+        polygon(
+            14px 0,
+            calc(100% - 14px) 0,
+            100% 14px,
+            100% calc(100% - 14px),
+            calc(100% - 14px) 100%,
+            14px 100%,
+            0 calc(100% - 14px),
+            0 14px
+        );
 
     opacity:0;
 
     transform:
-        scale(.9)
-        translateY(30px);
+        scale(.88)
+        translateY(35px);
 
     animation:
-        cardBoot .8s
+
+        bootTerminal
+        .9s
         cubic-bezier(.2,.8,.2,1)
         forwards;
+
 }
 
-@keyframes cardBoot{
+
+@keyframes bootTerminal{
 
     to{
+
         opacity:1;
 
         transform:
             scale(1)
             translateY(0);
+
     }
+
 }
 
 
-/* ================================
-   TOP TICKER
-================================ */
+/* =====================================================
+   TOP SYSTEM BAR
+===================================================== */
 
-.ticker-wrap{
+.system-bar{
 
     position:absolute;
 
@@ -168,168 +269,265 @@ body::before{
     left:0;
 
     width:100%;
-    height:28px;
+    height:30px;
+
+    display:flex;
+
+    align-items:center;
 
     overflow:hidden;
 
-    display:flex;
-    align-items:center;
-
-    z-index:30;
-
     background:
+
         linear-gradient(
             90deg,
-            var(--secondary),
-            var(--primary),
-            var(--secondary)
+            #001b0a,
+            #003b18,
+            #001b0a
         );
 
-    box-shadow:
-        0 0 20px rgba(0,200,255,.2);
+    border-bottom:
+
+        1px solid
+        rgba(0,255,102,.4);
+
+    z-index:50;
+
 }
 
-.ticker{
 
-    width:max-content;
-
-    display:flex;
-
-    animation:
-        marquee 16s
-        linear infinite;
-}
-
-.ticker span{
+.system-bar-text{
 
     white-space:nowrap;
 
-    padding-right:50px;
-
-    color:#fff;
-
-    font-size:8px;
+    font-size:7px;
 
     font-weight:900;
 
     letter-spacing:2px;
+
+    color:var(--green);
+
+    text-shadow:
+
+        0 0 8px
+        var(--green);
+
+    animation:
+
+        terminalMarquee
+        15s
+        linear
+        infinite;
+
 }
 
-@keyframes marquee{
 
-    0%{
-        transform:translateX(0);
+@keyframes terminalMarquee{
+
+    from{
+        transform:translateX(100%);
     }
 
-    100%{
-        transform:translateX(-50%);
+    to{
+        transform:translateX(-100%);
     }
+
 }
 
 
-/* ================================
-   PARTICLES
-================================ */
+/* =====================================================
+   MATRIX CANVAS
+===================================================== */
 
-#particles{
+#matrix{
 
     position:absolute;
 
     inset:0;
 
+    width:100%;
+    height:100%;
+
+    opacity:.13;
+
+    z-index:1;
+
     pointer-events:none;
 
-    overflow:hidden;
-
-    z-index:3;
 }
 
-.particle{
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.grid{
 
     position:absolute;
 
-    width:3px;
-    height:3px;
+    inset:0;
+
+    z-index:2;
+
+    pointer-events:none;
+
+    background:
+
+        linear-gradient(
+            rgba(0,255,102,.035) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0,255,102,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        25px 25px;
+
+}
+
+
+/* =====================================================
+   RADAR
+===================================================== */
+
+.radar{
+
+    position:absolute;
+
+    right:-55px;
+
+    top:105px;
+
+    width:150px;
+    height:150px;
 
     border-radius:50%;
 
-    background:var(--primary);
+    border:
+        1px solid
+        rgba(0,255,102,.15);
 
-    box-shadow:
-        0 0 10px var(--primary);
+    opacity:.5;
 
-    opacity:0;
+    z-index:3;
+
+}
+
+
+.radar::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:15px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(0,255,102,.18);
+
+}
+
+
+.radar::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:50%;
+    height:1px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--green),
+            transparent
+        );
+
+    transform-origin:left;
 
     animation:
-        floatParticle
-        linear infinite;
-}
 
-@keyframes floatParticle{
+        radarSpin
+        3s
+        linear
+        infinite;
 
-    0%{
-        transform:
-            translateY(100px)
-            scale(1);
-
-        opacity:0;
-    }
-
-    15%{
-        opacity:.9;
-    }
-
-    80%{
-        opacity:.5;
-    }
-
-    100%{
-        transform:
-            translateY(-450px)
-            scale:.1;
-
-        opacity:0;
-    }
 }
 
 
-/* ================================
-   BRAND
-================================ */
+@keyframes radarSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =====================================================
+   BRAND HEADER
+===================================================== */
 
 .brand{
 
     position:absolute;
 
-    top:48px;
-    left:24px;
+    left:23px;
 
-    z-index:12;
+    top:47px;
+
+    z-index:20;
 
     opacity:0;
 
     animation:
-        fadeIn .6s .25s forwards;
+
+        fadeUp
+        .6s
+        .2s
+        forwards;
+
 }
 
-.brand-small{
 
-    color:var(--primary);
+.brand-mini{
+
+    color:var(--green);
 
     font-size:7px;
 
+    letter-spacing:4px;
+
     font-weight:bold;
 
-    letter-spacing:3px;
+    text-shadow:
+
+        0 0 8px
+        var(--green);
+
 }
+
 
 .brand-name{
 
-    margin-top:4px;
+    margin-top:3px;
 
     font-family:Arial,sans-serif;
 
-    font-size:27px;
+    font-size:28px;
 
     font-weight:1000;
 
@@ -338,135 +536,222 @@ body::before{
     color:#fff;
 
     text-shadow:
-        0 0 10px rgba(0,200,255,.7),
-        0 0 25px rgba(0,200,255,.25);
+
+        2px 0 var(--red),
+        -2px 0 var(--cyan),
+        0 0 15px
+        rgba(0,255,102,.35);
+
+    animation:
+
+        glitchText
+        4s
+        infinite;
+
 }
+
 
 .brand-name span{
 
-    color:var(--secondary);
+    color:var(--green);
 
     text-shadow:
-        0 0 10px rgba(255,23,68,.7);
+
+        0 0 12px
+        var(--green);
+
 }
 
 
-/* ================================
+@keyframes glitchText{
+
+    0%,94%,100%{
+        transform:translate(0);
+    }
+
+    95%{
+        transform:translate(-2px,1px);
+    }
+
+    96%{
+        transform:translate(2px,-1px);
+    }
+
+    97%{
+        transform:translate(-1px,0);
+    }
+
+}
+
+
+/* =====================================================
    STATUS
-================================ */
+===================================================== */
 
 .status{
 
     position:absolute;
 
-    top:58px;
+    top:52px;
+
     right:20px;
 
-    z-index:12;
+    z-index:20;
 
     display:flex;
 
     align-items:center;
 
-    gap:7px;
+    gap:6px;
 
     font-size:7px;
 
-    color:var(--dim);
+    color:var(--green);
 
-    letter-spacing:1px;
+    letter-spacing:2px;
+
 }
 
-.status-dot{
+
+.status-light{
 
     width:7px;
     height:7px;
 
     border-radius:50%;
 
-    background:#00ff88;
+    background:var(--green);
 
     box-shadow:
-        0 0 12px #00ff88;
+
+        0 0 12px
+        var(--green);
 
     animation:
-        statusBlink 1.3s infinite;
+
+        blink
+        1s
+        infinite;
+
 }
 
-@keyframes statusBlink{
+
+@keyframes blink{
 
     50%{
-        opacity:.2;
+        opacity:.15;
     }
+
 }
 
 
-/* ================================
-   PORTRAIT / ORIGINAL IMAGE
-================================ */
+/* =====================================================
+   IMAGE / ORIGINAL MEDIA
+===================================================== */
 
-.portrait-wrapper{
+.portrait{
 
     position:absolute;
 
-    top:98px;
+    top:94px;
 
-    left:27px;
-    right:27px;
+    left:25px;
+    right:25px;
 
-    bottom:190px;
+    bottom:198px;
 
     overflow:hidden;
 
-    border-radius:16px;
+    z-index:8;
 
-    border:2px solid var(--primary);
+    border:
+
+        1px solid
+        var(--green);
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(0,200,255,.12),
-            rgba(255,23,68,.12)
-        );
+
+        url(
+        'https://raw.githubusercontent.com/DPModsYT/webbydpmods/refs/heads/main/IMG_20260514_135013.jpg'
+        )
+
+        center/cover
+        no-repeat;
 
     box-shadow:
-        0 0 25px rgba(0,200,255,.18),
-        inset 0 0 25px rgba(0,200,255,.08);
 
-    z-index:6;
+        0 0 18px
+        rgba(0,255,102,.18),
+
+        inset 0 0 25px
+        rgba(0,255,102,.08);
 
     opacity:0;
 
     animation:
-        portraitBoot .7s .35s forwards,
-        neonPulse 3s 1.2s infinite;
+
+        portraitBoot
+        .7s
+        .4s
+        forwards;
+
 }
 
-/*
-   اصل DPMods تصویر یہاں جوں کی توں رکھی گئی ہے۔
-*/
-
-.portrait-wrapper{
-
-    background:
-        url('https://raw.githubusercontent.com/DPModsYT/webbydpmods/refs/heads/main/IMG_20260514_135013.jpg')
-        center/cover
-        no-repeat;
-}
 
 @keyframes portraitBoot{
 
-    to{
-        opacity:1;
+    from{
+
+        opacity:0;
+
+        transform:
+            scale(1.05);
+
     }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1);
+
+    }
+
 }
 
 
-/* ================================
-   SCAN LINE
-================================ */
+/* =====================================================
+   IMAGE DARK OVERLAY
+===================================================== */
 
-.portrait-wrapper::after{
+.portrait::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(0,255,102,.04),
+            transparent 45%,
+            rgba(0,0,0,.55)
+        );
+
+    z-index:2;
+
+}
+
+
+/* =====================================================
+   SCANNING LASER
+===================================================== */
+
+.portrait::after{
 
     content:"";
 
@@ -475,24 +760,29 @@ body::before{
     left:0;
     right:0;
 
-    top:0;
+    top:-5%;
 
-    height:4px;
+    height:3px;
 
     background:#fff;
 
     box-shadow:
-        0 0 25px 5px var(--primary);
+
+        0 0 20px 4px
+        var(--green);
 
     animation:
-        scanLine 4s
-        infinite
-        cubic-bezier(.4,0,.2,1);
 
-    pointer-events:none;
+        laserScan
+        3.8s
+        infinite;
+
+    z-index:5;
+
 }
 
-@keyframes scanLine{
+
+@keyframes laserScan{
 
     0%{
         top:-5%;
@@ -500,52 +790,95 @@ body::before{
     }
 
     10%{
-        opacity:.9;
+        opacity:1;
     }
 
     90%{
-        opacity:.9;
+        opacity:1;
     }
 
     100%{
         top:105%;
         opacity:0;
     }
+
 }
 
 
-@keyframes neonPulse{
+/* =====================================================
+   IMAGE CORNERS
+===================================================== */
 
-    0%,100%{
+.image-corner{
 
-        box-shadow:
-            0 0 20px rgba(0,200,255,.18),
-            inset 0 0 15px rgba(0,200,255,.05);
-    }
+    position:absolute;
 
-    50%{
+    width:22px;
+    height:22px;
 
-        box-shadow:
-            0 0 35px rgba(0,200,255,.35),
-            0 0 60px rgba(255,23,68,.12),
-            inset 0 0 20px rgba(0,200,255,.08);
-    }
+    z-index:15;
+
 }
 
 
-/* ================================
-   SIDE BRAND
-================================ */
+.image-corner.a{
+
+    top:8px;
+    left:8px;
+
+    border-top:2px solid var(--green);
+    border-left:2px solid var(--green);
+
+}
+
+
+.image-corner.b{
+
+    top:8px;
+    right:8px;
+
+    border-top:2px solid var(--green);
+    border-right:2px solid var(--green);
+
+}
+
+
+.image-corner.c{
+
+    bottom:8px;
+    left:8px;
+
+    border-bottom:2px solid var(--green);
+    border-left:2px solid var(--green);
+
+}
+
+
+.image-corner.d{
+
+    bottom:8px;
+    right:8px;
+
+    border-bottom:2px solid var(--green);
+    border-right:2px solid var(--green);
+
+}
+
+
+/* =====================================================
+   VERTICAL BRAND
+===================================================== */
 
 .vertical-brand{
 
     position:absolute;
 
-    left:-12px;
+    left:-10px;
 
-    top:52%;
+    top:53%;
 
     transform:
+
         translateY(-50%)
         rotate(180deg);
 
@@ -554,164 +887,236 @@ body::before{
     color:transparent;
 
     -webkit-text-stroke:
-        1px var(--primary);
 
-    font-size:16px;
+        1px var(--green);
+
+    font-size:15px;
 
     font-weight:900;
 
     letter-spacing:5px;
 
     text-shadow:
-        0 0 12px rgba(0,200,255,.4);
 
-    z-index:10;
+        0 0 10px
+        rgba(0,255,102,.3);
+
+    z-index:20;
+
 }
 
 
-/* ================================
-   INFORMATION PANEL
-================================ */
+/* =====================================================
+   TERMINAL LOG WINDOW
+===================================================== */
 
-.name-panel{
+.logs{
+
+    position:absolute;
+
+    left:32px;
+
+    right:32px;
+
+    bottom:176px;
+
+    height:65px;
+
+    z-index:18;
+
+    overflow:hidden;
+
+    padding:8px;
+
+    background:
+
+        rgba(0,5,3,.82);
+
+    border:
+
+        1px solid
+        rgba(0,255,102,.2);
+
+    box-shadow:
+
+        inset 0 0 15px
+        rgba(0,255,102,.04);
+
+}
+
+
+.log-line{
+
+    font-size:6px;
+
+    line-height:12px;
+
+    color:var(--green);
+
+    white-space:nowrap;
+
+}
+
+
+.log-line::before{
+
+    content:"> ";
+
+    color:var(--red);
+
+}
+
+
+/* =====================================================
+   INFO PANEL
+===================================================== */
+
+.info-panel{
 
     position:absolute;
 
     left:0;
 
-    bottom:67px;
+    bottom:69px;
 
-    width:72%;
+    width:74%;
 
     padding:
-        12px
+
+        10px
         20px
-        12px
+        10px
         16px;
 
     background:
+
         linear-gradient(
             90deg,
-            rgba(5,12,22,.97),
-            rgba(5,12,22,.72)
+            rgba(0,8,4,.97),
+            rgba(0,15,8,.72)
         );
 
     border-top:
-        1px solid var(--primary);
+
+        1px solid
+        var(--green);
 
     border-right:
-        1px solid var(--primary);
+
+        1px solid
+        var(--green);
 
     border-bottom:
-        1px solid var(--primary);
+
+        1px solid
+        var(--green);
 
     border-left:none;
 
-    border-radius:
-        0 16px 16px 0;
-
-    backdrop-filter:blur(10px);
-
-    z-index:15;
+    z-index:25;
 
     opacity:0;
 
     animation:
-        slideIn .6s .75s forwards;
+
+        slideIn
+        .6s
+        .8s
+        forwards;
+
 }
 
-.name-label{
 
-    color:var(--primary);
+.info-label{
 
-    font-size:7px;
+    font-size:6px;
 
-    font-weight:bold;
+    color:var(--dim);
 
     letter-spacing:3px;
+
 }
 
-.name-value{
 
-    margin-top:3px;
-
-    margin-bottom:6px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:21px;
-
-    font-weight:1000;
-
-    color:#fff;
-
-    letter-spacing:1px;
-}
-
-.name-value span{
-
-    color:var(--secondary);
-}
-
-.mission-label{
-
-    color:var(--primary);
-
-    font-size:7px;
-
-    font-weight:bold;
-
-    letter-spacing:2px;
-}
-
-.mission-value{
+.info-name{
 
     margin-top:2px;
 
-    color:#fff;
+    font-family:Arial,sans-serif;
 
-    font-size:8px;
+    font-size:20px;
 
-    font-weight:bold;
+    font-weight:1000;
 
     letter-spacing:1px;
+
 }
+
+
+.info-name span{
+
+    color:var(--green);
+
+    text-shadow:
+
+        0 0 8px
+        var(--green);
+
+}
+
+
+.info-sub{
+
+    margin-top:5px;
+
+    color:var(--green);
+
+    font-size:7px;
+
+    letter-spacing:1px;
+
+}
+
 
 @keyframes slideIn{
 
     from{
-        transform:translateX(-20px);
+
+        transform:
+            translateX(-25px);
+
     }
 
     to{
-        transform:translateX(0);
+
+        transform:
+            translateX(0);
 
         opacity:1;
+
     }
+
 }
 
 
-/* ================================
+/* =====================================================
    TIME
-================================ */
+===================================================== */
 
-.time-box{
+.time{
 
     position:absolute;
 
     right:20px;
 
-    bottom:135px;
+    bottom:137px;
 
-    z-index:15;
+    z-index:25;
 
     text-align:right;
 
-    opacity:0;
-
-    animation:
-        fadeIn .7s 1s forwards;
 }
+
 
 .time-label{
 
@@ -720,79 +1125,96 @@ body::before{
     font-size:6px;
 
     letter-spacing:2px;
+
 }
+
 
 .time-value{
 
     margin-top:3px;
 
-    color:var(--primary);
+    color:var(--green);
 
-    font-size:13px;
+    font-size:12px;
 
     font-weight:bold;
 
     text-shadow:
-        0 0 10px var(--primary);
+
+        0 0 10px
+        var(--green);
+
 }
 
 
-/* ================================
-   WHATSAPP BUTTON
-================================ */
+/* =====================================================
+   WHATSAPP
+===================================================== */
 
-.whatsapp-button{
+.whatsapp{
 
     position:absolute;
 
     right:20px;
 
-    bottom:66px;
+    bottom:69px;
 
-    width:57px;
-    height:57px;
+    width:54px;
+    height:54px;
 
     border-radius:50%;
 
     display:flex;
 
     justify-content:center;
-
     align-items:center;
 
     background:
+
         linear-gradient(
             145deg,
             #25D366,
-            #0ca94f
+            #079b43
         );
 
     box-shadow:
-        0 0 18px rgba(37,211,102,.55),
-        0 0 40px rgba(37,211,102,.18);
 
-    z-index:25;
+        0 0 15px
+        rgba(37,211,102,.55),
+
+        0 0 35px
+        rgba(37,211,102,.18);
+
+    z-index:30;
 
     cursor:pointer;
 
     animation:
-        whatsappPulse 2s infinite;
 
-    transition:.2s;
+        whatsappPulse
+        2s
+        infinite;
+
 }
 
-.whatsapp-button:active{
 
-    transform:scale(.87);
+.whatsapp:active{
+
+    transform:
+        scale(.86);
+
 }
 
-.whatsapp-button svg{
 
-    width:29px;
-    height:29px;
+.whatsapp svg{
+
+    width:27px;
+    height:27px;
 
     fill:#fff;
+
 }
+
 
 .whatsapp-label{
 
@@ -800,47 +1222,43 @@ body::before{
 
     bottom:-15px;
 
+    color:#25D366;
+
     font-size:6px;
 
-    color:#25D366;
+    letter-spacing:1px;
 
     font-weight:bold;
 
-    letter-spacing:1px;
 }
 
+
 @keyframes whatsappPulse{
-
-    0%,100%{
-
-        box-shadow:
-            0 0 15px
-            rgba(37,211,102,.45);
-    }
 
     50%{
 
         box-shadow:
+
             0 0 30px
             rgba(37,211,102,.85);
+
     }
+
 }
 
 
-/* ================================
-   BOTTOM BUTTON
-================================ */
+/* =====================================================
+   BACK TO APP
+===================================================== */
 
-.action-console{
+.bottom{
 
     position:absolute;
 
     left:0;
     right:0;
 
-    bottom:15px;
-
-    z-index:25;
+    bottom:14px;
 
     display:flex;
 
@@ -848,157 +1266,146 @@ body::before{
 
     align-items:center;
 
-    gap:6px;
+    gap:5px;
 
-    opacity:0;
+    z-index:40;
 
-    animation:
-        fadeIn .6s 1s forwards;
 }
 
-.contact-button{
 
-    border:none;
+.back-button{
 
     padding:
-        10px
-        28px;
 
-    border-radius:8px;
+        9px
+        27px;
+
+    border:
+
+        1px solid
+        var(--green);
+
+    background:
+
+        rgba(0,255,102,.04);
+
+    color:var(--green);
 
     font-family:var(--font);
 
-    font-size:11px;
+    font-size:10px;
 
     font-weight:bold;
 
     letter-spacing:2px;
 
-    color:#fff;
+    cursor:pointer;
 
-    background:
-        linear-gradient(
-            90deg,
-            var(--secondary),
-            #ff345c,
-            var(--primary)
+    clip-path:
+
+        polygon(
+            8px 0,
+            100% 0,
+            100% calc(100% - 8px),
+            calc(100% - 8px) 100%,
+            0 100%,
+            0 8px
         );
 
     box-shadow:
-        0 0 20px rgba(0,200,255,.2);
 
-    cursor:pointer;
+        0 0 12px
+        rgba(0,255,102,.15);
 
     transition:.2s;
+
 }
 
-.contact-button:active{
 
-    transform:scale(.94);
+.back-button:active{
+
+    background:var(--green);
+
+    color:#000;
+
+    transform:
+        scale(.94);
+
 }
 
-.meta-text{
 
-    color:var(--dim);
+.copyright{
 
-    font-size:6px;
+    color:#3d5a48;
+
+    font-size:5px;
 
     letter-spacing:2px;
+
 }
 
 
-/* ================================
-   CORNERS
-================================ */
-
-.corner{
-
-    position:absolute;
-
-    width:30px;
-    height:30px;
-
-    border-color:var(--primary);
-
-    z-index:20;
-}
-
-.corner.tl{
-
-    top:38px;
-    left:10px;
-
-    border-top:1px solid;
-    border-left:1px solid;
-}
-
-.corner.tr{
-
-    top:38px;
-    right:10px;
-
-    border-top:1px solid;
-    border-right:1px solid;
-}
-
-.corner.bl{
-
-    bottom:10px;
-    left:10px;
-
-    border-bottom:1px solid;
-    border-left:1px solid;
-}
-
-.corner.br{
-
-    bottom:10px;
-    right:10px;
-
-    border-bottom:1px solid;
-    border-right:1px solid;
-}
-
-
-/* ================================
+/* =====================================================
    FADE
-================================ */
+===================================================== */
 
-@keyframes fadeIn{
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(10px);
+
+    }
 
     to{
+
         opacity:1;
+
+        transform:
+            translateY(0);
+
     }
+
 }
 
 
-/* ================================
+/* =====================================================
    SMALL SCREEN
-================================ */
+===================================================== */
 
 @media(max-height:650px){
 
-    .portrait-wrapper{
+    .portrait{
 
         top:88px;
 
-        bottom:175px;
+        bottom:180px;
+
     }
 
-    .name-panel{
+    .logs{
 
-        bottom:61px;
+        bottom:160px;
+
+        height:55px;
+
     }
 
-    .whatsapp-button{
+    .info-panel{
 
         bottom:62px;
+
     }
 
-    .time-box{
+    .whatsapp{
 
-        bottom:118px;
+        bottom:62px;
+
     }
+
 }
 
 </style>
@@ -1007,52 +1414,44 @@ body::before{
 
 <body>
 
-<div
-    class="zone-card"
-    id="mainCard"
->
+
+<!-- =====================================================
+     MAIN TERMINAL
+===================================================== -->
+
+<div class="cyber-terminal">
 
 
-    <!-- =========================
-         TOP TICKER
-    ========================== -->
+    <!-- TOP BAR -->
 
-    <div class="ticker-wrap">
+    <div class="system-bar">
 
-        <div class="ticker">
+        <div class="system-bar-text">
 
-            <span>
-                PARDESI ZONE
-                // DIGITAL SERVICES
-                // PREMIUM ACCESS
-                // OFFICIAL SYSTEM
-                //
-            </span>
-
-            <span>
-                PARDESI ZONE
-                // DIGITAL SERVICES
-                // PREMIUM ACCESS
-                // OFFICIAL SYSTEM
-                //
-            </span>
+            PARDESI ZONE //
+            CYBER TERMINAL //
+            SYSTEM ONLINE //
+            SECURE CONNECTION //
+            ACCESS GRANTED //
 
         </div>
 
     </div>
 
 
-    <!-- PARTICLES -->
+    <!-- MATRIX -->
 
-    <div id="particles"></div>
+    <canvas id="matrix"></canvas>
 
 
-    <!-- CORNERS -->
+    <!-- GRID -->
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+    <div class="grid"></div>
+
+
+    <!-- RADAR -->
+
+    <div class="radar"></div>
 
 
     <!-- =========================
@@ -1061,13 +1460,17 @@ body::before{
 
     <div class="brand">
 
-        <div class="brand-small">
-            OFFICIAL DIGITAL ZONE
+        <div class="brand-mini">
+
+            // OFFICIAL CYBER SYSTEM
+
         </div>
 
         <div class="brand-name">
-            SHAKIR HASSAN (PARDESI) 
+
+            PARDESI
             <span>ZONE</span>
+
         </div>
 
     </div>
@@ -1077,52 +1480,103 @@ body::before{
 
     <div class="status">
 
-        <div class="status-dot"></div>
+        <div class="status-light"></div>
 
-        <span>
-            ONLINE
-        </span>
+        SYSTEM ONLINE
 
     </div>
 
 
     <!-- =========================
-         ORIGINAL PHOTO
+         ORIGINAL IMAGE
     ========================== -->
 
-    <div class="portrait-wrapper"></div>
+    <div class="portrait">
+
+        <div class="image-corner a"></div>
+        <div class="image-corner b"></div>
+        <div class="image-corner c"></div>
+        <div class="image-corner d"></div>
+
+    </div>
 
 
-    <!-- =========================
-         SIDE BRAND
-    ========================== -->
+    <!-- VERTICAL BRAND -->
 
     <div class="vertical-brand">
+
         PARDESI ZONE
+
     </div>
 
 
     <!-- =========================
-         NAME PANEL
+         FAKE TERMINAL LOGS
     ========================== -->
 
-    <div class="name-panel">
+    <div class="logs">
 
-        <div class="name-label">
-            BRAND NAME
+        <div
+            class="log-line"
+            id="log1"
+        >
+            INITIALIZING PARDESI ZONE...
         </div>
 
-        <div class="name-value">
+        <div
+            class="log-line"
+            id="log2"
+        >
+            ENCRYPTED CHANNEL: ACTIVE
+        </div>
+
+        <div
+            class="log-line"
+            id="log3"
+        >
+            SECURITY STATUS: VERIFIED
+        </div>
+
+        <div
+            class="log-line"
+            id="log4"
+        >
+            DIGITAL CORE: ONLINE
+        </div>
+
+        <div
+            class="log-line"
+            id="log5"
+        >
+            WAITING FOR USER...
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         INFO
+    ========================== -->
+
+    <div class="info-panel">
+
+        <div class="info-label">
+
+            SYSTEM IDENTITY
+
+        </div>
+
+        <div class="info-name">
+
             PARDESI
             <span>ZONE</span>
+
         </div>
 
-        <div class="mission-label">
-            DIGITAL SERVICES
-        </div>
+        <div class="info-sub">
 
-        <div class="mission-value">
             PREMIUM • FAST • SECURE
+
         </div>
 
     </div>
@@ -1132,15 +1586,17 @@ body::before{
          TIME
     ========================== -->
 
-    <div class="time-box">
+    <div class="time">
 
         <div class="time-label">
-            LOCAL TIME
+
+            LOCAL SYSTEM TIME
+
         </div>
 
         <div
             class="time-value"
-            id="currentTime"
+            id="clock"
         >
             00:00:00
         </div>
@@ -1153,359 +1609,11 @@ body::before{
     ========================== -->
 
     <div
-        class="whatsapp-button"
+        class="whatsapp"
         onclick="openWhatsApp()"
+        title="WhatsApp"
     >
 
-        <svg
-            viewBox="0 0 24 24"
-        >
+        <svg viewBox="0 0 24 24">
 
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.198-.497.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-
-        </svg>
-
-        <div class="whatsapp-label">
-            WHATSAPP
-        </div>
-
-    </div>
-
-
-    <!-- =========================
-         BOTTOM
-    ========================== -->
-
-    <div class="action-console">
-
-        <button
-            class="contact-button"
-            onclick="openWhatsApp()"
-        >
-            CONTACT US
-        </button>
-
-        <div class="meta-text">
-            © 2026 PARDESI ZONE • OFFICIAL
-        </div>
-
-    </div>
-
-
-</div>
-
-
-<script>
-
-
-/* =========================================
-   WHATSAPP NUMBER
-========================================= */
-
-const whatsappNumber =
-    "923118485874";
-
-
-/* =========================================
-   WHATSAPP FUNCTION
-========================================= */
-
-function openWhatsApp(){
-
-    const message =
-        "Assalam-o-Alaikum, Pardesi Zone se rabta karna hai.";
-
-    const url =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(message);
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-/* =========================================
-   LIVE CLOCK + TIME THEME
-========================================= */
-
-function updateTime(){
-
-    const now =
-        new Date();
-
-    const hours =
-        now.getHours();
-
-    const minutes =
-        String(
-            now.getMinutes()
-        ).padStart(2,"0");
-
-    const seconds =
-        String(
-            now.getSeconds()
-        ).padStart(2,"0");
-
-
-    document.getElementById(
-        "currentTime"
-    ).innerText =
-
-        String(hours)
-        .padStart(2,"0")
-        + ":" +
-        minutes
-        + ":" +
-        seconds;
-
-
-    const root =
-        document.documentElement;
-
-
-    /*
-       MORNING
-       05:00 - 11:59
-    */
-
-    if(
-        hours >= 5 &&
-        hours < 12
-    ){
-
-        root.style.setProperty(
-            "--bg-main",
-            "#06151d"
-        );
-
-        root.style.setProperty(
-            "--primary",
-            "#00e1ff"
-        );
-
-        root.style.setProperty(
-            "--secondary",
-            "#ff477e"
-        );
-
-    }
-
-
-    /*
-       DAY
-       12:00 - 16:59
-    */
-
-    else if(
-        hours >= 12 &&
-        hours < 17
-    ){
-
-        root.style.setProperty(
-            "--bg-main",
-            "#06101b"
-        );
-
-        root.style.setProperty(
-            "--primary",
-            "#00b7ff"
-        );
-
-        root.style.setProperty(
-            "--secondary",
-            "#ff1744"
-        );
-
-    }
-
-
-    /*
-       EVENING
-       17:00 - 19:59
-    */
-
-    else if(
-        hours >= 17 &&
-        hours < 20
-    ){
-
-        root.style.setProperty(
-            "--bg-main",
-            "#180914"
-        );
-
-        root.style.setProperty(
-            "--primary",
-            "#ff6685"
-        );
-
-        root.style.setProperty(
-            "--secondary",
-            "#ff9f1c"
-        );
-
-    }
-
-
-    /*
-       NIGHT
-       20:00 - 04:59
-    */
-
-    else{
-
-        root.style.setProperty(
-            "--bg-main",
-            "#03050d"
-        );
-
-        root.style.setProperty(
-            "--primary",
-            "#8c7dff"
-        );
-
-        root.style.setProperty(
-            "--secondary",
-            "#ff1744"
-        );
-
-    }
-
-}
-
-
-/* Start Clock */
-
-updateTime();
-
-setInterval(
-    updateTime,
-    1000
-);
-
-
-/* =========================================
-   PARTICLE SYSTEM
-========================================= */
-
-function spawnParticles(){
-
-    const container =
-        document.getElementById(
-            "particles"
-        );
-
-
-    const particleCount =
-        45;
-
-
-    for(
-        let i = 0;
-        i < particleCount;
-        i++
-    ){
-
-        const particle =
-            document.createElement(
-                "div"
-            );
-
-
-        particle.className =
-            "particle";
-
-
-        particle.style.left =
-            Math.random() * 100 + "%";
-
-
-        particle.style.top =
-            (
-                70 +
-                Math.random() * 30
-            ) + "%";
-
-
-        particle.style.animationDuration =
-            (
-                3 +
-                Math.random() * 5
-            ) + "s";
-
-
-        particle.style.animationDelay =
-            (
-                Math.random() * 5
-            ) + "s";
-
-
-        if(
-            Math.random() > .55
-        ){
-
-            particle.style.background =
-                "var(--secondary)";
-
-            particle.style.boxShadow =
-                "0 0 10px var(--secondary)";
-        }
-
-
-        container.appendChild(
-            particle
-        );
-
-    }
-
-}
-
-
-spawnParticles();
-
-
-/* =========================================
-   OPTIONAL APP CLOSE
-========================================= */
-
-function triggerClose(){
-
-    const card =
-        document.getElementById(
-            "mainCard"
-        );
-
-
-    card.style.transition =
-        "all .4s ease";
-
-
-    card.style.transform =
-        "scale(.85) translateY(60px)";
-
-
-    card.style.opacity =
-        "0";
-
-
-    setTimeout(
-        function(){
-
-            window.location.href =
-                "action://close";
-
-        },
-        400
-    );
-
-}
-
-</script>
-
-</body>
-</html>
+            <path d="M17.472 14.382c-.297-.149-

@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>Secure Activation</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Pardesi Secure Zone</title>
 
 <style>
 :root{
-    --bg:#030506;
-    --panel:#080b0d;
-    --green:#00ff88;
-    --cyan:#00eaff;
     --red:#ff1744;
-    --orange:#ffb300;
-    --white:#f4f7f8;
-    --dim:#68777b;
+    --cyan:#00e5ff;
+    --green:#00ff9d;
+    --purple:#a855f7;
+    --gold:#ffd166;
+    --bg:#030407;
+    --panel:rgba(8,10,16,.88);
+    --text:#fff;
+    --dim:#84909d;
 }
 
 *{
@@ -24,1160 +24,965 @@
 }
 
 html,body{
+    margin:0;
     width:100%;
     height:100%;
-    margin:0;
     overflow:hidden;
+    background:#020306;
+    color:var(--text);
+    font-family:"Courier New",monospace;
 }
 
 body{
-    background:
-        radial-gradient(circle at 50% 38%,
-            rgba(0,255,136,.09),
-            transparent 28%),
-        radial-gradient(circle at 50% 100%,
-            rgba(255,23,68,.12),
-            transparent 38%),
-        #030506;
-
-    color:var(--white);
-    font-family:"Courier New",monospace;
-
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
+    position:relative;
 }
 
-/* CRT EFFECT */
-body:after{
+/* BACKGROUND */
+
+body::before{
     content:"";
     position:fixed;
     inset:0;
-    pointer-events:none;
-    z-index:9999;
-
     background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255,255,255,.018) 0,
-            rgba(255,255,255,.018) 1px,
-            transparent 1px,
-            transparent 4px
-        );
+      radial-gradient(circle at 20% 20%,rgba(255,23,68,.18),transparent 30%),
+      radial-gradient(circle at 80% 30%,rgba(0,229,255,.14),transparent 30%),
+      radial-gradient(circle at 50% 90%,rgba(168,85,247,.15),transparent 35%),
+      linear-gradient(135deg,#020306,#090b12,#020306);
+    animation:bgMove 8s ease-in-out infinite alternate;
 }
 
-/* MAIN */
-
-.card{
-    position:relative;
-
-    width:94%;
-    max-width:420px;
-    height:min(92vh,720px);
-
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(0,255,136,.035),
-            rgba(0,0,0,.97)
-        );
-
-    border:1px solid rgba(0,255,136,.25);
-
-    box-shadow:
-        0 0 45px rgba(0,255,136,.08),
-        0 35px 100px rgba(0,0,0,.95),
-        inset 0 0 80px rgba(0,0,0,.8);
-
-    clip-path:
-        polygon(
-            14px 0,
-            calc(100% - 14px) 0,
-            100% 14px,
-            100% calc(100% - 14px),
-            calc(100% - 14px) 100%,
-            14px 100%,
-            0 calc(100% - 14px),
-            0 14px
-        );
-
-    animation:cardIn .9s ease forwards;
+@keyframes bgMove{
+    from{filter:hue-rotate(0deg);}
+    to{filter:hue-rotate(35deg);}
 }
-
-@keyframes cardIn{
-    from{
-        opacity:0;
-        transform:scale(.92) translateY(25px);
-    }
-    to{
-        opacity:1;
-        transform:scale(1) translateY(0);
-    }
-}
-
-/* MATRIX */
-
-#matrix{
-    position:absolute;
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    opacity:.10;
-    z-index:1;
-}
-
-/* GRID */
 
 .grid{
-    position:absolute;
+    position:fixed;
     inset:0;
-    z-index:2;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:24px 24px;
     pointer-events:none;
-
-    background:
-        linear-gradient(
-            rgba(0,255,136,.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(0,255,136,.025) 1px,
-            transparent 1px
-        );
-
-    background-size:25px 25px;
 }
-
-/* TOP SYSTEM BAR */
-
-.system-bar{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-
-    height:30px;
-
-    z-index:40;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 16px;
-
-    border-bottom:1px solid
-        rgba(0,255,136,.18);
-
-    background:
-        rgba(0,0,0,.55);
-
-    font-size:6px;
-    letter-spacing:1.5px;
-}
-
-.system-left{
-    color:var(--green);
-
-    text-shadow:
-        0 0 8px var(--green);
-}
-
-.system-right{
-    color:var(--dim);
-}
-
-/* MAIN HEADER */
-
-.header{
-    position:absolute;
-
-    top:50px;
-    left:0;
-    right:0;
-
-    z-index:20;
-
-    text-align:center;
-}
-
-.header-small{
-    font-size:6px;
-    letter-spacing:3px;
-
-    color:var(--dim);
-}
-
-.header-title{
-    margin-top:9px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:22px;
-    font-weight:900;
-
-    letter-spacing:4px;
-
-    color:#fff;
-
-    text-shadow:
-        0 0 15px rgba(255,255,255,.25);
-}
-
-.header-line{
-    width:90px;
-    height:1px;
-
-    margin:10px auto 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--green),
-            transparent
-        );
-
-    box-shadow:
-        0 0 10px var(--green);
-}
-
-/* STATUS */
-
-.status{
-    position:absolute;
-
-    top:112px;
-    left:0;
-    right:0;
-
-    z-index:20;
-
-    text-align:center;
-
-    color:var(--green);
-
-    font-size:6px;
-    letter-spacing:2px;
-
-    text-shadow:
-        0 0 10px var(--green);
-}
-
-.status-dot{
-    display:inline-block;
-
-    width:6px;
-    height:6px;
-
-    margin-right:5px;
-
-    border-radius:50%;
-
-    background:var(--green);
-
-    box-shadow:
-        0 0 12px var(--green);
-
-    animation:pulse .8s infinite;
-}
-
-@keyframes pulse{
-    50%{
-        opacity:.2;
-    }
-}
-
-/* PHOTO FRAME */
-
-.photo-area{
-    position:absolute;
-
-    top:137px;
-    left:32px;
-    right:32px;
-
-    height:255px;
-
-    z-index:10;
-
-    overflow:hidden;
-
-    background:#020303;
-
-    border:1px solid
-        rgba(0,255,136,.4);
-
-    box-shadow:
-        0 0 25px rgba(0,255,136,.08),
-        inset 0 0 30px rgba(0,0,0,.8);
-}
-
-/* PHOTO */
-
-.photo{
-    position:absolute;
-    inset:7px;
-
-    background:
-        url(
-        'https://raw.githubusercontent.com/DPModsYT/webbydpmods/refs/heads/main/IMG_20260514_135013.jpg'
-        )
-        center/cover no-repeat;
-
-    filter:
-        contrast(1.08)
-        saturate(.9);
-
-    opacity:.93;
-}
-
-/* DARK CINEMATIC OVERLAY */
-
-.photo:after{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(0,0,0,.12),
-            transparent 40%,
-            rgba(0,0,0,.65)
-        );
-}
-
-/* CORNERS */
-
-.corner{
-    position:absolute;
-
-    width:24px;
-    height:24px;
-
-    z-index:15;
-}
-
-.c1{
-    top:0;
-    left:0;
-
-    border-top:2px solid var(--green);
-    border-left:2px solid var(--green);
-}
-
-.c2{
-    top:0;
-    right:0;
-
-    border-top:2px solid var(--green);
-    border-right:2px solid var(--green);
-}
-
-.c3{
-    bottom:0;
-    left:0;
-
-    border-bottom:2px solid var(--red);
-    border-left:2px solid var(--red);
-}
-
-.c4{
-    bottom:0;
-    right:0;
-
-    border-bottom:2px solid var(--red);
-    border-right:2px solid var(--red);
-}
-
-/* SCAN */
 
 .scan{
-    position:absolute;
-
+    position:fixed;
     left:0;
-    right:0;
-
-    top:-5px;
-
-    height:2px;
-
-    z-index:20;
-
-    background:#fff;
-
-    box-shadow:
-        0 0 18px 4px var(--green);
-
-    animation:
-        scan 3.5s infinite;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+    box-shadow:0 0 20px var(--cyan);
+    opacity:.5;
+    animation:scan 5s linear infinite;
 }
 
 @keyframes scan{
-    0%{
-        top:0;
-        opacity:0;
-    }
-
-    10%{
-        opacity:1;
-    }
-
-    90%{
-        opacity:1;
-    }
-
-    100%{
-        top:100%;
-        opacity:0;
-    }
+    0%{top:-5%}
+    100%{top:105%}
 }
 
-/* HUD CIRCLE */
+/* CARD */
 
-.hud{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:120px;
-    height:120px;
-
-    transform:translate(-50%,-50%);
-
-    border:1px solid
-        rgba(0,255,234,.25);
-
-    border-radius:50%;
-
-    z-index:25;
-
-    animation:rotate 14s linear infinite;
-}
-
-.hud:before{
-    content:"";
-
-    position:absolute;
-
-    inset:12px;
-
-    border:
-        1px dashed
-        rgba(0,255,234,.45);
-
-    border-radius:50%;
-}
-
-.hud:after{
-    content:"";
-
-    position:absolute;
-
-    inset:29px;
-
-    border:
-        1px solid
-        rgba(0,255,136,.4);
-
-    border-radius:50%;
-}
-
-@keyframes rotate{
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotate(360deg);
-    }
-}
-
-/* ACTIVATION MESSAGE */
-
-.activation{
-    position:absolute;
-
-    left:20px;
-    right:20px;
-
-    top:405px;
-
-    z-index:30;
-
-    text-align:center;
-}
-
-.activation-title{
-    font-family:Arial,sans-serif;
-
-    font-size:20px;
-    font-weight:900;
-
-    letter-spacing:2px;
-
-    color:#fff;
-
-    text-shadow:
-        0 0 18px rgba(255,255,255,.25);
-
-    animation:activationGlow 2s infinite;
-}
-
-@keyframes activationGlow{
-    50%{
-        text-shadow:
-            0 0 25px
-            rgba(0,255,136,.5);
-    }
-}
-
-.activation-credit{
-    margin-top:8px;
-
-    font-size:7px;
-
-    letter-spacing:3px;
-
-    color:var(--green);
-
-    text-shadow:
-        0 0 10px var(--green);
-}
-
-.activation-line{
-    width:160px;
-    height:1px;
-
-    margin:11px auto;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--green),
-            transparent
-        );
-}
-
-/* LANGUAGE */
-
-.language{
-    height:24px;
-
-    overflow:hidden;
-
+.card{
+    width:92%;
+    max-width:410px;
+    height:min(720px,92vh);
     position:relative;
-
-    margin-top:4px;
-}
-
-.lang{
-    position:absolute;
-
-    width:100%;
-
-    left:0;
-
-    opacity:0;
-
-    font-size:8px;
-
-    color:#b9c8c4;
-
-    animation:lang 9s infinite;
-}
-
-.lang:nth-child(1){
-    animation-delay:0s;
-}
-
-.lang:nth-child(2){
-    animation-delay:3s;
-}
-
-.lang:nth-child(3){
-    animation-delay:6s;
-}
-
-@keyframes lang{
-
-    0%{
-        opacity:0;
-        transform:translateY(8px);
-    }
-
-    8%{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-    27%{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-    34%{
-        opacity:0;
-        transform:translateY(-8px);
-    }
-
-    100%{
-        opacity:0;
-    }
-}
-
-/* TERMINAL */
-
-.terminal{
-    position:absolute;
-
-    left:32px;
-    right:32px;
-
-    bottom:92px;
-
-    height:52px;
-
-    z-index:30;
-
-    padding:7px 9px;
-
     overflow:hidden;
-
-    background:
-        rgba(0,0,0,.72);
-
-    border:
-        1px solid
-        rgba(0,255,136,.12);
-
-    font-size:6px;
-
-    line-height:10px;
-
-    color:#60756d;
+    border:1px solid rgba(0,229,255,.5);
+    background:var(--panel);
+    box-shadow:
+      0 0 25px rgba(0,229,255,.15),
+      0 0 80px rgba(255,23,68,.08),
+      inset 0 0 40px rgba(0,0,0,.8);
+    clip-path:polygon(
+        16px 0,
+        calc(100% - 16px) 0,
+        100% 16px,
+        100% calc(100% - 16px),
+        calc(100% - 16px) 100%,
+        16px 100%,
+        0 calc(100% - 16px),
+        0 16px
+    );
+    z-index:2;
 }
 
-.terminal span{
-    color:var(--green);
-}
-
-/* TIME */
-
-.time{
+.card::before{
+    content:"";
     position:absolute;
-
-    bottom:100px;
-    right:40px;
-
-    z-index:35;
-
-    text-align:right;
+    inset:7px;
+    border:1px solid rgba(255,23,68,.25);
+    pointer-events:none;
 }
 
-.time-label{
-    font-size:5px;
+.topline{
+    position:absolute;
+    top:0;
+    left:16px;
+    right:16px;
+    height:22px;
+    background:linear-gradient(90deg,var(--red),var(--purple),var(--cyan));
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    z-index:10;
+}
 
-    color:var(--dim);
+.marquee{
+    white-space:nowrap;
+    font-size:8px;
+    font-weight:bold;
+    letter-spacing:2px;
+    animation:marquee 16s linear infinite;
+}
 
+@keyframes marquee{
+    from{transform:translateX(100%)}
+    to{transform:translateX(-100%)}
+}
+
+/* HEADER */
+
+.header{
+    position:absolute;
+    top:45px;
+    width:100%;
+    text-align:center;
+    z-index:5;
+}
+
+.status{
+    font-size:8px;
+    letter-spacing:3px;
+    color:var(--green);
+    text-shadow:0 0 8px var(--green);
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{opacity:.4}
+}
+
+.title{
+    margin-top:10px;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:4px;
+    color:#fff;
+    text-shadow:
+      0 0 5px var(--red),
+      0 0 18px var(--red),
+      0 0 35px rgba(255,23,68,.5);
+}
+
+.subtitle{
+    margin-top:4px;
+    color:var(--cyan);
+    font-size:9px;
+    letter-spacing:3px;
+}
+
+/* LOGIN */
+
+.login{
+    position:absolute;
+    top:145px;
+    left:25px;
+    right:25px;
+    z-index:5;
+}
+
+.login-title{
+    text-align:center;
+    font-size:12px;
+    color:var(--gold);
+    letter-spacing:3px;
+    margin-bottom:18px;
+}
+
+.field{
+    margin-bottom:13px;
+}
+
+.label{
+    display:block;
+    color:var(--cyan);
+    font-size:8px;
+    letter-spacing:2px;
+    margin-bottom:6px;
+}
+
+.inputbox{
+    position:relative;
+}
+
+input{
+    width:100%;
+    height:48px;
+    border:1px solid rgba(0,229,255,.5);
+    outline:none;
+    background:rgba(0,0,0,.65);
+    color:white;
+    padding:0 15px;
+    font-family:inherit;
+    font-size:13px;
+    letter-spacing:1px;
+    box-shadow:inset 0 0 15px rgba(0,229,255,.04);
+}
+
+input:focus{
+    border-color:var(--red);
+    box-shadow:
+      0 0 15px rgba(255,23,68,.25),
+      inset 0 0 15px rgba(255,23,68,.05);
+}
+
+.password-toggle{
+    position:absolute;
+    right:12px;
+    top:15px;
+    color:var(--gold);
+    font-size:9px;
+    cursor:pointer;
+}
+
+.login-btn{
+    width:100%;
+    height:50px;
+    margin-top:8px;
+    border:1px solid var(--red);
+    background:linear-gradient(
+      90deg,
+      rgba(255,23,68,.15),
+      rgba(168,85,247,.15),
+      rgba(0,229,255,.15)
+    );
+    color:white;
+    font-family:inherit;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:3px;
+    cursor:pointer;
+    box-shadow:0 0 18px rgba(255,23,68,.2);
+    transition:.2s;
+}
+
+.login-btn:active{
+    transform:scale(.96);
+    background:var(--red);
+    box-shadow:0 0 35px var(--red);
+}
+
+.forgot{
+    text-align:center;
+    margin-top:13px;
+    color:var(--gold);
+    font-size:8px;
+    cursor:pointer;
     letter-spacing:1px;
 }
 
-.clock{
-    margin-top:3px;
+/* MESSAGE */
 
+.message{
+    min-height:20px;
+    text-align:center;
+    margin-top:12px;
+    font-size:9px;
+    letter-spacing:1px;
+}
+
+.error{
+    color:var(--red);
+    text-shadow:0 0 8px var(--red);
+}
+
+.success{
+    color:var(--green);
+    text-shadow:0 0 8px var(--green);
+}
+
+/* INFO */
+
+.info{
+    position:absolute;
+    bottom:72px;
+    width:100%;
+    text-align:center;
+    z-index:5;
+}
+
+.credit{
+    color:var(--purple);
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.name{
+    margin-top:5px;
     font-size:11px;
-
-    color:var(--orange);
-
+    color:white;
     font-weight:bold;
+}
 
-    text-shadow:
-        0 0 10px
-        rgba(255,179,0,.7);
+.phone{
+    margin-top:7px;
+    font-size:9px;
+    color:var(--cyan);
+    letter-spacing:2px;
+}
+
+.time{
+    margin-top:8px;
+    font-size:13px;
+    color:var(--gold);
+    text-shadow:0 0 8px var(--gold);
 }
 
 .date{
-    margin-top:2px;
-
-    font-size:5px;
-
-    color:#8b7650;
+    margin-top:3px;
+    font-size:8px;
+    color:var(--dim);
 }
 
-/* WHATSAPP */
+/* FOOTER */
 
-.whatsapp{
+.footer{
     position:absolute;
-
-    right:28px;
-    bottom:158px;
-
-    width:43px;
-    height:43px;
-
-    z-index:40;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        #20c968;
-
-    box-shadow:
-        0 0 18px
-        rgba(32,201,104,.5);
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.whatsapp:active{
-    transform:scale(.86);
-}
-
-.whatsapp svg{
-    width:22px;
-    height:22px;
-
-    fill:#fff;
-}
-
-.whatsapp-label{
-    position:absolute;
-
-    top:48px;
-
-    white-space:nowrap;
-
-    font-size:5px;
-
-    color:#20c968;
-
-    letter-spacing:1px;
-}
-
-/* SOUND */
-
-.sound{
-    position:absolute;
-
-    left:28px;
-    bottom:158px;
-
-    width:43px;
-    height:43px;
-
-    z-index:40;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        rgba(0,255,136,.04);
-
-    border:
-        1px solid
-        var(--green);
-
-    color:var(--green);
-
-    font-size:14px;
-
-    box-shadow:
-        0 0 15px
-        rgba(0,255,136,.12);
-
-    cursor:pointer;
-}
-
-.sound.on{
-    background:
-        rgba(0,255,136,.12);
-
-    box-shadow:
-        0 0 22px
-        rgba(0,255,136,.45);
-}
-
-/* ENTER */
-
-.enter{
-    position:absolute;
-
-    left:32px;
-    right:32px;
-
-    bottom:28px;
-
-    height:40px;
-
-    z-index:50;
-
-    border:
-        1px solid
-        var(--green);
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0,255,136,.04),
-            rgba(0,255,136,.12),
-            rgba(0,255,136,.04)
-        );
-
-    color:var(--green);
-
-    font-family:var(--font);
-
-    font-size:9px;
-    font-weight:bold;
-
-    letter-spacing:3px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 0 18px
-        rgba(0,255,136,.08);
-
-    transition:.2s;
-}
-
-.enter:active{
-    transform:scale(.97);
-
-    color:#000;
-
-    background:var(--green);
-
-    box-shadow:
-        0 0 30px
-        rgba(0,255,136,.7);
-}
-
-/* BOTTOM CREDIT */
-
-.credit{
-    position:absolute;
-
-    bottom:8px;
-
-    left:0;
-    right:0;
-
-    z-index:50;
-
+    bottom:15px;
+    width:100%;
     text-align:center;
-
-    font-size:4px;
-
-    color:#53615e;
-
+    color:#68727e;
+    font-size:7px;
     letter-spacing:2px;
 }
 
-/* FLASH */
+/* WELCOME */
 
-.flash{
-    position:fixed;
+.welcome{
+    display:none;
+    position:absolute;
     inset:0;
-
-    z-index:10000;
-
-    pointer-events:none;
-
-    background:#fff;
-
-    opacity:0;
+    background:
+      radial-gradient(circle at center,rgba(0,255,157,.12),transparent 40%),
+      rgba(2,3,6,.96);
+    z-index:30;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
 }
 
-.flash.go{
-    animation:flash .25s;
+.welcome.show{
+    display:flex;
+    animation:welcomeIn .5s ease;
 }
 
-@keyframes flash{
-    0%{opacity:0}
-    30%{opacity:.18}
-    100%{opacity:0}
+@keyframes welcomeIn{
+    from{opacity:0;transform:scale(.8)}
+    to{opacity:1;transform:scale(1)}
 }
 
-/* ACTIVATED */
+.welcome-box{
+    width:100%;
+}
 
-.activated .activation-title{
+.granted{
     color:var(--green);
-
-    text-shadow:
-        0 0 20px
-        var(--green);
+    font-size:12px;
+    letter-spacing:4px;
+    text-shadow:0 0 15px var(--green);
 }
 
+.welcome h1{
+    font-size:24px;
+    margin:20px 0 8px;
+    letter-spacing:2px;
+    text-shadow:0 0 15px var(--cyan);
+}
+
+.welcome p{
+    color:var(--gold);
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.enter-btn,
+.logout-btn{
+    margin-top:22px;
+    padding:13px 25px;
+    border:1px solid var(--cyan);
+    background:rgba(0,229,255,.08);
+    color:var(--cyan);
+    font-family:inherit;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.logout-btn{
+    border-color:var(--red);
+    color:var(--red);
+    margin-left:7px;
+}
+
+/* PARTICLES */
+
+.particle{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 10px var(--cyan);
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100px);
+        opacity:0;
+    }
+    20%{opacity:1}
+    to{
+        transform:translateY(-650px);
+        opacity:0;
+    }
+}
+
+.corner{
+    position:absolute;
+    width:18px;
+    height:18px;
+    border-color:var(--red);
+    z-index:8;
+}
+
+.c1{top:12px;left:12px;border-left:2px solid;border-top:2px solid}
+.c2{top:12px;right:12px;border-right:2px solid;border-top:2px solid}
+.c3{bottom:12px;left:12px;border-left:2px solid;border-bottom:2px solid}
+.c4{bottom:12px;right:12px;border-right:2px solid;border-bottom:2px solid}
 </style>
 </head>
 
 <body>
 
-<div class="flash" id="flash"></div>
+<div class="grid"></div>
+<div class="scan"></div>
 
 <div class="card" id="card">
 
-    <!-- SYSTEM BAR -->
-
-    <div class="system-bar">
-
-        <div class="system-left">
-            ● SECURE CONNECTION
-        </div>
-
-        <div class="system-right">
-            ONLINE
-        </div>
-
-    </div>
-
-
-    <!-- MATRIX -->
-
-    <canvas id="matrix"></canvas>
-
-    <div class="grid"></div>
-
-
-    <!-- HEADER -->
-
-    <div class="header">
-
-        <div class="header-small">
-            DIGITAL AUTHENTICATION PROTOCOL
-        </div>
-
-        <div class="header-title">
-            SECURE ACCESS
-        </div>
-
-        <div class="header-line"></div>
-
-    </div>
-
-
-    <!-- STATUS -->
-
-    <div class="status">
-
-        <span class="status-dot"></span>
-
-        SYSTEM READY • IDENTITY VERIFIED
-
-    </div>
-
-
-    <!-- PHOTO -->
-
-    <div class="photo-area">
-
-        <div class="photo"></div>
-
-        <div class="scan"></div>
-
-        <div class="hud"></div>
-
-        <div class="corner c1"></div>
-        <div class="corner c2"></div>
-        <div class="corner c3"></div>
-        <div class="corner c4"></div>
-
-    </div>
-
-
-    <!-- ACTIVATION -->
-
-    <div class="activation">
-
-        <div
-            class="activation-title"
-            id="activationTitle"
-        >
-            APPLICATION ACTIVATED
-        </div>
-
-        <div class="activation-credit">
-            CREDIT: PARDESI
-        </div>
-
-        <div class="activation-line"></div>
-
-
-        <!-- LANGUAGES -->
-
-        <div class="language">
-
-            <div class="lang">
-                SECURE APPLICATION READY
-            </div>
-
-            <div class="lang">
-                ایپلیکیشن کامیابی سے فعال ہے
-            </div>
-
-            <div class="lang">
-                ايپليڪيشن ڪاميابي سان فعال آهي
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- TERMINAL -->
-
-    <div class="terminal">
-
-        <div>
-            <span>[OK]</span>
-            BOOT SEQUENCE COMPLETE
-        </div>
-
-        <div>
-            <span>[OK]</span>
-            SECURITY VERIFICATION COMPLETE
-        </div>
-
-        <div>
-            <span>[OK]</span>
-            DIGITAL CORE CONNECTED
-        </div>
-
-        <div>
-            <span>[OK]</span>
-            PARDESI PROTOCOL READY
-        </div>
-
-    </div>
-
-
-    <!-- TIME -->
-
-    <div class="time">
-
-        <div class="time-label">
-            PAKISTAN LOCAL TIME
-        </div>
-
-        <div
-            class="clock"
-            id="clock"
-        >
-            00:00:00
-        </div>
-
-        <div
-            class="date"
-            id="date"
-        >
-            00/00/0000
-        </div>
-
-    </div>
-
-
-    <!-- WHATSAPP -->
-
-    <div
-        class="whatsapp"
-        onclick="openWhatsApp()"
-    >
-
-        <svg viewBox="0 0 24 24">
-
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.198-.497.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-
-        </svg>
-
-        <div class="whatsapp-label">
-            WHATSAPP
-        </div>
-
-    </div>
-
-
-    <!-- SOUND -->
-
-    <button
-        class="sound"
-        id="soundButton"
-        onclick="toggleSound()"
-        aria-label="Sound"
-    >
-        🔇
-    </button>
-
-
-    <!-- ENTER APP -->
-
-    <button
-        class="enter"
-        id="enterButton"
-        onclick="enterApplication()"
-    >
-        ENTER APPLICATION
-    </button>
-
-
-    <div class="credit">
-        DIGITAL INTERFACE • CREDIT BY PARDESI • 2026
-    </div>
+<div class="corner c1"></div>
+<div class="corner c2"></div>
+<div class="corner c3"></div>
+<div class="corner c4"></div>
+
+<div class="topline">
+<div class="marquee">
+PARDESI SECURE ZONE // SYSTEM ONLINE // AUTHENTICATION REQUIRED // SHAKIR HASSAN PARDESI // SECURE ACCESS // 
+</div>
+</div>
+
+<div id="particles"></div>
+
+<div class="header">
+<div class="status">● SYSTEM ONLINE // SECURE CONNECTION</div>
+<div class="title">PARDESI</div>
+<div class="subtitle">SECURE APPLICATION ZONE</div>
+</div>
+
+<div class="login">
+
+<div class="login-title">
+[ AUTHENTICATION REQUIRED ]
+</div>
+
+<div class="field">
+<label class="label">EMAIL ADDRESS</label>
+<input
+    id="email"
+    type="email"
+    autocomplete="username"
+    placeholder="Enter your email"
+>
+</div>
+
+<div class="field">
+<label class="label">PASSWORD</label>
+
+<div class="inputbox">
+<input
+    id="password"
+    type="password"
+    autocomplete="current-password"
+    placeholder="Enter password"
+>
+
+<span
+    class="password-toggle"
+    onclick="togglePassword()"
+    id="eye"
+>SHOW</span>
+</div>
+</div>
+
+<button class="login-btn" id="loginBtn">
+⚡ ACCESS APPLICATION
+</button>
+
+<div class="forgot" id="forgot">
+FORGOT PASSWORD?
+</div>
+
+<div class="message" id="message"></div>
 
 </div>
 
+<div class="info">
 
-<script>
+<div class="credit">CREDIT BY</div>
 
-/* =====================================================
-   PARDESI ZONE
-   PREMIUM ACTIVATION ENGINE
-===================================================== */
+<div class="name">
+SHAKIR HASSAN PARDESI
+</div>
+
+<div class="phone">
+WHATSAPP // +92 311 8485874
+</div>
+
+<div class="time" id="time">
+--:--:--
+</div>
+
+<div class="date" id="date">
+Loading...
+</div>
+
+</div>
+
+<div class="footer">
+ENGLISH • اردو • سنڌي // PARDESI SYSTEM 2026
+</div>
+
+<!-- WELCOME -->
+
+<div class="welcome" id="welcome">
+
+<div class="welcome-box">
+
+<div class="granted">
+✓ ACCESS GRANTED
+</div>
+
+<h1 id="welcomeName">
+WELCOME
+</h1>
+
+<p>
+SHAKIR HASSAN PARDESI<br>
+APPLICATION ACTIVATED
+</p>
+
+<button class="enter-btn" onclick="enterApplication()">
+ENTER APPLICATION
+</button>
+
+<button class="logout-btn" onclick="logoutUser()">
+LOGOUT
+</button>
+
+</div>
+</div>
+
+</div>
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    sendPasswordResetEmail,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 
-/* -----------------------------------------------------
-   WHATSAPP
------------------------------------------------------ */
+/* YOUR FIREBASE CONFIG */
 
-function openWhatsApp(){
+const firebaseConfig = {
 
-    const number =
-        "923118485874";
+    apiKey: "AIzaSyCRtLa4jhqvvrmgg_VqYulu9RpljLk9xD8",
 
-    const message =
-        "السلام علیکم، پردیسی سے رابطہ کرنا ہے۔";
+    authDomain: "pardesi-test.firebaseapp.com",
 
-    const url =
-        "https://wa.me/" +
-        number +
-        "?text=" +
-        encodeURIComponent(message);
+    projectId: "pardesi-test",
 
-    window.open(
-        url,
-        "_blank"
-    );
+    storageBucket: "pardesi-test.firebasestorage.app",
+
+    messagingSenderId: "15017643098",
+
+    appId: "1:15017643098:web:51bd50f9e6122e17505c63",
+
+    measurementId: "G-F5YEMXDSG8"
+
+};
+
+
+/* INITIALIZE */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+
+/* ELEMENTS */
+
+const emailInput =
+document.getElementById("email");
+
+const passwordInput =
+document.getElementById("password");
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+const message =
+document.getElementById("message");
+
+const welcome =
+document.getElementById("welcome");
+
+const welcomeName =
+document.getElementById("welcomeName");
+
+const forgot =
+document.getElementById("forgot");
+
+
+/* MESSAGE */
+
+function showMessage(text,type){
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
 }
 
 
-/* -----------------------------------------------------
-   LIVE PAKISTAN TIME
------------------------------------------------------ */
+/* LOGIN */
+
+loginBtn.addEventListener("click",async()=>{
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+    if(!email || !password){
+
+        showMessage(
+            "EMAIL AND PASSWORD REQUIRED",
+            "error"
+        );
+
+        playErrorSound();
+
+        return;
+    }
+
+    loginBtn.disabled = true;
+
+    loginBtn.textContent =
+        "AUTHENTICATING...";
+
+    showMessage(
+        "CONNECTING TO SECURE SERVER...",
+        "success"
+    );
+
+    playScanSound();
+
+    try{
+
+        const result =
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        const user =
+            result.user;
+
+        showMessage(
+            "ACCESS GRANTED",
+            "success"
+        );
+
+        welcomeName.textContent =
+            "WELCOME SHAKIR";
+
+        playWelcomeSound();
+
+        setTimeout(()=>{
+
+            welcome.classList.add("show");
+
+        },500);
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        let msg =
+            "ACCESS DENIED";
+
+        if(
+            error.code ===
+            "auth/invalid-credential"
+        ){
+
+            msg =
+            "INVALID EMAIL OR PASSWORD";
+
+        }
+        else if(
+            error.code ===
+            "auth/too-many-requests"
+        ){
+
+            msg =
+            "TOO MANY ATTEMPTS — TRY AGAIN LATER";
+
+        }
+        else if(
+            error.code ===
+            "auth/invalid-email"
+        ){
+
+            msg =
+            "INVALID EMAIL ADDRESS";
+
+        }
+
+        showMessage(msg,"error");
+
+        playErrorSound();
+
+    }
+
+    finally{
+
+        loginBtn.disabled = false;
+
+        loginBtn.textContent =
+            "⚡ ACCESS APPLICATION";
+
+    }
+
+});
+
+
+/* FORGOT PASSWORD */
+
+forgot.addEventListener("click",async()=>{
+
+    const email =
+        emailInput.value.trim();
+
+    if(!email){
+
+        showMessage(
+            "ENTER YOUR EMAIL FIRST",
+            "error"
+        );
+
+        return;
+    }
+
+    try{
+
+        await sendPasswordResetEmail(
+            auth,
+            email
+        );
+
+        showMessage(
+            "PASSWORD RESET EMAIL SENT",
+            "success"
+        );
+
+        playWelcomeSound();
+
+    }
+
+    catch(error){
+
+        showMessage(
+            "COULD NOT SEND RESET EMAIL",
+            "error"
+        );
+
+    }
+
+});
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(auth,(user)=>{
+
+    if(user){
+
+        console.log(
+            "Authenticated:",
+            user.email
+        );
+
+    }
+
+});
+
+
+/* LOGOUT */
+
+window.logoutUser = async function(){
+
+    await signOut(auth);
+
+    welcome.classList.remove("show");
+
+    emailInput.value="";
+    passwordInput.value="";
+
+    showMessage(
+        "SYSTEM LOGGED OUT",
+        "success"
+    );
+
+};
+
+
+/* ENTER APPLICATION */
+
+window.enterApplication = function(){
+
+    /*
+       اگر آپ Android WebView میں
+       action://close استعمال کر رہے ہیں
+       تو یہاں اپنا action URL رکھ سکتے ہیں.
+    */
+
+    try{
+
+        window.location.href =
+            "action://close";
+
+    }
+
+    catch(e){
+
+        console.log(e);
+
+    }
+
+};
+
+
+/* PASSWORD */
+
+window.togglePassword = function(){
+
+    const eye =
+        document.getElementById("eye");
+
+    if(passwordInput.type === "password"){
+
+        passwordInput.type="text";
+
+        eye.textContent="HIDE";
+
+    }else{
+
+        passwordInput.type="password";
+
+        eye.textContent="SHOW";
+
+    }
+
+};
+
+
+/* ENTER KEY */
+
+passwordInput.addEventListener(
+    "keydown",
+    e=>{
+
+        if(e.key==="Enter"){
+
+            loginBtn.click();
+
+        }
+
+    }
+);
+
+
+/* PARTICLES */
+
+const particleContainer =
+document.getElementById("particles");
+
+for(let i=0;i<45;i++){
+
+    const p =
+        document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left =
+        Math.random()*100+"%";
+
+    p.style.top =
+        (30+Math.random()*70)+"%";
+
+    p.style.animationDelay =
+        Math.random()*5+"s";
+
+    p.style.animationDuration =
+        (3+Math.random()*5)+"s";
+
+    if(Math.random()>.65){
+
+        p.style.background="var(--red)";
+
+        p.style.boxShadow=
+            "0 0 10px var(--red)";
+
+    }
+
+    particleContainer.appendChild(p);
+
+}
+
+
+/* PAKISTAN 12-HOUR TIME */
 
 function updateTime(){
 
@@ -1185,35 +990,48 @@ function updateTime(){
         new Date();
 
     const time =
-        new Intl.DateTimeFormat(
-            "en-GB",
+        now.toLocaleTimeString(
+            "en-US",
             {
-                timeZone:"Asia/Karachi",
-                hour:"2-digit",
-                minute:"2-digit",
-                second:"2-digit",
-                hour12:false
+                timeZone:
+                    "Asia/Karachi",
+
+                hour:
+                    "numeric",
+
+                minute:
+                    "2-digit",
+
+                second:
+                    "2-digit",
+
+                hour12:true
             }
-        ).format(now);
+        );
 
     const date =
-        new Intl.DateTimeFormat(
-            "en-GB",
+        now.toLocaleDateString(
+            "en-PK",
             {
-                timeZone:"Asia/Karachi",
-                day:"2-digit",
-                month:"2-digit",
-                year:"numeric"
+                timeZone:
+                    "Asia/Karachi",
+
+                weekday:"long",
+
+                year:"numeric",
+
+                month:"short",
+
+                day:"numeric"
             }
-        ).format(now);
+        );
 
-    document.getElementById(
-        "clock"
-    ).textContent = time;
+    document.getElementById("time")
+        .textContent=time;
 
-    document.getElementById(
-        "date"
-    ).textContent = date;
+    document.getElementById("date")
+        .textContent=date;
+
 }
 
 updateTime();
@@ -1224,543 +1042,130 @@ setInterval(
 );
 
 
-/* -----------------------------------------------------
-   AUDIO ENGINE
------------------------------------------------------ */
+/* SIMPLE CYBER SOUNDS */
 
-let audioCtx = null;
+let audioContext;
 
-let masterGain = null;
+function getAudio(){
 
-let soundOn = false;
+    if(!audioContext){
 
-
-/* Create audio */
-
-function initAudio(){
-
-    if(!audioCtx){
-
-        audioCtx =
+        audioContext =
             new (
                 window.AudioContext ||
                 window.webkitAudioContext
             )();
 
-        masterGain =
-            audioCtx.createGain();
-
-        masterGain.gain.value =
-            0.055;
-
-        masterGain.connect(
-            audioCtx.destination
-        );
     }
 
-    if(
-        audioCtx.state ===
-        "suspended"
-    ){
+    return audioContext;
 
-        audioCtx.resume();
-
-    }
 }
 
-
-/* -----------------------------------------------------
-   SYNTH TONE
------------------------------------------------------ */
 
 function tone(
     frequency,
     duration,
     type="sine",
-    volume=.3,
-    delay=0
+    volume=.04
 ){
 
-    if(
-        !soundOn ||
-        !audioCtx
-    ){
-        return;
-    }
+    try{
 
-    const osc =
-        audioCtx.createOscillator();
+        const ctx=getAudio();
 
-    const gain =
-        audioCtx.createGain();
+        const osc =
+            ctx.createOscillator();
 
-    osc.type =
-        type;
+        const gain =
+            ctx.createGain();
 
-    osc.frequency.setValueAtTime(
-        frequency,
-        audioCtx.currentTime +
-        delay
-    );
+        osc.type=type;
 
-    gain.gain.setValueAtTime(
-        0,
-        audioCtx.currentTime +
-        delay
-    );
+        osc.frequency.value=
+            frequency;
 
-    gain.gain.linearRampToValueAtTime(
-        volume,
-        audioCtx.currentTime +
-        delay +
-        .015
-    );
+        gain.gain.setValueAtTime(
+            volume,
+            ctx.currentTime
+        );
 
-    gain.gain.exponentialRampToValueAtTime(
-        .001,
-        audioCtx.currentTime +
-        delay +
-        duration
-    );
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            ctx.currentTime+duration
+        );
 
-    osc.connect(gain);
+        osc.connect(gain);
 
-    gain.connect(masterGain);
+        gain.connect(ctx.destination);
 
-    osc.start(
-        audioCtx.currentTime +
-        delay
-    );
+        osc.start();
 
-    osc.stop(
-        audioCtx.currentTime +
-        delay +
-        duration +
-        .03
-    );
-}
+        osc.stop(
+            ctx.currentTime+duration
+        );
 
-
-/* -----------------------------------------------------
-   ACTIVATION SOUND
------------------------------------------------------ */
-
-function activationSound(){
-
-    if(!soundOn){
-        return;
-    }
-
-    /*
-       1. Deep system boot
-    */
-
-    tone(
-        110,
-        .45,
-        "sine",
-        .9,
-        0
-    );
-
-    tone(
-        165,
-        .35,
-        "sine",
-        .55,
-        .18
-    );
-
-
-    /*
-       2. Scanner
-    */
-
-    tone(
-        420,
-        .08,
-        "square",
-        .25,
-        .48
-    );
-
-    tone(
-        620,
-        .08,
-        "square",
-        .25,
-        .60
-    );
-
-    tone(
-        820,
-        .08,
-        "square",
-        .25,
-        .72
-    );
-
-
-    /*
-       3. Security verification
-    */
-
-    tone(
-        540,
-        .11,
-        "triangle",
-        .35,
-        1.05
-    );
-
-    tone(
-        720,
-        .12,
-        "triangle",
-        .38,
-        1.22
-    );
-
-    tone(
-        960,
-        .18,
-        "triangle",
-        .42,
-        1.39
-    );
-
-
-    /*
-       4. Final activation
-    */
-
-    tone(
-        392,
-        .16,
-        "sine",
-        .42,
-        1.85
-    );
-
-    tone(
-        523,
-        .18,
-        "sine",
-        .45,
-        2.02
-    );
-
-    tone(
-        784,
-        .35,
-        "sine",
-        .55,
-        2.20
-    );
+    }catch(e){}
 
 }
 
 
-/* -----------------------------------------------------
-   SMALL UI SOUND
------------------------------------------------------ */
+function playScanSound(){
 
-function clickSound(){
-
-    if(!soundOn){
-        return;
-    }
-
-    tone(
-        680,
-        .07,
-        "square",
-        .18
-    );
-}
-
-
-/* -----------------------------------------------------
-   SOUND BUTTON
------------------------------------------------------ */
-
-function toggleSound(){
-
-    initAudio();
-
-    soundOn =
-        !soundOn;
-
-    const button =
-        document.getElementById(
-            "soundButton"
-        );
-
-    if(soundOn){
-
-        button.textContent =
-            "🔊";
-
-        button.classList.add(
-            "on"
-        );
-
-        activationSound();
-
-    }else{
-
-        button.textContent =
-            "🔇";
-
-        button.classList.remove(
-            "on"
-        );
-
-    }
-}
-
-
-/* -----------------------------------------------------
-   FIRST TOUCH
------------------------------------------------------ */
-
-document.addEventListener(
-    "pointerdown",
-    function(){
-
-        initAudio();
-
-    },
-    {
-        once:true
-    }
-);
-
-
-/* -----------------------------------------------------
-   ENTER APPLICATION
------------------------------------------------------ */
-
-function enterApplication(){
-
-    initAudio();
-
-    soundOn = true;
-
-    activationSound();
-
-    clickSound();
-
-    const button =
-        document.getElementById(
-            "enterButton"
-        );
-
-    const title =
-        document.getElementById(
-            "activationTitle"
-        );
-
-    const flash =
-        document.getElementById(
-            "flash"
-        );
-
-    button.textContent =
-        "APPLICATION ACTIVATING...";
-
-    title.textContent =
-        "ACCESS GRANTED";
-
-    document
-        .getElementById("card")
-        .classList.add(
-            "activated"
-        );
-
-    flash.classList.add(
-        "go"
-    );
-
-
-    /*
-       IMPORTANT:
-
-       action://close is retained
-       for Android WebView/dialog apps.
-
-       If your app uses another close
-       action, replace this URL.
-    */
+    tone(220,.08,"square",.025);
 
     setTimeout(
-        function(){
-
-            window.location.href =
-                "action://close";
-
-        },
-        900
+        ()=>tone(440,.08,"square",.025),
+        90
     );
+
+    setTimeout(
+        ()=>tone(880,.12,"square",.02),
+        180
+    );
+
 }
 
 
-/* -----------------------------------------------------
-   MATRIX
------------------------------------------------------ */
+function playWelcomeSound(){
 
-const canvas =
-    document.getElementById(
-        "matrix"
+    tone(440,.12,"sine",.04);
+
+    setTimeout(
+        ()=>tone(660,.12,"sine",.04),
+        130
     );
 
-const ctx =
-    canvas.getContext("2d");
-
-const chars =
-    "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%";
-
-let fontSize = 10;
-
-let columns;
-
-let drops;
-
-
-function resizeMatrix(){
-
-    canvas.width =
-        canvas.clientWidth;
-
-    canvas.height =
-        canvas.clientHeight;
-
-    columns =
-        Math.floor(
-            canvas.width /
-            fontSize
-        );
-
-    drops =
-        new Array(columns)
-        .fill(1);
-}
-
-resizeMatrix();
-
-window.addEventListener(
-    "resize",
-    resizeMatrix
-);
-
-
-function drawMatrix(){
-
-    ctx.fillStyle =
-        "rgba(0,0,0,.075)";
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
+    setTimeout(
+        ()=>tone(880,.2,"sine",.05),
+        260
     );
 
-    ctx.fillStyle =
-        "#00ff88";
-
-    ctx.font =
-        fontSize +
-        "px monospace";
-
-    for(
-        let i=0;
-        i<drops.length;
-        i++
-    ){
-
-        const text =
-            chars[
-                Math.floor(
-                    Math.random() *
-                    chars.length
-                )
-            ];
-
-        ctx.fillText(
-            text,
-            i * fontSize,
-            drops[i] *
-            fontSize
-        );
-
-        if(
-            drops[i] *
-            fontSize >
-            canvas.height &&
-            Math.random() >
-            .975
-        ){
-
-            drops[i] = 0;
-
-        }
-
-        drops[i]++;
-
-    }
 }
 
-setInterval(
-    drawMatrix,
-    55
-);
+
+function playErrorSound(){
+
+    tone(180,.18,"sawtooth",.035);
+
+    setTimeout(
+        ()=>tone(100,.22,"sawtooth",.035),
+        180
+    );
+
+}
 
 
-/* -----------------------------------------------------
-   TERMINAL TYPE EFFECT
------------------------------------------------------ */
+/* FIRST USER INTERACTION */
 
-const terminalLines = [
-    "AUTHENTICATION VERIFIED",
-    "SECURITY PROTOCOL READY",
-    "APPLICATION CORE CONNECTED",
-    "PARDESI DIGITAL CREDIT VERIFIED"
-];
-
-let terminalIndex = 0;
-
-setInterval(
-    function(){
-
-        const terminal =
-            document.querySelector(
-                ".terminal"
-            );
-
-        const lines =
-            terminal.querySelectorAll(
-                "div"
-            );
-
-        if(lines.length){
-
-            lines[
-                terminalIndex %
-                lines.length
-            ].innerHTML =
-                "<span>[OK]</span> " +
-                terminalLines[
-                    terminalIndex %
-                    terminalLines.length
-                ];
-
-        }
-
-        terminalIndex++;
-
+document.addEventListener(
+    "click",
+    ()=>{
+        try{
+            getAudio().resume();
+        }catch(e){}
     },
-    2300
+    {once:true}
 );
 
 </script>

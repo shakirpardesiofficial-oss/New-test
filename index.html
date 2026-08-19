@@ -2,1289 +2,577 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#020207">
-
-<title>Pardesi VIP Secure System</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Pardesi Secure Zone</title>
 
 <style>
 :root{
---bg:#020207;
---panel:#08080f;
---red:#ff1744;
---cyan:#00eaff;
---purple:#a855ff;
---green:#00ff9d;
---white:#fff;
---muted:#858ca3;
+    --red:#ff1744;
+    --cyan:#00e5ff;
+    --green:#00ff9d;
+    --purple:#a855f7;
+    --gold:#ffd166;
+    --bg:#020306;
+    --panel:rgba(7,9,15,.94);
+    --dim:#7f8b98;
 }
 
 *{
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
-margin:0;
-width:100%;
-height:100%;
-overflow:hidden;
-background:#020207;
-color:#fff;
-font-family:Arial,Segoe UI,sans-serif;
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#020306;
+    color:#fff;
+    font-family:"Courier New",monospace;
 }
 
 body{
-display:flex;
-align-items:center;
-justify-content:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
 }
 
-#matrix{
-position:fixed;
-inset:0;
-width:100%;
-height:100%;
-z-index:0;
-opacity:.45;
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 15% 20%,rgba(255,23,68,.18),transparent 30%),
+      radial-gradient(circle at 85% 25%,rgba(0,229,255,.15),transparent 30%),
+      radial-gradient(circle at 50% 90%,rgba(168,85,247,.16),transparent 35%),
+      linear-gradient(135deg,#010205,#0a0d14,#020306);
+    animation:hue 9s ease-in-out infinite alternate;
 }
 
-body:after{
-content:"";
-position:fixed;
-inset:0;
-pointer-events:none;
-background:
-radial-gradient(circle at 50% 30%,rgba(168,85,255,.15),transparent 32%),
-radial-gradient(circle at 10% 85%,rgba(255,23,68,.12),transparent 30%),
-radial-gradient(circle at 90% 15%,rgba(0,234,255,.10),transparent 30%);
+@keyframes hue{
+    from{filter:hue-rotate(0deg)}
+    to{filter:hue-rotate(28deg)}
 }
 
-.system{
-position:relative;
-z-index:5;
-width:min(1100px,96vw);
-height:min(760px,94vh);
-border-radius:24px;
-overflow:hidden;
-background:linear-gradient(145deg,rgba(8,8,15,.97),rgba(2,2,7,.96));
-border:1px solid rgba(255,255,255,.14);
-box-shadow:
-0 35px 100px #000,
-0 0 80px rgba(168,85,255,.12);
+.grid{
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:23px 23px;
 }
 
-.system:before{
-content:"";
-position:absolute;
-left:0;
-right:0;
-height:2px;
-top:-3px;
-background:linear-gradient(
-90deg,
-transparent,
-var(--cyan),
-var(--purple),
-var(--red),
-transparent
-);
-box-shadow:0 0 20px var(--cyan);
-animation:scan 5s linear infinite;
-z-index:20;
+.scan{
+    position:fixed;
+    left:0;
+    width:100%;
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+    box-shadow:0 0 18px var(--cyan);
+    animation:scan 5s linear infinite;
+    opacity:.6;
 }
 
 @keyframes scan{
-to{top:100%}
+    from{top:-5%}
+    to{top:105%}
 }
 
-.top{
-height:64px;
-padding:0 22px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-border-bottom:1px solid rgba(255,255,255,.08);
+.card{
+    width:92%;
+    max-width:410px;
+    height:min(720px,92vh);
+    position:relative;
+    overflow:hidden;
+    background:var(--panel);
+    border:1px solid rgba(0,229,255,.55);
+    box-shadow:
+      0 0 30px rgba(0,229,255,.14),
+      0 0 80px rgba(255,23,68,.08),
+      inset 0 0 40px rgba(0,0,0,.9);
+    clip-path:polygon(
+      16px 0,
+      calc(100% - 16px) 0,
+      100% 16px,
+      100% calc(100% - 16px),
+      calc(100% - 16px) 100%,
+      16px 100%,
+      0 calc(100% - 16px),
+      0 16px
+    );
+    z-index:2;
 }
 
-.logo{
-font-weight:1000;
-font-size:18px;
-letter-spacing:4px;
+.card:after{
+    content:"";
+    position:absolute;
+    inset:7px;
+    border:1px solid rgba(255,23,68,.22);
+    pointer-events:none;
 }
 
-.logo span{
-color:var(--red);
-text-shadow:0 0 15px var(--red);
+.corner{
+    position:absolute;
+    width:18px;
+    height:18px;
+    border-color:var(--red);
+    z-index:20;
 }
 
-.online{
-color:var(--green);
-font-size:9px;
-font-weight:bold;
-letter-spacing:2px;
+.c1{top:12px;left:12px;border-top:2px solid;border-left:2px solid}
+.c2{top:12px;right:12px;border-top:2px solid;border-right:2px solid}
+.c3{bottom:12px;left:12px;border-bottom:2px solid;border-left:2px solid}
+.c4{bottom:12px;right:12px;border-bottom:2px solid;border-right:2px solid}
+
+.topline{
+    position:absolute;
+    top:0;
+    left:16px;
+    right:16px;
+    height:21px;
+    overflow:hidden;
+    background:linear-gradient(90deg,var(--red),var(--purple),var(--cyan));
+    z-index:10;
 }
 
-.online-dot{
-display:inline-block;
-width:7px;
-height:7px;
-border-radius:50%;
-background:var(--green);
-box-shadow:0 0 14px var(--green);
-margin-right:7px;
-animation:blink 1.2s infinite;
+.marquee{
+    white-space:nowrap;
+    font-size:8px;
+    line-height:21px;
+    letter-spacing:2px;
+    font-weight:bold;
+    animation:marquee 17s linear infinite;
+}
+
+@keyframes marquee{
+    from{transform:translateX(100%)}
+    to{transform:translateX(-100%)}
+}
+
+.header{
+    position:absolute;
+    top:43px;
+    left:0;
+    width:100%;
+    text-align:center;
+    z-index:5;
+}
+
+.status{
+    font-size:8px;
+    letter-spacing:3px;
+    color:var(--green);
+    text-shadow:0 0 9px var(--green);
+    animation:blink 1.5s infinite;
 }
 
 @keyframes blink{
-50%{opacity:.2}
-}
-
-.content{
-height:calc(100% - 64px);
-display:grid;
-grid-template-columns:1fr 1.35fr 1fr;
-gap:18px;
-padding:18px;
-}
-
-.side{
-border-radius:18px;
-padding:17px;
-border:1px solid rgba(255,255,255,.08);
-background:rgba(0,0,0,.25);
-overflow:hidden;
-}
-
-.mask{
-height:220px;
-border-radius:16px;
-position:relative;
-overflow:hidden;
-background:
-radial-gradient(
-ellipse at center,
-rgba(255,255,255,.07),
-transparent 35%
-),
-linear-gradient(145deg,#11111a,#020204);
-border:1px solid rgba(255,255,255,.12);
-}
-
-.mask:before{
-content:"";
-position:absolute;
-left:16%;
-right:16%;
-top:24%;
-height:46%;
-border-radius:50%;
-border:2px solid rgba(255,23,68,.55);
-box-shadow:
-0 0 30px rgba(255,23,68,.2),
-inset 0 0 25px rgba(0,234,255,.08);
-transform:rotate(-5deg);
-}
-
-.eye{
-position:absolute;
-top:43%;
-width:27%;
-height:5px;
-border-radius:50%;
-background:var(--cyan);
-box-shadow:0 0 18px var(--cyan);
-}
-
-.eye.left{
-left:20%;
-transform:rotate(8deg);
-}
-
-.eye.right{
-right:20%;
-transform:rotate(-8deg);
+    50%{opacity:.35}
 }
 
 .title{
-color:var(--muted);
-font-size:9px;
-letter-spacing:3px;
-margin-top:14px;
+    margin-top:10px;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:5px;
+    text-shadow:
+      0 0 7px var(--red),
+      0 0 20px var(--red);
 }
 
-.name{
-font-size:21px;
-font-weight:1000;
-margin:5px 0;
-}
-
-.info{
-color:#b7bdd0;
-font-size:10px;
-line-height:1.8;
-}
-
-.profile-button{
-width:100%;
-margin-top:12px;
-padding:13px;
-border-radius:10px;
-border:1px solid var(--cyan);
-background:
-linear-gradient(
-90deg,
-rgba(0,234,255,.08),
-rgba(168,85,255,.08)
-);
-color:#fff;
-font-weight:1000;
-letter-spacing:1px;
-box-shadow:0 0 18px rgba(0,234,255,.08);
-}
-
-.profile-button:active{
-transform:scale(.97);
-}
-
-.whatsapp{
-width:100%;
-margin-top:10px;
-padding:12px;
-border-radius:10px;
-border:1px solid #00d084;
-background:rgba(0,208,132,.06);
-color:#63ffc0;
-font-weight:900;
-}
-
-.clock{
-margin-top:15px;
-padding:10px;
-text-align:center;
-border-radius:11px;
-border:1px solid rgba(0,234,255,.2);
-background:rgba(0,234,255,.025);
-}
-
-.time{
-color:var(--cyan);
-font-size:27px;
-font-weight:1000;
-text-shadow:0 0 18px rgba(0,234,255,.4);
-}
-
-.date{
-color:var(--muted);
-font-size:8px;
-letter-spacing:2px;
-margin-top:3px;
-}
-
-.center{
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.card{
-width:100%;
-max-width:475px;
-min-height:570px;
-position:relative;
-padding:25px;
-border-radius:22px;
-border:1px solid rgba(255,255,255,.12);
-background:linear-gradient(
-145deg,
-rgba(13,13,22,.98),
-rgba(3,3,8,.98)
-);
-box-shadow:0 0 60px rgba(168,85,255,.10);
-}
-
-.card:before{
-content:"";
-position:absolute;
-inset:8px;
-border:1px dashed rgba(0,234,255,.09);
-border-radius:17px;
-pointer-events:none;
+.subtitle{
+    margin-top:4px;
+    color:var(--cyan);
+    font-size:8px;
+    letter-spacing:3px;
 }
 
 .photo{
-height:215px;
-border-radius:15px;
-border:1px solid rgba(0,234,255,.25);
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-background:
-radial-gradient(circle,rgba(0,234,255,.14),transparent 45%),
-linear-gradient(135deg,#0c0c16,#020205);
+    position:absolute;
+    top:120px;
+    left:42px;
+    right:42px;
+    height:120px;
+    background:
+      linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.2)),
+      url("https://raw.githubusercontent.com/DPModsYT/webbydpmods/refs/heads/main/IMG_20260514_135013.jpg")
+      center/cover no-repeat;
+    border:1px solid var(--red);
+    box-shadow:
+      0 0 18px rgba(255,23,68,.3),
+      inset 0 0 30px rgba(0,0,0,.35);
+    overflow:hidden;
+    animation:photoGlow 3s ease-in-out infinite alternate;
 }
 
-.avatar{
-width:115px;
-height:115px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-color:var(--cyan);
-font-size:38px;
-font-weight:1000;
-border:2px solid var(--cyan);
-box-shadow:
-0 0 30px rgba(0,234,255,.35),
-inset 0 0 25px rgba(0,234,255,.1);
-animation:avatarPulse 2.5s infinite;
+@keyframes photoGlow{
+    from{border-color:var(--red);box-shadow:0 0 15px rgba(255,23,68,.25)}
+    to{border-color:var(--cyan);box-shadow:0 0 25px rgba(0,229,255,.35)}
 }
 
-@keyframes avatarPulse{
-50%{
-transform:scale(1.04);
-box-shadow:
-0 0 45px rgba(0,234,255,.55),
-inset 0 0 30px rgba(0,234,255,.2);
-}
-}
-
-.heading{
-text-align:center;
-margin-top:16px;
-font-size:27px;
-font-weight:1000;
-letter-spacing:3px;
+.photo:after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    height:2px;
+    background:#fff;
+    box-shadow:0 0 15px var(--cyan);
+    animation:photoScan 3.5s linear infinite;
 }
 
-.heading span{
-color:var(--red);
-text-shadow:0 0 17px rgba(255,23,68,.45);
+@keyframes photoScan{
+    from{top:-2px}
+    to{top:100%}
 }
 
-.sub{
-text-align:center;
-color:var(--muted);
-font-size:8px;
-letter-spacing:2.5px;
-margin:7px 0 18px;
+.login{
+    position:absolute;
+    left:27px;
+    right:27px;
+    top:260px;
+    z-index:8;
 }
 
-label{
-display:block;
-color:#a6adbf;
-font-size:8px;
-letter-spacing:2px;
-margin-bottom:7px;
+.login-title{
+    text-align:center;
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:3px;
+    margin-bottom:15px;
+}
+
+.label{
+    display:block;
+    color:var(--cyan);
+    font-size:8px;
+    letter-spacing:2px;
+    margin-bottom:6px;
+}
+
+.password-box{
+    position:relative;
 }
 
 input{
-width:100%;
-padding:14px 15px;
-border-radius:10px;
-border:1px solid rgba(0,234,255,.25);
-outline:none;
-background:#04050a;
-color:#fff;
-font-size:16px;
-letter-spacing:2px;
+    width:100%;
+    height:50px;
+    border:1px solid rgba(0,229,255,.55);
+    outline:none;
+    background:rgba(0,0,0,.7);
+    color:white;
+    padding:0 55px 0 15px;
+    font-family:inherit;
+    font-size:13px;
+    letter-spacing:2px;
 }
 
 input:focus{
-border-color:var(--cyan);
-box-shadow:0 0 20px rgba(0,234,255,.15);
+    border-color:var(--red);
+    box-shadow:0 0 20px rgba(255,23,68,.2);
 }
 
-.main-btn{
-width:100%;
-padding:14px;
-margin-top:11px;
-border:0;
-border-radius:10px;
-color:white;
-font-weight:1000;
-letter-spacing:2px;
-background:
-linear-gradient(
-90deg,
-var(--red),
-#b900ff,
-var(--cyan)
-);
-box-shadow:0 0 25px rgba(255,23,68,.17);
+.show{
+    position:absolute;
+    right:13px;
+    top:17px;
+    color:var(--gold);
+    font-size:8px;
+    cursor:pointer;
 }
 
-.main-btn:active{
-transform:scale(.97);
+.login-btn{
+    width:100%;
+    height:51px;
+    margin-top:13px;
+    border:1px solid var(--red);
+    background:linear-gradient(
+      90deg,
+      rgba(255,23,68,.18),
+      rgba(168,85,247,.15),
+      rgba(0,229,255,.18)
+    );
+    color:#fff;
+    font-family:inherit;
+    font-weight:bold;
+    letter-spacing:3px;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(255,23,68,.18);
+}
+
+.login-btn:active{
+    transform:scale(.96);
+    background:var(--red);
+    box-shadow:0 0 35px var(--red);
 }
 
 .message{
-min-height:18px;
-margin-top:9px;
-text-align:center;
-color:#ff5576;
-font-size:9px;
+    min-height:18px;
+    text-align:center;
+    margin-top:10px;
+    font-size:8px;
+    letter-spacing:1px;
 }
 
-.console{
-height:72px;
-margin-top:12px;
-padding:9px;
-overflow:hidden;
-border-radius:10px;
-border:1px solid rgba(255,255,255,.07);
-background:#020307;
-color:#7df6ff;
-font:9px monospace;
+.error{
+    color:var(--red);
+    text-shadow:0 0 9px var(--red);
 }
 
-.welcome{
-display:none;
-text-align:center;
+.success{
+    color:var(--green);
+    text-shadow:0 0 9px var(--green);
 }
 
-.welcome.show{
-display:block;
+.info{
+    position:absolute;
+    bottom:67px;
+    width:100%;
+    text-align:center;
+    z-index:5;
 }
 
-.login.hide{
-display:none;
+.credit{
+    color:var(--purple);
+    font-size:8px;
+    letter-spacing:2px;
 }
 
-.granted{
-margin-top:25px;
-color:var(--green);
-font-size:9px;
-font-weight:900;
-letter-spacing:2px;
+.name{
+    margin-top:5px;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:2px;
 }
 
-.big-welcome{
-font-size:34px;
-line-height:1.1;
-font-weight:1000;
-margin:22px 0 8px;
+.phone{
+    margin-top:7px;
+    color:var(--cyan);
+    font-size:8px;
+    letter-spacing:2px;
 }
 
-.detail-box{
-margin-top:18px;
-padding:17px;
-border-radius:13px;
-border:1px solid rgba(0,234,255,.15);
-background:rgba(0,234,255,.025);
-text-align:left;
-font-size:11px;
-line-height:1.8;
+.time{
+    margin-top:8px;
+    color:var(--gold);
+    font-size:14px;
+    text-shadow:0 0 10px var(--gold);
+}
+
+.date{
+    margin-top:3px;
+    color:var(--dim);
+    font-size:8px;
 }
 
 .footer{
-position:absolute;
-bottom:8px;
-left:0;
-right:0;
-text-align:center;
-color:#555b6d;
-font-size:7px;
-letter-spacing:2px;
+    position:absolute;
+    bottom:14px;
+    width:100%;
+    text-align:center;
+    color:#68727e;
+    font-size:7px;
+    letter-spacing:2px;
 }
 
+/* WELCOME */
 
-/* =========================================
-   DEVELOPER PROFILE POPUP
-========================================= */
-
-.profile-popup{
-position:fixed;
-inset:0;
-z-index:200;
-display:none;
-align-items:center;
-justify-content:center;
-padding:18px;
-background:rgba(0,0,0,.84);
-backdrop-filter:blur(14px);
+.welcome{
+    display:none;
+    position:absolute;
+    inset:0;
+    z-index:50;
+    background:
+      radial-gradient(circle at center,rgba(0,255,157,.15),transparent 38%),
+      rgba(1,3,6,.97);
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
 }
 
-.profile-popup.show{
-display:flex;
+.welcome.show{
+    display:flex;
+    animation:welcome .55s ease;
 }
 
-.profile-modal{
-position:relative;
-width:min(620px,95vw);
-max-height:90vh;
-overflow:auto;
-padding:24px;
-border-radius:25px;
-border:1px solid rgba(0,234,255,.25);
-background:
-linear-gradient(
-145deg,
-rgba(8,8,14,.98),
-rgba(2,2,7,.99)
-);
-box-shadow:
-0 40px 120px #000,
-0 0 50px rgba(0,234,255,.10);
-animation:popupIn .35s ease;
+@keyframes welcome{
+    from{opacity:0;transform:scale(.8)}
+    to{opacity:1;transform:scale(1)}
 }
 
-@keyframes popupIn{
-from{
-opacity:0;
-transform:scale(.88) translateY(25px);
-}
-to{
-opacity:1;
-transform:scale(1) translateY(0);
-}
+.granted{
+    color:var(--green);
+    font-size:12px;
+    letter-spacing:4px;
+    text-shadow:0 0 16px var(--green);
 }
 
-.close-profile{
-position:absolute;
-right:16px;
-top:16px;
-z-index:5;
-padding:8px 12px;
-border-radius:9px;
-border:1px solid rgba(255,255,255,.15);
-background:#11131c;
-color:#fff;
+.welcome h1{
+    font-size:23px;
+    letter-spacing:2px;
+    margin:18px 0 8px;
+    text-shadow:0 0 15px var(--cyan);
 }
 
-.profile-header{
-text-align:center;
-margin-bottom:18px;
+.welcome p{
+    color:var(--gold);
+    font-size:9px;
+    letter-spacing:2px;
 }
 
-.profile-tag{
-color:var(--cyan);
-font-size:8px;
-font-weight:bold;
-letter-spacing:4px;
+.enter,
+.logout{
+    padding:13px 20px;
+    margin-top:20px;
+    font-family:inherit;
+    font-weight:bold;
+    letter-spacing:2px;
+    background:rgba(0,229,255,.08);
+    border:1px solid var(--cyan);
+    color:var(--cyan);
 }
 
-.profile-title{
-font-size:29px;
-font-weight:1000;
-margin-top:8px;
+.logout{
+    border-color:var(--red);
+    color:var(--red);
+    margin-left:6px;
 }
 
-.profile-title span{
-color:var(--red);
+.particle{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 9px var(--cyan);
+    animation:float 5s linear infinite;
 }
 
-.profile-visual{
-height:270px;
-position:relative;
-overflow:hidden;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:19px;
-border:1px solid rgba(255,255,255,.12);
-background:
-radial-gradient(
-circle at center,
-rgba(255,23,68,.13),
-transparent 30%
-),
-radial-gradient(
-circle at center,
-rgba(0,234,255,.07),
-transparent 55%
-),
-#020204;
-}
-
-.profile-visual:after{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(
-transparent 48%,
-rgba(0,234,255,.08) 50%,
-transparent 52%
-);
-background-size:100% 8px;
-pointer-events:none;
-}
-
-.hacker-face{
-width:210px;
-height:210px;
-position:relative;
-border-radius:50%;
-background:
-radial-gradient(
-circle at 50% 35%,
-#20202a 0,
-#0c0c12 42%,
-#020203 70%
-);
-border:2px solid rgba(255,23,68,.55);
-box-shadow:
-0 0 45px rgba(255,23,68,.18),
-inset 0 0 50px #000;
-}
-
-.hacker-face:before{
-content:"";
-position:absolute;
-left:13%;
-right:13%;
-top:34%;
-height:42%;
-border-radius:48%;
-background:#020204;
-border:2px solid rgba(0,234,255,.3);
-box-shadow:
-inset 0 0 30px #000,
-0 0 25px rgba(0,234,255,.08);
-}
-
-.hacker-eye{
-position:absolute;
-top:48%;
-width:58px;
-height:7px;
-background:var(--cyan);
-border-radius:50%;
-box-shadow:
-0 0 20px var(--cyan),
-0 0 40px rgba(0,234,255,.5);
-z-index:3;
-}
-
-.hacker-eye.one{
-left:28%;
-transform:rotate(8deg);
-}
-
-.hacker-eye.two{
-right:28%;
-transform:rotate(-8deg);
-}
-
-.mask-line{
-position:absolute;
-left:17%;
-right:17%;
-top:60%;
-height:2px;
-background:var(--red);
-box-shadow:0 0 15px var(--red);
-z-index:3;
-}
-
-.profile-info{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:11px;
-margin-top:16px;
-}
-
-.info-card{
-padding:15px;
-border-radius:13px;
-border:1px solid rgba(255,255,255,.08);
-background:rgba(255,255,255,.025);
-}
-
-.info-card small{
-display:block;
-color:var(--muted);
-font-size:7px;
-letter-spacing:2px;
-margin-bottom:6px;
-}
-
-.info-card strong{
-font-size:13px;
-}
-
-.profile-quote{
-margin-top:14px;
-padding:15px;
-text-align:center;
-border-radius:13px;
-border:1px solid rgba(168,85,255,.22);
-background:rgba(168,85,255,.05);
-color:#d9c6ff;
-font-size:11px;
-line-height:1.8;
-}
-
-.profile-actions{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-margin-top:13px;
-}
-
-.profile-action{
-padding:12px;
-border-radius:10px;
-border:1px solid rgba(255,255,255,.12);
-background:#0c0d15;
-color:white;
-font-weight:900;
-}
-
-.profile-action.whatsapp{
-border-color:#00d084;
-color:#63ffc0;
-}
-
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-.system{
-width:96vw;
-height:96vh;
-}
-
-.content{
-grid-template-columns:1fr;
-}
-
-.side{
-display:none;
-}
-
-.card{
-min-height:0;
-}
-
-.photo{
-height:190px;
-}
-
-.top{
-height:56px;
-}
-
-.content{
-height:calc(100% - 56px);
-}
-
-.profile-info{
-grid-template-columns:1fr;
-}
-
-.profile-visual{
-height:230px;
-}
-
-.hacker-face{
-width:175px;
-height:175px;
-}
-
-.profile-title{
-font-size:23px;
-}
-
+@keyframes float{
+    from{transform:translateY(150px);opacity:0}
+    20%{opacity:1}
+    to{transform:translateY(-650px);opacity:0}
 }
 </style>
 </head>
 
-
 <body>
 
-<canvas id="matrix"></canvas>
+<div class="grid"></div>
+<div class="scan"></div>
 
+<div class="card">
 
-<div class="system">
+<div class="corner c1"></div>
+<div class="corner c2"></div>
+<div class="corner c3"></div>
+<div class="corner c4"></div>
 
-<div class="top">
-
-<div class="logo">
-PARDE<span>SI</span> // VIP
+<div class="topline">
+<div class="marquee">
+PARDESI SECURE ZONE // SYSTEM ONLINE // ACCESS CONTROL // SHAKIR HASSAN PARDESI // SECURE CHANNEL //
+</div>
 </div>
 
-<div class="online">
-<span class="online-dot"></span>
-SYSTEM ONLINE
+<div id="particles"></div>
+
+<div class="header">
+<div class="status">● SECURE SYSTEM ONLINE</div>
+<div class="title">PARDESI</div>
+<div class="subtitle">PRIVATE ACCESS SYSTEM</div>
 </div>
 
+<div class="photo"></div>
+
+<div class="login">
+
+<div class="login-title">
+[ ENTER ACCESS KEY ]
 </div>
 
+<label class="label">ACCESS PASSWORD</label>
 
-<div class="content">
+<div class="password-box">
 
+<input
+    id="password"
+    type="password"
+    placeholder="ENTER PASSWORD"
+    autocomplete="off"
+>
 
-<!-- LEFT SIDE -->
-
-<aside class="side">
-
-<div class="mask">
-
-<div class="eye left"></div>
-<div class="eye right"></div>
+<span class="show" id="showBtn">
+SHOW
+</span>
 
 </div>
 
+<button class="login-btn" id="loginBtn">
+⚡ ENTER APPLICATION
+</button>
 
-<div class="title">
-DEVELOPER PROFILE
-</div>
+<div class="message" id="message"></div>
 
-<div class="name">
-SHAKIR HASSAN
 </div>
 
 <div class="info">
-PARDESI SYSTEM DEVELOPER<br>
-SECURE ACCESS ENGINE<br>
-STATUS:
-<span style="color:#00ff9d">
-VERIFIED
-</span>
+
+<div class="credit">CREDIT BY</div>
+
+<div class="name">
+SHAKIR HASSAN PARDESI
 </div>
 
+<div class="phone">
+WHATSAPP // +92 311 8485874
+</div>
 
-<!-- PROFILE BUTTON -->
-
-<button
-class="profile-button"
-onclick="openProfile()">
-
-◉ OPEN DEVELOPER PROFILE
-
-</button>
-
-
-<button
-class="whatsapp"
-onclick="openWhatsApp()">
-
-▣ WHATSAPP
-+92 311 8485874
-
-</button>
-
-
-<div class="clock">
-
-<div class="time" id="clock">
+<div class="time" id="time">
 --:--:--
 </div>
 
 <div class="date" id="date">
-LOADING...
+Loading...
 </div>
 
 </div>
 
-</aside>
-
-
-<!-- CENTER -->
-
-<section class="center">
-
-<div class="card">
-
-
-<!-- LOGIN -->
-
-<div
-class="login"
-id="login">
-
-<div class="photo">
-
-<div class="avatar">
-P
-</div>
-
-</div>
-
-
-<div class="heading">
-
-WELCOME TO
-<span>PARDESI</span>
-
-</div>
-
-
-<div class="sub">
-
-SECURE CONNECTION //
-AUTHENTICATION REQUIRED
-
-</div>
-
-
-<label>
-ACCESS PASSWORD
-</label>
-
-
-<input
-id="password"
-type="password"
-placeholder="ENTER PASSWORD"
-autocomplete="off"
-onkeydown="if(event.key==='Enter')login()">
-
-
-<button
-class="main-btn"
-onclick="login()">
-
-ACCESS MY SYSTEM
-
-</button>
-
-
-<div
-class="message"
-id="message">
-</div>
-
-
-<div
-class="console"
-id="console">
-</div>
-
+<div class="footer">
+PARDESI SECURE SYSTEM // 2026
 </div>
 
 
 <!-- WELCOME -->
 
-<div
-class="welcome"
-id="welcome">
+<div class="welcome" id="welcome">
+
+<div>
 
 <div class="granted">
-
-✓ ACCESS GRANTED //
-SECURE SESSION ACTIVE
-
+✓ ACCESS GRANTED
 </div>
 
+<h1>
+WELCOME SHAKIR HASSAN PARDESI
+</h1>
 
-<div class="big-welcome">
+<p>
+APPLICATION ACTIVATED
+</p>
 
-WELCOME,<br>
-SHAKIR HASSAN
-
-</div>
-
-
-<div class="sub">
-PARDESI SECURE APPLICATION
-</div>
-
-
-<div class="detail-box">
-
-<b style="color:#00eaff">
-DEVELOPER
-</b>
-
-<br>
-
-Shakir Hassan Pardesi
-
-<br><br>
-
-<b style="color:#00eaff">
-CONTACT
-</b>
-
-<br>
-
-+92 311 8485874
-
-<br><br>
-
-<b style="color:#00eaff">
-LOCATION
-</b>
-
-<br>
-
-Pakistan • Lasbela • Winder
-
-</div>
-
-
-<button
-class="main-btn"
-onclick="openWhatsApp()">
-
-WHATSAPP
-
-</button>
-
-
-<button
-class="main-btn"
-style="background:linear-gradient(90deg,#008cff,#00ff9d)"
-onclick="enterApplication()">
-
+<button class="enter" id="enterBtn">
 ENTER APPLICATION
-
 </button>
 
-
-<button
-class="main-btn"
-style="background:#11131c;border:1px solid #333"
-onclick="logout()">
-
-LOG OUT
-
+<button class="logout" id="logoutBtn">
+LOGOUT
 </button>
 
 </div>
-
-
-<div class="footer">
-
-© 2026 PARDESI •
-CREDIT BY SHAKIR HASSAN •
-ALL RIGHTS RESERVED
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- RIGHT -->
-
-<aside class="side">
-
-<div class="title">
-LIVE SYSTEM FEED
-</div>
-
-<div
-class="console"
-id="feed"
-style="height:300px">
-</div>
-
-
-<div class="title">
-SECURITY
-</div>
-
-<div class="info">
-
-LOCAL ACCESS GATE<br>
-CYBER UI ENGINE ACTIVE<br>
-SESSION PROTECTION READY<br>
-SYSTEM STATUS:
-<span style="color:#00ff9d">
-STABLE
-</span>
-
-</div>
-
-</aside>
-
-
-</div>
-</div>
-
-
-<!-- =====================================================
-DEVELOPER PROFILE POPUP
-===================================================== -->
-
-<div
-class="profile-popup"
-id="profilePopup">
-
-
-<div class="profile-modal">
-
-
-<button
-class="close-profile"
-onclick="closeProfile()">
-
-✕ CLOSE
-
-</button>
-
-
-<div class="profile-header">
-
-<div class="profile-tag">
-OFFICIAL DEVELOPER PROFILE
-</div>
-
-<div class="profile-title">
-SHAKIR <span>HASSAN</span>
-</div>
-
-<div class="sub">
-PARDESI SYSTEM DEVELOPER
-</div>
-
-</div>
-
-
-<!-- HACKER VISUAL -->
-
-<div class="profile-visual">
-
-<div class="hacker-face">
-
-<div class="hacker-eye one"></div>
-<div class="hacker-eye two"></div>
-
-<div class="mask-line"></div>
-
-</div>
-
-</div>
-
-
-<!-- DETAILS -->
-
-<div class="profile-info">
-
-
-<div class="info-card">
-
-<small>
-FULL NAME
-</small>
-
-<strong>
-Shakir Hassan
-</strong>
-
-</div>
-
-
-<div class="info-card">
-
-<small>
-PROFESSION
-</small>
-
-<strong>
-Developer
-</strong>
-
-</div>
-
-
-<div class="info-card">
-
-<small>
-CONTACT
-</small>
-
-<strong>
-+92 311 8485874
-</strong>
-
-</div>
-
-
-<div class="info-card">
-
-<small>
-LOCATION
-</small>
-
-<strong>
-Pakistan
-</strong>
-
-</div>
-
-
-<div class="info-card">
-
-<small>
-DISTRICT
-</small>
-
-<strong>
-Lasbela
-</strong>
-
-</div>
-
-
-<div class="info-card">
-
-<small>
-CITY / AREA
-</small>
-
-<strong>
-Winder
-</strong>
-
-</div>
-
-</div>
-
-
-<div class="profile-quote">
-
-<b>
-PARDE<span style="color:#ff1744">
-SI
-</span>
-SYSTEM
-</b>
-
-<br>
-
-Designed & Developed by
-<strong>
-Shakir Hassan
-</strong>
-
-<br>
-
-Secure • Premium • Creative
-
-</div>
-
-
-<div class="profile-actions">
-
-
-<button
-class="profile-action whatsapp"
-onclick="openWhatsApp()">
-
-▣ WhatsApp
-
-</button>
-
-
-<button
-class="profile-action"
-onclick="closeProfile()">
-
-BACK TO SYSTEM
-
-</button>
-
-</div>
-
 
 </div>
 
@@ -1293,290 +581,378 @@ BACK TO SYSTEM
 
 <script>
 
-/* =====================================================
-PASSWORD
-===================================================== */
+/*
+====================================================
+TESTING PASSWORD
+====================================================
 
-const ACCESS_PASSWORD =
-"Pardesi@2026";
+IMPORTANT:
+یہ صرف testing/demo کے لیے ہے۔
 
+حقیقی secure central password کے لیے
+Firebase/backend verification لگانا ہوگا۔
 
-/* =====================================================
-APPLICATION LINK
-===================================================== */
+*/
 
-const APPLICATION_URL =
-"action://close";
+const ACCESS_PASSWORD = "Pardesi@2026";
 
-
-/* =====================================================
-PROFILE
-===================================================== */
-
-function openProfile(){
-
-document
-.getElementById("profilePopup")
-.classList
-.add("show");
-
-}
-
-function closeProfile(){
-
-document
-.getElementById("profilePopup")
-.classList
-.remove("show");
-
-}
-
-
-/* =====================================================
-WHATSAPP
-===================================================== */
-
-function openWhatsApp(){
-
-window.open(
-"https://wa.me/923118485874",
-"_blank"
-);
-
-}
-
-
-/* =====================================================
-LOGIN
-===================================================== */
-
-function login(){
 
 const password =
-document.getElementById(
-"password"
-).value.trim();
+document.getElementById("password");
+
+const loginBtn =
+document.getElementById("loginBtn");
 
 const message =
-document.getElementById(
-"message"
-);
+document.getElementById("message");
+
+const welcome =
+document.getElementById("welcome");
+
+const showBtn =
+document.getElementById("showBtn");
 
 
-if(!password){
+/* MESSAGE */
 
-message.textContent =
-"ENTER YOUR ACCESS PASSWORD";
+function showMessage(text,type){
 
-return;
+    message.textContent=text;
+
+    message.className=
+        "message "+type;
 
 }
 
 
-message.style.color =
-"#00eaff";
+/* PASSWORD SHOW/HIDE */
 
-message.textContent =
-"VERIFYING SECURE ACCESS...";
+showBtn.onclick=function(){
+
+    if(password.type==="password"){
+
+        password.type="text";
+        showBtn.textContent="HIDE";
+
+    }else{
+
+        password.type="password";
+        showBtn.textContent="SHOW";
+
+    }
+
+};
 
 
-setTimeout(function(){
+/* LOGIN */
 
-if(
-password ===
-ACCESS_PASSWORD
+loginBtn.onclick=function(){
+
+    const value=password.value;
+
+    if(!value){
+
+        showMessage(
+            "ACCESS KEY REQUIRED",
+            "error"
+        );
+
+        errorSound();
+
+        return;
+    }
+
+
+    loginBtn.disabled=true;
+
+    loginBtn.textContent=
+        "AUTHENTICATING...";
+
+
+    setTimeout(()=>{
+
+        if(value===ACCESS_PASSWORD){
+
+            showMessage(
+                "ACCESS GRANTED",
+                "success"
+            );
+
+            successSound();
+
+            setTimeout(()=>{
+
+                welcome.classList.add("show");
+
+            },500);
+
+        }else{
+
+            showMessage(
+                "ACCESS DENIED",
+                "error"
+            );
+
+            errorSound();
+
+            password.value="";
+
+        }
+
+        loginBtn.disabled=false;
+
+        loginBtn.textContent=
+            "⚡ ENTER APPLICATION";
+
+    },700);
+
+};
+
+
+/* ENTER APPLICATION */
+
+document.getElementById("enterBtn")
+.onclick=function(){
+
+    /*
+    Android WebView/app میں آپ کا
+    existing action URL یہاں چل سکتا ہے۔
+    */
+
+    window.location.href=
+        "action://close";
+
+};
+
+
+/* LOGOUT */
+
+document.getElementById("logoutBtn")
+.onclick=function(){
+
+    welcome.classList.remove("show");
+
+    password.value="";
+
+    showMessage(
+        "SYSTEM LOGGED OUT",
+        "success"
+    );
+
+};
+
+
+/* ENTER KEY */
+
+password.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key==="Enter"){
+
+            loginBtn.click();
+
+        }
+
+    }
+);
+
+
+/* LIVE PAKISTAN TIME - 12 HOUR */
+
+function updateTime(){
+
+    const now=new Date();
+
+    const time=
+        now.toLocaleTimeString(
+            "en-US",
+            {
+                timeZone:"Asia/Karachi",
+                hour:"numeric",
+                minute:"2-digit",
+                second:"2-digit",
+                hour12:true
+            }
+        );
+
+    const date=
+        now.toLocaleDateString(
+            "en-PK",
+            {
+                timeZone:"Asia/Karachi",
+                weekday:"long",
+                year:"numeric",
+                month:"short",
+                day:"numeric"
+            }
+        );
+
+    document.getElementById("time")
+        .textContent=time;
+
+    document.getElementById("date")
+        .textContent=date;
+
+}
+
+updateTime();
+
+setInterval(updateTime,1000);
+
+
+/* PARTICLES */
+
+const particles=
+document.getElementById("particles");
+
+for(let i=0;i<45;i++){
+
+    const p=
+        document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left=
+        Math.random()*100+"%";
+
+    p.style.top=
+        (20+Math.random()*80)+"%";
+
+    p.style.animationDelay=
+        Math.random()*5+"s";
+
+    p.style.animationDuration=
+        (3+Math.random()*5)+"s";
+
+    if(Math.random()>.65){
+
+        p.style.background=
+            "var(--red)";
+
+        p.style.boxShadow=
+            "0 0 9px var(--red)";
+
+    }
+
+    particles.appendChild(p);
+
+}
+
+
+/* CYBER AUDIO */
+
+let audio;
+
+function getAudio(){
+
+    if(!audio){
+
+        audio=
+        new(
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+
+    }
+
+    return audio;
+
+}
+
+function tone(
+    frequency,
+    duration,
+    type,
+    volume
 ){
 
-message.textContent="";
+    try{
 
-document
-.getElementById("login")
-.classList
-.add("hide");
+        const ctx=getAudio();
 
-document
-.getElementById("welcome")
-.classList
-.add("show");
+        const osc=
+            ctx.createOscillator();
 
-welcomeSound();
+        const gain=
+            ctx.createGain();
 
-}else{
+        osc.type=type;
 
-message.style.color =
-"#ff5576";
+        osc.frequency.value=
+            frequency;
 
-message.textContent =
-"ACCESS DENIED // INVALID PASSWORD";
+        gain.gain.setValueAtTime(
+            volume,
+            ctx.currentTime
+        );
 
-}
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            ctx.currentTime+duration
+        );
 
-},650);
+        osc.connect(gain);
 
-}
+        gain.connect(ctx.destination);
 
+        osc.start();
 
-/* =====================================================
-WELCOME SOUND
-===================================================== */
+        osc.stop(
+            ctx.currentTime+duration
+        );
 
-function welcomeSound(){
-
-try{
-
-const AudioContext =
-window.AudioContext ||
-window.webkitAudioContext;
-
-const audio =
-new AudioContext();
-
-const osc =
-audio.createOscillator();
-
-const gain =
-audio.createGain();
-
-osc.type="sine";
-
-osc.frequency.setValueAtTime(
-440,
-audio.currentTime
-);
-
-osc.frequency.exponentialRampToValueAtTime(
-880,
-audio.currentTime+.35
-);
-
-osc.frequency.exponentialRampToValueAtTime(
-520,
-audio.currentTime+1.3
-);
-
-gain.gain.setValueAtTime(
-.001,
-audio.currentTime
-);
-
-gain.gain.exponentialRampToValueAtTime(
-.20,
-audio.currentTime+.08
-);
-
-gain.gain.exponentialRampToValueAtTime(
-.001,
-audio.currentTime+1.7
-);
-
-osc.connect(gain);
-gain.connect(audio.destination);
-
-osc.start();
-osc.stop(
-audio.currentTime+1.7
-);
-
-}catch(e){}
+    }catch(e){}
 
 }
 
 
-/* =====================================================
-ENTER APPLICATION
-===================================================== */
+/* SUCCESS */
 
-function enterApplication(){
+function successSound(){
 
-window.location.href =
-APPLICATION_URL;
+    tone(440,.12,"sine",.04);
 
-}
+    setTimeout(
+        ()=>tone(660,.12,"sine",.04),
+        130
+    );
 
-
-/* =====================================================
-LOGOUT
-===================================================== */
-
-function logout(){
-
-document
-.getElementById("welcome")
-.classList
-.remove("show");
-
-document
-.getElementById("login")
-.classList
-.remove("hide");
-
-document
-.getElementById("password")
-.value="";
+    setTimeout(
+        ()=>tone(880,.2,"sine",.05),
+        260
+    );
 
 }
 
 
-/* =====================================================
-LIVE CLOCK 12 HOUR
-===================================================== */
+/* ERROR */
 
-function updateClock(){
+function errorSound(){
 
-const now =
-new Date();
+    tone(180,.18,"sawtooth",.035);
 
-document
-.getElementById("clock")
-.textContent =
-now.toLocaleTimeString(
-"en-PK",
-{
-hour:"numeric",
-minute:"2-digit",
-second:"2-digit",
-hour12:true
+    setTimeout(
+        ()=>tone(100,.22,"sawtooth",.035),
+        180
+    );
+
 }
+
+
+/* UNLOCK AUDIO AFTER FIRST USER ACTION */
+
+document.addEventListener(
+    "click",
+    ()=>{
+        try{
+            getAudio().resume();
+        }catch(e){}
+    },
+    {once:true}
 );
 
-document
-.getElementById("date")
-.textContent =
-now.toLocaleDateString(
-"en-PK",
-{
-weekday:"long",
-day:"2-digit",
-month:"long",
-year:"numeric"
-}
-);
+</script>
 
-}
-
-updateClock();
-
-setInterval(
-updateClock,
-1000
-);
-
-
-/* =====================================================
-LIVE FEED
-===================================================== */
-
-const feed =
-document.getElementById(
-"feed"
-);
-
-const logs=[
-
-"SECURE CONNECTION READY",
-"PARDESI ENGINE ONLINE",
-"ACCESS GATE ARMED",
-"SCANNING SESSION",
-"LOCAL PASSWORD CHECK READY",
-"SYSTEM STATUS STABLE",
-"WAITIN
+</body>
+</html>

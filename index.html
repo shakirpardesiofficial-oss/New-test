@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
 <title>Pardesi VIP Secure System</title>
 
@@ -16,30 +15,26 @@ user-scalable=no">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap"
-rel="stylesheet">
+      rel="stylesheet">
 
 <style>
 
-/* =====================================================
-   PARDESI VIP SYSTEM
+/* =========================================================
+   PARDESI VIP SECURE SYSTEM
    SHAKIR HASSAN PARDESI
    2022 - 2026
-===================================================== */
+========================================================= */
 
 :root{
-
     --red:#ff1744;
     --red2:#ff003c;
-
     --green:#00ff9d;
     --cyan:#00e5ff;
-
     --gold:#ffd166;
     --purple:#a855f7;
 
     --bg:#010204;
-    --panel:rgba(5,7,12,.97);
-
+    --panel:#05070c;
     --text:#ffffff;
     --dim:#77818d;
 }
@@ -51,120 +46,95 @@ rel="stylesheet">
 
 html,
 body{
-
     margin:0;
     width:100%;
     height:100%;
-
     overflow:hidden;
-
     background:#010204;
     color:#fff;
-
-    font-family:
-        "Courier New",
-        monospace;
+    font-family:"Courier New",monospace;
 }
 
 body{
-
     display:flex;
-    justify-content:center;
     align-items:center;
-
+    justify-content:center;
     position:relative;
 }
 
-
-/* =====================================================
+/* =========================================================
    BACKGROUND
-===================================================== */
+========================================================= */
 
 body::before{
-
     content:"";
-
     position:fixed;
     inset:0;
 
     background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,23,68,.18),
+            transparent 30%
+        ),
 
-    radial-gradient(
-        circle at 15% 20%,
-        rgba(255,23,68,.20),
-        transparent 30%
-    ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(0,229,255,.13),
+            transparent 30%
+        ),
 
-    radial-gradient(
-        circle at 85% 25%,
-        rgba(0,229,255,.12),
-        transparent 30%
-    ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(168,85,247,.12),
+            transparent 35%
+        ),
 
-    radial-gradient(
-        circle at 50% 90%,
-        rgba(168,85,247,.12),
-        transparent 35%
-    ),
+        linear-gradient(
+            135deg,
+            #010204,
+            #090c12,
+            #010204
+        );
 
-    linear-gradient(
-        135deg,
-        #010204,
-        #090c12,
-        #010204
-    );
-
-    animation:
-        backgroundPulse
-        9s ease-in-out infinite alternate;
+    animation:bgPulse 9s ease-in-out infinite alternate;
 }
 
-@keyframes backgroundPulse{
-
+@keyframes bgPulse{
     from{
         filter:hue-rotate(0deg);
     }
-
     to{
-        filter:hue-rotate(20deg);
+        filter:hue-rotate(18deg);
     }
 }
-
 
 /* GRID */
 
 .grid{
-
     position:fixed;
     inset:0;
 
     background-image:
-
-    linear-gradient(
-        rgba(255,255,255,.025) 1px,
-        transparent 1px
-    ),
-
-    linear-gradient(
-        90deg,
-        rgba(255,255,255,.025) 1px,
-        transparent 1px
-    );
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
 
     background-size:23px 23px;
-
     pointer-events:none;
 }
 
-
-/* SCAN */
+/* SCAN LINE */
 
 .scan{
-
     position:fixed;
-
     left:0;
-
     width:100%;
     height:2px;
 
@@ -176,43 +146,27 @@ body::before{
             transparent
         );
 
-    box-shadow:
-        0 0 18px var(--red);
-
-    animation:
-        scanLine
-        5s linear infinite;
-
-    opacity:.45;
-
+    box-shadow:0 0 18px var(--red);
+    animation:scanLine 5s linear infinite;
+    opacity:.4;
     pointer-events:none;
 }
 
 @keyframes scanLine{
-
-    from{
-        top:-5%;
-    }
-
-    to{
-        top:105%;
-    }
+    from{top:-5%;}
+    to{top:105%;}
 }
 
-
-/* =====================================================
+/* =========================================================
    MAIN CARD
-===================================================== */
+========================================================= */
 
 .card{
-
     width:94%;
     max-width:430px;
-
     height:min(750px,94vh);
 
     position:relative;
-
     overflow:hidden;
 
     background:
@@ -222,20 +176,12 @@ body::before{
             rgba(2,3,7,.98)
         );
 
-    border:
-        1px solid
-        rgba(255,23,68,.65);
+    border:1px solid rgba(255,23,68,.65);
 
     box-shadow:
-
-        0 0 25px
-        rgba(255,23,68,.18),
-
-        0 0 70px
-        rgba(0,229,255,.07),
-
-        inset 0 0 45px
-        rgba(0,0,0,.95);
+        0 0 25px rgba(255,23,68,.18),
+        0 0 70px rgba(0,229,255,.07),
+        inset 0 0 45px rgba(0,0,0,.95);
 
     clip-path:
         polygon(
@@ -252,38 +198,25 @@ body::before{
     z-index:5;
 }
 
-
-/* INNER BORDER */
-
 .card::after{
-
     content:"";
-
     position:absolute;
-
     inset:7px;
 
-    border:
-        1px solid
-        rgba(255,23,68,.20);
-
+    border:1px solid rgba(255,23,68,.20);
     pointer-events:none;
-
     z-index:100;
 }
 
-
-/* CORNERS */
+/* =========================================================
+   CORNERS
+========================================================= */
 
 .corner{
-
     position:absolute;
-
     width:19px;
     height:19px;
-
     border-color:var(--red);
-
     z-index:110;
 }
 
@@ -315,15 +248,12 @@ body::before{
     border-right:2px solid;
 }
 
-
-/* =====================================================
-   TOP BAR
-===================================================== */
+/* =========================================================
+   TOP MARQUEE
+========================================================= */
 
 .topline{
-
     position:absolute;
-
     top:0;
     left:17px;
     right:17px;
@@ -345,24 +275,17 @@ body::before{
 }
 
 .marquee{
-
     white-space:nowrap;
 
     font-size:8px;
-
     line-height:22px;
-
     letter-spacing:2px;
-
     font-weight:900;
 
-    animation:
-        marquee
-        16s linear infinite;
+    animation:marquee 16s linear infinite;
 }
 
 @keyframes marquee{
-
     from{
         transform:translateX(100%);
     }
@@ -372,16 +295,14 @@ body::before{
     }
 }
 
-
-/* =====================================================
+/* =========================================================
    HEADER
-===================================================== */
+========================================================= */
 
 .header{
-
     position:absolute;
 
-    top:38px;
+    top:39px;
     left:0;
 
     width:100%;
@@ -391,79 +312,78 @@ body::before{
     z-index:20;
 }
 
-
-/* WELCOME */
+/* WELCOME TO */
 
 .welcome-small{
-
     font-size:10px;
-
     letter-spacing:4px;
-
-    font-weight:900;
+    font-weight:1000;
 
     color:#fff;
 
     text-shadow:
         0 0 8px #fff;
 
-    margin-bottom:5px;
+    margin-bottom:3px;
 }
-
 
 /* PARDESI */
 
 .title{
-
-    position:relative;
-
     display:inline-block;
 
-    font-size:34px;
-
-    line-height:35px;
+    font-size:36px;
+    line-height:36px;
 
     font-weight:1000;
-
     letter-spacing:6px;
 
     color:var(--red);
 
     text-shadow:
-
         0 0 6px var(--red),
-
         0 0 18px var(--red),
-
         0 0 35px rgba(255,23,68,.7);
 
     animation:
         titleMove
-        2.8s ease-in-out infinite alternate;
+        2.8s ease-in-out infinite alternate,
+        titleGlow
+        1.8s ease-in-out infinite alternate;
 }
 
 @keyframes titleMove{
-
     from{
-        transform:translateX(-4px);
+        transform:translateX(-3px);
     }
 
     to{
-        transform:translateX(4px);
+        transform:translateX(3px);
     }
 }
 
+@keyframes titleGlow{
+    from{
+        text-shadow:
+            0 0 6px var(--red),
+            0 0 15px var(--red);
+    }
 
-/* VIP */
+    to{
+        text-shadow:
+            0 0 10px var(--red),
+            0 0 25px var(--red),
+            0 0 45px rgba(255,23,68,.8);
+    }
+}
+
+/* VIP SYSTEM */
 
 .subtitle{
+    margin-top:5px;
 
-    margin-top:4px;
-
-    font-size:12px;
-
+    font-size:13px;
     font-weight:1000;
-
     letter-spacing:5px;
 
     color:var(--cyan);
@@ -472,92 +392,92 @@ body::before{
         0 0 12px var(--cyan);
 }
 
-
-/* ONLY VIP MEMBER */
+/* =========================================================
+   ONLY VIP MEMBER
+========================================================= */
 
 .vip-member{
-
     position:absolute;
 
-    top:42px;
-    right:14px;
+    top:78px;
+    right:16px;
 
-    padding:6px 8px;
+    padding:5px 8px;
 
-    border:
-        1px solid
-        rgba(255,23,68,.6);
+    border:1px solid rgba(255,209,102,.7);
 
     background:
-        rgba(255,23,68,.08);
+        rgba(255,209,102,.07);
 
     color:var(--gold);
 
     font-size:6px;
-
-    letter-spacing:1.4px;
-
-    font-weight:900;
+    letter-spacing:1.3px;
+    font-weight:1000;
 
     box-shadow:
-        0 0 12px
-        rgba(255,23,68,.12);
+        0 0 12px rgba(255,209,102,.12);
 
-    transform:rotate(90deg);
+    z-index:35;
 
-    transform-origin:right top;
+    white-space:nowrap;
+
+    animation:
+        vipGlow
+        2s ease-in-out infinite alternate;
 }
 
+@keyframes vipGlow{
+    from{
+        opacity:.7;
+        box-shadow:0 0 8px rgba(255,209,102,.1);
+    }
 
-/* =====================================================
+    to{
+        opacity:1;
+        box-shadow:0 0 18px rgba(255,209,102,.3);
+    }
+}
+
+/* =========================================================
    SECURITY STATUS
-   SEPARATE POSITION - NO OVERLAP
-===================================================== */
+========================================================= */
 
 .status{
-
     position:absolute;
 
-    top:105px;
-    right:20px;
-    left:20px;
+    top:103px;
 
-    width:auto;
+    left:20px;
+    right:20px;
 
     text-align:center;
 
     z-index:25;
 
     font-size:7px;
-
     letter-spacing:2px;
-
-    font-weight:900;
+    font-weight:1000;
 
     color:var(--green);
 
     text-shadow:
         0 0 10px var(--green);
 
-    animation:
-        blink
-        1.5s infinite;
+    animation:statusBlink 1.5s infinite;
 }
 
-@keyframes blink{
-
+@keyframes statusBlink{
     50%{
-        opacity:.35;
+        opacity:.4;
     }
 }
 
-
-/* =====================================================
-   HACKER CIRCLE
-===================================================== */
+/* =========================================================
+   HACKER AREA
+========================================================= */
 
 .hacker-area{
-
     position:absolute;
 
     top:125px;
@@ -565,23 +485,17 @@ body::before{
     left:0;
 
     width:100%;
-
     height:145px;
 
     display:flex;
 
     justify-content:center;
-
     align-items:center;
 
     z-index:15;
 }
 
-
-/* ROTATING OUTER */
-
 .hacker-ring{
-
     position:relative;
 
     width:130px;
@@ -589,66 +503,42 @@ body::before{
 
     border-radius:50%;
 
-    border:
-        2px solid
-        var(--red);
+    border:2px solid var(--red);
 
     box-shadow:
-
         0 0 10px var(--red),
+        0 0 25px rgba(255,23,68,.55),
+        inset 0 0 22px rgba(255,23,68,.30);
 
-        0 0 25px
-        rgba(255,23,68,.55),
-
-        inset 0 0 22px
-        rgba(255,23,68,.30);
-
-    animation:
-        ringRotate
-        5s linear infinite;
+    animation:ringRotate 5s linear infinite;
 }
 
 @keyframes ringRotate{
-
     to{
         transform:rotate(360deg);
     }
 }
 
-
-/* ROTATING DASH */
-
 .hacker-ring::before{
-
     content:"";
 
     position:absolute;
-
     inset:-8px;
 
     border-radius:50%;
 
-    border:
-        2px dashed
-        rgba(255,23,68,.75);
+    border:2px dashed rgba(255,23,68,.75);
 
-    animation:
-        ringRotateReverse
-        3s linear infinite;
+    animation:ringRotateReverse 3s linear infinite;
 }
 
 @keyframes ringRotateReverse{
-
     to{
         transform:rotate(-360deg);
     }
 }
 
-
-/* IMAGE */
-
 .hacker-image{
-
     position:absolute;
 
     inset:10px;
@@ -657,9 +547,7 @@ body::before{
 
     overflow:hidden;
 
-    border:
-        2px solid
-        var(--red);
+    border:2px solid var(--red);
 
     background:#050505;
 
@@ -667,13 +555,10 @@ body::before{
         inset 0 0 30px #000,
         0 0 18px rgba(255,23,68,.5);
 
-    animation:
-        hackerPulse
-        2.2s ease-in-out infinite alternate;
+    animation:hackerPulse 2.2s ease-in-out infinite alternate;
 }
 
 @keyframes hackerPulse{
-
     from{
         box-shadow:
             inset 0 0 30px #000,
@@ -688,7 +573,6 @@ body::before{
 }
 
 .hacker-image img{
-
     width:100%;
     height:100%;
 
@@ -700,11 +584,7 @@ body::before{
         saturate(.7);
 }
 
-
-/* IMAGE SCAN */
-
 .hacker-image::after{
-
     content:"";
 
     position:absolute;
@@ -721,29 +601,19 @@ body::before{
     box-shadow:
         0 0 12px var(--red);
 
-    animation:
-        hackerScan
-        2.8s linear infinite;
+    animation:hackerScan 2.8s linear infinite;
 }
 
 @keyframes hackerScan{
-
-    from{
-        top:-3px;
-    }
-
-    to{
-        top:100%;
-    }
+    from{top:-3px;}
+    to{top:100%;}
 }
 
-
-/* =====================================================
+/* =========================================================
    LOGIN AREA
-===================================================== */
+========================================================= */
 
 .login{
-
     position:absolute;
 
     left:25px;
@@ -754,11 +624,10 @@ body::before{
     z-index:30;
 }
 
-
-/* URDU PASSWORD LINE */
+/* IMPORTANT:
+   Urdu instruction directly above password box */
 
 .urdu-instruction{
-
     width:100%;
 
     text-align:center;
@@ -768,28 +637,25 @@ body::before{
         "Jameel Noori Nastaleeq",
         serif;
 
-    font-size:14px;
+    font-size:15px;
 
     line-height:2;
 
-    font-weight:900;
+    font-weight:1000;
 
     color:#fff;
 
     text-shadow:
-        0 0 7px
-        rgba(255,255,255,.25);
+        0 0 7px rgba(255,255,255,.28);
 
-    margin-bottom:8px;
+    margin:0 0 5px;
 
     direction:rtl;
 }
 
-
-/* SMALL ENGLISH LABEL */
+/* ENGLISH LABEL */
 
 .label{
-
     display:block;
 
     text-align:center;
@@ -797,31 +663,24 @@ body::before{
     color:var(--cyan);
 
     font-size:7px;
-
     letter-spacing:2px;
-
-    font-weight:900;
+    font-weight:1000;
 
     margin-bottom:6px;
 }
 
-
 /* PASSWORD */
 
 .password-box{
-
     position:relative;
 }
 
 input{
-
     width:100%;
 
     height:49px;
 
-    border:
-        1px solid
-        rgba(255,23,68,.65);
+    border:1px solid rgba(255,23,68,.65);
 
     outline:none;
 
@@ -848,40 +707,30 @@ input{
     text-align:center;
 
     box-shadow:
-        inset 0 0 15px
-        rgba(0,0,0,.7);
+        inset 0 0 15px rgba(0,0,0,.7);
+
+    border-radius:4px;
 }
 
 input::placeholder{
-
     color:#66707c;
 
     font-size:8px;
-
     letter-spacing:2px;
 }
 
 input:focus{
-
     border-color:var(--red);
 
     box-shadow:
-        0 0 20px
-        rgba(255,23,68,.25),
-
-        inset 0 0 15px
-        rgba(255,23,68,.08);
+        0 0 20px rgba(255,23,68,.25),
+        inset 0 0 15px rgba(255,23,68,.08);
 }
 
-
-/* SHOW */
-
 .show{
-
     position:absolute;
 
     right:13px;
-
     top:17px;
 
     color:var(--gold);
@@ -895,11 +744,9 @@ input:focus{
     z-index:5;
 }
 
-
 /* LOGIN BUTTON */
 
 .login-btn{
-
     position:relative;
 
     overflow:hidden;
@@ -910,9 +757,9 @@ input:focus{
 
     margin-top:12px;
 
-    border:
-        1px solid
-        var(--red);
+    border:1px solid var(--red);
+
+    border-radius:4px;
 
     background:
         linear-gradient(
@@ -935,12 +782,10 @@ input:focus{
     cursor:pointer;
 
     box-shadow:
-        0 0 18px
-        rgba(255,23,68,.15);
+        0 0 18px rgba(255,23,68,.15);
 }
 
 .login-btn::before{
-
     content:"";
 
     position:absolute;
@@ -959,20 +804,16 @@ input:focus{
             transparent
         );
 
-    animation:
-        buttonScan
-        2.5s linear infinite;
+    animation:buttonScan 2.5s linear infinite;
 }
 
 @keyframes buttonScan{
-
     to{
         left:100%;
     }
 }
 
 .login-btn:active{
-
     transform:scale(.96);
 
     background:var(--red);
@@ -982,17 +823,12 @@ input:focus{
 }
 
 .login-btn:disabled{
-
     opacity:.65;
 }
 
-
-/* =====================================================
-   MESSAGE
-===================================================== */
+/* MESSAGE */
 
 .message{
-
     min-height:20px;
 
     text-align:center;
@@ -1007,7 +843,6 @@ input:focus{
 }
 
 .error{
-
     color:var(--red);
 
     text-shadow:
@@ -1015,20 +850,17 @@ input:focus{
 }
 
 .success{
-
     color:var(--green);
 
     text-shadow:
         0 0 10px var(--green);
 }
 
-
-/* =====================================================
-   BOTTOM CREDIT
-===================================================== */
+/* =========================================================
+   BOTTOM INFO
+========================================================= */
 
 .info{
-
     position:absolute;
 
     bottom:54px;
@@ -1041,18 +873,16 @@ input:focus{
 }
 
 .credit{
-
     color:var(--purple);
 
     font-size:7px;
 
-    font-weight:900;
+    font-weight:1000;
 
     letter-spacing:2px;
 }
 
 .name{
-
     margin-top:4px;
 
     font-size:10px;
@@ -1065,7 +895,6 @@ input:focus{
 }
 
 .phone{
-
     margin-top:5px;
 
     color:var(--cyan);
@@ -1076,7 +905,6 @@ input:focus{
 }
 
 .time{
-
     margin-top:6px;
 
     color:var(--gold);
@@ -1090,7 +918,6 @@ input:focus{
 }
 
 .date{
-
     margin-top:2px;
 
     color:var(--dim);
@@ -1098,11 +925,42 @@ input:focus{
     font-size:7px;
 }
 
+/* =========================================================
+   DEVELOPER BUTTON
+========================================================= */
+
+.developer-btn{
+    position:absolute;
+
+    right:14px;
+    bottom:60px;
+
+    z-index:40;
+
+    padding:7px 9px;
+
+    background:
+        rgba(255,23,68,.07);
+
+    border:
+        1px solid rgba(255,23,68,.6);
+
+    color:var(--red);
+
+    font-family:inherit;
+
+    font-size:6px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+}
 
 /* FOOTER */
 
 .footer{
-
     position:absolute;
 
     bottom:12px;
@@ -1120,15 +978,15 @@ input:focus{
     font-weight:bold;
 
     letter-spacing:1.5px;
+
+    white-space:nowrap;
 }
 
-
-/* =====================================================
-   POPUP SYSTEM
-===================================================== */
+/* =========================================================
+   POPUP
+========================================================= */
 
 .popup-overlay{
-
     display:none;
 
     position:absolute;
@@ -1138,41 +996,27 @@ input:focus{
     z-index:200;
 
     align-items:center;
-
     justify-content:center;
 
     padding:20px;
 
-    background:
-        rgba(0,0,0,.84);
+    background:rgba(0,0,0,.84);
 
-    backdrop-filter:
-        blur(5px);
+    backdrop-filter:blur(5px);
 }
 
 .popup-overlay.show{
-
     display:flex;
 
-    animation:
-        popupFade
-        .25s ease;
+    animation:popupFade .25s ease;
 }
 
 @keyframes popupFade{
-
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
+    from{opacity:0;}
+    to{opacity:1;}
 }
 
-
 .popup{
-
     width:100%;
     max-width:340px;
 
@@ -1187,17 +1031,11 @@ input:focus{
             rgba(3,4,8,.98)
         );
 
-    border:
-        1px solid
-        var(--red);
+    border:1px solid var(--red);
 
     box-shadow:
-
-        0 0 30px
-        rgba(255,23,68,.45),
-
-        inset 0 0 30px
-        rgba(255,23,68,.08);
+        0 0 30px rgba(255,23,68,.45),
+        inset 0 0 30px rgba(255,23,68,.08);
 
     animation:
         popupZoom
@@ -1205,23 +1043,18 @@ input:focus{
 }
 
 @keyframes popupZoom{
-
     from{
-        transform:scale(.55)
-                   rotate(-2deg);
+        transform:scale(.55) rotate(-2deg);
         opacity:0;
     }
 
     to{
-        transform:scale(1)
-                   rotate(0);
+        transform:scale(1) rotate(0);
         opacity:1;
     }
 }
 
-
 .popup-icon{
-
     width:70px;
     height:70px;
 
@@ -1240,13 +1073,10 @@ input:focus{
 
     color:var(--red);
 
-    border:
-        2px solid
-        var(--red);
+    border:2px solid var(--red);
 
     box-shadow:
-        0 0 25px
-        rgba(255,23,68,.55);
+        0 0 25px rgba(255,23,68,.55);
 
     animation:
         iconPulse
@@ -1254,18 +1084,15 @@ input:focus{
 }
 
 @keyframes iconPulse{
-
     to{
         transform:scale(1.08);
 
         box-shadow:
-            0 0 40px
-            rgba(255,23,68,.8);
+            0 0 40px rgba(255,23,68,.8);
     }
 }
 
 .popup.checking .popup-icon{
-
     color:var(--gold);
 
     border-color:var(--gold);
@@ -1276,34 +1103,28 @@ input:focus{
 }
 
 @keyframes checkingSpin{
-
     to{
         transform:rotate(360deg);
     }
 }
 
 .popup.success-popup{
-
     border-color:var(--green);
 
     box-shadow:
-        0 0 35px
-        rgba(0,255,157,.45);
+        0 0 35px rgba(0,255,157,.45);
 }
 
 .popup.success-popup .popup-icon{
-
     color:var(--green);
 
     border-color:var(--green);
 
     box-shadow:
-        0 0 25px
-        rgba(0,255,157,.55);
+        0 0 25px rgba(0,255,157,.55);
 }
 
 .popup h2{
-
     margin:16px 0 8px;
 
     font-size:20px;
@@ -1314,7 +1135,6 @@ input:focus{
 }
 
 .popup p{
-
     margin:0;
 
     color:#d8d8d8;
@@ -1331,7 +1151,6 @@ input:focus{
 }
 
 .popup-button{
-
     margin-top:17px;
 
     width:100%;
@@ -1340,9 +1159,7 @@ input:focus{
 
     background:rgba(255,23,68,.08);
 
-    border:
-        1px solid
-        var(--red);
+    border:1px solid var(--red);
 
     color:#fff;
 
@@ -1353,13 +1170,11 @@ input:focus{
     letter-spacing:2px;
 }
 
-
-/* =====================================================
+/* =========================================================
    WELCOME SCREEN
-===================================================== */
+========================================================= */
 
 .welcome{
-
     display:none;
 
     position:absolute;
@@ -1369,17 +1184,14 @@ input:focus{
     z-index:150;
 
     background:
-
         radial-gradient(
             circle at center,
             rgba(0,255,157,.12),
             transparent 38%
         ),
-
         rgba(1,3,6,.98);
 
     align-items:center;
-
     justify-content:center;
 
     text-align:center;
@@ -1388,7 +1200,6 @@ input:focus{
 }
 
 .welcome.show{
-
     display:flex;
 
     animation:
@@ -1397,7 +1208,6 @@ input:focus{
 }
 
 @keyframes welcomeIn{
-
     from{
         opacity:0;
         transform:scale(.8);
@@ -1410,7 +1220,6 @@ input:focus{
 }
 
 .granted{
-
     color:var(--green);
 
     font-size:11px;
@@ -1424,7 +1233,6 @@ input:focus{
 }
 
 .welcome h1{
-
     font-size:23px;
 
     font-weight:1000;
@@ -1440,7 +1248,6 @@ input:focus{
 }
 
 .welcome p{
-
     color:var(--gold);
 
     font-family:
@@ -1454,22 +1261,74 @@ input:focus{
     direction:rtl;
 }
 
-.welcome-detail{
+/* UPDATED THANK YOU TEXT */
 
-    margin-top:8px;
+.welcome-detail{
+    margin-top:12px;
 
     color:#c4cbd2;
 
-    font-size:8px;
+    font-size:9px;
 
-    line-height:1.9;
+    line-height:2;
 
-    letter-spacing:1px;
+    letter-spacing:.5px;
+}
+
+.thanks{
+    margin-top:10px;
+
+    font-family:
+        "Noto Nastaliq Urdu",
+        "Jameel Noori Nastaleeq",
+        serif;
+
+    font-size:17px;
+
+    line-height:2.2;
+
+    font-weight:1000;
+
+    direction:rtl;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.25);
+}
+
+.heart{
+    display:inline-block;
+
+    color:var(--red);
+
+    font-family:Arial,sans-serif;
+
+    font-size:23px;
+
+    margin:0 4px;
+
+    animation:
+        heartBeat
+        1.1s ease-in-out infinite;
+}
+
+@keyframes heartBeat{
+    0%,100%{
+        transform:scale(1);
+        text-shadow:0 0 8px var(--red);
+    }
+
+    50%{
+        transform:scale(1.25);
+        text-shadow:
+            0 0 20px var(--red),
+            0 0 35px var(--red);
+    }
 }
 
 .enter,
 .logout{
-
     padding:13px 18px;
 
     margin-top:18px;
@@ -1482,9 +1341,7 @@ input:focus{
 
     background:rgba(0,229,255,.08);
 
-    border:
-        1px solid
-        var(--cyan);
+    border:1px solid var(--cyan);
 
     color:var(--cyan);
 
@@ -1492,7 +1349,6 @@ input:focus{
 }
 
 .logout{
-
     border-color:var(--red);
 
     color:var(--red);
@@ -1500,48 +1356,11 @@ input:focus{
     margin-left:5px;
 }
 
-
-/* =====================================================
+/* =========================================================
    DEVELOPER PROFILE
-===================================================== */
-
-.developer-btn{
-
-    position:absolute;
-
-    right:14px;
-
-    bottom:60px;
-
-    z-index:40;
-
-    padding:7px 9px;
-
-    background:
-        rgba(255,23,68,.07);
-
-    border:
-        1px solid
-        rgba(255,23,68,.6);
-
-    color:var(--red);
-
-    font-family:inherit;
-
-    font-size:6px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-    cursor:pointer;
-}
-
-
-/* PROFILE MODAL */
+========================================================= */
 
 .profile-overlay{
-
     display:none;
 
     position:absolute;
@@ -1551,20 +1370,16 @@ input:focus{
     z-index:300;
 
     align-items:center;
-
     justify-content:center;
 
     padding:20px;
 
-    background:
-        rgba(0,0,0,.88);
+    background:rgba(0,0,0,.88);
 
-    backdrop-filter:
-        blur(6px);
+    backdrop-filter:blur(6px);
 }
 
 .profile-overlay.show{
-
     display:flex;
 
     animation:
@@ -1573,7 +1388,6 @@ input:focus{
 }
 
 .profile{
-
     width:100%;
     max-width:350px;
 
@@ -1592,20 +1406,13 @@ input:focus{
             #030408
         );
 
-    border:
-        1px solid
-        var(--red);
+    border:1px solid var(--red);
 
     box-shadow:
-        0 0 35px
-        rgba(255,23,68,.35);
+        0 0 35px rgba(255,23,68,.35);
 }
 
-
-/* PROFILE IMAGE */
-
 .profile-image{
-
     width:105px;
     height:105px;
 
@@ -1615,17 +1422,13 @@ input:focus{
 
     padding:4px;
 
-    border:
-        2px solid
-        var(--red);
+    border:2px solid var(--red);
 
     box-shadow:
-        0 0 25px
-        rgba(255,23,68,.55);
+        0 0 25px rgba(255,23,68,.55);
 }
 
 .profile-image img{
-
     width:100%;
     height:100%;
 
@@ -1639,7 +1442,6 @@ input:focus{
 }
 
 .profile h2{
-
     margin:14px 0 3px;
 
     font-size:18px;
@@ -1652,7 +1454,6 @@ input:focus{
 }
 
 .profile-role{
-
     color:var(--red);
 
     font-size:8px;
@@ -1663,7 +1464,6 @@ input:focus{
 }
 
 .profile-line{
-
     margin-top:13px;
 
     color:#c5cbd0;
@@ -1673,11 +1473,7 @@ input:focus{
     line-height:1.8;
 }
 
-
-/* SIGNATURE */
-
 .signature{
-
     margin-top:12px;
 
     font-family:
@@ -1691,12 +1487,10 @@ input:focus{
     transform:rotate(-4deg);
 
     text-shadow:
-        0 0 8px
-        rgba(255,255,255,.4);
+        0 0 8px rgba(255,255,255,.4);
 }
 
 .credit-profile{
-
     margin-top:4px;
 
     color:var(--gold);
@@ -1706,11 +1500,7 @@ input:focus{
     letter-spacing:2px;
 }
 
-
-/* WHATSAPP */
-
 .whatsapp{
-
     display:block;
 
     margin-top:16px;
@@ -1719,12 +1509,9 @@ input:focus{
 
     text-decoration:none;
 
-    background:
-        rgba(0,255,157,.07);
+    background:rgba(0,255,157,.07);
 
-    border:
-        1px solid
-        var(--green);
+    border:1px solid var(--green);
 
     color:var(--green);
 
@@ -1736,19 +1523,15 @@ input:focus{
 }
 
 .back-system{
-
     margin-top:9px;
 
     width:100%;
 
     padding:11px;
 
-    background:
-        rgba(255,23,68,.06);
+    background:rgba(255,23,68,.06);
 
-    border:
-        1px solid
-        var(--red);
+    border:1px solid var(--red);
 
     color:var(--red);
 
@@ -1759,13 +1542,11 @@ input:focus{
     letter-spacing:2px;
 }
 
-
-/* =====================================================
+/* =========================================================
    PARTICLES
-===================================================== */
+========================================================= */
 
 .particle{
-
     position:absolute;
 
     width:2px;
@@ -1776,8 +1557,7 @@ input:focus{
     background:var(--red);
 
     box-shadow:
-        0 0 9px
-        var(--red);
+        0 0 9px var(--red);
 
     animation:
         float
@@ -1785,11 +1565,8 @@ input:focus{
 }
 
 @keyframes float{
-
     from{
-        transform:
-            translateY(150px);
-
+        transform:translateY(150px);
         opacity:0;
     }
 
@@ -1798,86 +1575,179 @@ input:focus{
     }
 
     to{
-        transform:
-            translateY(-650px);
-
+        transform:translateY(-650px);
         opacity:0;
     }
 }
 
+/* =========================================================
+   MOBILE OPTIMIZATION
+========================================================= */
 
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-height:650px){
+@media(max-width:430px){
 
     .card{
+        width:96%;
         height:96vh;
     }
 
+    .header{
+        top:38px;
+    }
+
+    .title{
+        font-size:32px;
+        letter-spacing:5px;
+    }
+
+    .subtitle{
+        font-size:12px;
+        letter-spacing:4px;
+    }
+
+    .vip-member{
+        top:79px;
+        right:11px;
+        font-size:5.5px;
+        padding:5px 6px;
+    }
+
+    .status{
+        top:105px;
+        font-size:6.5px;
+    }
+
     .hacker-area{
-        top:118px;
-        transform:scale(.86);
+        top:124px;
     }
 
     .login{
-        top:255px;
+        left:20px;
+        right:20px;
+        top:276px;
+    }
+
+    .urdu-instruction{
+        font-size:14px;
     }
 
     .info{
-        bottom:40px;
+        bottom:55px;
     }
 
     .developer-btn{
-        bottom:46px;
+        right:10px;
+        bottom:61px;
+    }
+
+    .footer{
+        font-size:5.5px;
+        letter-spacing:1px;
+    }
+}
+
+/* SHORT SCREEN */
+
+@media(max-height:680px){
+
+    .card{
+        height:97vh;
+    }
+
+    .hacker-area{
+        top:113px;
+        transform:scale(.78);
+    }
+
+    .login{
+        top:247px;
+    }
+
+    .urdu-instruction{
+        font-size:12px;
+    }
+
+    .info{
+        bottom:39px;
+        transform:scale(.9);
+    }
+
+    .developer-btn{
+        bottom:43px;
+    }
+
+    .footer{
+        bottom:8px;
+    }
+}
+
+/* VERY SHORT PHONE */
+
+@media(max-height:600px){
+
+    .hacker-area{
+        top:105px;
+        transform:scale(.65);
+    }
+
+    .login{
+        top:218px;
+    }
+
+    .urdu-instruction{
+        font-size:11px;
+    }
+
+    input,
+    .login-btn{
+        height:43px;
+    }
+
+    .show{
+        top:14px;
+    }
+
+    .info{
+        display:none;
+    }
+
+    .developer-btn{
+        bottom:24px;
+    }
+
+    .footer{
+        bottom:7px;
     }
 }
 
 </style>
 </head>
 
-
 <body>
 
-
 <div class="grid"></div>
-
 <div class="scan"></div>
 
-
 <div class="card">
-
-
-    <!-- CORNERS -->
 
     <div class="corner c1"></div>
     <div class="corner c2"></div>
     <div class="corner c3"></div>
     <div class="corner c4"></div>
 
-
     <!-- TOP BAR -->
 
     <div class="topline">
-
         <div class="marquee">
-
             PARDESI VIP SYSTEM //
             SECURE ACCESS //
             SHAKIR HASSAN PARDESI //
             PRIVATE SYSTEM //
             ONLY VIP MEMBER //
-
         </div>
-
     </div>
 
-
-    <!-- PARTICLES -->
-
     <div id="particles"></div>
-
 
     <!-- HEADER -->
 
@@ -1897,22 +1767,19 @@ input:focus{
 
     </div>
 
-
-    <!-- ONLY VIP MEMBER -->
+    <!-- VIP MEMBER -->
 
     <div class="vip-member">
         ONLY VIP MEMBER
     </div>
 
-
-    <!-- SECURITY STATUS -->
+    <!-- SECURITY -->
 
     <div class="status">
         ● SECURITY SYSTEM ACTIVE
     </div>
 
-
-    <!-- HACKER IMAGE -->
+    <!-- IMAGE -->
 
     <div class="hacker-area">
 
@@ -1921,8 +1788,8 @@ input:focus{
             <div class="hacker-image">
 
                 <img
-                src="https://images.unsplash.com/photo-1666615435088-4865bf5ed3fd?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Pardesi Hacker">
+                    src="https://images.unsplash.com/photo-1666615435088-4865bf5ed3fd?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Pardesi VIP">
 
             </div>
 
@@ -1930,27 +1797,17 @@ input:focus{
 
     </div>
 
-
     <!-- LOGIN -->
 
     <div class="login">
 
-
-        <!-- URDU INSTRUCTION -->
-
         <div class="urdu-instruction">
-
             براہِ کرم سسٹم میں داخل ہونے کے لیے پاسورڈ درج کریں
-
         </div>
 
-
         <label class="label">
-
             SECURE ACCESS PASSWORD
-
         </label>
-
 
         <div class="password-box">
 
@@ -1958,39 +1815,30 @@ input:focus{
                 id="password"
                 type="password"
                 placeholder="ENTER PASSWORD"
-                autocomplete="off"
-            >
+                autocomplete="off">
 
             <span
                 class="show"
                 id="showBtn">
-
                 SHOW
-
             </span>
 
         </div>
 
-
         <button
             class="login-btn"
             id="loginBtn">
-
             ⚡ ENTER APPLICATION
-
         </button>
-
 
         <div
             class="message"
             id="message">
         </div>
 
-
     </div>
 
-
-    <!-- BOTTOM INFORMATION -->
+    <!-- INFORMATION -->
 
     <div class="info">
 
@@ -2009,23 +1857,18 @@ input:focus{
         <div
             class="time"
             id="time">
-
             --:--:--
-
         </div>
 
         <div
             class="date"
             id="date">
-
             Loading...
-
         </div>
 
     </div>
 
-
-    <!-- DEVELOPER BUTTON -->
+    <!-- DEVELOPER -->
 
     <button
         class="developer-btn"
@@ -2035,20 +1878,17 @@ input:focus{
 
     </button>
 
-
     <!-- FOOTER -->
 
     <div class="footer">
-
         © 2022 - 2026
         ALL RIGHTS RESERVED
+        •
         CREDIT BY SHAKIR HASSAN
-
     </div>
 
-
     <!-- =================================================
-         CHECKING / RESULT POPUP
+         POPUP
     ================================================== -->
 
     <div
@@ -2059,44 +1899,30 @@ input:focus{
             class="popup"
             id="popup">
 
-
             <div
                 class="popup-icon"
                 id="popupIcon">
-
                 !
-
             </div>
 
-
             <h2 id="popupTitle">
-
                 CHECKING
-
             </h2>
 
-
             <p id="popupText">
-
                 سسٹم پاسورڈ کی تصدیق کر رہا ہے
-
             </p>
-
 
             <button
                 class="popup-button"
                 id="popupButton"
                 style="display:none;">
-
                 TRY AGAIN
-
             </button>
-
 
         </div>
 
     </div>
-
 
     <!-- =================================================
          WELCOME SCREEN
@@ -2106,45 +1932,42 @@ input:focus{
         class="welcome"
         id="welcome">
 
-
         <div>
 
-
             <div class="granted">
-
                 ✓ ACCESS GRANTED
-
             </div>
 
-
             <h1>
-
                 WELCOME TO PARDESI VIP SYSTEM
-
             </h1>
 
-
             <p>
-
                 آپ کامیابی سے پردیسی VIP سسٹم میں داخل ہو چکے ہیں
-
             </p>
-
 
             <div class="welcome-detail">
 
                 This is the private VIP online system
-                of Shakir Hassan Pardesi.<br>
+                of Shakir Hassan Pardesi.
+
+                <br>
 
                 Premium access has been successfully activated.
 
-                <br><br>
-
-                آپ کے اعتماد اور بھروسے کا دل سے شکریہ۔
-                آپ کا اعتماد ہمارے لیے بہت قیمتی ہے۔
-
             </div>
 
+            <div class="thanks">
+
+                آپ کے اعتماد اور بھروسے کا دل سے شکریہ
+
+                <span class="heart">♥</span>
+
+                <br>
+
+                آپ کا اعتماد میرے لیے بہت قیمتی ہے۔
+
+            </div>
 
             <button
                 class="enter"
@@ -2154,7 +1977,6 @@ input:focus{
 
             </button>
 
-
             <button
                 class="logout"
                 id="logoutBtn">
@@ -2163,11 +1985,9 @@ input:focus{
 
             </button>
 
-
         </div>
 
     </div>
-
 
     <!-- =================================================
          DEVELOPER PROFILE
@@ -2177,32 +1997,23 @@ input:focus{
         class="profile-overlay"
         id="profileOverlay">
 
-
         <div class="profile">
-
 
             <div class="profile-image">
 
                 <img
-                src="https://drive.google.com/file/d/1L6DSc7NmAaPggeefXtTtzbMUnUd3lbhY/view?usp=drivesdk"
-                alt="Shakir Hassan Pardesi">
+                    src="https://drive.google.com/file/d/1L6DSc7NmAaPggeefXtTtzbMUnUd3lbhY/view?usp=drivesdk"
+                    alt="Shakir Hassan Pardesi">
 
             </div>
-
 
             <h2>
-
                 SHAKIR HASSAN
-
             </h2>
 
-
             <div class="profile-role">
-
-               MADE &  DEVELOPER BY • PARDESI 
-
+                MADE & DEVELOPER BY • PARDESI
             </div>
-
 
             <div class="profile-line">
 
@@ -2218,20 +2029,13 @@ input:focus{
 
             </div>
 
-
             <div class="signature">
-
                 Shakir Hassan
-
             </div>
-
 
             <div class="credit-profile">
-
                 CREDIT BY SHAKIR HASSAN
-
             </div>
-
 
             <a
                 class="whatsapp"
@@ -2242,7 +2046,6 @@ input:focus{
 
             </a>
 
-
             <button
                 class="back-system"
                 id="backSystem">
@@ -2251,25 +2054,19 @@ input:focus{
 
             </button>
 
-
         </div>
 
     </div>
 
-
 </div>
-
 
 <script>
 
-
-/* =====================================================
+/* =========================================================
    PASSWORD
-===================================================== */
+========================================================= */
 
-const ACCESS_PASSWORD =
-    "Pardesi@2026";
-
+const ACCESS_PASSWORD = "Pardesi@2026";
 
 const password =
     document.getElementById("password");
@@ -2283,10 +2080,9 @@ const message =
 const showBtn =
     document.getElementById("showBtn");
 
-
-/* =====================================================
-   POPUP ELEMENTS
-===================================================== */
+/* =========================================================
+   POPUP
+========================================================= */
 
 const popupOverlay =
     document.getElementById("popupOverlay");
@@ -2306,10 +2102,9 @@ const popupText =
 const popupButton =
     document.getElementById("popupButton");
 
-
-/* =====================================================
-   SHOW MESSAGE
-===================================================== */
+/* =========================================================
+   MESSAGE
+========================================================= */
 
 function showMessage(text,type){
 
@@ -2320,10 +2115,9 @@ function showMessage(text,type){
 
 }
 
-
-/* =====================================================
-   SHOW / HIDE PASSWORD
-===================================================== */
+/* =========================================================
+   PASSWORD SHOW/HIDE
+========================================================= */
 
 showBtn.onclick = function(){
 
@@ -2343,10 +2137,9 @@ showBtn.onclick = function(){
 
 };
 
-
-/* =====================================================
-   OPEN CHECKING POPUP
-===================================================== */
+/* =========================================================
+   CHECKING POPUP
+========================================================= */
 
 function openChecking(){
 
@@ -2360,7 +2153,7 @@ function openChecking(){
         "VERIFYING ACCESS";
 
     popupText.textContent =
-        "سسٹم پاسورڈ تصدیق کر رہا ہے، انتظار کریں";
+        "سسٹم پاسورڈ کی تصدیق کر رہا ہے، براہِ کرم انتظار کریں";
 
     popupButton.style.display =
         "none";
@@ -2369,10 +2162,9 @@ function openChecking(){
 
 }
 
-
-/* =====================================================
+/* =========================================================
    WRONG PASSWORD
-===================================================== */
+========================================================= */
 
 function wrongPassword(){
 
@@ -2384,7 +2176,7 @@ function wrongPassword(){
         "ACCESS DENIED";
 
     popupText.textContent =
-        "  غلط پاسورڈ، براہِ کرم درست پاسورڈ دوبارہ درج کریں۔";
+        "غلط پاسورڈ، براہِ کرم درست پاسورڈ دوبارہ درج کریں۔";
 
     popupButton.style.display =
         "block";
@@ -2405,10 +2197,9 @@ function wrongPassword(){
 
 }
 
-
-/* =====================================================
+/* =========================================================
    EMPTY PASSWORD
-===================================================== */
+========================================================= */
 
 function emptyPassword(){
 
@@ -2441,10 +2232,9 @@ function emptyPassword(){
 
 }
 
-
-/* =====================================================
-   SUCCESS POPUP
-===================================================== */
+/* =========================================================
+   CORRECT PASSWORD
+========================================================= */
 
 function correctPassword(){
 
@@ -2465,31 +2255,26 @@ function correctPassword(){
 
     successSound();
 
-
     setTimeout(function(){
 
         popupOverlay.classList.remove("show");
 
         document
-        .getElementById("welcome")
-        .classList.add("show");
+            .getElementById("welcome")
+            .classList.add("show");
 
     },900);
 
 }
 
-
-/* =====================================================
+/* =========================================================
    LOGIN
-===================================================== */
+========================================================= */
 
 loginBtn.onclick = function(){
 
     const value =
         password.value.trim();
-
-
-    /* EMPTY */
 
     if(!value){
 
@@ -2499,21 +2284,12 @@ loginBtn.onclick = function(){
 
     }
 
-
-    /* BUTTON */
-
     loginBtn.disabled = true;
 
     loginBtn.textContent =
         "VERIFYING ACCESS...";
 
-
-    /* CHECKING */
-
     openChecking();
-
-
-    /* SIMULATED SECURITY CHECK */
 
     setTimeout(function(){
 
@@ -2527,21 +2303,18 @@ loginBtn.onclick = function(){
 
         }
 
-
         loginBtn.disabled = false;
 
         loginBtn.textContent =
             "⚡ ENTER APPLICATION";
 
-
     },1500);
 
 };
 
-
-/* =====================================================
-   ENTER KEY
-===================================================== */
+/* =========================================================
+   ENTER
+========================================================= */
 
 password.addEventListener(
     "keydown",
@@ -2556,152 +2329,117 @@ password.addEventListener(
     }
 );
 
-
-/* =====================================================
-   ENTER APPLICATION
-===================================================== */
+/* =========================================================
+   APPLICATION
+========================================================= */
 
 document
-.getElementById("enterBtn")
-.onclick = function(){
+    .getElementById("enterBtn")
+    .onclick = function(){
 
-    /*
-       اپنی اصل Application URL
-       یہاں لگا سکتے ہیں۔
-    */
+        window.location.href =
+            "action://close";
 
-    window.location.href =
-        "action://close";
+    };
 
-};
-
-
-/* =====================================================
+/* =========================================================
    LOGOUT
-===================================================== */
+========================================================= */
 
 document
-.getElementById("logoutBtn")
-.onclick = function(){
+    .getElementById("logoutBtn")
+    .onclick = function(){
 
-    document
-    .getElementById("welcome")
-    .classList.remove("show");
+        document
+            .getElementById("welcome")
+            .classList.remove("show");
 
-    password.value = "";
+        password.value = "";
 
-    showMessage(
-        "SYSTEM LOGGED OUT",
-        "success"
-    );
+        showMessage(
+            "SYSTEM LOGGED OUT",
+            "success"
+        );
 
-};
+    };
 
-
-/* =====================================================
+/* =========================================================
    DEVELOPER PROFILE
-===================================================== */
+========================================================= */
 
 const developerBtn =
-    document.getElementById(
-        "developerBtn"
-    );
+    document.getElementById("developerBtn");
 
 const profileOverlay =
-    document.getElementById(
-        "profileOverlay"
-    );
-
+    document.getElementById("profileOverlay");
 
 developerBtn.onclick =
 function(){
 
-    profileOverlay.classList.add(
-        "show"
-    );
+    profileOverlay.classList.add("show");
 
 };
 
-
-/* =====================================================
-   BACK TO SYSTEM
-===================================================== */
+/* =========================================================
+   BACK
+========================================================= */
 
 document
-.getElementById("backSystem")
-.onclick = function(){
+    .getElementById("backSystem")
+    .onclick = function(){
 
-    profileOverlay.classList.remove(
-        "show"
-    );
+        profileOverlay.classList.remove("show");
 
-    password.value = "";
+        password.value = "";
 
-    showMessage(
-        "SECURE SYSTEM READY",
-        "success"
-    );
+        showMessage(
+            "SECURE SYSTEM READY",
+            "success"
+        );
 
-};
+    };
 
-
-/* =====================================================
+/* =========================================================
    PAKISTAN TIME
-===================================================== */
+========================================================= */
 
 function updateTime(){
 
-    const now =
-        new Date();
-
+    const now = new Date();
 
     const time =
         now.toLocaleTimeString(
             "en-US",
             {
-                timeZone:
-                    "Asia/Karachi",
-
+                timeZone:"Asia/Karachi",
                 hour:"numeric",
-
                 minute:"2-digit",
-
                 second:"2-digit",
-
                 hour12:true
             }
         );
-
 
     const date =
         now.toLocaleDateString(
             "en-PK",
             {
-                timeZone:
-                    "Asia/Karachi",
-
+                timeZone:"Asia/Karachi",
                 weekday:"long",
-
                 year:"numeric",
-
                 month:"short",
-
                 day:"numeric"
             }
         );
 
+    document
+        .getElementById("time")
+        .textContent = time;
 
     document
-    .getElementById("time")
-    .textContent = time;
-
-
-    document
-    .getElementById("date")
-    .textContent = date;
+        .getElementById("date")
+        .textContent = date;
 
 }
-
 
 updateTime();
 
@@ -2710,54 +2448,38 @@ setInterval(
     1000
 );
 
-
-/* =====================================================
+/* =========================================================
    PARTICLES
-===================================================== */
+========================================================= */
 
 const particles =
-    document.getElementById(
-        "particles"
-    );
-
+    document.getElementById("particles");
 
 for(
-    let i = 0;
-    i < 45;
+    let i=0;
+    i<45;
     i++
 ){
 
     const p =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     p.className =
         "particle";
 
-
     p.style.left =
-        Math.random() * 100 + "%";
-
+        Math.random()*100 + "%";
 
     p.style.top =
-        (20 +
-        Math.random() * 80) + "%";
-
+        (20 + Math.random()*80) + "%";
 
     p.style.animationDelay =
-        Math.random() * 5 + "s";
-
+        Math.random()*5 + "s";
 
     p.style.animationDuration =
-        (3 +
-        Math.random() * 5) + "s";
+        (3 + Math.random()*5) + "s";
 
-
-    if(
-        Math.random() > .65
-    ){
+    if(Math.random()>.65){
 
         p.style.background =
             "var(--cyan)";
@@ -2767,18 +2489,15 @@ for(
 
     }
 
-
     particles.appendChild(p);
 
 }
 
-
-/* =====================================================
-   CYBER AUDIO
-===================================================== */
+/* =========================================================
+   AUDIO
+========================================================= */
 
 let audio;
-
 
 function getAudio(){
 
@@ -2796,7 +2515,6 @@ function getAudio(){
 
 }
 
-
 function tone(
     frequency,
     duration,
@@ -2809,35 +2527,27 @@ function tone(
         const ctx =
             getAudio();
 
-
         const osc =
             ctx.createOscillator();
-
 
         const gain =
             ctx.createGain();
 
-
         osc.type =
             type;
 
-
         osc.frequency.value =
             frequency;
-
 
         gain.gain.setValueAtTime(
             volume,
             ctx.currentTime
         );
 
-
         gain.gain.exponentialRampToValueAtTime(
             .001,
-            ctx.currentTime +
-            duration
+            ctx.currentTime + duration
         );
-
 
         osc.connect(gain);
 
@@ -2845,21 +2555,17 @@ function tone(
             ctx.destination
         );
 
-
         osc.start();
 
-
         osc.stop(
-            ctx.currentTime +
-            duration
+            ctx.currentTime + duration
         );
 
     }catch(e){}
 
 }
 
-
-/* SUCCESS SOUND */
+/* SUCCESS */
 
 function successSound(){
 
@@ -2869,7 +2575,6 @@ function successSound(){
         "sine",
         .04
     );
-
 
     setTimeout(
         function(){
@@ -2884,7 +2589,6 @@ function successSound(){
         },
         130
     );
-
 
     setTimeout(
         function(){
@@ -2902,8 +2606,7 @@ function successSound(){
 
 }
 
-
-/* ERROR SOUND */
+/* ERROR */
 
 function errorSound(){
 
@@ -2913,7 +2616,6 @@ function errorSound(){
         "sawtooth",
         .035
     );
-
 
     setTimeout(
         function(){
@@ -2931,10 +2633,7 @@ function errorSound(){
 
 }
 
-
-/* =====================================================
-   ENABLE AUDIO AFTER USER TAP
-===================================================== */
+/* ENABLE AUDIO */
 
 document.addEventListener(
     "click",

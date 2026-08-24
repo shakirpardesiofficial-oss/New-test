@@ -1,1224 +1,535 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0,
-      maximum-scale=1.0,
-      user-scalable=no">
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<meta name="theme-color" content="#050508">
-
-<title>Shakir Hassan VIP System</title>
+<title>Pardesi VIP System</title>
 
 <style>
-
-/* =========================================================
-   SHAKIR HASSAN VIP SYSTEM
-   FULL MOBILE OPTIMIZED UI
-========================================================= */
-
-:root{
-    --red:#ff1744;
-    --red2:#ff003c;
-    --cyan:#00eaff;
-    --green:#00ff9d;
-    --gold:#ffd166;
-    --purple:#9b5cff;
-
-    --black:#020204;
-    --panel:rgba(7,8,13,.92);
-
-    --white:#ffffff;
-    --muted:#89919d;
-}
-
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
     -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+:root{
+    --red:#ff1744;
+    --cyan:#00e5ff;
+    --green:#00ff9d;
+    --gold:#ffd166;
+    --purple:#a855f7;
+    --bg:#020305;
+    --panel:rgba(8,10,16,.96);
+}
+
+html,body{
+    margin:0;
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#020204;
+    background:#020305;
     color:#fff;
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
-
-button,
-input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-
-/* =========================================================
-   FULL SCREEN BACKGROUND
-========================================================= */
 
 body{
-    position:relative;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#020204;
 }
 
-.background-image{
+/* BACKGROUND */
+
+.bg{
     position:fixed;
     inset:0;
-    z-index:0;
-
-    background-image:
-        linear-gradient(
-            180deg,
-            rgba(0,0,0,.52),
-            rgba(0,0,0,.82)
-        ),
-        url("https://files.idyllic.app/files/static/4492361?optimizer=image&width=3840");
-
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-
-    transform:scale(1.04);
-
-    animation:
-        backgroundZoom
-        16s
-        ease-in-out
-        infinite alternate;
-}
-
-@keyframes backgroundZoom{
-    from{
-        transform:scale(1.04);
-    }
-
-    to{
-        transform:scale(1.10);
-    }
-}
-
-.background-image::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
+    overflow:hidden;
     background:
-        radial-gradient(
-            circle at center,
-            transparent 0%,
-            rgba(0,0,0,.15) 35%,
-            rgba(0,0,0,.90) 100%
-        );
+      radial-gradient(circle at 50% 20%,rgba(0,229,255,.10),transparent 30%),
+      radial-gradient(circle at 15% 80%,rgba(255,23,68,.12),transparent 30%),
+      radial-gradient(circle at 90% 70%,rgba(168,85,247,.10),transparent 30%),
+      #020305;
 }
-
-
-/* =========================================================
-   CYBER GRID
-========================================================= */
 
 .grid{
-    position:fixed;
+    position:absolute;
     inset:0;
-
-    z-index:1;
-
-    pointer-events:none;
-
-    opacity:.20;
-
+    opacity:.18;
     background-image:
-        linear-gradient(
-            rgba(0,234,255,.08) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,23,68,.07) 1px,
-            transparent 1px
-        );
-
-    background-size:32px 32px;
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-            transparent,
-            #000 25%,
-            #000 75%,
-            transparent
-        );
+      linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:28px 28px;
 }
 
-
-/* =========================================================
-   SCAN LINE
-========================================================= */
-
-.scanline{
-    position:fixed;
-
-    left:0;
-    right:0;
-
-    top:-5px;
-
+.scan{
+    position:absolute;
+    width:100%;
     height:2px;
-
-    z-index:3;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--cyan),
-            var(--red),
-            transparent
-        );
-
-    box-shadow:
-        0 0 15px var(--cyan),
-        0 0 25px var(--red);
-
-    opacity:.7;
-
-    animation:
-        scan
-        4.5s
-        linear
-        infinite;
-
-    pointer-events:none;
+    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+    box-shadow:0 0 20px var(--cyan);
+    animation:scan 5s linear infinite;
+    opacity:.35;
 }
 
 @keyframes scan{
-    from{
-        top:-5px;
-    }
-
-    to{
-        top:105%;
-    }
+    from{top:-5%}
+    to{top:105%}
 }
 
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-#particles{
-    position:fixed;
-    inset:0;
-    z-index:2;
-    pointer-events:none;
-}
-
-.particle{
-    position:absolute;
-
-    width:2px;
-    height:2px;
-
-    border-radius:50%;
-
-    background:var(--cyan);
-
-    box-shadow:
-        0 0 10px var(--cyan);
-
-    animation:
-        particleMove
-        linear
-        infinite;
-}
-
-@keyframes particleMove{
-    0%{
-        transform:
-            translateY(30px)
-            scale(.5);
-
-        opacity:0;
-    }
-
-    20%{
-        opacity:1;
-    }
-
-    100%{
-        transform:
-            translateY(-100vh)
-            scale(1.3);
-
-        opacity:0;
-    }
-}
-
-
-/* =========================================================
-   MAIN APP
-========================================================= */
+/* MAIN */
 
 .app{
     position:relative;
-
-    width:100%;
-    height:100%;
-
-    max-width:520px;
-
-    z-index:10;
-
+    width:min(94vw,440px);
+    height:min(94vh,780px);
+    min-height:560px;
     overflow:hidden;
+    border:1px solid rgba(0,229,255,.45);
+    border-radius:28px;
+    background:
+      linear-gradient(145deg,rgba(10,14,22,.98),rgba(2,3,7,.98));
+    box-shadow:
+      0 0 35px rgba(0,229,255,.12),
+      0 0 80px rgba(255,23,68,.08),
+      inset 0 0 50px rgba(0,0,0,.8);
 }
 
+/* TOP */
 
-/* =========================================================
-   TOP SECURITY LABEL
-========================================================= */
-
-.security-status{
+.top{
     position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:7px;
+    background:linear-gradient(
+        90deg,
+        var(--red),
+        var(--purple),
+        var(--cyan),
+        var(--red)
+    );
+    background-size:300% 100%;
+    animation:colors 4s linear infinite;
+}
 
-    top:18px;
-    left:50%;
+@keyframes colors{
+    to{background-position:300% 0}
+}
 
-    transform:translateX(-50%);
-
-    z-index:30;
-
-    padding:7px 14px;
-
-    border:1px solid
-        rgba(0,255,157,.5);
-
-    background:
-        rgba(0,20,15,.55);
-
-    color:var(--green);
-
-    font-size:8px;
-
+.status{
+    position:absolute;
+    top:20px;
+    right:18px;
+    font-size:9px;
     font-weight:900;
-
-    letter-spacing:2px;
-
-    white-space:nowrap;
-
-    box-shadow:
-        0 0 18px
-        rgba(0,255,157,.15);
-
-    animation:
-        statusPulse
-        1.8s
-        infinite;
+    letter-spacing:1.5px;
+    color:var(--green);
+    text-shadow:0 0 12px var(--green);
+    animation:blink 1.6s infinite;
 }
 
-@keyframes statusPulse{
-    50%{
-        opacity:.45;
-    }
+@keyframes blink{
+    50%{opacity:.45}
 }
 
+/* HEADER */
 
-/* =========================================================
-   ACTIVATION SCREEN
-========================================================= */
-
-.activation{
+.header{
     position:absolute;
-    inset:0;
-
-    z-index:100;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    padding:25px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(0,234,255,.10),
-            transparent 32%
-        ),
-        #010103;
-
-    transition:
-        opacity
-        .7s ease,
-        visibility
-        .7s ease;
-}
-
-.activation.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-.activation-box{
-    width:100%;
-    max-width:380px;
-}
-
-.activation-circle{
-    width:125px;
-    height:125px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        rgba(0,234,255,.7);
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    position:relative;
-
-    box-shadow:
-        0 0 20px rgba(0,234,255,.2),
-        inset 0 0 25px rgba(0,234,255,.08);
-
-    animation:
-        activationSpin
-        4s
-        linear
-        infinite;
-}
-
-.activation-circle::before{
-    content:"";
-
-    position:absolute;
-
-    inset:-10px;
-
-    border-radius:50%;
-
-    border:
-        2px dashed
-        rgba(255,23,68,.7);
-
-    animation:
-        activationReverse
-        3s
-        linear
-        infinite;
-}
-
-.activation-circle::after{
-    content:"";
-
-    position:absolute;
-
-    inset:18px;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        rgba(255,255,255,.2);
-}
-
-@keyframes activationSpin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-@keyframes activationReverse{
-    to{
-        transform:rotate(-360deg);
-    }
-}
-
-.activation-core{
-    animation:
-        activationCore
-        1.3s
-        ease-in-out
-        infinite alternate;
-}
-
-@keyframes activationCore{
-    from{
-        opacity:.45;
-        transform:scale(.85);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1.05);
-    }
-}
-
-.activation-logo{
-    font-size:30px;
-    font-weight:1000;
-
-    color:var(--red);
-
-    text-shadow:
-        0 0 15px var(--red);
-}
-
-.activation-text{
-    margin-top:30px;
-
-    font-size:11px;
-
-    letter-spacing:4px;
-
-    font-weight:1000;
-}
-
-.activation-sub{
-    margin-top:10px;
-
-    color:var(--cyan);
-
-    font-size:8px;
-
-    letter-spacing:2px;
-}
-
-.code-stream{
-    height:80px;
-
-    margin-top:20px;
-
-    overflow:hidden;
-
-    color:#6e7781;
-
-    font-family:
-        monospace;
-
-    font-size:7px;
-
-    line-height:15px;
-
-    text-align:left;
-
-    opacity:.8;
-}
-
-.activation-progress{
-    width:100%;
-    height:3px;
-
-    margin-top:15px;
-
-    background:#15171c;
-
-    overflow:hidden;
-}
-
-.activation-progress span{
-    display:block;
-
-    width:0;
-    height:100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--red),
-            var(--cyan),
-            var(--green)
-        );
-
-    box-shadow:
-        0 0 12px var(--cyan);
-
-    animation:
-        loading
-        3.2s
-        linear
-        forwards;
-}
-
-@keyframes loading{
-    to{
-        width:100%;
-    }
-}
-
-
-/* =========================================================
-   MAIN HOME
-========================================================= */
-
-.home{
-    position:absolute;
-    inset:0;
-
-    z-index:20;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    padding:
-        68px
-        20px
-        20px;
-
-    opacity:0;
-
-    transform:scale(1.04);
-
-    pointer-events:none;
-
-    transition:
-        opacity .7s ease,
-        transform .7s ease;
-}
-
-.home.show{
-    opacity:1;
-    transform:scale(1);
-    pointer-events:auto;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.brand{
-    width:100%;
-
+    top:45px;
+    left:20px;
+    right:20px;
     text-align:center;
 }
 
 .welcome{
     font-size:11px;
-
     font-weight:900;
-
     letter-spacing:5px;
-
     color:#fff;
-
-    text-shadow:
-        0 0 12px rgba(255,255,255,.5);
 }
 
-.shakir{
-    margin-top:5px;
-
-    font-size:
-        clamp(30px,9vw,47px);
-
-    font-weight:1000;
-
-    letter-spacing:4px;
-
+.pardesi{
+    margin-top:4px;
+    font-size:36px;
     line-height:1;
-
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            var(--cyan),
-            var(--red),
-            #fff
-        );
-
-    background-size:300%;
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-    animation:
-        gradientText
-        4s
-        linear
-        infinite;
+    font-weight:1000;
+    letter-spacing:5px;
+    color:var(--red);
+    text-shadow:
+      0 0 8px var(--red),
+      0 0 25px rgba(255,23,68,.7);
+    animation:titleFloat 2.5s ease-in-out infinite alternate;
 }
 
-@keyframes gradientText{
+@keyframes titleFloat{
+    from{transform:translateX(-3px)}
+    to{transform:translateX(3px)}
+}
+
+.vip{
+    margin-top:8px;
+    font-size:13px;
+    font-weight:1000;
+    letter-spacing:6px;
+    color:var(--cyan);
+    text-shadow:0 0 15px var(--cyan);
+}
+
+/* CHARACTER */
+
+.character-zone{
+    position:absolute;
+    top:145px;
+    left:0;
+    width:100%;
+    height:120px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+}
+
+.character{
+    position:relative;
+    width:80px;
+    height:105px;
+    animation:characterIn 1.4s cubic-bezier(.2,.8,.2,1);
+    filter:drop-shadow(0 0 12px rgba(0,229,255,.5));
+}
+
+@keyframes characterIn{
+    from{
+        transform:translateX(-170px) scale(.5);
+        opacity:0;
+    }
+    65%{
+        transform:translateX(20px) scale(1.08);
+    }
     to{
-        background-position:
-            300% center;
+        transform:translateX(0) scale(1);
+        opacity:1;
     }
 }
 
-.vip-system{
-    margin-top:7px;
-
-    font-size:11px;
-
-    font-weight:1000;
-
-    letter-spacing:7px;
-
-    color:var(--gold);
-
-    text-shadow:
-        0 0 14px
-        rgba(255,209,102,.45);
+.head{
+    position:absolute;
+    top:2px;
+    left:18px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#d7d7d7,#777);
+    border:2px solid #222;
 }
 
+.hair{
+    position:absolute;
+    top:-2px;
+    left:10px;
+    width:52px;
+    height:18px;
+    border-radius:50% 50% 20% 20%;
+    background:#111;
+}
 
-/* =========================================================
-   EXPIRY CARD
-========================================================= */
+.glasses{
+    position:absolute;
+    top:17px;
+    left:13px;
+    width:55px;
+    height:17px;
+    z-index:3;
+}
 
-.expiry-card{
+.glass{
+    position:absolute;
+    width:24px;
+    height:15px;
+    border:2px solid var(--cyan);
+    background:#02070a;
+    box-shadow:0 0 9px var(--cyan);
+}
+
+.glass:first-child{left:0}
+.glass:last-child{right:0}
+
+.bridge{
+    position:absolute;
+    top:7px;
+    left:22px;
+    width:12px;
+    height:2px;
+    background:var(--cyan);
+}
+
+.body{
+    position:absolute;
+    top:43px;
+    left:18px;
+    width:44px;
+    height:52px;
+    border-radius:15px 15px 7px 7px;
+    background:linear-gradient(145deg,#111827,#05070a);
+    border:2px solid var(--red);
+    box-shadow:0 0 15px rgba(255,23,68,.35);
+}
+
+.arm{
+    position:absolute;
+    top:48px;
+    width:34px;
+    height:7px;
+    border-radius:10px;
+    background:#777;
+    transform-origin:left center;
+}
+
+.arm.left{
+    left:-8px;
+    transform:rotate(25deg);
+}
+
+.arm.right{
+    right:-27px;
+    transform:rotate(-15deg);
+    transform-origin:left center;
+}
+
+.leg{
+    position:absolute;
+    top:88px;
+    width:8px;
+    height:20px;
+    border-radius:5px;
+    background:#777;
+}
+
+.leg.left{left:26px}
+.leg.right{left:47px}
+
+/* LOGIN */
+
+.login-panel{
+    position:absolute;
+    left:22px;
+    right:22px;
+    top:280px;
+    text-align:center;
+}
+
+.urdu{
+    direction:rtl;
+    font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;
+    font-size:16px;
+    line-height:2;
+    font-weight:900;
+    margin-bottom:13px;
+    color:#fff;
+    text-shadow:0 0 8px rgba(255,255,255,.25);
+}
+
+.password{
     width:100%;
-
-    margin-top:15px;
-
-    padding:9px 12px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
-
-    gap:10px;
-
-    border:
-        1px solid
-        rgba(255,209,102,.35);
-
-    background:
-        rgba(0,0,0,.52);
-
+    height:56px;
+    border:1px solid rgba(255,23,68,.7);
+    border-radius:14px;
+    outline:none;
+    background:#05070b;
+    color:#fff;
+    text-align:center;
+    font-size:15px;
+    font-weight:900;
+    letter-spacing:3px;
     box-shadow:
-        inset 0 0 18px
-        rgba(255,209,102,.04);
+      inset 0 0 18px #000,
+      0 0 15px rgba(255,23,68,.08);
+}
+
+.password:focus{
+    border-color:var(--cyan);
+    box-shadow:
+      0 0 20px rgba(0,229,255,.2),
+      inset 0 0 18px #000;
+}
+
+.password::placeholder{
+    color:#68717c;
+    font-size:10px;
+}
+
+.login-btn{
+    width:100%;
+    height:55px;
+    margin-top:13px;
+    border:1px solid var(--cyan);
+    border-radius:14px;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0,229,255,.12),
+        rgba(168,85,247,.15),
+        rgba(255,23,68,.12)
+      );
+    color:#fff;
+    font-size:14px;
+    font-weight:1000;
+    letter-spacing:3px;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(0,229,255,.12);
+    transition:.2s;
+}
+
+.login-btn:active{
+    transform:scale(.96);
+    box-shadow:0 0 35px var(--cyan);
+}
+
+/* EXPIRY */
+
+.expiry{
+    position:absolute;
+    left:22px;
+    right:22px;
+    bottom:100px;
+    text-align:center;
+    padding:9px;
+    border:1px solid rgba(255,209,102,.35);
+    border-radius:12px;
+    background:rgba(255,209,102,.04);
 }
 
 .expiry-label{
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:2px;
     color:var(--gold);
-
-    font-size:7px;
-
-    font-weight:1000;
-
-    letter-spacing:1.5px;
 }
 
 .expiry-date{
-    color:#fff;
-
-    font-size:9px;
-
+    margin-top:4px;
+    font-size:14px;
     font-weight:1000;
-
-    letter-spacing:1px;
-}
-
-
-/* =========================================================
-   WELCOME URDU
-========================================================= */
-
-.urdu-line{
-    width:100%;
-
-    margin-top:16px;
-
-    text-align:center;
-
-    direction:rtl;
-
-    font-family:
-        "Noto Nastaliq Urdu",
-        "Jameel Noori Nastaleeq",
-        serif;
-
-    font-size:15px;
-
-    font-weight:900;
-
-    line-height:2;
-
     color:#fff;
-
-    text-shadow:
-        0 0 9px
-        rgba(255,255,255,.3);
+    text-shadow:0 0 10px var(--gold);
 }
 
+/* DEVELOPER */
 
-/* =========================================================
-   PASSWORD PANEL
-========================================================= */
-
-.login-panel{
-    width:100%;
-
-    margin-top:10px;
-
-    padding:15px;
-
-    border:
-        1px solid
-        rgba(255,23,68,.45);
-
-    background:
-        rgba(2,3,7,.68);
-
-    box-shadow:
-        0 0 30px
-        rgba(255,23,68,.08),
-
-        inset 0 0 30px
-        rgba(0,0,0,.7);
-
-    backdrop-filter:
-        blur(8px);
-}
-
-.access-title{
-    text-align:center;
-
-    font-size:8px;
-
-    font-weight:1000;
-
-    letter-spacing:3px;
-
-    color:var(--cyan);
-
-    margin-bottom:9px;
-}
-
-.password-wrap{
-    position:relative;
-}
-
-.password-input{
-    width:100%;
-
-    height:53px;
-
-    padding:
-        0 60px
-        0 16px;
-
-    outline:none;
-
-    border:
-        1px solid
-        rgba(255,23,68,.7);
-
-    background:
-        rgba(0,0,0,.72);
-
-    color:#fff;
-
-    text-align:center;
-
-    font-size:13px;
-
-    font-weight:1000;
-
-    letter-spacing:3px;
-
-    box-shadow:
-        inset 0 0 20px
-        rgba(0,0,0,.8);
-}
-
-.password-input:focus{
-    border-color:var(--cyan);
-
-    box-shadow:
-        0 0 20px
-        rgba(0,234,255,.15),
-
-        inset 0 0 20px
-        rgba(0,234,255,.05);
-}
-
-.password-input::placeholder{
-    color:#6d7680;
-
-    font-size:8px;
-
-    letter-spacing:2px;
-}
-
-.show-password{
+.dev{
     position:absolute;
-
-    right:12px;
-    top:50%;
-
-    transform:
-        translateY(-50%);
-
-    color:var(--gold);
-
-    font-size:7px;
-
+    left:22px;
+    right:22px;
+    bottom:57px;
+    height:34px;
+    border:1px solid var(--purple);
+    border-radius:10px;
+    background:rgba(168,85,247,.08);
+    color:#fff;
+    font-size:9px;
     font-weight:1000;
-
+    letter-spacing:2px;
     cursor:pointer;
+    animation:borderPulse 3s linear infinite;
 }
 
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.action-row{
-    display:grid;
-
-    grid-template-columns:
-        1fr
-        .72fr;
-
-    gap:8px;
-
-    margin-top:10px;
+@keyframes borderPulse{
+    0%{border-color:var(--purple)}
+    50%{border-color:var(--cyan)}
+    100%{border-color:var(--red)}
 }
 
-.login-button,
-.logout-button{
-    height:48px;
+/* FOOTER */
 
-    border:1px solid;
-
-    font-size:9px;
-
-    font-weight:1000;
-
-    letter-spacing:2px;
-
-    transition:
-        .2s ease;
-}
-
-.login-button{
-    color:#fff;
-
-    border-color:var(--red);
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255,23,68,.25),
-            rgba(168,85,247,.15)
-        );
-
-    box-shadow:
-        0 0 18px
-        rgba(255,23,68,.12);
-}
-
-.logout-button{
-    color:var(--cyan);
-
-    border-color:
-        rgba(0,234,255,.55);
-
-    background:
-        rgba(0,234,255,.06);
-}
-
-.login-button:active,
-.logout-button:active{
-    transform:scale(.96);
-}
-
-
-/* =========================================================
-   VIP MEMBER
-========================================================= */
-
-.vip-member{
-    margin-top:12px;
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
-}
-
-.vip-badge{
-    padding:6px 14px;
-
-    border:
-        1px solid
-        rgba(255,209,102,.5);
-
-    background:
-        rgba(255,209,102,.06);
-
-    color:var(--gold);
-
-    font-size:7px;
-
-    font-weight:1000;
-
-    letter-spacing:2px;
-
-    box-shadow:
-        0 0 15px
-        rgba(255,209,102,.08);
-
-    animation:
-        badgePulse
-        2s
-        infinite;
-}
-
-@keyframes badgePulse{
-    50%{
-        box-shadow:
-            0 0 25px
-            rgba(255,209,102,.2);
-    }
-}
-
-
-/* =========================================================
-   BOTTOM INFO
-========================================================= */
-
-.bottom{
+.footer{
     position:absolute;
-
-    left:20px;
-    right:20px;
-
-    bottom:13px;
-
-    z-index:30;
-
+    bottom:18px;
+    left:15px;
+    right:15px;
     text-align:center;
-}
-
-.made{
     font-size:7px;
-
-    font-weight:1000;
-
-    letter-spacing:2px;
-
-    color:#fff;
-}
-
-.made span{
-    color:var(--red);
-}
-
-.clock{
-    margin-top:5px;
-
-    font-size:13px;
-
-    font-weight:1000;
-
-    letter-spacing:2px;
-
-    color:var(--cyan);
-
-    text-shadow:
-        0 0 10px
-        rgba(0,234,255,.45);
-}
-
-.date-now{
-    margin-top:2px;
-
-    color:#9aa2ac;
-
-    font-size:7px;
-
+    font-weight:900;
     letter-spacing:1px;
+    color:#68727e;
 }
 
+/* POPUP */
 
-/* =========================================================
-   POPUP
-========================================================= */
-
-.popup-overlay{
+.overlay{
     position:absolute;
-
     inset:0;
-
-    z-index:500;
-
+    z-index:100;
     display:none;
-
     align-items:center;
     justify-content:center;
-
-    padding:22px;
-
-    background:
-        rgba(0,0,0,.84);
-
-    backdrop-filter:
-        blur(8px);
+    padding:20px;
+    background:rgba(0,0,0,.86);
+    backdrop-filter:blur(7px);
 }
 
-.popup-overlay.show{
+.overlay.show{
     display:flex;
-
-    animation:
-        fadeIn
-        .25s ease;
+    animation:fade .25s ease;
 }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
+@keyframes fade{
+    from{opacity:0}
+    to{opacity:1}
 }
 
 .popup{
     width:100%;
-    max-width:370px;
-
-    padding:25px 18px;
-
+    max-width:350px;
+    padding:26px 20px;
     text-align:center;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(15,5,10,.98),
-            rgba(3,4,8,.99)
-        );
-
-    border:
-        1px solid
-        var(--red);
-
-    box-shadow:
-        0 0 45px
-        rgba(255,23,68,.35);
-
-    animation:
-        popupIn
-        .4s
-        cubic-bezier(.2,.8,.2,1);
+    border:1px solid var(--red);
+    border-radius:22px;
+    background:linear-gradient(145deg,#10050a,#030509);
+    box-shadow:0 0 45px rgba(255,23,68,.35);
+    animation:pop .4s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes popupIn{
+@keyframes pop{
     from{
+        transform:scale(.55) rotate(-3deg);
         opacity:0;
-        transform:
-            scale(.55)
-            translateY(30px);
     }
-
     to{
+        transform:scale(1) rotate(0);
         opacity:1;
-        transform:
-            scale(1)
-            translateY(0);
     }
+}
+
+.popup-icon{
+    width:74px;
+    height:74px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid var(--red);
+    border-radius:50%;
+    color:var(--red);
+    font-size:32px;
+    font-weight:1000;
+    box-shadow:0 0 28px rgba(255,23,68,.5);
+}
+
+.popup.checking .popup-icon{
+    color:var(--gold);
+    border-color:var(--gold);
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
 }
 
 .popup.success{
     border-color:var(--green);
-
-    box-shadow:
-        0 0 45px
-        rgba(0,255,157,.3);
-}
-
-.popup.expired{
-    border-color:var(--gold);
-
-    box-shadow:
-        0 0 45px
-        rgba(255,209,102,.25);
-}
-
-.popup.updated{
-    border-color:var(--cyan);
-
-    box-shadow:
-        0 0 45px
-        rgba(0,234,255,.25);
-}
-
-.popup-icon{
-    width:76px;
-    height:76px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border:
-        2px solid
-        var(--red);
-
-    color:var(--red);
-
-    font-size:30px;
-
-    font-weight:1000;
-
-    box-shadow:
-        0 0 25px
-        rgba(255,23,68,.35);
-
-    animation:
-        iconPulse
-        1.1s
-        infinite
-        alternate;
-}
-
-@keyframes iconPulse{
-    to{
-        transform:scale(1.08);
-    }
+    box-shadow:0 0 45px rgba(0,255,157,.35);
 }
 
 .popup.success .popup-icon{
@@ -1226,154 +537,59 @@ body{
     border-color:var(--green);
 }
 
-.popup.expired .popup-icon{
-    color:var(--gold);
-    border-color:var(--gold);
-}
-
-.popup.updated .popup-icon{
-    color:var(--cyan);
-    border-color:var(--cyan);
-}
-
 .popup h2{
-    margin-top:17px;
-
-    font-size:19px;
-
+    margin:15px 0 8px;
+    font-size:22px;
     font-weight:1000;
-
     letter-spacing:2px;
 }
 
 .popup p{
-    margin-top:12px;
-
+    margin:0;
     direction:rtl;
-
-    font-family:
-        "Noto Nastaliq Urdu",
-        serif;
-
-    font-size:13px;
-
-    line-height:2.1;
-
-    color:#eee;
+    font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;
+    font-size:14px;
+    line-height:2;
+    color:#ddd;
 }
 
-.popup-small{
-    margin-top:9px;
-
-    color:#8e98a4;
-
-    font-size:7px;
-
-    line-height:1.7;
-}
-
-.popup-buttons{
-    display:grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
-    gap:8px;
-
-    margin-top:17px;
-}
-
-.popup-button{
-    height:45px;
-
-    border:
-        1px solid
-        var(--red);
-
-    background:
-        rgba(255,23,68,.08);
-
+.popup-btn{
+    width:100%;
+    height:44px;
+    margin-top:16px;
+    border:1px solid var(--red);
+    border-radius:11px;
+    background:rgba(255,23,68,.08);
     color:#fff;
-
-    font-size:8px;
-
     font-weight:1000;
-
-    letter-spacing:1px;
 }
 
-.popup-whatsapp{
-    text-decoration:none;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    height:45px;
-
-    border:
-        1px solid
-        var(--green);
-
-    background:
-        rgba(0,255,157,.07);
-
-    color:var(--green);
-
-    font-size:8px;
-
-    font-weight:1000;
-
-    letter-spacing:1px;
-}
-
-
-/* =========================================================
-   WELCOME SUCCESS SCREEN
-========================================================= */
+/* WELCOME */
 
 .welcome-screen{
     position:absolute;
-
     inset:0;
-
-    z-index:400;
-
+    z-index:80;
     display:none;
-
     align-items:center;
     justify-content:center;
-
     text-align:center;
-
     padding:25px;
-
     background:
-        radial-gradient(
-            circle at center,
-            rgba(0,255,157,.13),
-            transparent 38%
-        ),
-        rgba(1,2,5,.97);
+      radial-gradient(circle at center,rgba(0,255,157,.13),transparent 40%),
+      #020508;
 }
 
 .welcome-screen.show{
     display:flex;
-
-    animation:
-        welcomeShow
-        .55s
-        ease;
+    animation:welcomeIn .6s ease;
 }
 
-@keyframes welcomeShow{
+@keyframes welcomeIn{
     from{
         opacity:0;
         transform:scale(.8);
     }
-
     to{
         opacity:1;
         transform:scale(1);
@@ -1382,955 +598,436 @@ body{
 
 .granted{
     color:var(--green);
-
-    font-size:10px;
-
+    font-size:11px;
     font-weight:1000;
-
     letter-spacing:4px;
 }
 
 .welcome-screen h1{
-    margin-top:17px;
-
-    font-size:
-        clamp(20px,6vw,28px);
-
+    margin:18px 0 10px;
+    font-size:24px;
+    line-height:1.3;
     font-weight:1000;
-
-    line-height:1.2;
-
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            var(--cyan),
-            var(--green)
-        );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-}
-
-.welcome-urdu{
-    margin-top:16px;
-
-    direction:rtl;
-
-    font-family:
-        "Noto Nastaliq Urdu",
-        serif;
-
-    font-size:13px;
-
-    line-height:2;
-
-    color:#fff;
 }
 
 .thanks{
-    margin-top:14px;
-
     direction:rtl;
-
-    font-family:
-        "Noto Nastaliq Urdu",
-        serif;
-
-    font-size:16px;
-
+    font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;
+    font-size:15px;
     line-height:2.1;
-
-    font-weight:900;
-
     color:var(--gold);
-
-    text-shadow:
-        0 0 10px
-        rgba(255,209,102,.25);
 }
 
-.welcome-detail{
-    margin-top:13px;
-
-    color:#c7ced6;
-
-    font-size:8px;
-
-    line-height:1.9;
-}
-
-.continue-button{
+.enter{
     width:100%;
-
-    max-width:300px;
-
     height:48px;
-
     margin-top:20px;
-
-    border:
-        1px solid
-        var(--cyan);
-
-    background:
-        rgba(0,234,255,.08);
-
+    border:1px solid var(--cyan);
+    border-radius:12px;
+    background:rgba(0,229,255,.08);
     color:var(--cyan);
-
-    font-size:9px;
-
     font-weight:1000;
-
     letter-spacing:2px;
 }
 
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-.profile-overlay{
-    position:absolute;
-
-    inset:0;
-
-    z-index:600;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:
-        rgba(0,0,0,.88);
-
-    backdrop-filter:
-        blur(8px);
+.logout{
+    width:100%;
+    height:44px;
+    margin-top:9px;
+    border:1px solid var(--red);
+    border-radius:12px;
+    background:rgba(255,23,68,.07);
+    color:var(--red);
+    font-weight:1000;
 }
 
-.profile-overlay.show{
-    display:flex;
-
-    animation:
-        fadeIn
-        .3s ease;
-}
+/* PROFILE */
 
 .profile{
     width:100%;
-    max-width:380px;
-
-    max-height:90vh;
-
+    max-width:350px;
+    max-height:90%;
     overflow:auto;
-
-    padding:22px 18px;
-
     text-align:center;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(12,4,8,.98),
-            rgba(2,3,7,.99)
-        );
-
-    border:
-        1px solid
-        var(--red);
-
-    box-shadow:
-        0 0 45px
-        rgba(255,23,68,.35);
-
-    animation:
-        popupIn
-        .4s
-        ease;
+    padding:25px 18px;
+    border:1px solid var(--purple);
+    border-radius:24px;
+    background:#05060b;
+    box-shadow:0 0 45px rgba(168,85,247,.3);
 }
 
-.profile-image{
-    width:125px;
-    height:125px;
-
+.profile-img{
+    width:115px;
+    height:115px;
     margin:auto;
-
+    padding:4px;
     border-radius:50%;
-
-    overflow:hidden;
-
-    border:
-        2px solid
-        var(--red);
-
-    box-shadow:
-        0 0 30px
-        rgba(255,23,68,.5);
+    border:2px solid var(--cyan);
+    box-shadow:0 0 30px rgba(0,229,255,.4);
+    animation:borderPulse 3s linear infinite;
 }
 
-.profile-image img{
+.profile-img img{
     width:100%;
     height:100%;
-
     object-fit:cover;
+    border-radius:50%;
 }
 
 .profile h2{
-    margin-top:14px;
-
-    font-size:20px;
-
+    margin:14px 0 5px;
+    font-size:21px;
     font-weight:1000;
-
-    letter-spacing:2px;
 }
 
-.profile-role{
-    margin-top:5px;
-
+.role{
     color:var(--cyan);
-
-    font-size:8px;
-
-    font-weight:1000;
-
-    letter-spacing:1.5px;
-}
-
-.profile-text{
-    margin-top:14px;
-
-    color:#c9d0d7;
-
-    font-size:8px;
-
-    line-height:1.9;
-}
-
-.profile-credit{
-    margin-top:13px;
-
-    color:var(--gold);
-
-    font-size:8px;
-
-    font-weight:1000;
-
+    font-size:9px;
+    font-weight:900;
     letter-spacing:2px;
 }
 
-.profile-wa{
-    display:flex;
+.profile-info{
+    margin-top:14px;
+    color:#cdd2d8;
+    font-size:9px;
+    line-height:1.8;
+}
 
+.wa{
+    display:block;
+    margin-top:17px;
+    padding:12px;
+    border:1px solid var(--green);
+    border-radius:11px;
+    color:var(--green);
+    text-decoration:none;
+    font-size:9px;
+    font-weight:1000;
+    letter-spacing:1px;
+}
+
+.back{
+    width:100%;
+    margin-top:9px;
+    padding:11px;
+    border:1px solid var(--red);
+    border-radius:11px;
+    background:transparent;
+    color:var(--red);
+    font-weight:1000;
+}
+
+/* INSTALLATION INTRO */
+
+.intro{
+    position:absolute;
+    inset:0;
+    z-index:200;
+    display:flex;
     align-items:center;
     justify-content:center;
-
-    width:100%;
-
-    height:47px;
-
-    margin-top:17px;
-
-    text-decoration:none;
-
-    border:
-        1px solid
-        var(--green);
-
-    background:
-        rgba(0,255,157,.07);
-
-    color:var(--green);
-
-    font-size:8px;
-
-    font-weight:1000;
-
-    letter-spacing:1.5px;
+    text-align:center;
+    background:#010204;
 }
 
-.close-profile{
-    width:100%;
-
-    height:43px;
-
-    margin-top:8px;
-
-    border:
-        1px solid
-        var(--red);
-
-    background:
-        rgba(255,23,68,.06);
-
-    color:var(--red);
-
-    font-size:8px;
-
-    font-weight:1000;
+.intro.hide{
+    animation:introOut .7s forwards;
 }
 
-
-/* =========================================================
-   DEVELOPER BUTTON
-========================================================= */
-
-.developer-button{
-    position:absolute;
-
-    right:14px;
-    bottom:76px;
-
-    z-index:80;
-
-    padding:8px 10px;
-
-    border:
-        1px solid
-        rgba(255,23,68,.6);
-
-    background:
-        rgba(0,0,0,.65);
-
-    color:var(--red);
-
-    font-size:7px;
-
-    font-weight:1000;
-
-    letter-spacing:1px;
-
-    box-shadow:
-        0 0 12px
-        rgba(255,23,68,.1);
+@keyframes introOut{
+    to{
+        opacity:0;
+        visibility:hidden;
+        transform:scale(1.1);
+    }
 }
 
+.intro-box{
+    width:90%;
+}
 
-/* =========================================================
-   SOUND BUTTON
-========================================================= */
-
-.sound-button{
-    position:absolute;
-
-    left:14px;
-    bottom:76px;
-
-    z-index:80;
-
-    width:34px;
-    height:30px;
-
-    border:
-        1px solid
-        rgba(0,234,255,.45);
-
-    background:
-        rgba(0,0,0,.6);
-
+.intro-code{
+    height:120px;
+    overflow:hidden;
+    font-family:monospace;
     color:var(--cyan);
-
-    font-size:12px;
+    font-size:11px;
+    line-height:1.8;
+    text-align:left;
 }
 
-
-/* =========================================================
-   MOBILE HEIGHT
-========================================================= */
-
-@media(max-height:700px){
-
-    .home{
-        padding-top:58px;
-    }
-
-    .shakir{
-        font-size:31px;
-    }
-
-    .urdu-line{
-        margin-top:10px;
-        font-size:13px;
-    }
-
-    .expiry-card{
-        margin-top:9px;
-    }
-
-    .login-panel{
-        margin-top:7px;
-        padding:11px;
-    }
-
-    .developer-button,
-    .sound-button{
-        bottom:61px;
-    }
-
-    .bottom{
-        bottom:7px;
-    }
-
+.boot-title{
+    margin-top:20px;
+    font-size:25px;
+    font-weight:1000;
+    letter-spacing:3px;
 }
 
-
-/* SMALL WIDTH */
-
-@media(max-width:360px){
-
-    .home{
-        padding-left:13px;
-        padding-right:13px;
-    }
-
-    .welcome{
-        font-size:9px;
-    }
-
-    .shakir{
-        font-size:27px;
-        letter-spacing:2px;
-    }
-
-    .vip-system{
-        font-size:9px;
-        letter-spacing:5px;
-    }
-
-    .urdu-line{
-        font-size:12px;
-    }
-
-    .password-input{
-        height:48px;
-    }
-
-    .login-button,
-    .logout-button{
-        height:44px;
-    }
-
+.boot-status{
+    margin-top:12px;
+    color:var(--green);
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:2px;
 }
 
+@media(max-height:650px){
+    .header{top:32px}
+    .character-zone{top:110px}
+    .login-panel{top:235px}
+    .expiry{bottom:78px}
+    .dev{bottom:40px}
+    .footer{display:none}
+}
+
+@media(max-width:350px){
+    .pardesi{font-size:29px}
+    .urdu{font-size:14px}
+    .login-panel{left:17px;right:17px}
+}
 </style>
 </head>
 
-
 <body>
 
-
-<!-- FULL SCREEN IMAGE -->
-
-<div class="background-image"></div>
-
-<div class="grid"></div>
-
-<div class="scanline"></div>
-
-<div id="particles"></div>
-
+<div class="bg">
+    <div class="grid"></div>
+    <div class="scan"></div>
+</div>
 
 <div class="app">
 
+<div class="top"></div>
 
-    <!-- =====================================================
-         SECURITY STATUS
-    ====================================================== -->
+<div class="status">● SECURITY SYSTEM ACTIVE</div>
 
-    <div class="security-status">
-        ● SECURITY SYSTEM ACTIVE
-    </div>
+<div class="header">
+    <div class="welcome">WELCOME TO</div>
+    <div class="pardesi">PARDESI</div>
+    <div class="vip">VIP SYSTEM</div>
+</div>
 
+<!-- CHARACTER -->
+<div class="character-zone" id="characterZone">
+    <div class="character" id="character">
 
-    <!-- =====================================================
-         ACTIVATION
-    ====================================================== -->
+        <div class="head">
+            <div class="hair"></div>
 
-    <section
-        class="activation"
-        id="activation">
-
-        <div class="activation-box">
-
-            <div class="activation-circle">
-
-                <div class="activation-core">
-
-                    <div class="activation-logo">
-                        SH
-                    </div>
-
-                </div>
-
+            <div class="glasses">
+                <div class="glass"></div>
+                <div class="glass"></div>
+                <div class="bridge"></div>
             </div>
-
-
-            <div class="activation-text">
-                SHAKIR HASSAN VIP SYSTEM
-            </div>
-
-
-            <div class="activation-sub">
-                SECURE ENVIRONMENT INITIALIZING
-            </div>
-
-
-            <div
-                class="code-stream"
-                id="codeStream">
-            </div>
-
-
-            <div class="activation-progress">
-                <span></span>
-            </div>
-
         </div>
 
-    </section>
-
-
-    <!-- =====================================================
-         HOME
-    ====================================================== -->
-
-    <main
-        class="home"
-        id="home">
-
-
-        <div class="brand">
-
-            <div class="welcome">
-                WELCOME TO
-            </div>
-
-            <div class="shakir">
-                SHAKIR HASSAN
-            </div>
-
-            <div class="vip-system">
-                VIP SYSTEM
-            </div>
-
-        </div>
-
-
-        <!-- EXPIRY -->
-
-        <div class="expiry-card">
-
-            <div class="expiry-label">
-                APP EXPIRY DATE
-            </div>
-
-            <div
-                class="expiry-date"
-                id="expiryDisplay">
-                --
-            </div>
-
-        </div>
-
-
-        <!-- URDU PASSWORD LINE -->
-
-        <div class="urdu-line">
-
-            براہِ کرم سسٹم میں داخل ہونے کے لیے پاسورڈ درج کریں
-
-        </div>
-
-
-        <!-- LOGIN -->
-
-        <div class="login-panel">
-
-            <div class="access-title">
-                VIP ACCESS PASSWORD
-            </div>
-
-
-            <div class="password-wrap">
-
-                <input
-                    id="password"
-                    class="password-input"
-                    type="password"
-                    autocomplete="off"
-                    placeholder="ENTER PASSWORD">
-
-
-                <span
-                    id="showPassword"
-                    class="show-password">
-
-                    SHOW
-
-                </span>
-
-            </div>
-
-
-            <div class="action-row">
-
-                <button
-                    id="loginButton"
-                    class="login-button">
-
-                    LOGIN
-
-                </button>
-
-
-                <button
-                    id="logoutButton"
-                    class="logout-button">
-
-                    LOGOUT
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- VIP -->
-
-        <div class="vip-member">
-
-            <div class="vip-badge">
-                ★ ONLY VIP MEMBER ★
-            </div>
-
-        </div>
-
-
-    </main>
-
-
-    <!-- =====================================================
-         BOTTOM
-    ====================================================== -->
-
-    <div class="bottom">
-
-        <div class="made">
-            MADE &amp; DEVELOPED BY
-            <span>SHAKIR HASSAN</span>
-        </div>
-
-        <div
-            class="clock"
-            id="clock">
-            --:--:--
-        </div>
-
-        <div
-            class="date-now"
-            id="dateNow">
-            Loading...
-        </div>
+        <div class="body"></div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
 
     </div>
+</div>
 
+<!-- LOGIN -->
+<div class="login-panel">
 
-    <!-- SOUND -->
+    <div class="urdu">
+        براہِ کرم سسٹم میں داخل ہونے کے لیے پاسورڈ درج کریں
+    </div>
 
-    <button
-        class="sound-button"
-        id="soundButton">
-        🔊
+    <input
+        id="password"
+        class="password"
+        type="password"
+        placeholder="ENTER PASSWORD"
+        autocomplete="off">
+
+    <button id="loginBtn" class="login-btn">
+        ⚡ LOGIN
     </button>
-
-
-    <!-- DEVELOPER -->
-
-    <button
-        class="developer-button"
-        id="developerButton">
-
-        DEVELOPER PROFILE
-
-    </button>
-
-
-    <!-- =====================================================
-         POPUP
-    ====================================================== -->
-
-    <div
-        class="popup-overlay"
-        id="popupOverlay">
-
-        <div
-            class="popup"
-            id="popup">
-
-
-            <div
-                class="popup-icon"
-                id="popupIcon">
-                !
-            </div>
-
-
-            <h2
-                id="popupTitle">
-                CHECKING
-            </h2>
-
-
-            <p
-                id="popupText">
-                سسٹم پاسورڈ کی تصدیق کر رہا ہے
-            </p>
-
-
-            <div
-                class="popup-small"
-                id="popupSmall">
-            </div>
-
-
-            <div
-                class="popup-buttons"
-                id="popupButtons">
-
-                <button
-                    class="popup-button"
-                    id="popupClose">
-
-                    TRY AGAIN
-
-                </button>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         SUCCESS WELCOME
-    ====================================================== -->
-
-    <section
-        class="welcome-screen"
-        id="welcomeScreen">
-
-
-        <div>
-
-            <div class="granted">
-                ✓ ACCESS GRANTED
-            </div>
-
-
-            <h1>
-                WELCOME TO SHAKIR HASSAN VIP SYSTEM
-            </h1>
-
-
-            <div class="welcome-urdu">
-                آپ کامیابی سے شاکر حسن پردیسی کے VIP سسٹم میں داخل ہو چکے ہیں
-            </div>
-
-
-            <div class="thanks">
-                ❤️ آپ کے اعتماد اور بھروسے کا دل سے شکریہ<br>
-                آپ کا اعتماد میرے لیے بہت قیمتی ہے۔
-            </div>
-
-
-            <div class="welcome-detail">
-
-                Your VIP access has been successfully activated.<br>
-                Enjoy the premium system experience.
-
-            </div>
-
-
-            <button
-                class="continue-button"
-                id="continueButton">
-
-                CONTINUE TO VIP SYSTEM
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         PROFILE
-    ====================================================== -->
-
-    <section
-        class="profile-overlay"
-        id="profileOverlay">
-
-
-        <div class="profile">
-
-
-            <div class="profile-image">
-
-                <img
-                    src="https://files.idyllic.app/files/static/4492361?optimizer=image&width=3840"
-                    alt="Shakir Hassan VIP Profile">
-
-            </div>
-
-
-            <h2>
-                SHAKIR HASSAN
-            </h2>
-
-
-            <div class="profile-role">
-                MADE &amp; DEVELOPED BY • PARDESI
-            </div>
-
-
-            <div class="profile-text">
-
-                Developer &amp; Creator of Shakir Hassan VIP System
-
-                <br>
-
-                Premium Digital Interface • Secure Access
-
-                <br>
-
-                Private VIP Application System
-
-            </div>
-
-
-            <div class="profile-credit">
-                CREDIT BY SHAKIR HASSAN
-            </div>
-
-
-            <a
-                id="profileWhatsapp"
-                class="profile-wa"
-                target="_blank"
-                rel="noopener">
-
-                💬 CONTACT SHAKIR ON WHATSAPP
-
-            </a>
-
-
-            <button
-                id="closeProfile"
-                class="close-profile">
-
-                ← BACK TO SYSTEM
-
-            </button>
-
-
-        </div>
-
-    </section>
-
 
 </div>
 
+<!-- EXPIRY -->
+<div class="expiry">
+    <div class="expiry-label">APP EXPIRY DATE</div>
+    <div class="expiry-date" id="expiryDate">---</div>
+</div>
+
+<!-- DEVELOPER -->
+<button class="dev" id="developerBtn">
+    ◈ DEVELOPER PROFILE
+</button>
+
+<div class="footer">
+    MADE &amp; DEVELOPED BY SHAKIR HASSAN • © 2022–2026
+</div>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+
+    <div class="intro-box">
+
+        <div class="intro-code" id="bootCode"></div>
+
+        <div class="boot-title">
+            PARDESI VIP
+        </div>
+
+        <div class="boot-status" id="bootStatus">
+            INITIALIZING SECURE SYSTEM...
+        </div>
+
+    </div>
+
+</div>
+
+<!-- POPUP -->
+<div class="overlay" id="popupOverlay">
+
+    <div class="popup" id="popup">
+
+        <div class="popup-icon" id="popupIcon">!</div>
+
+        <h2 id="popupTitle">CHECKING</h2>
+
+        <p id="popupText">
+            سسٹم پاسورڈ کی تصدیق کر رہا ہے
+        </p>
+
+        <button
+            id="popupButton"
+            class="popup-btn"
+            style="display:none">
+            TRY AGAIN
+        </button>
+
+    </div>
+
+</div>
+
+<!-- WELCOME -->
+<div class="welcome-screen" id="welcomeScreen">
+
+    <div>
+
+        <div class="granted">
+            ✓ ACCESS GRANTED
+        </div>
+
+        <h1>
+            WELCOME TO<br>
+            SHAKIR HASSAN VIP SYSTEM
+        </h1>
+
+        <div class="thanks">
+            آپ کامیابی سے شاکر حسن پردیسی کے سسٹم میں داخل ہو چکے ہیں۔
+            <br>
+            اب آپ کو یہاں ہر چیز VIP ملے گی۔
+            <br><br>
+            آپ کے اعتماد اور بھروسے کا دل سے شکریہ ❤️
+        </div>
+
+        <button class="enter" id="enterBtn">
+            ENTER APPLICATION
+        </button>
+
+        <button class="logout" id="logoutBtn">
+            LOGOUT
+        </button>
+
+    </div>
+
+</div>
+
+<!-- PROFILE -->
+<div class="overlay" id="profileOverlay">
+
+    <div class="profile">
+
+        <div class="profile-img">
+
+            <img
+              src="https://i.ibb.co/mVtPk55T/1000023507.png"
+              alt="Shakir Hassan">
+
+        </div>
+
+        <h2>SHAKIR HASSAN</h2>
+
+        <div class="role">
+            MADE &amp; DEVELOPED BY • PARDESI
+        </div>
+
+        <div class="profile-info">
+            Developer &amp; Creator of Pardesi VIP System
+            <br>
+            Premium Digital Interface
+            <br>
+            Secure Access • VIP Application
+        </div>
+
+        <a
+          class="wa"
+          id="profileWhatsApp"
+          target="_blank">
+            ◉ CONTACT ON WHATSAPP
+        </a>
+
+        <button class="back" id="backBtn">
+            ← BACK TO SYSTEM
+        </button>
+
+    </div>
+
+</div>
+
+</div>
 
 <script>
 
-/* =========================================================
-   SHAKIR HASSAN VIP SYSTEM
-   CONTROL PANEL
-========================================================= */
+/* =====================================================
+   PARDESI VIP — CONTROL PANEL
+   صرف یہاں سے values تبدیل کریں
+===================================================== */
 
 const CONFIG = {
 
-    /*
-       اپنا موجودہ ACTIVE PASSWORD یہاں رکھیں۔
-    */
+    /* موجودہ password */
+    NEW_PASSWORD: "PKR200",
 
-    CURRENT_PASSWORD:
-        "PKR200",
+    /* اگر پرانا password بھی recognize کرنا ہو */
+    OLD_PASSWORD: "Pardesi@2026",
 
+    /* expiry — YYYY-MM-DD */
+    EXPIRY_DATE: "2026-12-31",
 
-    /*
-       جن پرانے passwords کو آپ ختم کر چکے ہیں
-       وہ یہاں لکھ سکتے ہیں۔
+    /* نام */
+    DEVELOPER_NAME: "SHAKIR HASSAN",
 
-       مثال:
-       OLD_PASSWORDS: [
-           "OLD123",
-           "PKR100",
-           "Pardesi@2026"
-       ]
-    */
+    /* WhatsApp number */
+    WHATSAPP: "923118485874",
 
-    OLD_PASSWORDS: [
-    ],
+    /* Application کھولنے کا URL */
+    APPLICATION_URL: "action://close",
 
-
-    /*
-       یہاں expiry date تبدیل کریں۔
-
-       Format:
-       YYYY-MM-DD
-    */
-
-    EXPIRY_DATE:
-        "2026-12-31",
-
-
-    /*
-       WhatsApp نمبر
-       Country code کے ساتھ،
-       + کے بغیر۔
-    */
-
-    WHATSAPP:
-        "923118485874"
+    /* Profile image */
+    PROFILE_IMAGE:
+      "https://i.ibb.co/mVtPk55T/1000023507.png"
 
 };
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const activation =
-    document.getElementById("activation");
-
-const home =
-    document.getElementById("home");
+/* ELEMENTS */
 
 const password =
     document.getElementById("password");
 
-const loginButton =
-    document.getElementById("loginButton");
-
-const logoutButton =
-    document.getElementById("logoutButton");
-
-const showPassword =
-    document.getElementById("showPassword");
-
-const expiryDisplay =
-    document.getElementById("expiryDisplay");
+const loginBtn =
+    document.getElementById("loginBtn");
 
 const popupOverlay =
     document.getElementById("popupOverlay");
@@ -2347,74 +1044,43 @@ const popupTitle =
 const popupText =
     document.getElementById("popupText");
 
-const popupSmall =
-    document.getElementById("popupSmall");
-
-const popupButtons =
-    document.getElementById("popupButtons");
-
-const popupClose =
-    document.getElementById("popupClose");
+const popupButton =
+    document.getElementById("popupButton");
 
 const welcomeScreen =
     document.getElementById("welcomeScreen");
 
-const continueButton =
-    document.getElementById("continueButton");
-
-const profileOverlay =
-    document.getElementById("profileOverlay");
-
-const developerButton =
-    document.getElementById("developerButton");
-
-const closeProfile =
-    document.getElementById("closeProfile");
-
-const profileWhatsapp =
-    document.getElementById("profileWhatsapp");
-
-const soundButton =
-    document.getElementById("soundButton");
-
-const codeStream =
-    document.getElementById("codeStream");
+const character =
+    document.getElementById("character");
 
 
-/* =========================================================
-   EXPIRY DISPLAY
-========================================================= */
+/* EXPIRY DISPLAY */
 
-function formatExpiry(){
-
-    const date =
-        new Date(
-            CONFIG.EXPIRY_DATE +
-            "T23:59:59"
-        );
-
-    expiryDisplay.textContent =
-        date.toLocaleDateString(
-            "en-PK",
-            {
-                day:"2-digit",
-                month:"short",
-                year:"numeric"
-            }
-        );
-}
-
-formatExpiry();
+document.getElementById("expiryDate").textContent =
+    new Date(CONFIG.EXPIRY_DATE + "T00:00:00")
+    .toLocaleDateString("en-PK",{
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+    });
 
 
-/* =========================================================
+/* PROFILE IMAGE */
+
+document.querySelector(".profile-img img").src =
+    CONFIG.PROFILE_IMAGE;
+
+
+/* =====================================================
    EXPIRY CHECK
-========================================================= */
+===================================================== */
 
 function isExpired(){
 
-    const now =
+    const today =
         new Date();
+
+    today.setHours(0,0,0,0);
 
     const expiry =
         new Date(
@@ -2422,525 +1088,395 @@ function isExpired(){
             "T23:59:59"
         );
 
-    return now > expiry;
+    return today > expiry;
 }
 
 
-/* =========================================================
-   ACTIVATION CODE STREAM
-========================================================= */
+/* =====================================================
+   WHATSAPP
+===================================================== */
 
-const codeLines = [
-    "[SH] INITIALIZING CORE...",
-    "[VIP] LOADING SECURE MODULE...",
-    "[SYS] CHECKING ENVIRONMENT...",
-    "[AUTH] BUILDING ACCESS ENGINE...",
-    "[UI] LOADING PREMIUM INTERFACE...",
-    "[SEC] SECURITY LAYER ACTIVE...",
-    "[KEY] ACCESS DATABASE READY...",
-    "[SH] SHAKIR HASSAN SYSTEM...",
-    "[VIP] ALMOST DONE...",
-    "[SYS] SYSTEM ACTIVATED..."
-];
+function whatsappMessage(type){
 
-let codeIndex = 0;
+    let text = "";
 
-function writeCode(){
+    if(type === "password"){
 
-    if(codeIndex >= codeLines.length){
-        return;
-    }
-
-    const line =
-        document.createElement("div");
-
-    line.textContent =
-        codeLines[codeIndex];
-
-    codeStream.appendChild(line);
-
-    codeStream.scrollTop =
-        codeStream.scrollHeight;
-
-    codeIndex++;
-
-    setTimeout(
-        writeCode,
-        260
-    );
-}
-
-writeCode();
-
-
-/* =========================================================
-   ACTIVATION -> HOME
-========================================================= */
-
-setTimeout(function(){
-
-    activation.classList.add("hide");
-
-    home.classList.add("show");
-
-},3500);
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-const particles =
-    document.getElementById("particles");
-
-for(let i=0;i<45;i++){
-
-    const p =
-        document.createElement("div");
-
-    p.className =
-        "particle";
-
-    p.style.left =
-        Math.random()*100 + "%";
-
-    p.style.top =
-        (30 + Math.random()*70) + "%";
-
-    p.style.animationDuration =
-        (4 + Math.random()*7) + "s";
-
-    p.style.animationDelay =
-        Math.random()*5 + "s";
-
-    if(Math.random()>.55){
-
-        p.style.background =
-            "var(--red)";
-
-        p.style.boxShadow =
-            "0 0 10px var(--red)";
-    }
-
-    particles.appendChild(p);
-}
-
-
-/* =========================================================
-   PASSWORD SHOW / HIDE
-========================================================= */
-
-showPassword.onclick =
-function(){
-
-    if(password.type === "password"){
-
-        password.type =
-            "text";
-
-        showPassword.textContent =
-            "HIDE";
+        text =
+        "السلام علیکم شاکر بھائی، مجھے VIP سسٹم کے پاسورڈ کے بارے میں معلومات چاہیے۔ براہِ کرم نیا پاسورڈ دے دیں۔";
 
     }else{
 
-        password.type =
-            "password";
-
-        showPassword.textContent =
-            "SHOW";
+        text =
+        "السلام علیکم شاکر بھائی، میں آپ کے Pardesi VIP System میں شامل ہوا ہوں۔ شکریہ ❤️";
 
     }
-};
-
-
-/* =========================================================
-   POPUP HELPER
-========================================================= */
-
-function openPopup(
-    type,
-    icon,
-    title,
-    text,
-    small,
-    buttons
-){
-
-    popup.className =
-        "popup " + (type || "");
-
-    popupIcon.textContent =
-        icon;
-
-    popupTitle.textContent =
-        title;
-
-    popupText.textContent =
-        text;
-
-    popupSmall.textContent =
-        small || "";
-
-    popupButtons.innerHTML =
-        "";
-
-    buttons.forEach(function(btn){
-
-        if(btn.whatsapp){
-
-            const a =
-                document.createElement("a");
-
-            a.className =
-                "popup-whatsapp";
-
-            a.href =
-                btn.url;
-
-            a.target =
-                "_blank";
-
-            a.rel =
-                "noopener";
-
-            a.textContent =
-                btn.text;
-
-            popupButtons.appendChild(a);
-
-        }else{
-
-            const b =
-                document.createElement("button");
-
-            b.className =
-                "popup-button";
-
-            b.textContent =
-                btn.text;
-
-            b.onclick =
-                btn.action;
-
-            popupButtons.appendChild(b);
-        }
-
-    });
-
-    popupOverlay.classList.add("show");
-}
-
-
-function closePopup(){
-
-    popupOverlay.classList.remove(
-        "show"
-    );
-}
-
-
-/* =========================================================
-   WHATSAPP MESSAGE
-========================================================= */
-
-function whatsappURL(message){
 
     return "https://wa.me/" +
         CONFIG.WHATSAPP +
         "?text=" +
-        encodeURIComponent(message);
+        encodeURIComponent(text);
+}
+
+document.getElementById(
+    "profileWhatsApp"
+).href = whatsappMessage("profile");
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+let audioCtx;
+
+function audio(){
+
+    if(!audioCtx){
+
+        audioCtx =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+    }
+
+    return audioCtx;
+}
+
+function tone(freq,duration,type="sine"){
+
+    try{
+
+        const ctx = audio();
+
+        const osc =
+            ctx.createOscillator();
+
+        const gain =
+            ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.value = freq;
+
+        gain.gain.setValueAtTime(
+            .045,
+            ctx.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            ctx.currentTime + duration
+        );
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+
+        osc.stop(
+            ctx.currentTime + duration
+        );
+
+    }catch(e){}
+
+}
+
+function successSound(){
+
+    tone(440,.12);
+
+    setTimeout(
+        ()=>tone(660,.12),
+        120
+    );
+
+    setTimeout(
+        ()=>tone(880,.20),
+        240
+    );
+
+}
+
+function errorSound(){
+
+    tone(180,.16,"sawtooth");
+
+    setTimeout(
+        ()=>tone(100,.22,"sawtooth"),
+        160
+    );
+
 }
 
 
-/* =========================================================
-   EMPTY PASSWORD
-========================================================= */
+/* =====================================================
+   POPUP
+===================================================== */
 
-function showEmptyPassword(){
+function showChecking(){
 
-    openPopup(
-        "",
-        "⚠",
-        "PASSWORD REQUIRED",
-        "براہِ کرم پہلے پاسورڈ درج کریں، پھر سسٹم میں داخل ہونے کی کوشش کریں۔",
-        "🔐 VIP ACCESS REQUIRED",
-        [
-            {
-                text:"ENTER PASSWORD",
-                action:function(){
-                    closePopup();
-                    password.focus();
-                }
-            }
-        ]
-    );
+    popupOverlay.classList.add("show");
+
+    popup.className =
+        "popup checking";
+
+    popupIcon.textContent = "⟳";
+
+    popupTitle.textContent =
+        "VERIFYING ACCESS";
+
+    popupText.textContent =
+        "سسٹم پاسورڈ تصدیق کر رہا ہے، انتظار کریں";
+
+    popupButton.style.display =
+        "none";
+
+}
+
+function showEmpty(){
+
+    popup.className = "popup";
+
+    popupIcon.textContent = "!";
+
+    popupTitle.textContent =
+        "PASSWORD REQUIRED";
+
+    popupText.textContent =
+        "براہِ کرم سسٹم میں داخل ہونے کے لیے پہلے پاسورڈ درج کریں۔";
+
+    popupButton.style.display =
+        "block";
+
+    popupButton.textContent =
+        "ENTER PASSWORD";
+
+    popupButton.onclick = function(){
+
+        popupOverlay.classList.remove("show");
+
+        password.focus();
+
+    };
 
     errorSound();
 }
 
+function showWrong(){
 
-/* =========================================================
-   OLD PASSWORD
-========================================================= */
+    popup.className = "popup";
 
-function showOldPassword(){
+    popupIcon.textContent = "✕";
 
-    const message =
-        "السلام علیکم شاکر بھائی، آپ نے جو پاسورڈ دیا تھا وہ اب تبدیل ہو گیا ہے۔ براہِ کرم مجھے نیا پاسورڈ دے دیں۔ شکریہ۔";
+    popupTitle.textContent =
+        "ACCESS DENIED";
 
-    openPopup(
-        "updated",
-        "🔄",
-        "PASSWORD UPDATED",
-        "آپ کا پاسورڈ درست تھا، لیکن Shakir Hassan کی طرف سے نیا پاسورڈ جاری کیا گیا ہے۔",
-        "نیا VIP پاسورڈ حاصل کرنے کے لیے WhatsApp پر رابطہ کریں۔",
-        [
-            {
-                text:"CLOSE",
-                action:function(){
-                    closePopup();
-                }
-            },
-            {
-                text:"WHATSAPP",
-                whatsapp:true,
-                url:
-                    whatsappURL(message)
-            }
-        ]
-    );
+    popupText.textContent =
+        "غلط پاسورڈ، براہِ کرم درست پاسورڈ دوبارہ درج کریں۔";
+
+    popupButton.style.display =
+        "block";
+
+    popupButton.textContent =
+        "TRY AGAIN";
+
+    popupButton.onclick = function(){
+
+        popupOverlay.classList.remove("show");
+
+        password.focus();
+
+    };
 
     errorSound();
 }
-
-
-/* =========================================================
-   EXPIRED PASSWORD
-========================================================= */
 
 function showExpired(){
 
-    const message =
-        "السلام علیکم شاکر بھائی، میرا پاسورڈ درست ہے لیکن اس کی expiry ہو گئی ہے۔ براہِ کرم نیا پاسورڈ دے دیں۔ شکریہ۔";
+    popup.className = "popup";
 
-    openPopup(
-        "expired",
-        "⏳",
-        "ACCESS EXPIRED",
-        "آپ کا پاسورڈ درست ہے، لیکن اس کی مدت ختم ہو چکی ہے۔ نیا پاسورڈ حاصل کریں۔",
-        "APP EXPIRY DATE: " +
-        CONFIG.EXPIRY_DATE,
-        [
-            {
-                text:"CLOSE",
-                action:function(){
-                    closePopup();
-                }
-            },
-            {
-                text:"GET NEW PASSWORD",
-                whatsapp:true,
-                url:
-                    whatsappURL(message)
-            }
-        ]
-    );
+    popupIcon.textContent = "⌛";
+
+    popupTitle.textContent =
+        "PASSWORD EXPIRED";
+
+    popupText.textContent =
+        "آپ کا پاسورڈ درست ہے لیکن اس کی مدت ختم ہو چکی ہے۔ براہِ کرم پردیسی سے نیا پاسورڈ حاصل کریں۔";
+
+    popupButton.style.display =
+        "block";
+
+    popupButton.textContent =
+        "GET NEW PASSWORD";
+
+    popupButton.onclick = function(){
+
+        window.open(
+            whatsappMessage("password"),
+            "_blank"
+        );
+
+    };
+
+    errorSound();
+}
+
+function showChanged(){
+
+    popup.className = "popup";
+
+    popupIcon.textContent = "⚠";
+
+    popupTitle.textContent =
+        "PASSWORD UPDATED";
+
+    popupText.textContent =
+        "آپ کا پرانا پاسورڈ درست تھا، لیکن سسٹم کی طرف سے پاسورڈ تبدیل کر دیا گیا ہے۔ براہِ کرم نیا پاسورڈ حاصل کریں۔";
+
+    popupButton.style.display =
+        "block";
+
+    popupButton.textContent =
+        "GET NEW PASSWORD";
+
+    popupButton.onclick = function(){
+
+        window.open(
+            whatsappMessage("password"),
+            "_blank"
+        );
+
+    };
 
     errorSound();
 }
 
 
-/* =========================================================
-   WRONG PASSWORD
-========================================================= */
+/* =====================================================
+   SUCCESS
+===================================================== */
 
-function showWrongPassword(){
+function showSuccess(){
 
-    openPopup(
-        "",
-        "✕",
-        "ACCESS DENIED",
-        "غلط پاسورڈ، براہِ کرم درست پاسورڈ دوبارہ درج کریں۔",
-        "⚠ VIP SECURITY CHECK FAILED",
-        [
-            {
-                text:"TRY AGAIN",
-                action:function(){
-                    closePopup();
-                    password.focus();
-                }
-            }
-        ]
-    );
+    popup.className =
+        "popup success";
 
-    errorSound();
-}
+    popupIcon.textContent =
+        "✓";
 
+    popupTitle.textContent =
+        "ACCESS GRANTED";
 
-/* =========================================================
-   CORRECT PASSWORD
-========================================================= */
+    popupText.textContent =
+        "پاسورڈ بالکل درست ہے، آپ کامیابی سے شاکر حسن پردیسی کے سسٹم میں داخل ہو چکے ہیں۔";
 
-function showCorrectPassword(){
-
-    openPopup(
-        "success",
-        "✓",
-        "ACCESS GRANTED",
-        "پاسورڈ بالکل درست ہے۔ آپ کامیابی سے شاکر حسن پردیسی کے سسٹم میں داخل ہو چکے ہیں۔",
-        "✨ اب آپ کو یہاں VIP EXPERIENCE ملے گی۔",
-        [
-            {
-                text:"CONTINUE",
-                action:function(){
-
-                    closePopup();
-
-                    setTimeout(
-                        function(){
-
-                            welcomeScreen
-                                .classList
-                                .add("show");
-
-                        },
-                        250
-                    );
-
-                }
-            }
-        ]
-    );
+    popupButton.style.display =
+        "none";
 
     successSound();
+
+    /*
+       CHARACTER KICK / KNOCK-BACK EFFECT
+    */
+
+    character.style.transition =
+        "1s cubic-bezier(.2,.8,.2,1)";
+
+    character.style.transform =
+        "translateX(150px) rotate(12deg)";
+
+    setTimeout(function(){
+
+        popupOverlay.classList.remove("show");
+
+        welcomeScreen.classList.add("show");
+
+    },1200);
+
 }
 
 
-/* =========================================================
+/* =====================================================
    LOGIN
-========================================================= */
+===================================================== */
 
-loginButton.onclick =
-function(){
+loginBtn.onclick = function(){
+
+    try{
+        audio().resume();
+    }catch(e){}
 
     const value =
         password.value.trim();
 
-
     if(!value){
 
-        showEmptyPassword();
+        popupOverlay.classList.add("show");
+
+        showEmpty();
 
         return;
     }
 
+    loginBtn.disabled = true;
 
-    loginButton.disabled =
-        true;
+    loginBtn.textContent =
+        "VERIFYING...";
 
-    loginButton.textContent =
-        "CHECKING...";
-
-
-    openPopup(
-        "",
-        "⟳",
-        "VERIFYING ACCESS",
-        "سسٹم پاسورڈ کی تصدیق کر رہا ہے، انتظار کریں۔",
-        "SECURITY ENGINE ACTIVE",
-        []
-    );
-
+    showChecking();
 
     setTimeout(function(){
 
         /*
-           FIRST:
-           Check whether entered password is an old password.
+           اگر نیا password درست ہے
         */
 
-        if(
-            CONFIG.OLD_PASSWORDS
-            .includes(value)
-        ){
+        if(value === CONFIG.NEW_PASSWORD){
 
-            closePopup();
+            if(isExpired()){
 
-            setTimeout(
-                showOldPassword,
-                180
-            );
+                showExpired();
+
+            }else{
+
+                showSuccess();
+
+            }
 
         }
 
         /*
-           SECOND:
-           Check current password.
+           پرانا password
         */
 
-        else if(
-            value !==
-            CONFIG.CURRENT_PASSWORD
-        ){
+        else if(value === CONFIG.OLD_PASSWORD){
 
-            closePopup();
-
-            setTimeout(
-                showWrongPassword,
-                180
-            );
+            showChanged();
 
         }
 
         /*
-           THIRD:
-           Password correct but expiry finished.
-        */
-
-        else if(
-            isExpired()
-        ){
-
-            closePopup();
-
-            setTimeout(
-                showExpired,
-                180
-            );
-
-        }
-
-        /*
-           FOURTH:
-           Everything correct.
+           غلط password
         */
 
         else{
 
-            closePopup();
-
-            setTimeout(
-                showCorrectPassword,
-                180
-            );
+            showWrong();
 
         }
 
+        loginBtn.disabled = false;
 
-        loginButton.disabled =
-            false;
-
-        loginButton.textContent =
-            "LOGIN";
+        loginBtn.textContent =
+            "⚡ LOGIN";
 
     },1500);
 
 };
 
 
-/* =========================================================
-   ENTER KEY
-========================================================= */
+/* ENTER KEY */
 
 password.addEventListener(
     "keydown",
@@ -2948,7 +1484,7 @@ password.addEventListener(
 
         if(e.key === "Enter"){
 
-            loginButton.click();
+            loginBtn.click();
 
         }
 
@@ -2956,146 +1492,81 @@ password.addEventListener(
 );
 
 
-/* =========================================================
-   LOGOUT
-========================================================= */
+/* =====================================================
+   WELCOME → APPLICATION
+===================================================== */
 
-logoutButton.onclick =
-function(){
+document.getElementById(
+    "enterBtn"
+).onclick = function(){
 
-    password.value =
-        "";
-
-    password.type =
-        "password";
-
-    showPassword.textContent =
-        "SHOW";
-
-    closePopup();
-
-    welcomeScreen
-        .classList
-        .remove("show");
-
-    profileOverlay
-        .classList
-        .remove("show");
+    window.location.href =
+        CONFIG.APPLICATION_URL;
 
 };
 
 
-/* =========================================================
-   CONTINUE
-========================================================= */
+/* LOGOUT */
 
-continueButton.onclick =
-function(){
+document.getElementById(
+    "logoutBtn"
+).onclick = function(){
 
-    welcomeScreen
-        .classList
-        .remove("show");
+    welcomeScreen.classList.remove("show");
 
-    openProfile();
+    password.value = "";
+
+    character.style.transition =
+        "none";
+
+    character.style.transform =
+        "translateX(0)";
 
 };
 
 
-/* =========================================================
+/* =====================================================
    DEVELOPER PROFILE
-========================================================= */
+===================================================== */
 
-function openProfile(){
+const profileOverlay =
+    document.getElementById(
+        "profileOverlay"
+    );
 
-    profileOverlay
-        .classList
-        .add("show");
+document.getElementById(
+    "developerBtn"
+).onclick = function(){
 
-    profileWhatsapp.href =
-        whatsappURL(
-            "السلام علیکم شاکر بھائی، آپ کا VIP سسٹم بہت اچھا ہے۔ دل سے شکریہ، میں آپ کو Thank You کہنا چاہتا تھا۔"
-        );
+    profileOverlay.classList.add("show");
 
-    clickSound();
-}
-
-developerButton.onclick =
-function(){
-
-    openProfile();
+    tone(520,.08);
 
 };
 
-closeProfile.onclick =
-function(){
+document.getElementById(
+    "backBtn"
+).onclick = function(){
 
-    profileOverlay
-        .classList
-        .remove("show");
+    profileOverlay.classList.remove("show");
 
 };
 
 
-/* =========================================================
-   REAL TIME PAKISTAN CLOCK
-========================================================= */
+/* =====================================================
+   REAL-TIME PAKISTAN CLOCK
+===================================================== */
 
 function updateClock(){
 
     const now =
         new Date();
 
-    const time =
-        now.toLocaleTimeString(
-            "en-US",
-            {
-                timeZone:
-                    "Asia/Karachi",
+    /*
+       اگر بعد میں clock دکھانا ہو
+       تو یہاں element add کیا جا سکتا ہے۔
+    */
 
-                hour:
-                    "2-digit",
-
-                minute:
-                    "2-digit",
-
-                second:
-                    "2-digit",
-
-                hour12:
-                    true
-            }
-        );
-
-    const date =
-        now.toLocaleDateString(
-            "en-PK",
-            {
-                timeZone:
-                    "Asia/Karachi",
-
-                weekday:
-                    "long",
-
-                day:
-                    "2-digit",
-
-                month:
-                    "short",
-
-                year:
-                    "numeric"
-            }
-        );
-
-    document
-        .getElementById("clock")
-        .textContent =
-        time;
-
-    document
-        .getElementById("dateNow")
-        .textContent =
-        date;
 }
 
 updateClock();
@@ -3106,268 +1577,81 @@ setInterval(
 );
 
 
-/* =========================================================
-   AUDIO ENGINE
-========================================================= */
+/* =====================================================
+   BOOT / ENTRY ANIMATION
+===================================================== */
 
-let audioContext =
-    null;
+const intro =
+    document.getElementById("intro");
 
-let soundEnabled =
-    true;
+const bootCode =
+    document.getElementById("bootCode");
 
+const bootStatus =
+    document.getElementById("bootStatus");
 
-function getAudio(){
+const bootLines = [
 
-    if(!audioContext){
+    "PARDESI_CORE // START",
+    "LOADING VIP ENGINE...",
+    "GENERATING SECURE SESSION...",
+    "CHECKING SYSTEM MODULES...",
+    "INITIALIZING ACCESS CONTROL...",
+    "LOADING USER INTERFACE...",
+    "ENCRYPTION MODULE READY...",
+    "VIP INTERFACE READY...",
+    "ALMOST DONE...",
+    "SYSTEM ACTIVATED ✓"
 
-        audioContext =
-            new (
-                window.AudioContext ||
-                window.webkitAudioContext
-            )();
+];
 
-    }
+let line = 0;
 
-    return audioContext;
-}
+function boot(){
 
+    if(line < bootLines.length){
 
-function playTone(
-    frequency,
-    duration,
-    type,
-    volume
-){
+        bootCode.innerHTML +=
+            bootLines[line] +
+            "<br>";
 
-    if(!soundEnabled){
-        return;
-    }
+        line++;
 
-    try{
-
-        const ctx =
-            getAudio();
-
-        if(ctx.state === "suspended"){
-            ctx.resume();
-        }
-
-        const osc =
-            ctx.createOscillator();
-
-        const gain =
-            ctx.createGain();
-
-        osc.type =
-            type;
-
-        osc.frequency.value =
-            frequency;
-
-        gain.gain.setValueAtTime(
-            volume,
-            ctx.currentTime
+        setTimeout(
+            boot,
+            180
         );
 
-        gain.gain.exponentialRampToValueAtTime(
-            .001,
-            ctx.currentTime +
-            duration
-        );
+    }else{
 
-        osc.connect(gain);
+        bootStatus.textContent =
+            "SYSTEM ACTIVATED • WELCOME";
 
-        gain.connect(
-            ctx.destination
-        );
+        setTimeout(function(){
 
-        osc.start();
+            intro.classList.add("hide");
 
-        osc.stop(
-            ctx.currentTime +
-            duration
-        );
-
-    }catch(e){}
-
-}
-
-
-/* =========================================================
-   CLICK SOUND
-========================================================= */
-
-function clickSound(){
-
-    playTone(
-        620,
-        .06,
-        "sine",
-        .025
-    );
-
-}
-
-
-/* =========================================================
-   SUCCESS SOUND
-========================================================= */
-
-function successSound(){
-
-    playTone(
-        420,
-        .10,
-        "sine",
-        .035
-    );
-
-    setTimeout(
-        function(){
-
-            playTone(
-                620,
-                .10,
-                "sine",
-                .035
-            );
-
-        },
-        100
-    );
-
-    setTimeout(
-        function(){
-
-            playTone(
-                880,
-                .18,
-                "sine",
-                .045
-            );
-
-        },
-        210
-    );
-
-}
-
-
-/* =========================================================
-   ERROR SOUND
-========================================================= */
-
-function errorSound(){
-
-    playTone(
-        190,
-        .14,
-        "sawtooth",
-        .03
-    );
-
-    setTimeout(
-        function(){
-
-            playTone(
-                110,
-                .20,
-                "sawtooth",
-                .03
-            );
-
-        },
-        150
-    );
-
-}
-
-
-/* =========================================================
-   SOUND TOGGLE
-========================================================= */
-
-soundButton.onclick =
-function(){
-
-    soundEnabled =
-        !soundEnabled;
-
-    soundButton.textContent =
-        soundEnabled
-            ? "🔊"
-            : "🔇";
-
-    if(soundEnabled){
-        clickSound();
-    }
-
-};
-
-
-/* =========================================================
-   CLICK FEEDBACK
-========================================================= */
-
-document.addEventListener(
-    "click",
-    function(e){
-
-        if(
-            e.target.tagName ===
-            "BUTTON"
-        ){
-
-            if(
-                e.target !==
-                soundButton
-            ){
-
-                clickSound();
-
-            }
-
-        }
+        },900);
 
     }
-);
+
+}
+
+boot();
 
 
-/* =========================================================
-   START AUDIO AFTER FIRST USER INTERACTION
-========================================================= */
-
-document.addEventListener(
-    "touchstart",
-    function(){
-
-        try{
-
-            getAudio().resume();
-
-        }catch(e){}
-
-    },
-    {
-        once:true
-    }
-);
+/* AUDIO AFTER FIRST TOUCH */
 
 document.addEventListener(
     "click",
     function(){
 
         try{
-
-            getAudio().resume();
-
+            audio().resume();
         }catch(e){}
 
     },
-    {
-        once:true
-    }
+    {once:true}
 );
 
 </script>

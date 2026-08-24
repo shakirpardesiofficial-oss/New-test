@@ -1,99 +1,2472 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
 <title>Pardesi VIP Application</title>
+
 <style>
-:root{--r:#ff1744;--c:#00e5ff;--g:#00ff9d;--y:#ffd166;--p:#b45cff;--bg:#020205}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
-body{display:flex;align-items:center;justify-content:center}
-.bg{position:fixed;inset:0;z-index:-5;background:linear-gradient(180deg,#0007,#000d),url("https://images.unsplash.com/photo-1666615435088-4865bf5ed3fd?auto=format&fit=crop&w=1200&q=90") center/cover;animation:zoom 12s ease-in-out infinite alternate}
-.bg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,transparent 0 18%,#0009 65%,#020205 100%)}
-@keyframes zoom{to{transform:scale(1.1)}}
-.grid{position:fixed;inset:0;z-index:-3;background-image:linear-gradient(#fff1 1px,transparent 1px),linear-gradient(90deg,#fff1 1px,transparent 1px);background-size:25px 25px}
-.scan{position:fixed;z-index:-2;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--c),transparent);box-shadow:0 0 15px var(--c);animation:scan 5s linear infinite}
-@keyframes scan{from{top:-3%}to{top:103%}}
-.shell{position:relative;width:min(96vw,460px);height:min(94vh,820px);overflow:hidden;background:#02040999;border:1px solid #00e5ff66;box-shadow:0 0 55px #00e5ff1c,0 0 90px #ff17441a,inset 0 0 70px #000;clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px),0 20px)}
-.shell:before{content:"";position:absolute;inset:8px;border:1px solid #ff174428;pointer-events:none;z-index:50}
-.top{position:absolute;top:0;left:20px;right:20px;height:24px;overflow:hidden;background:linear-gradient(90deg,#79001d,var(--r),#7600b8,var(--c));z-index:60}
-.marquee{white-space:nowrap;font:900 8px/24px monospace;letter-spacing:2px;animation:marquee 14s linear infinite}
-@keyframes marquee{to{transform:translateX(-100%)}}
-.header{position:absolute;top:45px;left:22px;right:22px;text-align:center;z-index:10}
-.welcome{font:900 10px Arial;letter-spacing:6px}
-.title{margin-top:5px;color:var(--r);font:1000 42px/43px Arial;letter-spacing:6px;text-shadow:0 0 9px var(--r),0 0 30px #ff1744aa;animation:pulse 2.5s infinite alternate}
-@keyframes pulse{to{transform:scale(1.03)}}
-.subtitle{margin-top:5px;color:var(--c);font:900 12px monospace;letter-spacing:5px;text-shadow:0 0 12px var(--c)}
-.vip{position:absolute;top:82px;right:10px;writing-mode:vertical-rl;transform:rotate(180deg);padding:8px 5px;border:1px solid #ffd16680;background:#0008;color:var(--y);font:900 7px monospace;letter-spacing:2px;z-index:20}
-.status{position:absolute;top:137px;left:25px;right:25px;text-align:center;color:var(--g);font:900 7px monospace;letter-spacing:2px;text-shadow:0 0 10px var(--g)}
-.status i{font-style:normal;animation:blink 1.2s infinite}@keyframes blink{50%{opacity:.3}}
-.expiry{position:absolute;top:158px;left:38px;right:38px;padding:8px;text-align:center;border:1px solid #ffd16670;background:#0009;z-index:10}
-.expiry b{display:block;color:var(--y);font:900 8px monospace;letter-spacing:2px}.expiry strong{display:block;margin-top:4px;font:1000 12px monospace}.expiry small{display:block;margin-top:3px;color:#b7bec8;font:700 7px monospace}
-.caption{position:absolute;top:220px;left:20px;right:20px;text-align:center;color:#fff;font:900 8px monospace;letter-spacing:3px;text-shadow:0 0 10px var(--r)}
-.line{position:absolute;top:237px;left:18%;right:18%;height:1px;background:linear-gradient(90deg,transparent,var(--r),var(--c),transparent);box-shadow:0 0 12px var(--r)}
-.login{position:absolute;top:265px;left:29px;right:29px;z-index:10}
-.instruction{font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;direction:rtl;text-align:center;font-size:15px;line-height:2.1;font-weight:900;margin-bottom:8px}
-.label{text-align:center;color:var(--c);font:900 8px monospace;letter-spacing:2px;margin-bottom:7px}
-.box{position:relative}input{width:100%;height:53px;background:#000b;border:1px solid #ff1744aa;outline:0;color:#fff;text-align:center;padding:0 65px 0 12px;font:900 14px monospace;letter-spacing:2px;box-shadow:inset 0 0 18px #000}
-input:focus{border-color:var(--c);box-shadow:0 0 20px #00e5ff33,inset 0 0 18px #00e5ff0d}
-.show{position:absolute;right:14px;top:19px;color:var(--y);font:900 7px monospace;cursor:pointer}
-.enter{width:100%;height:54px;margin-top:12px;border:1px solid var(--r);background:linear-gradient(90deg,#ff174422,#b45cff22,#00e5ff1c);color:#fff;font:1000 10px monospace;letter-spacing:2px;position:relative;overflow:hidden;box-shadow:0 0 22px #ff174426}
-.enter:after{content:"";position:absolute;inset:0;left:-100%;background:linear-gradient(90deg,transparent,#fff3,transparent);animation:shine 2s linear infinite}
-@keyframes shine{to{left:100%}}
-.message{height:18px;margin-top:7px;text-align:center;font:900 8px monospace}.success{color:var(--g)}.error{color:var(--r)}
-.bottom{position:absolute;left:20px;right:20px;bottom:53px;height:73px;text-align:center}
-.credit{color:var(--p);font:900 7px monospace;letter-spacing:2px}.name{margin-top:3px;font:1000 10px monospace;letter-spacing:2px}.time{margin-top:5px;color:var(--y);font:900 13px monospace;text-shadow:0 0 12px var(--y)}.date{margin-top:2px;color:#8a94a3;font:700 7px monospace}
-.dev{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);min-width:170px;height:31px;background:#000b;border:1px solid #ff1744b3;color:var(--r);font:900 7px monospace;letter-spacing:1.5px;z-index:15}
-.footer{position:absolute;bottom:8px;left:20px;right:20px;text-align:center;color:#7c8792;font:900 5.5px monospace;letter-spacing:1px}
-.overlay{display:none;position:absolute;inset:0;z-index:100;align-items:center;justify-content:center;padding:20px;background:#000e;backdrop-filter:blur(8px)}.overlay.show{display:flex;animation:fade .25s}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-.modal{width:100%;max-width:350px;padding:24px 18px;text-align:center;background:linear-gradient(145deg,#10040a,#02070c);border:1px solid var(--r);box-shadow:0 0 45px #ff174466;animation:zoom .35s}
-@keyframes zoom{from{transform:scale(.65)}to{transform:scale(1)}}
-.icon{width:78px;height:78px;margin:auto;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--r);color:var(--r);font:900 32px Arial;box-shadow:0 0 28px #ff174488}.checking .icon{color:var(--y);border-color:var(--y);animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
-.modal.success{border-color:var(--g);box-shadow:0 0 45px #00ff9d66}.modal.success .icon{color:var(--g);border-color:var(--g)}
-.modal h2{margin:16px 0 8px;font:1000 20px Arial;letter-spacing:2px}.modal p{margin:0;font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;direction:rtl;color:#ddd;font-size:13px;line-height:2}.modal button{width:100%;height:45px;margin-top:17px;border:1px solid var(--r);background:#ff174414;color:#fff;font:900 9px monospace;letter-spacing:2px}
-.welcomeScreen{background:linear-gradient(#0008,#000f),url("https://images.unsplash.com/photo-1666615435088-4865bf5ed3fd?auto=format&fit=crop&w=1200&q=90") center/cover}
-.granted{color:var(--g);font:900 10px monospace;letter-spacing:3px;text-shadow:0 0 15px var(--g)}.welcomeScreen h1{font:1000 24px Arial;line-height:1.2;letter-spacing:2px;margin:17px 0 9px}.welcomeScreen h1 span{color:var(--r)}.thanks{font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;direction:rtl;font-size:16px;line-height:2.1;font-weight:900}.detail{margin-top:8px;color:#ccd3da;font:700 8px/1.8 monospace}.cyan{border-color:var(--c)!important;color:var(--c)!important}
-.profileImg{width:120px;height:120px;margin:auto;padding:4px;border:2px solid var(--r);border-radius:50%;box-shadow:0 0 30px #ff174477}.profileImg img{width:100%;height:100%;object-fit:cover;border-radius:50%}.profile h2{margin:14px 0 4px;font:1000 20px Arial;letter-spacing:2px}.role{color:var(--r);font:900 8px monospace;letter-spacing:2px}.profileLine{margin-top:12px;color:#cbd2d9;font:700 8px/1.9 monospace}.sig{margin-top:12px;font:28px "Brush Script MT",cursive}.wa{display:block;margin-top:16px;padding:13px;text-decoration:none;background:#00ff9d12;border:1px solid var(--g);color:var(--g);font:900 9px monospace}.back{margin-top:9px;width:100%;height:43px;background:#ff174410!important;border:1px solid var(--r)!important;color:var(--r)!important}
-@media(max-height:700px){.header{top:39px}.title{font-size:37px}.expiry{top:145px}.status{top:124px}.caption{top:202px}.line{top:219px}.login{top:245px}.bottom{bottom:47px}.dev{bottom:22px}.footer{bottom:6px}}
-@media(max-width:370px){.title{font-size:34px}.login{left:22px;right:22px}.instruction{font-size:13px}.expiry{left:28px;right:28px}}
+
+/* =====================================================
+   PARDESI VIP APPLICATION
+   PASSWORD: PKR200
+===================================================== */
+
+:root{
+    --red:#ff1744;
+    --cyan:#00eaff;
+    --green:#00ff9d;
+    --gold:#ffd166;
+    --purple:#a855f7;
+    --blue:#4285ff;
+
+    --bg:#020306;
+    --panel:rgba(7,9,15,.96);
+    --white:#ffffff;
+    --muted:#87919d;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#020306;
+    color:white;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+body{
+    position:relative;
+}
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,23,68,.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 30%,
+            rgba(0,234,255,.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(168,85,247,.10),
+            transparent 35%
+        ),
+        #020306;
+
+    animation:
+        bgMove 12s ease-in-out infinite alternate;
+
+    pointer-events:none;
+}
+
+@keyframes bgMove{
+    0%{
+        filter:hue-rotate(0deg);
+    }
+    100%{
+        filter:hue-rotate(25deg);
+    }
+}
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.grid{
+    position:fixed;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size:25px 25px;
+
+    pointer-events:none;
+}
+
+/* =====================================================
+   SCAN LINE
+===================================================== */
+
+.scan{
+    position:fixed;
+    left:0;
+    top:-5px;
+
+    width:100%;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px var(--cyan);
+
+    opacity:.45;
+
+    animation:
+        scan 5s linear infinite;
+
+    z-index:999;
+    pointer-events:none;
+}
+
+@keyframes scan{
+    from{
+        top:-5px;
+    }
+    to{
+        top:105%;
+    }
+}
+
+/* =====================================================
+   MAIN APP
+===================================================== */
+
+.app{
+    position:relative;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+}
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+#particles{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:2;
+}
+
+.particle{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:var(--cyan);
+
+    box-shadow:
+        0 0 10px var(--cyan);
+
+    animation:
+        particleMove
+        linear infinite;
+}
+
+@keyframes particleMove{
+
+    0%{
+        transform:
+            translateY(110vh)
+            scale(.5);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    85%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translateY(-20vh)
+            scale(1.4);
+
+        opacity:0;
+    }
+}
+
+/* =====================================================
+   ACTIVATION SCREEN
+===================================================== */
+
+.activation{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:25px;
+
+    z-index:50;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,234,255,.09),
+            transparent 38%
+        ),
+        #020306;
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
+}
+
+.activation.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.activation-box{
+    width:100%;
+    max-width:430px;
+
+    position:relative;
+}
+
+/* BIG CORE */
+
+.core{
+    width:145px;
+    height:145px;
+
+    margin:0 auto 30px;
+
+    border-radius:50%;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:
+        1px solid
+        rgba(0,234,255,.8);
+
+    box-shadow:
+        0 0 20px rgba(0,234,255,.35),
+        0 0 70px rgba(0,234,255,.15),
+        inset 0 0 30px rgba(0,234,255,.12);
+
+    animation:
+        corePulse
+        2s ease-in-out infinite;
+}
+
+@keyframes corePulse{
+
+    50%{
+        transform:scale(1.04);
+
+        box-shadow:
+            0 0 35px rgba(0,234,255,.6),
+            0 0 100px rgba(0,234,255,.2),
+            inset 0 0 45px rgba(0,234,255,.18);
+    }
+}
+
+.core::before{
+    content:"";
+
+    position:absolute;
+    inset:-12px;
+
+    border-radius:50%;
+
+    border:
+        1px dashed
+        rgba(255,23,68,.8);
+
+    animation:
+        rotate
+        5s linear infinite;
+}
+
+.core::after{
+    content:"";
+
+    position:absolute;
+    inset:-25px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(168,85,247,.25);
+
+    animation:
+        rotateReverse
+        8s linear infinite;
+}
+
+@keyframes rotate{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes rotateReverse{
+    to{
+        transform:rotate(-360deg);
+    }
+}
+
+.core-text{
+    font-size:11px;
+    font-weight:900;
+
+    letter-spacing:3px;
+
+    color:var(--cyan);
+
+    text-shadow:
+        0 0 15px var(--cyan);
+
+    animation:
+        blinkText
+        1s infinite;
+}
+
+@keyframes blinkText{
+    50%{
+        opacity:.45;
+    }
+}
+
+/* ACTIVATION TITLE */
+
+.activation-title{
+    font-size:14px;
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    color:#fff;
+
+    margin-bottom:12px;
+}
+
+.activation-brand{
+    font-size:34px;
+    font-weight:1000;
+
+    letter-spacing:7px;
+
+    color:var(--red);
+
+    text-shadow:
+        0 0 8px var(--red),
+        0 0 30px rgba(255,23,68,.6);
+
+    margin-bottom:8px;
+}
+
+.activation-sub{
+    font-size:9px;
+
+    color:var(--muted);
+
+    letter-spacing:3px;
+
+    margin-bottom:25px;
+}
+
+/* TERMINAL */
+
+.terminal{
+    min-height:90px;
+
+    padding:14px;
+
+    border:
+        1px solid
+        rgba(0,234,255,.2);
+
+    background:
+        rgba(0,0,0,.55);
+
+    text-align:left;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:8px;
+
+    line-height:1.9;
+
+    color:#9cecff;
+
+    overflow:hidden;
+
+    box-shadow:
+        inset 0 0 25px rgba(0,234,255,.04);
+}
+
+.terminal-line{
+    white-space:nowrap;
+}
+
+.terminal-line::before{
+    content:"> ";
+    color:var(--red);
+}
+
+/* =====================================================
+   LOGIN SCREEN
+===================================================== */
+
+.login-screen{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:25px;
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:scale(1.04);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        visibility .8s ease;
+
+    z-index:20;
+}
+
+.login-screen.show{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+}
+
+.login-card{
+    width:100%;
+    max-width:430px;
+
+    position:relative;
+
+    padding:28px 20px 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9,12,19,.97),
+            rgba(2,3,7,.98)
+        );
+
+    border:
+        1px solid
+        rgba(0,234,255,.25);
+
+    box-shadow:
+        0 0 40px rgba(0,0,0,.8),
+        0 0 80px rgba(0,234,255,.06);
+
+    overflow:hidden;
+}
+
+.login-card::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--red),
+            var(--cyan),
+            transparent
+        );
+
+    animation:
+        borderRun
+        3s linear infinite;
+}
+
+@keyframes borderRun{
+    from{
+        transform:translateX(-100%);
+    }
+    to{
+        transform:translateX(100%);
+    }
+}
+
+/* LOGO */
+
+.logo-wrap{
+    width:105px;
+    height:105px;
+
+    margin:0 auto 18px;
+
+    border-radius:50%;
+
+    padding:3px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--red),
+            var(--purple),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 30px rgba(255,23,68,.25);
+}
+
+.logo-wrap img{
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    display:block;
+
+    background:#050505;
+}
+
+/* HEADER */
+
+.welcome-small{
+    text-align:center;
+
+    font-size:11px;
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    color:#fff;
+
+    margin-bottom:5px;
+}
+
+.brand{
+    text-align:center;
+
+    font-size:39px;
+
+    line-height:1;
+
+    font-weight:1000;
+
+    letter-spacing:5px;
+
+    color:var(--red);
+
+    text-shadow:
+        0 0 10px var(--red),
+        0 0 30px rgba(255,23,68,.5);
+
+    animation:
+        brandFloat
+        2.5s ease-in-out infinite alternate;
+}
+
+@keyframes brandFloat{
+    from{
+        transform:translateY(-2px);
+    }
+    to{
+        transform:translateY(2px);
+    }
+}
+
+.vip-title{
+    text-align:center;
+
+    margin-top:8px;
+
+    font-size:13px;
+
+    font-weight:1000;
+
+    letter-spacing:6px;
+
+    color:var(--cyan);
+
+    text-shadow:
+        0 0 15px var(--cyan);
+}
+
+/* VIP MEMBER */
+
+.vip-badge{
+    display:block;
+
+    width:max-content;
+
+    margin:16px auto 20px;
+
+    padding:7px 12px;
+
+    border:
+        1px solid
+        rgba(255,209,102,.45);
+
+    color:var(--gold);
+
+    background:
+        rgba(255,209,102,.04);
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    box-shadow:
+        0 0 15px rgba(255,209,102,.08);
+}
+
+/* EXPIRY */
+
+.expiry{
+    width:100%;
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    padding:11px 10px;
+
+    border:
+        1px solid
+        rgba(255,23,68,.25);
+
+    background:
+        rgba(255,23,68,.035);
+}
+
+.expiry-label{
+    display:block;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    color:var(--muted);
+
+    margin-bottom:5px;
+}
+
+.expiry-text{
+    font-size:11px;
+
+    font-weight:1000;
+
+    color:var(--gold);
+
+    letter-spacing:1px;
+
+    text-shadow:
+        0 0 10px rgba(255,209,102,.4);
+}
+
+/* PASSWORD INSTRUCTION */
+
+.instruction{
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:1000;
+
+    margin-bottom:10px;
+
+    color:white;
+}
+
+/* PASSWORD */
+
+.password-wrap{
+    position:relative;
+
+    width:100%;
+}
+
+.password{
+    width:100%;
+    height:55px;
+
+    border:
+        1px solid
+        rgba(0,234,255,.45);
+
+    outline:none;
+
+    background:
+        rgba(0,0,0,.7);
+
+    color:white;
+
+    padding:0 65px 0 16px;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+    text-align:center;
+
+    box-shadow:
+        inset 0 0 20px rgba(0,234,255,.04);
+
+    transition:.25s;
+}
+
+.password:focus{
+    border-color:var(--cyan);
+
+    box-shadow:
+        0 0 25px rgba(0,234,255,.15),
+        inset 0 0 20px rgba(0,234,255,.07);
+}
+
+.password::placeholder{
+    color:#56616d;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+}
+
+.show{
+    position:absolute;
+
+    right:13px;
+    top:20px;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    color:var(--gold);
+
+    cursor:pointer;
+}
+
+/* ENTER BUTTON */
+
+.enter-btn{
+    width:100%;
+    height:54px;
+
+    margin-top:14px;
+
+    border:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--red),
+            #b800ff,
+            var(--cyan)
+        );
+
+    background-size:200% 100%;
+
+    color:#fff;
+
+    font-size:10px;
+
+    font-weight:1000;
+
+    letter-spacing:3px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 25px rgba(255,23,68,.18);
+
+    animation:
+        buttonGradient
+        4s linear infinite;
+}
+
+@keyframes buttonGradient{
+    0%{
+        background-position:0% 50%;
+    }
+    100%{
+        background-position:200% 50%;
+    }
+}
+
+.enter-btn:active{
+    transform:scale(.97);
+}
+
+/* BOTTOM CONTROLS */
+
+.controls{
+    display:flex;
+
+    gap:8px;
+
+    margin-top:12px;
+}
+
+.control-btn{
+    flex:1;
+
+    height:38px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.14);
+
+    background:
+        rgba(255,255,255,.035);
+
+    color:#dce4eb;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+    cursor:pointer;
+}
+
+.control-btn:active{
+    transform:scale(.96);
+}
+
+/* PROFILE */
+
+.profile-btn{
+    margin-top:12px;
+
+    width:100%;
+
+    height:38px;
+
+    border:
+        1px solid
+        rgba(168,85,247,.45);
+
+    background:
+        rgba(168,85,247,.05);
+
+    color:#d9a8ff;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+/* STATUS */
+
+.system-status{
+    text-align:center;
+
+    margin-top:13px;
+
+    color:var(--green);
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    animation:
+        statusBlink
+        1.5s infinite;
+}
+
+@keyframes statusBlink{
+    50%{
+        opacity:.35;
+    }
+}
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.overlay{
+    position:absolute;
+    inset:0;
+
+    z-index:200;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:22px;
+
+    background:
+        rgba(0,0,0,.86);
+
+    backdrop-filter:
+        blur(7px);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s;
+}
+
+.overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.popup{
+    width:100%;
+    max-width:350px;
+
+    padding:25px 18px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13,7,12,.99),
+            rgba(2,4,8,.99)
+        );
+
+    border:
+        1px solid
+        var(--red);
+
+    box-shadow:
+        0 0 50px rgba(255,23,68,.35);
+
+    transform:scale(.65);
+
+    animation:
+        popupIn
+        .35s ease forwards;
+}
+
+@keyframes popupIn{
+    to{
+        transform:scale(1);
+    }
+}
+
+.popup-icon{
+    width:72px;
+    height:72px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:
+        2px solid
+        var(--red);
+
+    color:var(--red);
+
+    font-size:30px;
+    font-weight:1000;
+
+    box-shadow:
+        0 0 30px rgba(255,23,68,.45);
+
+    animation:
+        iconPulse
+        1s infinite alternate;
+}
+
+@keyframes iconPulse{
+    to{
+        transform:scale(1.08);
+    }
+}
+
+.popup h2{
+    margin-top:18px;
+
+    font-size:20px;
+
+    font-weight:1000;
+
+    letter-spacing:2px;
+}
+
+.popup p{
+    margin-top:10px;
+
+    color:#d5dce2;
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+.popup-close{
+    width:100%;
+    height:44px;
+
+    margin-top:18px;
+
+    border:
+        1px solid
+        var(--red);
+
+    background:
+        rgba(255,23,68,.07);
+
+    color:#fff;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+/* =====================================================
+   SUCCESS WELCOME
+===================================================== */
+
+.welcome-screen{
+    position:absolute;
+    inset:0;
+
+    z-index:150;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:25px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,255,157,.12),
+            transparent 40%
+        ),
+        rgba(1,3,6,.98);
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:scale(.95);
+
+    transition:.6s;
+}
+
+.welcome-screen.show{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+}
+
+.welcome-box{
+    width:100%;
+    max-width:430px;
+
+    text-align:center;
+}
+
+.granted{
+    color:var(--green);
+
+    font-size:10px;
+
+    font-weight:1000;
+
+    letter-spacing:4px;
+
+    text-shadow:
+        0 0 18px var(--green);
+}
+
+.welcome-title{
+    margin-top:18px;
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    font-weight:900;
+}
+
+.welcome-brand{
+    margin-top:7px;
+
+    font-size:38px;
+
+    font-weight:1000;
+
+    letter-spacing:5px;
+
+    color:var(--red);
+
+    text-shadow:
+        0 0 15px var(--red),
+        0 0 40px rgba(255,23,68,.5);
+}
+
+.welcome-vip{
+    margin-top:8px;
+
+    font-size:14px;
+
+    letter-spacing:6px;
+
+    color:var(--cyan);
+
+    font-weight:1000;
+}
+
+.welcome-urdu{
+    margin-top:25px;
+
+    font-family:
+        "Noto Nastaliq Urdu",
+        serif;
+
+    font-size:17px;
+
+    line-height:2;
+
+    direction:rtl;
+
+    font-weight:900;
+}
+
+.thanks{
+    margin-top:14px;
+
+    font-size:12px;
+
+    line-height:1.9;
+
+    color:#d9dfe4;
+}
+
+.thanks b{
+    color:var(--gold);
+}
+
+.welcome-actions{
+    display:flex;
+
+    gap:9px;
+
+    margin-top:25px;
+}
+
+.welcome-action{
+    flex:1;
+
+    height:45px;
+
+    border:
+        1px solid
+        var(--cyan);
+
+    background:
+        rgba(0,234,255,.06);
+
+    color:var(--cyan);
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+.welcome-action.red{
+    border-color:var(--red);
+    color:var(--red);
+}
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-card{
+    width:100%;
+    max-width:350px;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    text-align:center;
+
+    padding:24px 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0d0509,
+            #030408
+        );
+
+    border:
+        1px solid
+        var(--purple);
+
+    box-shadow:
+        0 0 45px rgba(168,85,247,.25);
+}
+
+.profile-img{
+    width:115px;
+    height:115px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    padding:3px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--red),
+            var(--purple),
+            var(--cyan)
+        );
+}
+
+.profile-img img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+}
+
+.profile-name{
+    margin-top:15px;
+
+    font-size:19px;
+
+    font-weight:1000;
+
+    letter-spacing:2px;
+}
+
+.profile-role{
+    margin-top:5px;
+
+    color:var(--red);
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.profile-text{
+    margin-top:14px;
+
+    color:#c5cbd1;
+
+    font-size:9px;
+
+    line-height:1.9;
+}
+
+.whatsapp{
+    display:block;
+
+    margin-top:18px;
+
+    padding:13px;
+
+    text-decoration:none;
+
+    border:
+        1px solid
+        var(--green);
+
+    background:
+        rgba(0,255,157,.06);
+
+    color:var(--green);
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+.close-profile{
+    width:100%;
+
+    margin-top:9px;
+
+    height:42px;
+
+    border:
+        1px solid
+        var(--red);
+
+    background:
+        rgba(255,23,68,.06);
+
+    color:var(--red);
+
+    font-size:8px;
+
+    font-weight:900;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:9px;
+
+    text-align:center;
+
+    color:#59636d;
+
+    font-size:6px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+    z-index:10;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-height:700px){
+
+    .logo-wrap{
+        width:82px;
+        height:82px;
+        margin-bottom:11px;
+    }
+
+    .brand{
+        font-size:30px;
+    }
+
+    .vip-title{
+        font-size:10px;
+    }
+
+    .vip-badge{
+        margin:10px auto 12px;
+    }
+
+    .expiry{
+        margin-bottom:12px;
+        padding:8px;
+    }
+
+    .instruction{
+        font-size:12px;
+    }
+
+    .password{
+        height:48px;
+    }
+
+    .enter-btn{
+        height:48px;
+    }
+
+    .control-btn,
+    .profile-btn{
+        height:34px;
+    }
+
+    .login-card{
+        padding:18px 16px 15px;
+    }
+}
+
+@media(max-height:600px){
+
+    .login-card{
+        transform:scale(.90);
+    }
+
+    .footer{
+        display:none;
+    }
+}
+
 </style>
 </head>
-<body>
-<div class="bg"></div><div class="grid"></div><div class="scan"></div>
-<div class="shell">
-<div class="top"><div class="marquee">PARDESI VIP APPLICATION // SECURE ACCESS // SHAKIR HASSAN // PRIVATE SYSTEM // ONLY VIP MEMBER //</div></div>
-<div class="header"><div class="welcome">WELCOME TO</div><div class="title">PARDESI</div><div class="subtitle">VIP APPLICATION</div></div>
-<div class="vip">ONLY VIP MEMBER</div>
-<div class="status"><i>●</i> SECURITY SYSTEM ACTIVE</div>
-<div class="expiry"><b>APP EXPIRY DATE</b><strong id="expiry"></strong><small>ENJOY YOUR VIP ACCESS UNTIL THIS DATE</small></div>
-<div class="caption">PRIVATE • PREMIUM • SECURE ACCESS</div><div class="line"></div>
-<div class="login">
-<div class="instruction">براہِ کرم سسٹم میں داخل ہونے کے لیے پاسورڈ درج کریں</div>
-<div class="label">SECURE ACCESS PASSWORD</div>
-<div class="box"><input id="password" type="password" placeholder="ENTER PASSWORD" autocomplete="off"><span class="show" id="show">SHOW</span></div>
-<button class="enter" id="login">⚡ ENTER APPLICATION</button><div class="message" id="message"></div>
-</div>
-<div class="bottom"><div class="credit">CREDIT BY</div><div class="name">SHAKIR HASSAN</div><div class="time" id="time">--:--:--</div><div class="date" id="date">Loading...</div></div>
-<button class="dev" id="dev">DEVELOPER PROFILE</button><div class="footer">© 2022–2026 • PARDESI VIP SYSTEM</div>
 
-<div class="overlay" id="popupOverlay"><div class="modal" id="popup"><div class="icon" id="icon">!</div><h2 id="ptitle">CHECKING</h2><p id="ptext">سسٹم پاسورڈ کی تصدیق کر رہا ہے</p><button id="pbtn" style="display:none">TRY AGAIN</button></div></div>
-<div class="overlay welcomeScreen" id="welcome"><div style="width:100%;max-width:360px;text-align:center"><div class="granted">✓ ACCESS GRANTED • SYSTEM ACTIVATED</div><h1>WELCOME TO <span>PARDESI</span> VIP APPLICATION</h1><div class="thanks">آپ کے اعتماد اور بھروسے کا دل سے شکریہ ❤️<br>آپ کا اعتماد میرے لیے بہت قیمتی ہے۔</div><div class="detail">PRIVATE VIP APPLICATION • PREMIUM ACCESS ACTIVATED</div><button id="enterApp" class="cyan">ENTER APPLICATION</button><button id="logout">LOGOUT</button></div></div>
-<div class="overlay" id="profile"><div class="modal"><div class="profileImg"><img src="https://images.unsplash.com/photo-1666615435088-4865bf5ed3fd?auto=format&fit=crop&w=700&q=90" alt="Developer"></div><h2>SHAKIR HASSAN</h2><div class="role">MADE & DEVELOPER BY • PARDESI</div><div class="profileLine">Developer & Creator of Pardesi VIP Application<br>Private Digital System • Premium Interface<br>Secure Access • UI / Application Development</div><div class="sig">Shakir Hassan</div><a class="wa" href="https://wa.me/923118485874?text=Assalam%20o%20Alaikum%20Shakir%20bhai%2C%20aap%20ne%20jo%20password%20diya%20tha%20woh%20expire%20ho%20gaya%20hai.%20Mujhe%20please%20naya%20password%20de%20den." target="_blank">◉ REQUEST NEW PASSWORD ON WHATSAPP</a><button class="back" id="back">← BACK TO SYSTEM</button></div></div>
+<body>
+
+<div class="app">
+
+<div class="grid"></div>
+<div class="scan"></div>
+
+<div id="particles"></div>
+
+
+<!-- =====================================================
+     ACTIVATION
+===================================================== -->
+
+<section class="activation" id="activation">
+
+    <div class="activation-box">
+
+        <div class="core">
+            <div class="core-text" id="coreText">
+                STARTING
+            </div>
+        </div>
+
+        <div class="activation-title">
+            PARDESI PRIVATE SYSTEM
+        </div>
+
+        <div class="activation-brand">
+            PARDESI
+        </div>
+
+        <div class="activation-sub">
+            VIP APPLICATION INITIALIZATION
+        </div>
+
+        <div class="terminal" id="terminal">
+
+            <div class="terminal-line">
+                SYSTEM BOOT INITIALIZED...
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<section class="login-screen" id="loginScreen">
+
+    <div class="login-card">
+
+        <div class="logo-wrap">
+
+            <img
+            src="https://images.unsplash.com/photo-1666615435088-4865bf5ed3fd?q=80&w=1471&auto=format&fit=crop"
+            alt="Pardesi Logo">
+
+        </div>
+
+
+        <div class="welcome-small">
+            WELCOME TO
+        </div>
+
+        <div class="brand">
+            PARDESI
+        </div>
+
+        <div class="vip-title">
+            VIP APPLICATION
+        </div>
+
+
+        <div class="vip-badge">
+            ★ ONLY VIP MEMBER ★
+        </div>
+
+
+        <!-- EXPIRY -->
+
+        <div class="expiry">
+
+            <span class="expiry-label">
+                APP EXPIRY DATE
+            </span>
+
+            <span
+            class="expiry-text"
+            id="expiryText">
+                31 AUG 2026
+            </span>
+
+        </div>
+
+
+        <div class="instruction">
+            🔐 ENTER YOUR PASSWORD
+        </div>
+
+
+        <div class="password-wrap">
+
+            <input
+            id="password"
+            class="password"
+            type="password"
+            placeholder="ENTER PASSWORD"
+            autocomplete="off">
+
+            <span
+            id="showBtn"
+            class="show">
+                SHOW
+            </span>
+
+        </div>
+
+
+        <button
+        class="enter-btn"
+        id="enterBtn">
+
+            ⚡ ENTER VIP ACCESS
+
+        </button>
+
+
+        <div class="controls">
+
+            <button
+            class="control-btn"
+            id="soundBtn">
+
+                🔊 PLAY SOUND
+
+            </button>
+
+            <button
+            class="control-btn"
+            id="clearBtn">
+
+                CLEAR
+
+            </button>
+
+        </div>
+
+
+        <button
+        class="control-btn profile-btn"
+        id="profileBtn">
+
+            👤 DEVELOPER PROFILE
+
+        </button>
+
+
+        <div class="system-status">
+            ● SECURITY SYSTEM ACTIVE
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     POPUP
+===================================================== -->
+
+<div
+class="overlay"
+id="popupOverlay">
+
+    <div class="popup">
+
+        <div
+        class="popup-icon"
+        id="popupIcon">
+            !
+        </div>
+
+        <h2 id="popupTitle">
+            ACCESS DENIED
+        </h2>
+
+        <p id="popupText">
+            براہِ کرم درست پاسورڈ درج کریں۔
+        </p>
+
+        <button
+        class="popup-close"
+        id="popupClose">
+            TRY AGAIN
+        </button>
+
+    </div>
+
 </div>
+
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<div
+class="welcome-screen"
+id="welcomeScreen">
+
+    <div class="welcome-box">
+
+        <div class="granted">
+            ✓ ACCESS GRANTED
+        </div>
+
+        <div class="welcome-title">
+            WELCOME TO
+        </div>
+
+        <div class="welcome-brand">
+            PARDESI
+        </div>
+
+        <div class="welcome-vip">
+            VIP APPLICATION
+        </div>
+
+        <div class="welcome-urdu">
+            آپ کامیابی سے سسٹم میں داخل ہو چکے ہیں
+        </div>
+
+        <div class="thanks">
+
+            آپ کے اعتماد اور بھروسے کا دل سے شکریہ۔
+            <br>
+
+            <b>
+            آپ کا اعتماد میرے لیے بہت قیمتی ہے ❤️
+            </b>
+
+        </div>
+
+        <div class="welcome-actions">
+
+            <button
+            class="welcome-action"
+            id="openApp">
+                ENTER APPLICATION
+            </button>
+
+            <button
+            class="welcome-action red"
+            id="logout">
+                LOGOUT
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<div
+class="overlay"
+id="profileOverlay">
+
+    <div class="profile-card">
+
+        <div class="profile-img">
+
+            <img
+            src="https://images.unsplash.com/photo-1666615435088-4865bf5ed3fd?q=80&w=1471&auto=format&fit=crop"
+            alt="Shakir Hassan">
+
+        </div>
+
+        <div class="profile-name">
+            SHAKIR HASSAN
+        </div>
+
+        <div class="profile-role">
+            DEVELOPER & CREATOR • PARDESI
+        </div>
+
+        <div class="profile-text">
+
+            Developer & Creator of Pardesi VIP Application
+
+            <br>
+
+            Premium Interface • Secure Access
+
+            <br>
+
+            Private Digital System
+
+        </div>
+
+        <a
+        class="whatsapp"
+        href="https://wa.me/923118485874?text=Assalam%20o%20Alaikum%20Shakir%20bhai%2C%20aap%20ne%20jo%20VIP%20password%20diya%20tha%20uski%20muddat%20khatam%20ho%20gayi%20hai.%20Meharbani%20karke%20mujhe%20naya%20password%20de%20den."
+        target="_blank">
+
+            🟢 CONTACT ON WHATSAPP
+
+        </a>
+
+        <button
+        class="close-profile"
+        id="closeProfile">
+
+            ← BACK TO SYSTEM
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="footer">
+    © 2022–2026 • SHAKIR HASSAN
+</div>
+
+</div>
+
+
 <script>
-const ADMIN={PASSWORD:"PKR200",EXPIRY:"31 DEC 2026",APP_URL:"action://close"};
-const $=id=>document.getElementById(id);$("expiry").textContent=ADMIN.EXPIRY;
-let ctx;function audio(){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();return ctx}
-function tone(f,d,t="sine",v=.035){try{let c=audio(),o=c.createOscillator(),g=c.createGain();o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+d)}catch(e){}}
-function boot(){let a=["INITIALIZING CORE...","GENERATING SECURE CODE...","VERIFYING VIP MODULE...","LOADING PREMIUM UI...","ALMOST DONE...","SYSTEM READY"],i=0,b=document.createElement("div");b.style.cssText="position:fixed;inset:0;background:#010204;color:#00e5ff;display:flex;align-items:center;justify-content:center;z-index:999;font:900 10px monospace;padding:25px";b.innerHTML='<div id="bb" style="width:min(350px,90vw);padding:18px;border:1px solid #00e5ff;box-shadow:0 0 35px #00e5ff33"><b style="color:#ff1744">PARDESI VIP ACTIVATION</b><br><br></div>';document.body.appendChild(b);[110,150,200,260,330,440].forEach((f,j)=>setTimeout(()=>tone(f,.08,"square",.018),j*80));let x=setInterval(()=>{bb.insertAdjacentHTML("beforeend",`<div>› ${a[i]} <span style="color:#00ff9d">OK</span></div>`);i++;if(i==a.length){clearInterval(x);setTimeout(()=>b.remove(),550)}},380)}window.addEventListener("load",boot);
-$("show").onclick=()=>{password.type=password.type==="password"?"text":"password";$("show").textContent=password.type==="password"?"SHOW":"HIDE"};
-function result(ok,title,text,sym){$("popupOverlay").classList.add("show");$("popup").className="modal"+(ok?" success":"");$("icon").textContent=sym;$("ptitle").textContent=title;$("ptext").textContent=text;$("pbtn").style.display="block";$("pbtn").textContent=ok?"CONTINUE":"TRY AGAIN";tone(ok?660:120,.2,ok?"sine":"sawtooth",.04);$("pbtn").onclick=()=>{$("popupOverlay").classList.remove("show");if(ok)$("welcome").classList.add("show");else password.focus()}}
-function submit(){let v=password.value.trim();if(!v){result(false,"PASSWORD REQUIRED","⚠️ آپ نے کوئی پاسورڈ درج نہیں کیا، پہلے پاسورڈ لکھیں۔","⚠");return}$("login").disabled=true;$("login").textContent="VERIFYING ACCESS...";$("popupOverlay").classList.add("show");$("popup").className="modal checking";$("icon").textContent="⟳";$("ptitle").textContent="VERIFYING ACCESS";$("ptext").textContent="سسٹم پاسورڈ کی تصدیق کر رہا ہے، انتظار کریں";$("pbtn").style.display="none";setTimeout(()=>{result(v===ADMIN.PASSWORD,v===ADMIN.PASSWORD?"ACCESS GRANTED":"ACCESS DENIED",v===ADMIN.PASSWORD?"پاسورڈ درست ہے، سسٹم کامیابی سے فعال ہو گیا ہے۔":"❌ غلط پاسورڈ۔ براہِ کرم درست پاسورڈ دوبارہ درج کریں۔",v===ADMIN.PASSWORD?"✓":"✕");$("login").disabled=false;$("login").textContent="⚡ ENTER APPLICATION"},1500)}
-$("login").onclick=submit;password.onkeydown=e=>{if(e.key==="Enter")submit()};
-$("enterApp").onclick=()=>location.href=ADMIN.APP_URL;$("logout").onclick=()=>{$("welcome").classList.remove("show");password.value=""};$("dev").onclick=()=>{$("profile").classList.add("show");tone(520,.08)};$("back").onclick=()=>{$("profile").classList.remove("show");tone(300,.08)};
-function clock(){let d=new Date();$("time").textContent=d.toLocaleTimeString("en-US",{timeZone:"Asia/Karachi",hour:"numeric",minute:"2-digit",second:"2-digit",hour12:true});$("date").textContent=d.toLocaleDateString("en-PK",{timeZone:"Asia/Karachi",weekday:"short",day:"2-digit",month:"short",year:"numeric"})}clock();setInterval(clock,1000);
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+/*
+   صرف یہ تین چیزیں آسانی سے تبدیل کریں۔
+*/
+
+const ACCESS_PASSWORD = "PKR200";
+
+const EXPIRY_DATE = "31 7 2026";
+
+const APPLICATION_URL = "action://close";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const activation =
+document.getElementById("activation");
+
+const loginScreen =
+document.getElementById("loginScreen");
+
+const coreText =
+document.getElementById("coreText");
+
+const terminal =
+document.getElementById("terminal");
+
+const password =
+document.getElementById("password");
+
+const enterBtn =
+document.getElementById("enterBtn");
+
+const showBtn =
+document.getElementById("showBtn");
+
+const popupOverlay =
+document.getElementById("popupOverlay");
+
+const popupIcon =
+document.getElementById("popupIcon");
+
+const popupTitle =
+document.getElementById("popupTitle");
+
+const popupText =
+document.getElementById("popupText");
+
+const popupClose =
+document.getElementById("popupClose");
+
+const welcomeScreen =
+document.getElementById("welcomeScreen");
+
+const profileOverlay =
+document.getElementById("profileOverlay");
+
+const expiryText =
+document.getElementById("expiryText");
+
+const soundBtn =
+document.getElementById("soundBtn");
+
+
+expiryText.textContent =
+EXPIRY_DATE;
+
+
+/* =====================================================
+   ACTIVATION SEQUENCE
+===================================================== */
+
+const bootLines = [
+
+    "PARDESI CORE ENGINE STARTING...",
+
+    "LOADING SECURITY MODULE...",
+
+    "GENERATING ACCESS CODE: PARDESI-01",
+
+    "GENERATING ACCESS CODE: VIP-200",
+
+    "CHECKING SYSTEM INTEGRITY...",
+
+    "AUTHENTICATION MODULE READY",
+
+    "INSTALLING VIP INTERFACE...",
+
+    "ALMOST DONE...",
+
+    "VIP SECURITY READY"
+
+];
+
+let bootIndex = 0;
+
+function boot(){
+
+    if(bootIndex >= bootLines.length){
+
+        coreText.textContent =
+        "READY";
+
+        setTimeout(()=>{
+
+            activation.classList.add("hide");
+
+            loginScreen.classList.add("show");
+
+        },800);
+
+        return;
+    }
+
+    const line =
+    document.createElement("div");
+
+    line.className =
+    "terminal-line";
+
+    line.textContent =
+    bootLines[bootIndex];
+
+    terminal.appendChild(line);
+
+    terminal.scrollTop =
+    terminal.scrollHeight;
+
+    coreText.textContent =
+    Math.min(
+        100,
+        Math.round(
+            ((bootIndex+1) /
+            bootLines.length) * 100
+        )
+    ) + "%";
+
+    bootIndex++;
+
+    setTimeout(
+        boot,
+        420 + Math.random()*300
+    );
+}
+
+setTimeout(
+    boot,
+    700
+);
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+const particleBox =
+document.getElementById("particles");
+
+for(let i=0;i<55;i++){
+
+    const p =
+    document.createElement("div");
+
+    p.className =
+    "particle";
+
+    p.style.left =
+    Math.random()*100 + "%";
+
+    p.style.animationDuration =
+    (4 + Math.random()*7) + "s";
+
+    p.style.animationDelay =
+    Math.random()*6 + "s";
+
+    if(Math.random()>.65){
+
+        p.style.background =
+        "var(--red)";
+
+        p.style.boxShadow =
+        "0 0 10px var(--red)";
+    }
+
+    particleBox.appendChild(p);
+}
+
+
+/* =====================================================
+   SHOW PASSWORD
+===================================================== */
+
+showBtn.onclick = ()=>{
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        showBtn.textContent =
+        "HIDE";
+
+    }else{
+
+        password.type = "password";
+
+        showBtn.textContent =
+        "SHOW";
+    }
+};
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+function popup(
+    icon,
+    title,
+    text,
+    success=false
+){
+
+    popupIcon.textContent =
+    icon;
+
+    popupTitle.textContent =
+    title;
+
+    popupText.textContent =
+    text;
+
+    if(success){
+
+        popupIcon.style.color =
+        "var(--green)";
+
+        popupIcon.style.borderColor =
+        "var(--green)";
+
+    }else{
+
+        popupIcon.style.color =
+        "var(--red)";
+
+        popupIcon.style.borderColor =
+        "var(--red)";
+    }
+
+    popupOverlay.classList.add("show");
+}
+
+
+/* =====================================================
+   CLOSE POPUP
+===================================================== */
+
+popupClose.onclick = ()=>{
+
+    popupOverlay.classList.remove("show");
+
+    password.focus();
+};
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+enterBtn.onclick = ()=>{
+
+    const value =
+    password.value.trim();
+
+
+    /* EMPTY */
+
+    if(!value){
+
+        popup(
+            "⚠",
+            "PASSWORD REQUIRED",
+            "🚨 آپ نے پاسورڈ درج نہیں کیا۔ براہِ کرم پہلے اپنا VIP پاسورڈ درج کریں۔"
+        );
+
+        errorSound();
+
+        return;
+    }
+
+
+    /* VERIFYING */
+
+    enterBtn.disabled =
+    true;
+
+    enterBtn.textContent =
+    "VERIFYING ACCESS...";
+
+
+    setTimeout(()=>{
+
+        if(value === ACCESS_PASSWORD){
+
+            popup(
+                "✓",
+                "ACCESS GRANTED",
+                "پاسورڈ درست ہے۔ VIP access فعال کیا جا رہا ہے۔",
+                true
+            );
+
+            successSound();
+
+            setTimeout(()=>{
+
+                popupOverlay.classList.remove(
+                    "show"
+                );
+
+                loginScreen.classList.remove(
+                    "show"
+                );
+
+                welcomeScreen.classList.add(
+                    "show"
+                );
+
+            },850);
+
+        }else{
+
+            popup(
+                "✕",
+                "ACCESS DENIED",
+                "❌ غلط پاسورڈ! براہِ کرم درست VIP پاسورڈ درج کریں۔"
+            );
+
+            errorSound();
+        }
+
+        enterBtn.disabled =
+        false;
+
+        enterBtn.textContent =
+        "⚡ ENTER VIP ACCESS";
+
+    },1200);
+};
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+password.addEventListener(
+"keydown",
+e=>{
+
+    if(e.key === "Enter"){
+
+        enterBtn.click();
+    }
+
+});
+
+
+/* =====================================================
+   CLEAR
+===================================================== */
+
+document.getElementById(
+"clearBtn"
+).onclick = ()=>{
+
+    password.value = "";
+
+    password.focus();
+};
+
+
+/* =====================================================
+   DEVELOPER PROFILE
+===================================================== */
+
+document.getElementById(
+"profileBtn"
+).onclick = ()=>{
+
+    profileOverlay.classList.add(
+        "show"
+    );
+
+    clickSound();
+};
+
+
+/* =====================================================
+   CLOSE PROFILE
+===================================================== */
+
+document.getElementById(
+"closeProfile"
+).onclick = ()=>{
+
+    profileOverlay.classList.remove(
+        "show"
+    );
+
+    clickSound();
+};
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+document.getElementById(
+"logout"
+).onclick = ()=>{
+
+    welcomeScreen.classList.remove(
+        "show"
+    );
+
+    loginScreen.classList.add(
+        "show"
+    );
+
+    password.value = "";
+
+    clickSound();
+};
+
+
+/* =====================================================
+   OPEN APPLICATION
+===================================================== */
+
+document.getElementById(
+"openApp"
+).onclick = ()=>{
+
+    clickSound();
+
+    /*
+       یہاں اپنی اصل Application action لگا سکتے ہیں۔
+    */
+
+    window.location.href =
+    APPLICATION_URL;
+};
+
+
+/* =====================================================
+   AUDIO ENGINE
+===================================================== */
+
+let audioCtx = null;
+
+function getAudio(){
+
+    if(!audioCtx){
+
+        audioCtx =
+        new(
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+    }
+
+    if(audioCtx.state === "suspended"){
+
+        audioCtx.resume();
+    }
+
+    return audioCtx;
+}
+
+
+/* =====================================================
+   SOUND
+===================================================== */
+
+function tone(
+frequency,
+duration,
+type="sine",
+volume=.035
+){
+
+    try{
+
+        const ctx =
+        getAudio();
+
+        const osc =
+        ctx.createOscillator();
+
+        const gain =
+        ctx.createGain();
+
+        osc.type =
+        type;
+
+        osc.frequency.value =
+        frequency;
+
+        gain.gain.setValueAtTime(
+            volume,
+            ctx.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            ctx.currentTime + duration
+        );
+
+        osc.connect(gain);
+
+        gain.connect(
+            ctx.destination
+        );
+
+        osc.start();
+
+        osc.stop(
+            ctx.currentTime + duration
+        );
+
+    }catch(e){}
+}
+
+
+/* =====================================================
+   SUCCESS SOUND
+===================================================== */
+
+function successSound(){
+
+    tone(440,.10,"sine",.04);
+
+    setTimeout(
+        ()=>tone(600,.10,"sine",.04),
+        100
+    );
+
+    setTimeout(
+        ()=>tone(800,.16,"sine",.05),
+        200
+    );
+}
+
+
+/* =====================================================
+   ERROR SOUND
+===================================================== */
+
+function errorSound(){
+
+    tone(170,.15,"sawtooth",.035);
+
+    setTimeout(
+        ()=>tone(100,.20,"sawtooth",.035),
+        160
+    );
+}
+
+
+/* =====================================================
+   CLICK SOUND
+===================================================== */
+
+function clickSound(){
+
+    tone(520,.06,"square",.018);
+
+}
+
+
+/* =====================================================
+   SOUND BUTTON
+===================================================== */
+
+let soundPlaying =
+false;
+
+soundBtn.onclick = ()=>{
+
+    if(!soundPlaying){
+
+        getAudio();
+
+        tone(220,.12,"square",.025);
+
+        setTimeout(
+            ()=>tone(330,.12,"square",.025),
+            130
+        );
+
+        soundPlaying =
+        true;
+
+        soundBtn.textContent =
+        "🔊 SOUND ON";
+
+    }else{
+
+        soundPlaying =
+        false;
+
+        soundBtn.textContent =
+        "🔇 SOUND OFF";
+    }
+};
+
+
+/* =====================================================
+   FIRST USER TOUCH
+===================================================== */
+
+document.addEventListener(
+"click",
+()=>{
+
+    try{
+        getAudio().resume();
+    }catch(e){}
+
+},
+{
+    once:true
+});
+
 </script>
+
 </body>
 </html>

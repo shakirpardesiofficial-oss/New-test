@@ -2,1659 +2,587 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
-<title>Pardesi VIP System</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#f5f8ff">
+<title>Pardesi VIP System — Premium Edition</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-    --red:#ff1744;
-    --cyan:#00e5ff;
-    --green:#00ff9d;
-    --gold:#ffd166;
-    --purple:#a855f7;
-    --bg:#020305;
-    --panel:rgba(8,10,16,.96);
+ --blue:#2563eb;--blue2:#60a5fa;--cyan:#06b6d4;--green:#16a34a;
+ --red:#ef4444;--gold:#d59b08;--purple:#7c3aed;
+ --ink:#0f172a;--text:#334155;--muted:#94a3b8;--line:#e5eaf2;
+ --bg:#f4f7fb;--card:rgba(255,255,255,.88)
 }
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif}
+body{display:flex;align-items:center;justify-content:center}
+button,input{font:inherit}
+button{cursor:pointer}
 
-html,body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#020305;
-    color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
-}
+.bg{position:fixed;inset:0;overflow:hidden;background:
+ radial-gradient(circle at 50% 0%,rgba(96,165,250,.20),transparent 34%),
+ radial-gradient(circle at 0% 100%,rgba(124,58,237,.08),transparent 30%),
+ radial-gradient(circle at 100% 70%,rgba(6,182,212,.09),transparent 30%),#f4f7fb}
+.grid{position:absolute;inset:0;opacity:.28;background-image:
+ linear-gradient(rgba(37,99,235,.035) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(37,99,235,.035) 1px,transparent 1px);background-size:32px 32px}
+.orb{position:absolute;border-radius:50%;filter:blur(1px);opacity:.45}
+.orb.a{width:180px;height:180px;background:rgba(96,165,250,.12);left:-70px;top:15%;animation:orbA 8s ease-in-out infinite}
+.orb.b{width:150px;height:150px;background:rgba(124,58,237,.10);right:-50px;bottom:12%;animation:orbB 10s ease-in-out infinite}
+@keyframes orbA{50%{transform:translate(45px,30px) scale(1.08)}}
+@keyframes orbB{50%{transform:translate(-35px,-25px) scale(.9)}}
 
-body{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
+.app{position:relative;width:min(94vw,440px);height:min(94vh,780px);min-height:560px;overflow:hidden;
+border:1px solid rgba(255,255,255,.95);border-radius:32px;
+background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(247,250,255,.93));
+box-shadow:0 28px 90px rgba(15,23,42,.14),0 5px 25px rgba(37,99,235,.05);
+backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);animation:appIn .9s cubic-bezier(.2,.8,.2,1)}
+@keyframes appIn{from{opacity:0;transform:scale(.92) translateY(25px)}to{opacity:1;transform:none}}
 
-/* BACKGROUND */
+.top{position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,#2563eb,#06b6d4,#7c3aed,#2563eb);background-size:300% 100%;animation:colors 5s linear infinite}
+@keyframes colors{to{background-position:300% 0}}
+.status{position:absolute;top:18px;right:17px;padding:6px 9px;border:1px solid rgba(22,163,74,.16);
+border-radius:20px;background:rgba(22,163,74,.06);font-size:8px;font-weight:900;letter-spacing:1px;color:var(--green);animation:fadeDown .8s .4s both}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 
-.bg{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-    background:
-      radial-gradient(circle at 50% 20%,rgba(0,229,255,.10),transparent 30%),
-      radial-gradient(circle at 15% 80%,rgba(255,23,68,.12),transparent 30%),
-      radial-gradient(circle at 90% 70%,rgba(168,85,247,.10),transparent 30%),
-      #020305;
-}
-
-.grid{
-    position:absolute;
-    inset:0;
-    opacity:.18;
-    background-image:
-      linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
-    background-size:28px 28px;
-}
-
-.scan{
-    position:absolute;
-    width:100%;
-    height:2px;
-    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
-    box-shadow:0 0 20px var(--cyan);
-    animation:scan 5s linear infinite;
-    opacity:.35;
-}
-
-@keyframes scan{
-    from{top:-5%}
-    to{top:105%}
-}
-
-/* MAIN */
-
-.app{
-    position:relative;
-    width:min(94vw,440px);
-    height:min(94vh,780px);
-    min-height:560px;
-    overflow:hidden;
-    border:1px solid rgba(0,229,255,.45);
-    border-radius:28px;
-    background:
-      linear-gradient(145deg,rgba(10,14,22,.98),rgba(2,3,7,.98));
-    box-shadow:
-      0 0 35px rgba(0,229,255,.12),
-      0 0 80px rgba(255,23,68,.08),
-      inset 0 0 50px rgba(0,0,0,.8);
-}
-
-/* TOP */
-
-.top{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:7px;
-    background:linear-gradient(
-        90deg,
-        var(--red),
-        var(--purple),
-        var(--cyan),
-        var(--red)
-    );
-    background-size:300% 100%;
-    animation:colors 4s linear infinite;
-}
-
-@keyframes colors{
-    to{background-position:300% 0}
-}
-
-.status{
-    position:absolute;
-    top:20px;
-    right:18px;
-    font-size:9px;
-    font-weight:900;
-    letter-spacing:1.5px;
-    color:var(--green);
-    text-shadow:0 0 12px var(--green);
-    animation:blink 1.6s infinite;
-}
-
-@keyframes blink{
-    50%{opacity:.45}
-}
-
-/* HEADER */
-
-.header{
-    position:absolute;
-    top:45px;
-    left:20px;
-    right:20px;
-    text-align:center;
-}
-
-.welcome{
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:5px;
-    color:#fff;
-}
-
+.header{position:absolute;top:47px;left:20px;right:20px;text-align:center;animation:headerIn .9s .15s both}
+@keyframes headerIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.welcome{font-size:10px;font-weight:800;letter-spacing:4px;color:#64748b}
 .pardesi{
-    margin-top:4px;
-    font-size:36px;
-    line-height:1;
-    font-weight:1000;
-    letter-spacing:5px;
-    color:var(--red);
-    text-shadow:
-      0 0 8px var(--red),
-      0 0 25px rgba(255,23,68,.7);
-    animation:titleFloat 2.5s ease-in-out infinite alternate;
+ margin-top:5px;font-size:38px;line-height:1;font-weight:1000;letter-spacing:4px;
+ background:linear-gradient(90deg,#2563eb,#06b6d4,#7c3aed,#ef4444,#2563eb);
+ background-size:400% auto;color:transparent;background-clip:text;-webkit-background-clip:text;
+ text-shadow:0 7px 22px rgba(37,99,235,.16);
+ animation:titleFloat 3s ease-in-out infinite alternate,titleSpectrum 4s linear infinite;
 }
+@keyframes titleSpectrum{to{background-position:400% center}}
+@keyframes titleFloat{to{transform:translateY(-3px)}}
+.vip{margin-top:9px;font-size:11px;font-weight:900;letter-spacing:5px;color:#0891b2}
 
-@keyframes titleFloat{
-    from{transform:translateX(-3px)}
-    to{transform:translateX(3px)}
+.character-zone{position:absolute;top:139px;left:0;width:100%;height:122px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.character{position:relative;width:80px;height:105px;animation:characterIn 1.25s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 12px 16px rgba(37,99,235,.14))}
+@keyframes characterIn{from{opacity:0;transform:translateX(-160px) scale(.55) rotate(-8deg)}65%{transform:translateX(18px) scale(1.06) rotate(2deg)}to{opacity:1;transform:none}}
+.head{position:absolute;top:2px;left:18px;width:44px;height:44px;border-radius:50%;background:linear-gradient(145deg,#fff,#cbd5e1);border:2px solid #94a3b8;box-shadow:0 5px 15px rgba(15,23,42,.12)}
+.hair{position:absolute;top:-2px;left:10px;width:52px;height:18px;border-radius:50% 50% 20% 20%;background:#1e293b}
+.glasses{position:absolute;top:17px;left:13px;width:55px;height:17px;z-index:3}
+.glass{position:absolute;width:24px;height:15px;border:2px solid #2563eb;border-radius:6px;background:rgba(219,234,254,.85);box-shadow:0 2px 8px rgba(37,99,235,.16)}
+.glass:first-child{left:0}.glass:last-child{right:0}
+.bridge{position:absolute;top:7px;left:22px;width:12px;height:2px;background:#2563eb}
+.body{position:absolute;top:43px;left:18px;width:44px;height:52px;border-radius:15px 15px 8px 8px;background:linear-gradient(145deg,#fff,#e2e8f0);border:2px solid #2563eb;box-shadow:0 8px 18px rgba(37,99,235,.13)}
+.arm{position:absolute;top:48px;width:34px;height:7px;border-radius:10px;background:#94a3b8;transform-origin:left center}
+.arm.left{left:-8px;transform:rotate(25deg)}.arm.right{right:-27px;transform:rotate(-15deg)}
+.leg{position:absolute;top:88px;width:8px;height:20px;border-radius:5px;background:#94a3b8}
+.leg.left{left:26px}.leg.right{left:47px}
+
+
+.guardian{
+ position:relative;width:128px;height:128px;display:grid;place-items:center;
+ animation:guardianEnter 1.2s cubic-bezier(.2,.8,.2,1),guardianFloat 3.5s ease-in-out 1.2s infinite alternate;
 }
-
-.vip{
-    margin-top:8px;
-    font-size:13px;
-    font-weight:1000;
-    letter-spacing:6px;
-    color:var(--cyan);
-    text-shadow:0 0 15px var(--cyan);
+.guardian-core{
+ position:relative;width:82px;height:82px;z-index:4;display:grid;place-items:center;
+ filter:drop-shadow(0 12px 18px rgba(37,99,235,.20));
 }
-
-/* CHARACTER */
-
-.character-zone{
-    position:absolute;
-    top:145px;
-    left:0;
-    width:100%;
-    height:120px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    pointer-events:none;
+.guardian-core svg{width:82px;height:82px}
+.guardian-ring{
+ position:absolute;border-radius:50%;border:1px solid transparent;
 }
+.guardian-ring.r1{inset:5px;border-top-color:#2563eb;border-right-color:#06b6d4;animation:spin 2.2s linear infinite}
+.guardian-ring.r2{inset:-2px;border-bottom-color:#7c3aed;border-left-color:#60a5fa;animation:spin 3.4s linear infinite reverse}
+.guardian-ring.r3{inset:16px;border:1px dashed rgba(37,99,235,.22);animation:spin 6s linear infinite}
+.guardian-dot{position:absolute;width:7px;height:7px;border-radius:50%;z-index:5}
+.guardian-dot.d1{top:5px;left:61px;background:#2563eb;box-shadow:0 0 14px #2563eb;animation:orbit1 2.2s linear infinite}
+.guardian-dot.d2{right:7px;top:58px;background:#06b6d4;box-shadow:0 0 14px #06b6d4;animation:orbit2 3.4s linear infinite}
+.guardian-dot.d3{bottom:8px;left:60px;background:#7c3aed;box-shadow:0 0 14px #7c3aed;animation:orbit3 2.8s linear infinite}
+@keyframes guardianEnter{from{opacity:0;transform:scale(.45) rotate(-15deg)}65%{transform:scale(1.08) rotate(3deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes guardianFloat{to{transform:translateY(-4px)}}
+@keyframes orbit1{to{transform:rotate(360deg) translateX(58px) rotate(-360deg)}}
+@keyframes orbit2{to{transform:rotate(-360deg) translateX(58px) rotate(360deg)}}
+@keyframes orbit3{to{transform:rotate(360deg) translateX(44px) rotate(-360deg)}}
 
-.character{
-    position:relative;
-    width:80px;
-    height:105px;
-    animation:characterIn 1.4s cubic-bezier(.2,.8,.2,1);
-    filter:drop-shadow(0 0 12px rgba(0,229,255,.5));
+.login-panel{position:absolute;left:22px;right:22px;top:273px;padding:18px;border:1px solid rgba(226,232,240,.95);border-radius:24px;
+background:rgba(255,255,255,.84);box-shadow:0 12px 35px rgba(15,23,42,.07);animation:loginIn .8s .45s both}
+@keyframes loginIn{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:none}}
+.urdu{direction:rtl;font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;font-size:15px;line-height:2;font-weight:900;margin-bottom:12px;color:#1e293b;text-align:center}
+.input-wrap{position:relative}
+.password{width:100%;height:56px;border:1px solid #dbe3ed;border-radius:16px;outline:none;background:#f8fafc;color:#111827;text-align:center;font-size:15px;font-weight:800;letter-spacing:3px;transition:.25s;box-shadow:inset 0 2px 6px rgba(15,23,42,.03)}
+.password:focus{background:#fff;border-color:rgba(37,99,235,.65);box-shadow:0 0 0 4px rgba(37,99,235,.08),0 8px 25px rgba(37,99,235,.08);transform:translateY(-1px)}
+.password::placeholder{color:#94a3b8;font-size:10px;letter-spacing:2px}
+.input-light{position:absolute;left:8%;right:8%;bottom:0;height:2px;border-radius:5px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transform:scaleX(.2);transition:.35s}
+.password:focus + .input-light{opacity:1;transform:scaleX(1)}
+
+.login-btn{position:relative;overflow:hidden;width:100%;height:55px;margin-top:12px;border:0;border-radius:16px;background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;font-size:13px;font-weight:1000;letter-spacing:3px;box-shadow:0 10px 25px rgba(37,99,235,.22);transition:.2s}
+.login-btn::before{content:"";position:absolute;top:0;left:-120%;width:75%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);animation:shine 3.4s infinite}
+@keyframes shine{0%{left:-120%}35%,100%{left:140%}}
+.login-btn:active{transform:scale(.97);box-shadow:0 5px 15px rgba(37,99,235,.18)}
+.login-btn:disabled{opacity:.65}
+
+.expiry{position:absolute;left:22px;right:22px;bottom:100px;text-align:center;padding:10px;border:1px solid rgba(213,155,8,.20);border-radius:15px;background:linear-gradient(135deg,rgba(255,251,235,.9),rgba(255,255,255,.9));box-shadow:0 7px 20px rgba(15,23,42,.04);animation:bottomIn .8s .7s both}
+@keyframes bottomIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.expiry-label{font-size:7px;font-weight:900;letter-spacing:2px;color:#a16207}.expiry-date{
+ margin-top:4px;font-size:14px;font-weight:1000;
+ background:linear-gradient(90deg,#2563eb,#06b6d4,#7c3aed,#2563eb);
+ background-size:300% auto;color:transparent;background-clip:text;-webkit-background-clip:text;
+ animation:dateFlow 3s linear infinite;
+ text-shadow:0 0 18px rgba(37,99,235,.10)
 }
+@keyframes dateFlow{to{background-position:300% center}}
 
-@keyframes characterIn{
-    from{
-        transform:translateX(-170px) scale(.5);
-        opacity:0;
-    }
-    65%{
-        transform:translateX(20px) scale(1.08);
-    }
-    to{
-        transform:translateX(0) scale(1);
-        opacity:1;
-    }
-}
-
-.head{
-    position:absolute;
-    top:2px;
-    left:18px;
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    background:linear-gradient(145deg,#d7d7d7,#777);
-    border:2px solid #222;
-}
-
-.hair{
-    position:absolute;
-    top:-2px;
-    left:10px;
-    width:52px;
-    height:18px;
-    border-radius:50% 50% 20% 20%;
-    background:#111;
-}
-
-.glasses{
-    position:absolute;
-    top:17px;
-    left:13px;
-    width:55px;
-    height:17px;
-    z-index:3;
-}
-
-.glass{
-    position:absolute;
-    width:24px;
-    height:15px;
-    border:2px solid var(--cyan);
-    background:#02070a;
-    box-shadow:0 0 9px var(--cyan);
-}
-
-.glass:first-child{left:0}
-.glass:last-child{right:0}
-
-.bridge{
-    position:absolute;
-    top:7px;
-    left:22px;
-    width:12px;
-    height:2px;
-    background:var(--cyan);
-}
-
-.body{
-    position:absolute;
-    top:43px;
-    left:18px;
-    width:44px;
-    height:52px;
-    border-radius:15px 15px 7px 7px;
-    background:linear-gradient(145deg,#111827,#05070a);
-    border:2px solid var(--red);
-    box-shadow:0 0 15px rgba(255,23,68,.35);
-}
-
-.arm{
-    position:absolute;
-    top:48px;
-    width:34px;
-    height:7px;
-    border-radius:10px;
-    background:#777;
-    transform-origin:left center;
-}
-
-.arm.left{
-    left:-8px;
-    transform:rotate(25deg);
-}
-
-.arm.right{
-    right:-27px;
-    transform:rotate(-15deg);
-    transform-origin:left center;
-}
-
-.leg{
-    position:absolute;
-    top:88px;
-    width:8px;
-    height:20px;
-    border-radius:5px;
-    background:#777;
-}
-
-.leg.left{left:26px}
-.leg.right{left:47px}
-
-/* LOGIN */
-
-.login-panel{
-    position:absolute;
-    left:22px;
-    right:22px;
-    top:280px;
-    text-align:center;
-}
-
-.urdu{
-    direction:rtl;
-    font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;
-    font-size:16px;
-    line-height:2;
-    font-weight:900;
-    margin-bottom:13px;
-    color:#fff;
-    text-shadow:0 0 8px rgba(255,255,255,.25);
-}
-
-.password{
-    width:100%;
-    height:56px;
-    border:1px solid rgba(255,23,68,.7);
-    border-radius:14px;
-    outline:none;
-    background:#05070b;
-    color:#fff;
-    text-align:center;
-    font-size:15px;
-    font-weight:900;
-    letter-spacing:3px;
-    box-shadow:
-      inset 0 0 18px #000,
-      0 0 15px rgba(255,23,68,.08);
-}
-
-.password:focus{
-    border-color:var(--cyan);
-    box-shadow:
-      0 0 20px rgba(0,229,255,.2),
-      inset 0 0 18px #000;
-}
-
-.password::placeholder{
-    color:#68717c;
-    font-size:10px;
-}
-
-.login-btn{
-    width:100%;
-    height:55px;
-    margin-top:13px;
-    border:1px solid var(--cyan);
-    border-radius:14px;
-    background:
-      linear-gradient(
-        90deg,
-        rgba(0,229,255,.12),
-        rgba(168,85,247,.15),
-        rgba(255,23,68,.12)
-      );
-    color:#fff;
-    font-size:14px;
-    font-weight:1000;
-    letter-spacing:3px;
-    cursor:pointer;
-    box-shadow:0 0 20px rgba(0,229,255,.12);
-    transition:.2s;
-}
-
-.login-btn:active{
-    transform:scale(.96);
-    box-shadow:0 0 35px var(--cyan);
-}
-
-/* EXPIRY */
-
-.expiry{
-    position:absolute;
-    left:22px;
-    right:22px;
-    bottom:100px;
-    text-align:center;
-    padding:9px;
-    border:1px solid rgba(255,209,102,.35);
-    border-radius:12px;
-    background:rgba(255,209,102,.04);
-}
-
-.expiry-label{
-    font-size:8px;
-    font-weight:900;
-    letter-spacing:2px;
-    color:var(--gold);
-}
-
-.expiry-date{
-    margin-top:4px;
-    font-size:14px;
-    font-weight:1000;
-    color:#fff;
-    text-shadow:0 0 10px var(--gold);
-}
-
-/* DEVELOPER */
-
+.dev{position:absolute;left:22px;right:22px;bottom:57px;height:34px;border:1px solid rgba(124,58,237,.2);border-radius:12px;background:rgba(124,58,237,.045);color:#6d28d9;font-size:8px;font-weight:1000;letter-spacing:2px;transition:.25s}
 .dev{
-    position:absolute;
-    left:22px;
-    right:22px;
-    bottom:57px;
-    height:34px;
-    border:1px solid var(--purple);
-    border-radius:10px;
-    background:rgba(168,85,247,.08);
-    color:#fff;
-    font-size:9px;
-    font-weight:1000;
-    letter-spacing:2px;
-    cursor:pointer;
-    animation:borderPulse 3s linear infinite;
+ position:absolute;left:22px;right:22px;bottom:57px;height:34px;
+ border:1px solid transparent;border-radius:12px;
+ background:linear-gradient(#fff,#fff) padding-box,
+ linear-gradient(90deg,#2563eb,#06b6d4,#7c3aed,#ef4444,#2563eb) border-box;
+ background-size:auto,300% 100%;
+ color:#6d28d9;font-size:8px;font-weight:1000;letter-spacing:2px;transition:.25s;
+ animation:devBorder 3s linear infinite;
 }
+.dev:active{transform:scale(.97)}
+@keyframes devBorder{to{background-position:0,300% 0}}
+.footer{position:absolute;bottom:18px;left:15px;right:15px;text-align:center;font-size:7px;font-weight:800;letter-spacing:1px;color:#94a3b8}
 
-@keyframes borderPulse{
-    0%{border-color:var(--purple)}
-    50%{border-color:var(--cyan)}
-    100%{border-color:var(--red)}
+.overlay{position:absolute;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(248,250,252,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.overlay.show{display:flex;animation:overlayIn .3s ease}
+@keyframes overlayIn{from{opacity:0}to{opacity:1}}
+
+.popup{width:100%;max-width:350px;padding:28px 20px;text-align:center;border:1px solid rgba(226,232,240,.95);border-radius:26px;background:rgba(255,255,255,.97);box-shadow:0 25px 70px rgba(15,23,42,.15);animation:pop .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{transform:scale(.78) translateY(20px);opacity:0}to{transform:none;opacity:1}}
+.popup-icon{width:76px;height:76px;margin:auto;display:flex;align-items:center;justify-content:center;border:2px solid var(--blue);border-radius:50%;color:var(--blue);font-size:30px;font-weight:1000;background:rgba(37,99,235,.06);box-shadow:0 10px 30px rgba(37,99,235,.12)}
+.popup.checking .popup-icon{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.popup.success{border-color:rgba(22,163,74,.25);box-shadow:0 25px 70px rgba(22,163,74,.15)}
+.popup.success .popup-icon{color:var(--green);border-color:var(--green);background:rgba(22,163,74,.07);animation:successPop .5s}
+@keyframes successPop{0%{transform:scale(.6)}70%{transform:scale(1.12)}100%{transform:scale(1)}}
+.popup h2{margin:16px 0 8px;font-size:20px;font-weight:1000;letter-spacing:2px;color:#0f172a}
+.popup p{margin:0;direction:rtl;font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;font-size:14px;line-height:2;color:#475569}
+.popup-btn{width:100%;height:44px;margin-top:17px;border:0;border-radius:13px;background:#eff6ff;color:var(--blue);font-weight:1000}
+
+.processing{width:100%;max-width:360px;padding:26px 20px;border:1px solid #e2e8f0;border-radius:28px;background:rgba(255,255,255,.98);box-shadow:0 25px 75px rgba(15,23,42,.16);animation:pop .45s cubic-bezier(.2,.8,.2,1)}
+.process-ring{position:relative;width:92px;height:92px;margin:auto;border-radius:50%;display:grid;place-items:center}
+.process-ring::before,.process-ring::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.process-ring::before{border-top-color:var(--blue);border-right-color:var(--cyan);animation:spin 1s linear infinite}
+.process-ring::after{inset:9px;border-bottom-color:var(--purple);border-left-color:var(--blue2);animation:spin 1.5s linear infinite reverse}
+.process-core{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#f8fbff;color:var(--blue);font-size:20px;font-weight:1000;box-shadow:inset 0 0 0 1px #e6eefb}
+.process-title{margin:17px 0 5px;text-align:center;font-size:18px;font-weight:1000;letter-spacing:2px}
+.process-sub{margin:0;text-align:center;color:#64748b;font-size:11px}
+.process-bar{height:7px;margin-top:18px;border-radius:20px;background:#edf2f7;overflow:hidden}
+.process-fill{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--purple));transition:width .25s ease}
+
+.boot-emblem{position:relative;width:116px;height:116px;margin:auto;display:grid;place-items:center}
+.boot-emblem svg{width:72px;height:72px;position:relative;z-index:3;filter:drop-shadow(0 10px 18px rgba(37,99,235,.18))}
+.boot-emblem::before,.boot-emblem::after{content:"";position:absolute;border-radius:50%;border:1px solid transparent}
+.boot-emblem::before{inset:1px;border-top-color:#2563eb;border-right-color:#06b6d4;animation:spin 1.8s linear infinite}
+.boot-emblem::after{inset:11px;border-bottom-color:#7c3aed;border-left-color:#60a5fa;animation:spin 2.8s linear infinite reverse}
+.boot-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 72%,rgba(37,99,235,.16) 84%,transparent 92%);animation:spin 2.4s linear infinite}
+.boot-percent{position:absolute;bottom:-3px;right:-5px;z-index:4;padding:5px 8px;border-radius:12px;background:#fff;border:1px solid #dbeafe;color:#2563eb;font-size:8px;font-weight:1000;box-shadow:0 6px 18px rgba(37,99,235,.10)}
+
+.process-steps{display:grid;gap:8px;margin-top:15px;text-align:left}
+.step{display:flex;align-items:center;gap:9px;font-size:9px;font-weight:800;color:#94a3b8;transition:.3s}
+.step-dot{width:8px;height:8px;border-radius:50%;background:#dbe3ed;box-shadow:0 0 0 3px #f5f7fb}
+.step.active{color:#2563eb}.step.active .step-dot{background:#2563eb;box-shadow:0 0 0 3px #dbeafe,0 0 12px rgba(37,99,235,.35)}
+.step.done{color:#16a34a}.step.done .step-dot{background:#16a34a;box-shadow:0 0 0 3px #dcfce7}
+
+.welcome-screen{position:absolute;inset:0;z-index:80;display:none;align-items:center;justify-content:center;text-align:center;padding:25px;background:radial-gradient(circle at center,rgba(37,99,235,.08),transparent 42%),rgba(255,255,255,.97);backdrop-filter:blur(20px)}
+.welcome-screen.show{display:flex;animation:welcomeIn .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes welcomeIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+.success-burst{position:absolute;width:210px;height:210px;border-radius:50%;border:1px solid rgba(37,99,235,.10);animation:burst 2.5s ease-out infinite}
+.success-burst::before,.success-burst::after{content:"";position:absolute;inset:18px;border-radius:50%;border:1px dashed rgba(6,182,212,.15)}
+.success-burst::after{inset:40px;border-style:solid}
+@keyframes burst{50%{transform:scale(1.08);opacity:.45}100%{transform:scale(1);opacity:1}}
+.granted{display:inline-block;padding:7px 12px;border-radius:20px;background:rgba(22,163,74,.07);color:var(--green);font-size:9px;font-weight:1000;letter-spacing:3px}
+.welcome-screen h1{margin:18px 0 12px;font-size:23px;line-height:1.35;font-weight:1000;color:#0f172a}
+.thanks{direction:rtl;font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;font-size:14px;line-height:2.1;color:#64748b}
+.enter{width:100%;height:48px;margin-top:20px;border:0;border-radius:14px;background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;font-weight:1000;letter-spacing:2px;box-shadow:0 10px 25px rgba(37,99,235,.2)}
+.logout{width:100%;height:44px;margin-top:9px;border:1px solid #fecaca;border-radius:13px;background:#fff7f7;color:var(--red);font-weight:1000}
+
+.profile{position:relative;width:100%;max-width:350px;max-height:90%;overflow:auto;text-align:center;padding:28px 20px;border:1px solid rgba(226,232,240,.95);border-radius:27px;background:rgba(255,255,255,.97);box-shadow:0 25px 70px rgba(15,23,42,.15);animation:pop .45s cubic-bezier(.2,.8,.2,1)}
+.profile-rings{position:relative;width:135px;height:135px;margin:auto;display:grid;place-items:center}
+.profile-rings::before,.profile-rings::after{content:"";position:absolute;border-radius:50%;border:2px solid transparent}
+.profile-rings::before{inset:0;border-top-color:var(--blue);border-right-color:var(--cyan);animation:spin 2.7s linear infinite}
+.profile-rings::after{inset:8px;border-bottom-color:var(--purple);border-left-color:var(--blue2);animation:spin 3.8s linear infinite reverse}
+.profile-rings .orbit{position:absolute;inset:-6px;border-radius:50%;border:1px dashed rgba(37,99,235,.2);animation:spin 7s linear infinite}
+.profile-rings .orbit::after{content:"";position:absolute;width:7px;height:7px;right:9px;top:17px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.profile-img{position:relative;width:112px;height:112px;padding:4px;border-radius:50%;border:2px solid var(--blue);background:#fff;box-shadow:0 12px 30px rgba(37,99,235,.15);z-index:2}
+.profile-img img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.profile h2{margin:15px 0 5px;font-size:21px;font-weight:1000;color:#0f172a}
+.name-shine{display:inline-block;background:linear-gradient(90deg,#0f172a,#2563eb,#0f172a);background-size:200% auto;color:transparent;background-clip:text;-webkit-background-clip:text;animation:nameShine 3s linear infinite}
+@keyframes nameShine{to{background-position:200% center}}
+.role{color:var(--blue);font-size:8px;font-weight:900;letter-spacing:2px}
+.profile-info{margin-top:14px;color:#64748b;font-size:9px;line-height:1.9}
+.wa{display:block;margin-top:17px;padding:12px;border:1px solid rgba(22,163,74,.22);border-radius:12px;background:rgba(22,163,74,.05);color:var(--green);text-decoration:none;font-size:9px;font-weight:1000;letter-spacing:1px}
+.back{width:100%;margin-top:9px;padding:11px;border:1px solid #dbe3ed;border-radius:12px;background:#f8fafc;color:#475569;font-weight:1000}
+
+@media(max-height:650px){.header{top:30px}.character-zone{top:100px}
+.guardian{
+ position:relative;width:128px;height:128px;display:grid;place-items:center;
+ animation:guardianEnter 1.2s cubic-bezier(.2,.8,.2,1),guardianFloat 3.5s ease-in-out 1.2s infinite alternate;
 }
-
-/* FOOTER */
-
-.footer{
-    position:absolute;
-    bottom:18px;
-    left:15px;
-    right:15px;
-    text-align:center;
-    font-size:7px;
-    font-weight:900;
-    letter-spacing:1px;
-    color:#68727e;
+.guardian-core{
+ position:relative;width:82px;height:82px;z-index:4;display:grid;place-items:center;
+ filter:drop-shadow(0 12px 18px rgba(37,99,235,.20));
 }
-
-/* POPUP */
-
-.overlay{
-    position:absolute;
-    inset:0;
-    z-index:100;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:rgba(0,0,0,.86);
-    backdrop-filter:blur(7px);
+.guardian-core svg{width:82px;height:82px}
+.guardian-ring{
+ position:absolute;border-radius:50%;border:1px solid transparent;
 }
+.guardian-ring.r1{inset:5px;border-top-color:#2563eb;border-right-color:#06b6d4;animation:spin 2.2s linear infinite}
+.guardian-ring.r2{inset:-2px;border-bottom-color:#7c3aed;border-left-color:#60a5fa;animation:spin 3.4s linear infinite reverse}
+.guardian-ring.r3{inset:16px;border:1px dashed rgba(37,99,235,.22);animation:spin 6s linear infinite}
+.guardian-dot{position:absolute;width:7px;height:7px;border-radius:50%;z-index:5}
+.guardian-dot.d1{top:5px;left:61px;background:#2563eb;box-shadow:0 0 14px #2563eb;animation:orbit1 2.2s linear infinite}
+.guardian-dot.d2{right:7px;top:58px;background:#06b6d4;box-shadow:0 0 14px #06b6d4;animation:orbit2 3.4s linear infinite}
+.guardian-dot.d3{bottom:8px;left:60px;background:#7c3aed;box-shadow:0 0 14px #7c3aed;animation:orbit3 2.8s linear infinite}
+@keyframes guardianEnter{from{opacity:0;transform:scale(.45) rotate(-15deg)}65%{transform:scale(1.08) rotate(3deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes guardianFloat{to{transform:translateY(-4px)}}
+@keyframes orbit1{to{transform:rotate(360deg) translateX(58px) rotate(-360deg)}}
+@keyframes orbit2{to{transform:rotate(-360deg) translateX(58px) rotate(360deg)}}
+@keyframes orbit3{to{transform:rotate(360deg) translateX(44px) rotate(-360deg)}}
 
-.overlay.show{
-    display:flex;
-    animation:fade .25s ease;
+.login-panel{top:215px}.expiry{bottom:76px}.dev{bottom:39px}.footer{display:none}}
+@media(max-width:350px){.pardesi{font-size:30px}
+.guardian{
+ position:relative;width:128px;height:128px;display:grid;place-items:center;
+ animation:guardianEnter 1.2s cubic-bezier(.2,.8,.2,1),guardianFloat 3.5s ease-in-out 1.2s infinite alternate;
 }
-
-@keyframes fade{
-    from{opacity:0}
-    to{opacity:1}
+.guardian-core{
+ position:relative;width:82px;height:82px;z-index:4;display:grid;place-items:center;
+ filter:drop-shadow(0 12px 18px rgba(37,99,235,.20));
 }
-
-.popup{
-    width:100%;
-    max-width:350px;
-    padding:26px 20px;
-    text-align:center;
-    border:1px solid var(--red);
-    border-radius:22px;
-    background:linear-gradient(145deg,#10050a,#030509);
-    box-shadow:0 0 45px rgba(255,23,68,.35);
-    animation:pop .4s cubic-bezier(.2,.8,.2,1);
+.guardian-core svg{width:82px;height:82px}
+.guardian-ring{
+ position:absolute;border-radius:50%;border:1px solid transparent;
 }
+.guardian-ring.r1{inset:5px;border-top-color:#2563eb;border-right-color:#06b6d4;animation:spin 2.2s linear infinite}
+.guardian-ring.r2{inset:-2px;border-bottom-color:#7c3aed;border-left-color:#60a5fa;animation:spin 3.4s linear infinite reverse}
+.guardian-ring.r3{inset:16px;border:1px dashed rgba(37,99,235,.22);animation:spin 6s linear infinite}
+.guardian-dot{position:absolute;width:7px;height:7px;border-radius:50%;z-index:5}
+.guardian-dot.d1{top:5px;left:61px;background:#2563eb;box-shadow:0 0 14px #2563eb;animation:orbit1 2.2s linear infinite}
+.guardian-dot.d2{right:7px;top:58px;background:#06b6d4;box-shadow:0 0 14px #06b6d4;animation:orbit2 3.4s linear infinite}
+.guardian-dot.d3{bottom:8px;left:60px;background:#7c3aed;box-shadow:0 0 14px #7c3aed;animation:orbit3 2.8s linear infinite}
+@keyframes guardianEnter{from{opacity:0;transform:scale(.45) rotate(-15deg)}65%{transform:scale(1.08) rotate(3deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes guardianFloat{to{transform:translateY(-4px)}}
+@keyframes orbit1{to{transform:rotate(360deg) translateX(58px) rotate(-360deg)}}
+@keyframes orbit2{to{transform:rotate(-360deg) translateX(58px) rotate(360deg)}}
+@keyframes orbit3{to{transform:rotate(360deg) translateX(44px) rotate(-360deg)}}
 
-@keyframes pop{
-    from{
-        transform:scale(.55) rotate(-3deg);
-        opacity:0;
-    }
-    to{
-        transform:scale(1) rotate(0);
-        opacity:1;
-    }
-}
-
-.popup-icon{
-    width:74px;
-    height:74px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:2px solid var(--red);
-    border-radius:50%;
-    color:var(--red);
-    font-size:32px;
-    font-weight:1000;
-    box-shadow:0 0 28px rgba(255,23,68,.5);
-}
-
-.popup.checking .popup-icon{
-    color:var(--gold);
-    border-color:var(--gold);
-    animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-    to{transform:rotate(360deg)}
-}
-
-.popup.success{
-    border-color:var(--green);
-    box-shadow:0 0 45px rgba(0,255,157,.35);
-}
-
-.popup.success .popup-icon{
-    color:var(--green);
-    border-color:var(--green);
-}
-
-.popup h2{
-    margin:15px 0 8px;
-    font-size:22px;
-    font-weight:1000;
-    letter-spacing:2px;
-}
-
-.popup p{
-    margin:0;
-    direction:rtl;
-    font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;
-    font-size:14px;
-    line-height:2;
-    color:#ddd;
-}
-
-.popup-btn{
-    width:100%;
-    height:44px;
-    margin-top:16px;
-    border:1px solid var(--red);
-    border-radius:11px;
-    background:rgba(255,23,68,.08);
-    color:#fff;
-    font-weight:1000;
-}
-
-/* WELCOME */
-
-.welcome-screen{
-    position:absolute;
-    inset:0;
-    z-index:80;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:25px;
-    background:
-      radial-gradient(circle at center,rgba(0,255,157,.13),transparent 40%),
-      #020508;
-}
-
-.welcome-screen.show{
-    display:flex;
-    animation:welcomeIn .6s ease;
-}
-
-@keyframes welcomeIn{
-    from{
-        opacity:0;
-        transform:scale(.8);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-.granted{
-    color:var(--green);
-    font-size:11px;
-    font-weight:1000;
-    letter-spacing:4px;
-}
-
-.welcome-screen h1{
-    margin:18px 0 10px;
-    font-size:24px;
-    line-height:1.3;
-    font-weight:1000;
-}
-
-.thanks{
-    direction:rtl;
-    font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;
-    font-size:15px;
-    line-height:2.1;
-    color:var(--gold);
-}
-
-.enter{
-    width:100%;
-    height:48px;
-    margin-top:20px;
-    border:1px solid var(--cyan);
-    border-radius:12px;
-    background:rgba(0,229,255,.08);
-    color:var(--cyan);
-    font-weight:1000;
-    letter-spacing:2px;
-}
-
-.logout{
-    width:100%;
-    height:44px;
-    margin-top:9px;
-    border:1px solid var(--red);
-    border-radius:12px;
-    background:rgba(255,23,68,.07);
-    color:var(--red);
-    font-weight:1000;
-}
-
-/* PROFILE */
-
-.profile{
-    width:100%;
-    max-width:350px;
-    max-height:90%;
-    overflow:auto;
-    text-align:center;
-    padding:25px 18px;
-    border:1px solid var(--purple);
-    border-radius:24px;
-    background:#05060b;
-    box-shadow:0 0 45px rgba(168,85,247,.3);
-}
-
-.profile-img{
-    width:115px;
-    height:115px;
-    margin:auto;
-    padding:4px;
-    border-radius:50%;
-    border:2px solid var(--cyan);
-    box-shadow:0 0 30px rgba(0,229,255,.4);
-    animation:borderPulse 3s linear infinite;
-}
-
-.profile-img img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:50%;
-}
-
-.profile h2{
-    margin:14px 0 5px;
-    font-size:21px;
-    font-weight:1000;
-}
-
-.role{
-    color:var(--cyan);
-    font-size:9px;
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-.profile-info{
-    margin-top:14px;
-    color:#cdd2d8;
-    font-size:9px;
-    line-height:1.8;
-}
-
-.wa{
-    display:block;
-    margin-top:17px;
-    padding:12px;
-    border:1px solid var(--green);
-    border-radius:11px;
-    color:var(--green);
-    text-decoration:none;
-    font-size:9px;
-    font-weight:1000;
-    letter-spacing:1px;
-}
-
-.back{
-    width:100%;
-    margin-top:9px;
-    padding:11px;
-    border:1px solid var(--red);
-    border-radius:11px;
-    background:transparent;
-    color:var(--red);
-    font-weight:1000;
-}
-
-/* INSTALLATION INTRO */
-
-.intro{
-    position:absolute;
-    inset:0;
-    z-index:200;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    background:#010204;
-}
-
-.intro.hide{
-    animation:introOut .7s forwards;
-}
-
-@keyframes introOut{
-    to{
-        opacity:0;
-        visibility:hidden;
-        transform:scale(1.1);
-    }
-}
-
-.intro-box{
-    width:90%;
-}
-
-.intro-code{
-    height:120px;
-    overflow:hidden;
-    font-family:monospace;
-    color:var(--cyan);
-    font-size:11px;
-    line-height:1.8;
-    text-align:left;
-}
-
-.boot-title{
-    margin-top:20px;
-    font-size:25px;
-    font-weight:1000;
-    letter-spacing:3px;
-}
-
-.boot-status{
-    margin-top:12px;
-    color:var(--green);
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-@media(max-height:650px){
-    .header{top:32px}
-    .character-zone{top:110px}
-    .login-panel{top:235px}
-    .expiry{bottom:78px}
-    .dev{bottom:40px}
-    .footer{display:none}
-}
-
-@media(max-width:350px){
-    .pardesi{font-size:29px}
-    .urdu{font-size:14px}
-    .login-panel{left:17px;right:17px}
-}
+.login-panel{left:17px;right:17px;padding:15px}.urdu{font-size:13px}.expiry,.dev{left:17px;right:17px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 
 <body>
-
 <div class="bg">
-    <div class="grid"></div>
-    <div class="scan"></div>
+ <div class="grid"></div><div class="orb a"></div><div class="orb b"></div>
 </div>
 
 <div class="app">
-
 <div class="top"></div>
-
-<div class="status">● SECURITY SYSTEM ACTIVE</div>
+<div class="status">● PROTECTION ACTIVE</div>
 
 <div class="header">
-    <div class="welcome">WELCOME TO</div>
-    <div class="pardesi">PARDESI</div>
-    <div class="vip">VIP SYSTEM</div>
+ <div class="welcome">WELCOME TO</div>
+ <div class="pardesi">PARDESI</div>
+ <div class="vip">VIP SYSTEM</div>
 </div>
 
-<!-- CHARACTER -->
-<div class="character-zone" id="characterZone">
-    <div class="character" id="character">
-
-        <div class="head">
-            <div class="hair"></div>
-
-            <div class="glasses">
-                <div class="glass"></div>
-                <div class="glass"></div>
-                <div class="bridge"></div>
-            </div>
-        </div>
-
-        <div class="body"></div>
-        <div class="arm left"></div>
-        <div class="arm right"></div>
-        <div class="leg left"></div>
-        <div class="leg right"></div>
-
-    </div>
+<div class="character-zone">
+ <div class="guardian" id="character" aria-label="Pardesi security guardian">
+  <div class="guardian-ring r1"></div>
+  <div class="guardian-ring r2"></div>
+  <div class="guardian-ring r3"></div>
+  <div class="guardian-core">
+   <svg viewBox="0 0 120 120" role="img" aria-hidden="true">
+    <defs>
+     <linearGradient id="gShield" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset=".5" stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+     </linearGradient>
+     <filter id="glow"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <circle cx="60" cy="60" r="48" fill="#f8fbff" stroke="#dbeafe" stroke-width="2"/>
+    <path d="M60 18 L91 31 V57 C91 78 77 94 60 102 C43 94 29 78 29 57 V31 Z"
+          fill="white" stroke="url(#gShield)" stroke-width="4" filter="url(#glow)"/>
+    <path d="M45 54 Q60 40 75 54" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="47" cy="57" r="5" fill="#06b6d4"/>
+    <circle cx="73" cy="57" r="5" fill="#2563eb"/>
+    <path d="M45 70 Q60 81 75 70" fill="none" stroke="#7c3aed" stroke-width="4" stroke-linecap="round"/>
+    <path d="M53 84 L60 90 L67 84" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+   </svg>
+  </div>
+  <span class="guardian-dot d1"></span><span class="guardian-dot d2"></span><span class="guardian-dot d3"></span>
+ </div>
 </div>
 
-<!-- LOGIN -->
 <div class="login-panel">
-
-    <div class="urdu">
-        براہِ کرم سسٹم میں داخل ہونے کے لیے پاسورڈ درج کریں
-    </div>
-
-    <input
-        id="password"
-        class="password"
-        type="password"
-        placeholder="ENTER PASSWORD"
-        autocomplete="off">
-
-    <button id="loginBtn" class="login-btn">
-        ⚡ LOGIN
-    </button>
-
+ <div class="urdu"> پاسورڈ درج کریں</div>
+ <div class="input-wrap">
+  <input id="password" class="password" type="password" placeholder="ENTER PASSWORD" autocomplete="off" spellcheck="false">
+  <div class="input-light"></div>
+ </div>
+ <button id="loginBtn" class="login-btn">⚡ LOGIN</button>
 </div>
 
-<!-- EXPIRY -->
 <div class="expiry">
-    <div class="expiry-label">APP EXPIRY DATE</div>
-    <div class="expiry-date" id="expiryDate">---</div>
+ <div class="expiry-label">APP EXPIRY DATE</div>
+ <div class="expiry-date" id="expiryDate">---</div>
 </div>
 
-<!-- DEVELOPER -->
-<button class="dev" id="developerBtn">
-    ◈ DEVELOPER PROFILE
-</button>
+<button class="dev" id="developerBtn">◈ DEVELOPER PROFILE</button>
+<div class="footer">MADE &amp; DEVELOPED BY SHAKIR HASSAN • © 2022–2026</div>
 
-<div class="footer">
-    MADE &amp; DEVELOPED BY SHAKIR HASSAN • © 2022–2026
+<!-- 5–6 SECOND BOOT -->
+<div class="overlay show" id="bootOverlay">
+ <div class="processing">
+  <div class="boot-emblem">
+   <div class="boot-sweep"></div>
+   <svg viewBox="0 0 120 120" aria-hidden="true">
+    <defs>
+     <linearGradient id="bootG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/><stop offset=".5" stop-color="#06b6d4"/><stop offset="1" stop-color="#7c3aed"/>
+     </linearGradient>
+    </defs>
+    <path d="M60 12 L94 27 V57 C94 82 78 100 60 108 C42 100 26 82 26 57 V27 Z"
+          fill="#fff" stroke="url(#bootG)" stroke-width="4"/>
+    <path d="M42 56 L53 67 L78 42" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+   </svg>
+   <div class="boot-percent" id="bootPercent">0%</div>
+  </div>
+  <div class="process-title">PARDESI VIP</div>
+  <p class="process-sub" id="bootText">INITIALIZING SECURE SYSTEM...</p>
+  <div class="process-bar"><div class="process-fill" id="bootFill"></div></div>
+  <div class="process-steps">
+   <div class="step" id="b1"><span class="step-dot"></span>Loading core interface</div>
+   <div class="step" id="b2"><span class="step-dot"></span>Preparing secure access</div>
+   <div class="step" id="b3"><span class="step-dot"></span>Checking system modules</div>
+   <div class="step" id="b4"><span class="step-dot"></span>Activating VIP interface</div>
+  </div>
+ </div>
 </div>
 
-<!-- INTRO -->
-<div class="intro" id="intro">
-
-    <div class="intro-box">
-
-        <div class="intro-code" id="bootCode"></div>
-
-        <div class="boot-title">
-            PARDESI VIP
-        </div>
-
-        <div class="boot-status" id="bootStatus">
-            INITIALIZING SECURE SYSTEM...
-        </div>
-
-    </div>
-
+<!-- PROCESSING -->
+<div class="overlay" id="processOverlay">
+ <div class="processing">
+  <div class="process-ring"><div class="process-core" id="processPercent">0%</div></div>
+  <div class="process-title">PROCESSING</div>
+  <p class="process-sub" id="processText">Secure authentication is starting...</p>
+  <div class="process-bar"><div class="process-fill" id="processFill"></div></div>
+  <div class="process-steps">
+   <div class="step" id="p1"><span class="step-dot"></span>Initializing secure channel</div>
+   <div class="step" id="p2"><span class="step-dot"></span>Connecting authentication layer</div>
+   <div class="step" id="p3"><span class="step-dot"></span>Verifying credentials</div>
+   <div class="step" id="p4"><span class="step-dot"></span>Finalizing access</div>
+  </div>
+ </div>
 </div>
 
-<!-- POPUP -->
+<!-- RESULT POPUP -->
 <div class="overlay" id="popupOverlay">
-
-    <div class="popup" id="popup">
-
-        <div class="popup-icon" id="popupIcon">!</div>
-
-        <h2 id="popupTitle">CHECKING</h2>
-
-        <p id="popupText">
-            سسٹم پاسورڈ کی تصدیق کر رہا ہے
-        </p>
-
-        <button
-            id="popupButton"
-            class="popup-btn"
-            style="display:none">
-            TRY AGAIN
-        </button>
-
-    </div>
-
+ <div class="popup" id="popup">
+  <div class="popup-icon" id="popupIcon">!</div>
+  <h2 id="popupTitle">CHECKING</h2>
+  <p id="popupText">سسٹم پاسورڈ کی تصدیق کر رہا ہے</p>
+  <button id="popupButton" class="popup-btn" style="display:none">TRY AGAIN</button>
+ </div>
 </div>
 
 <!-- WELCOME -->
 <div class="welcome-screen" id="welcomeScreen">
-
-    <div>
-
-        <div class="granted">
-            ✓ ACCESS GRANTED
-        </div>
-
-        <h1>
-            WELCOME TO<br>
-            SHAKIR HASSAN VIP SYSTEM
-        </h1>
-
-        <div class="thanks">
-            آپ کامیابی سے شاکر حسن پردیسی کے سسٹم میں داخل ہو چکے ہیں۔
-            <br>
-            اب آپ کو یہاں ہر چیز VIP ملے گی۔
-            <br><br>
-            آپ کے اعتماد اور بھروسے کا دل سے شکریہ ❤️
-        </div>
-
-        <button class="enter" id="enterBtn">
-            ENTER APPLICATION
-        </button>
-
-        <button class="logout" id="logoutBtn">
-            LOGOUT
-        </button>
-
-    </div>
-
+ <div class="success-burst"></div>
+ <div style="position:relative;z-index:2;width:100%">
+  <div class="granted">✓ ACCESS GRANTED</div>
+  <h1>WELCOME TO<br>SHAKIR HASSAN VIP SYSTEM</h1>
+  <div class="thanks">آپ کامیابی سے شاکر حسن پردیسی کے سسٹم میں داخل ہو چکے ہیں۔<br>اب آپ کو یہاں ہر چیز VIP ملے گی۔<br><br>آپ کے اعتماد اور بھروسے کا دل سے شکریہ ❤️</div>
+  <button class="enter" id="enterBtn">ENTER APPLICATION</button>
+  <button class="logout" id="logoutBtn">LOGOUT</button>
+ </div>
 </div>
 
 <!-- PROFILE -->
 <div class="overlay" id="profileOverlay">
-
-    <div class="profile">
-
-        <div class="profile-img">
-
-            <img
-              src="https://i.ibb.co/mVtPk55T/1000023507.png"
-              alt="Shakir Hassan">
-
-        </div>
-
-        <h2>SHAKIR HASSAN</h2>
-
-        <div class="role">
-            MADE &amp; DEVELOPED BY • PARDESI
-        </div>
-
-        <div class="profile-info">
-            Developer &amp; Creator of Pardesi VIP System
-            <br>
-            Premium Digital Interface
-            <br>
-            Secure Access • VIP Application
-        </div>
-
-        <a
-          class="wa"
-          id="profileWhatsApp"
-          target="_blank">
-            ◉ CONTACT ON WHATSAPP
-        </a>
-
-        <button class="back" id="backBtn">
-            ← BACK TO SYSTEM
-        </button>
-
-    </div>
-
+ <div class="profile">
+  <div class="profile-rings">
+   <div class="orbit"></div>
+   <div class="profile-img"><img src="https://i.ibb.co/mVtPk55T/1000023507.png" alt="Shakir Hassan"></div>
+  </div>
+  <h2><span class="name-shine">SHAKIR HASSAN</span></h2>
+  <div class="role">MADE &amp; DEVELOPED BY • PARDESI</div>
+  <div class="profile-info">Developer &amp; Creator of Pardesi VIP System<br>Premium Digital Interface<br>Secure Access • VIP Application</div>
+  <a class="wa" id="profileWhatsApp" target="_blank" rel="noopener">◉ CONTACT ON WHATSAPP</a>
+  <button class="back" id="backBtn">← BACK TO SYSTEM</button>
+ </div>
 </div>
-
 </div>
 
 <script>
-
-/* =====================================================
-   PARDESI VIP — CONTROL PANEL
-   صرف یہاں سے values تبدیل کریں
-===================================================== */
-
-const CONFIG = {
-
-    /* موجودہ password */
-    NEW_PASSWORD: "PKR200",
-
-    /* اگر پرانا password بھی recognize کرنا ہو */
-    OLD_PASSWORD: "Pardesi@2026",
-
-    /* expiry — YYYY-MM-DD */
-    EXPIRY_DATE: "2026-08-31",
-
-    /* نام */
-    DEVELOPER_NAME: "SHAKIR HASSAN",
-
-    /* WhatsApp number */
-    WHATSAPP: "923118485874",
-
-    /* Application کھولنے کا URL */
-    APPLICATION_URL: "action://close",
-
-    /* Profile image */
-    PROFILE_IMAGE:
-      "https://i.ibb.co/mVtPk55T/1000023507.png"
-
+/* =========================================================
+   CONTROL PANEL — YOUR ORIGINAL VALUES
+========================================================= */
+const CONFIG={
+ NEW_PASSWORD:"PKR200",
+ OLD_PASSWORD:"Pardesi@2026",
+ EXPIRY_DATE:"2026-08-31",
+ DEVELOPER_NAME:"SHAKIR HASSAN",
+ WHATSAPP:"923118485874",
+ APPLICATION_URL:"action://close",
+ PROFILE_IMAGE:"https://i.ibb.co/mVtPk55T/1000023507.png"
 };
 
+const $=id=>document.getElementById(id);
+const password=$("password"),loginBtn=$("loginBtn"),character=$("character");
+const popupOverlay=$("popupOverlay"),popup=$("popup"),popupIcon=$("popupIcon");
+const popupTitle=$("popupTitle"),popupText=$("popupText"),popupButton=$("popupButton");
+const welcomeScreen=$("welcomeScreen");
 
-/* ELEMENTS */
-
-const password =
-    document.getElementById("password");
-
-const loginBtn =
-    document.getElementById("loginBtn");
-
-const popupOverlay =
-    document.getElementById("popupOverlay");
-
-const popup =
-    document.getElementById("popup");
-
-const popupIcon =
-    document.getElementById("popupIcon");
-
-const popupTitle =
-    document.getElementById("popupTitle");
-
-const popupText =
-    document.getElementById("popupText");
-
-const popupButton =
-    document.getElementById("popupButton");
-
-const welcomeScreen =
-    document.getElementById("welcomeScreen");
-
-const character =
-    document.getElementById("character");
-
-
-/* EXPIRY DISPLAY */
-
-document.getElementById("expiryDate").textContent =
-    new Date(CONFIG.EXPIRY_DATE + "T00:00:00")
-    .toLocaleDateString("en-PK",{
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-    });
-
-
-/* PROFILE IMAGE */
-
-document.querySelector(".profile-img img").src =
-    CONFIG.PROFILE_IMAGE;
-
-
-/* =====================================================
-   EXPIRY CHECK
-===================================================== */
+$("expiryDate").textContent=new Date(CONFIG.EXPIRY_DATE+"T00:00:00").toLocaleDateString("en-PK",{day:"2-digit",month:"short",year:"numeric"});
+document.querySelector(".profile-img img").src=CONFIG.PROFILE_IMAGE;
 
 function isExpired(){
-
-    const today =
-        new Date();
-
-    today.setHours(0,0,0,0);
-
-    const expiry =
-        new Date(
-            CONFIG.EXPIRY_DATE +
-            "T23:59:59"
-        );
-
-    return today > expiry;
+ const today=new Date();today.setHours(0,0,0,0);
+ return today>new Date(CONFIG.EXPIRY_DATE+"T23:59:59");
 }
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
 
 function whatsappMessage(type){
-
-    let text = "";
-
-    if(type === "password"){
-
-        text =
-        "السلام علیکم شاکر بھائی، مجھے VIP سسٹم کے پاسورڈ کے بارے میں معلومات چاہیے۔ براہِ کرم نیا پاسورڈ دے دیں۔";
-
-    }else{
-
-        text =
-        "السلام علیکم شاکر بھائی، میں آپ کے Pardesi VIP System میں شامل ہوا ہوں۔ شکریہ ❤️";
-
-    }
-
-    return "https://wa.me/" +
-        CONFIG.WHATSAPP +
-        "?text=" +
-        encodeURIComponent(text);
+ const text=type==="password"
+ ? "السلام علیکم شاکر بھائی، مجھے سسٹم کے پاسورڈ کے بارے میں معلومات چاہیے۔ براہِ کرم نیا پاسورڈ دے دیں۔"
+ : "السلام علیکم شاکر بھائی، میں آپ کے Pardesi VIP System میں شامل ہوا ہوں۔ شکریہ ❤️";
+ return "https://wa.me/"+CONFIG.WHATSAPP+"?text="+encodeURIComponent(text);
 }
+$("profileWhatsApp").href=whatsappMessage("profile");
 
-document.getElementById(
-    "profileWhatsApp"
-).href = whatsappMessage("profile");
-
-
-/* =====================================================
-   AUDIO
-===================================================== */
-
-let audioCtx;
-
-function audio(){
-
-    if(!audioCtx){
-
-        audioCtx =
-            new (
-                window.AudioContext ||
-                window.webkitAudioContext
-            )();
-
-    }
-
-    return audioCtx;
-}
-
+/* AUDIO */
+let audioCtx=null;
+function audio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx}
 function tone(freq,duration,type="sine"){
+ try{
+  const ctx=audio(),osc=ctx.createOscillator(),gain=ctx.createGain();
+  osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(.035,ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);
+  osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+duration);
+ }catch(e){}
+}
+function successSound(){tone(440,.12);setTimeout(()=>tone(660,.12),120);setTimeout(()=>tone(880,.20),240)}
+function errorSound(){tone(180,.16,"sawtooth");setTimeout(()=>tone(100,.22,"sawtooth"),160)}
+function clickSound(){tone(520,.06)}
 
-    try{
+function closePopup(){popupOverlay.classList.remove("show")}
 
-        const ctx = audio();
-
-        const osc =
-            ctx.createOscillator();
-
-        const gain =
-            ctx.createGain();
-
-        osc.type = type;
-        osc.frequency.value = freq;
-
-        gain.gain.setValueAtTime(
-            .045,
-            ctx.currentTime
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            .001,
-            ctx.currentTime + duration
-        );
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start();
-
-        osc.stop(
-            ctx.currentTime + duration
-        );
-
-    }catch(e){}
-
+function showResult(kind){
+ popup.className="popup";popupButton.style.display="block";
+ if(kind==="empty"){
+  popupIcon.textContent="!";popupTitle.textContent="PASSWORD REQUIRED";
+  popupText.textContent=" پہلے پاسورڈ درج کریں۔";
+  popupButton.textContent="ENTER PASSWORD";popupButton.onclick=()=>{closePopup();password.focus()};errorSound();
+ }
+ if(kind==="wrong"){
+  popupIcon.textContent="✕";popupTitle.textContent="ACCESS DENIED";
+  popupText.textContent="غلط پاسورڈ، براہِ کرم درست پاسورڈ دوبارہ درج کریں۔";
+  popupButton.textContent="TRY AGAIN";popupButton.onclick=()=>{closePopup();password.value="";password.focus()};errorSound();
+ }
+ if(kind==="expired"){
+  popupIcon.textContent="⌛";popupTitle.textContent="PASSWORD EXPIRED";
+  popupText.textContent="آپ کا پاسورڈ درست ہے لیکن اس کی مدت ختم ہو چکی ہے۔ براہِ کرم نیا پاسورڈ حاصل کریں۔";
+  popupButton.textContent="GET NEW PASSWORD";popupButton.onclick=()=>window.open(whatsappMessage("password"),"_blank");errorSound();
+ }
+ if(kind==="old"){
+  popupIcon.textContent="⚠";popupTitle.textContent="PASSWORD UPDATED";
+  popupText.textContent="آپ کا پرانا پاسورڈ درست تھا، لیکن سسٹم میں نیا پاسورڈ ہے۔ براہِ کرم نیا پاسورڈ حاصل کریں۔";
+  popupButton.textContent="GET NEW PASSWORD";popupButton.onclick=()=>window.open(whatsappMessage("password"),"_blank");errorSound();
+ }
+ popupOverlay.classList.add("show");
 }
 
-function successSound(){
-
-    tone(440,.12);
-
-    setTimeout(
-        ()=>tone(660,.12),
-        120
-    );
-
-    setTimeout(
-        ()=>tone(880,.20),
-        240
-    );
-
+function setStep(prefix,n){
+ for(let i=1;i<=4;i++){
+  const el=$(prefix+i);
+  el.classList.toggle("active",i===n);
+  el.classList.toggle("done",i<n);
+ }
 }
 
-function errorSound(){
-
-    tone(180,.16,"sawtooth");
-
-    setTimeout(
-        ()=>tone(100,.22,"sawtooth"),
-        160
-    );
-
+function runProcessing(callback){
+ const overlay=$("processOverlay"),fill=$("processFill"),percent=$("processPercent"),text=$("processText");
+ overlay.classList.add("show");
+ loginBtn.disabled=true;loginBtn.textContent="PROCESSING...";
+ const messages=[
+  "Secure authentication is starting...",
+  "Connecting authentication layer...",
+  "Verifying credentials...",
+  "Finalizing access..."
+ ];
+ let start=performance.now(),duration=1900;
+ function tick(now){
+  let p=Math.min(100,Math.round(((now-start)/duration)*100));
+  fill.style.width=p+"%";percent.textContent=p+"%";
+  const step=p<25?1:p<50?2:p<80?3:4;
+  setStep("p",step);text.textContent=messages[step-1];
+  if(p<100)requestAnimationFrame(tick);
+  else setTimeout(()=>{overlay.classList.remove("show");callback()},220);
+ }
+ requestAnimationFrame(tick);
 }
-
-
-/* =====================================================
-   POPUP
-===================================================== */
-
-function showChecking(){
-
-    popupOverlay.classList.add("show");
-
-    popup.className =
-        "popup checking";
-
-    popupIcon.textContent = "⟳";
-
-    popupTitle.textContent =
-        "VERIFYING ACCESS";
-
-    popupText.textContent =
-        "سسٹم پاسورڈ تصدیق کر رہا ہے، انتظار کریں";
-
-    popupButton.style.display =
-        "none";
-
-}
-
-function showEmpty(){
-
-    popup.className = "popup";
-
-    popupIcon.textContent = "!";
-
-    popupTitle.textContent =
-        "PASSWORD REQUIRED";
-
-    popupText.textContent =
-        "براہِ کرم سسٹم میں داخل ہونے کے لیے پہلے پاسورڈ درج کریں۔";
-
-    popupButton.style.display =
-        "block";
-
-    popupButton.textContent =
-        "ENTER PASSWORD";
-
-    popupButton.onclick = function(){
-
-        popupOverlay.classList.remove("show");
-
-        password.focus();
-
-    };
-
-    errorSound();
-}
-
-function showWrong(){
-
-    popup.className = "popup";
-
-    popupIcon.textContent = "✕";
-
-    popupTitle.textContent =
-        "ACCESS DENIED";
-
-    popupText.textContent =
-        "غلط پاسورڈ، براہِ کرم درست پاسورڈ دوبارہ درج کریں۔";
-
-    popupButton.style.display =
-        "block";
-
-    popupButton.textContent =
-        "TRY AGAIN";
-
-    popupButton.onclick = function(){
-
-        popupOverlay.classList.remove("show");
-
-        password.focus();
-
-    };
-
-    errorSound();
-}
-
-function showExpired(){
-
-    popup.className = "popup";
-
-    popupIcon.textContent = "⌛";
-
-    popupTitle.textContent =
-        "PASSWORD EXPIRED";
-
-    popupText.textContent =
-        "آپ کا پاسورڈ درست ہے لیکن اس کی مدت ختم ہو چکی ہے۔ براہِ کرم پردیسی سے نیا پاسورڈ حاصل کریں۔";
-
-    popupButton.style.display =
-        "block";
-
-    popupButton.textContent =
-        "GET NEW PASSWORD";
-
-    popupButton.onclick = function(){
-
-        window.open(
-            whatsappMessage("password"),
-            "_blank"
-        );
-
-    };
-
-    errorSound();
-}
-
-function showChanged(){
-
-    popup.className = "popup";
-
-    popupIcon.textContent = "⚠";
-
-    popupTitle.textContent =
-        "PASSWORD UPDATED";
-
-    popupText.textContent =
-        "آپ کا پرانا پاسورڈ درست تھا، لیکن سسٹم کی طرف سے پاسورڈ تبدیل کر دیا گیا ہے۔ براہِ کرم نیا پاسورڈ حاصل کریں۔";
-
-    popupButton.style.display =
-        "block";
-
-    popupButton.textContent =
-        "GET NEW PASSWORD";
-
-    popupButton.onclick = function(){
-
-        window.open(
-            whatsappMessage("password"),
-            "_blank"
-        );
-
-    };
-
-    errorSound();
-}
-
-
-/* =====================================================
-   SUCCESS
-===================================================== */
 
 function showSuccess(){
-
-    popup.className =
-        "popup success";
-
-    popupIcon.textContent =
-        "✓";
-
-    popupTitle.textContent =
-        "ACCESS GRANTED";
-
-    popupText.textContent =
-        "پاسورڈ بالکل درست ہے، آپ کامیابی سے شاکر حسن پردیسی کے سسٹم میں داخل ہو چکے ہیں۔";
-
-    popupButton.style.display =
-        "none";
-
-    successSound();
-
-    /*
-       CHARACTER KICK / KNOCK-BACK EFFECT
-    */
-
-    character.style.transition =
-        "1s cubic-bezier(.2,.8,.2,1)";
-
-    character.style.transform =
-        "translateX(150px) rotate(12deg)";
-
-    setTimeout(function(){
-
-        popupOverlay.classList.remove("show");
-
-        welcomeScreen.classList.add("show");
-
-    },1200);
-
+ popupOverlay.classList.remove("show");
+ welcomeScreen.classList.add("show");
+ character.style.transition="1s cubic-bezier(.2,.8,.2,1)";
+ character.style.transform="translateX(150px) rotate(12deg)";
+ successSound();
 }
 
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-loginBtn.onclick = function(){
-
-    try{
-        audio().resume();
-    }catch(e){}
-
-    const value =
-        password.value.trim();
-
-    if(!value){
-
-        popupOverlay.classList.add("show");
-
-        showEmpty();
-
-        return;
-    }
-
-    loginBtn.disabled = true;
-
-    loginBtn.textContent =
-        "VERIFYING...";
-
-    showChecking();
-
-    setTimeout(function(){
-
-        /*
-           اگر نیا password درست ہے
-        */
-
-        if(value === CONFIG.NEW_PASSWORD){
-
-            if(isExpired()){
-
-                showExpired();
-
-            }else{
-
-                showSuccess();
-
-            }
-
-        }
-
-        /*
-           پرانا password
-        */
-
-        else if(value === CONFIG.OLD_PASSWORD){
-
-            showChanged();
-
-        }
-
-        /*
-           غلط password
-        */
-
-        else{
-
-            showWrong();
-
-        }
-
-        loginBtn.disabled = false;
-
-        loginBtn.textContent =
-            "⚡ LOGIN";
-
-    },1500);
-
-};
-
-
-/* ENTER KEY */
-
-password.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key === "Enter"){
-
-            loginBtn.click();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   WELCOME → APPLICATION
-===================================================== */
-
-document.getElementById(
-    "enterBtn"
-).onclick = function(){
-
-    window.location.href =
-        CONFIG.APPLICATION_URL;
-
-};
-
-
-/* LOGOUT */
-
-document.getElementById(
-    "logoutBtn"
-).onclick = function(){
-
-    welcomeScreen.classList.remove("show");
-
-    password.value = "";
-
-    character.style.transition =
-        "none";
-
-    character.style.transform =
-        "translateX(0)";
-
-};
-
-
-/* =====================================================
-   DEVELOPER PROFILE
-===================================================== */
-
-const profileOverlay =
-    document.getElementById(
-        "profileOverlay"
-    );
-
-document.getElementById(
-    "developerBtn"
-).onclick = function(){
-
-    profileOverlay.classList.add("show");
-
-    tone(520,.08);
-
-};
-
-document.getElementById(
-    "backBtn"
-).onclick = function(){
-
-    profileOverlay.classList.remove("show");
-
-};
-
-
-/* =====================================================
-   REAL-TIME PAKISTAN CLOCK
-===================================================== */
-
-function updateClock(){
-
-    const now =
-        new Date();
-
-    /*
-       اگر بعد میں clock دکھانا ہو
-       تو یہاں element add کیا جا سکتا ہے۔
-    */
-
+function login(){
+ try{audio().resume()}catch(e){}
+ const value=password.value.trim();
+ if(!value){showResult("empty");return}
+ runProcessing(()=>{
+  if(value===CONFIG.NEW_PASSWORD){
+   if(isExpired())showResult("expired");else showSuccess();
+  }else if(value===CONFIG.OLD_PASSWORD){
+   showResult("old");
+  }else{
+   showResult("wrong");
+  }
+  loginBtn.disabled=false;loginBtn.textContent="⚡ LOGIN";
+ });
 }
 
-updateClock();
+loginBtn.onclick=login;
+password.addEventListener("keydown",e=>{if(e.key==="Enter")login()});
 
-setInterval(
-    updateClock,
-    1000
-);
+$("enterBtn").onclick=()=>{window.location.href=CONFIG.APPLICATION_URL};
+$("logoutBtn").onclick=()=>{
+ welcomeScreen.classList.remove("show");password.value="";
+ character.style.transition="none";character.style.transform="none";
+};
 
+$("developerBtn").onclick=()=>{clickSound();$("profileOverlay").classList.add("show")};
+$("backBtn").onclick=()=>$("profileOverlay").classList.remove("show");
 
-/* =====================================================
-   BOOT / ENTRY ANIMATION
-===================================================== */
-
-const intro =
-    document.getElementById("intro");
-
-const bootCode =
-    document.getElementById("bootCode");
-
-const bootStatus =
-    document.getElementById("bootStatus");
-
-const bootLines = [
-
-    "PARDESI_CORE // START",
-    "LOADING VIP ENGINE...",
-    "GENERATING SECURE SESSION...",
-    "CHECKING SYSTEM MODULES...",
-    "INITIALIZING ACCESS CONTROL...",
-    "LOADING USER INTERFACE...",
-    "ENCRYPTION MODULE READY...",
-    "VIP INTERFACE READY...",
-    "ALMOST DONE...",
-    "SYSTEM ACTIVATED ✓"
-
+/* =========================================================
+   5.8 SECOND DYNAMIC BOOT
+========================================================= */
+const bootMessages=[
+ "INITIALIZING PARDESI SYSTEM...",
+ "PREPARING ACCESS INTERFACE...",
+ "CHECKING LOCAL SYSTEM MODULES...",
+ "ACTIVATING VIP INTERFACE...",
+ "SYSTEM READY • WELCOME"
 ];
-
-let line = 0;
-
-function boot(){
-
-    if(line < bootLines.length){
-
-        bootCode.innerHTML +=
-            bootLines[line] +
-            "<br>";
-
-        line++;
-
-        setTimeout(
-            boot,
-            180
-        );
-
-    }else{
-
-        bootStatus.textContent =
-            "SYSTEM ACTIVATED • WELCOME";
-
-        setTimeout(function(){
-
-            intro.classList.add("hide");
-
-        },900);
-
-    }
-
+let bootStart=performance.now(),bootDuration=5800;
+function bootTick(now){
+ const p=Math.min(100,Math.round(((now-bootStart)/bootDuration)*100));
+ $("bootFill").style.width=p+"%";$("bootPercent").textContent=p+"%";
+ const step=p<22?1:p<48?2:p<76?3:4;
+ setStep("b",step);
+ $("bootText").textContent=bootMessages[Math.min(4,Math.floor(p/25))];
+ if(p<100)requestAnimationFrame(bootTick);
+ else setTimeout(()=>{$("bootOverlay").classList.remove("show")},500);
 }
+requestAnimationFrame(bootTick);
 
-boot();
-
-
-/* AUDIO AFTER FIRST TOUCH */
-
-document.addEventListener(
-    "click",
-    function(){
-
-        try{
-            audio().resume();
-        }catch(e){}
-
-    },
-    {once:true}
-);
-
+document.addEventListener("click",()=>{try{audio().resume()}catch(e){}},{once:true});
 </script>
-
 </body>
 </html>

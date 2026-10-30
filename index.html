@@ -423,7 +423,7 @@ background:rgba(255,255,255,.84);box-shadow:0 12px 35px rgba(15,23,42,.07);anima
 const CONFIG={
  NEW_PASSWORD:"SP",
  OLD_PASSWORD:"PKR200",
- EXPIRY_DATE:"2026-10-29",
+ EXPIRY_DATE:"2026-11-28",
  DEVELOPER_NAME:"SHAKIR HASSAN",
  WHATSAPP:"923118485874",
  APPLICATION_URL:"action://close",
@@ -477,7 +477,7 @@ function showResult(kind){
   popupButton.textContent="ENTER PASSWORD";popupButton.onclick=()=>{closePopup();password.focus()};errorSound();
  }
  if(kind==="wrong"){
-  popupIcon.textContent="✕";popupTitle.textContent="ACCESS DENIED";
+  popupIcon.textContent="✕";popupTitle.textContent=" ACCESSDENIED";
   popupText.textContent="غلط پاسورڈ، براہِ کرم درست پاسورڈ دوبارہ درج کریں۔";
   popupButton.textContent="TRY AGAIN";popupButton.onclick=()=>{closePopup();password.value="";password.focus()};errorSound();
  }
